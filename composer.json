@@ -1,5 +1,5 @@
 {
-    "name": "GIT_USER_ID/GIT_REPO_ID",
+    "name": "catalytic/catalytic-sdk-php",
     "description": "",
     "keywords": [
         "swagger",
@@ -7,12 +7,12 @@
         "sdk",
         "api"
     ],
-    "homepage": "http://swagger.io",
+    "homepage": "https://github.com/catalyticlabs/catalytic-sdk-php",
     "license": "proprietary",
     "authors": [
         {
-            "name": "Swagger and contributors",
-            "homepage": "https://github.com/swagger-api/swagger-codegen"
+            "name": "Catalytic, Inc",
+            "homepage": "https://catalytic.com"
         }
     ],
     "require": {
