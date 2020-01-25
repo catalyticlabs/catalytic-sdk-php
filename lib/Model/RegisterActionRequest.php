@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * RegisterActionRequest Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -60,8 +60,8 @@ class RegisterActionRequest implements ModelInterface, ArrayAccess
 'description' => 'string',
 'tags' => 'string[]',
 'required_worker_tags' => 'string[]',
-'inputs' => '\Swagger\Client\Model\ActionInputDefinition[]',
-'outputs' => '\Swagger\Client\Model\ActionOutputDefinition[]',
+'inputs' => '\Catalytic\Client\Model\ActionInputDefinition[]',
+'outputs' => '\Catalytic\Client\Model\ActionOutputDefinition[]',
 'is_published' => 'bool',
 'meta_data' => 'string'    ];
 
@@ -337,7 +337,7 @@ class RegisterActionRequest implements ModelInterface, ArrayAccess
     /**
      * Gets inputs
      *
-     * @return \Swagger\Client\Model\ActionInputDefinition[]
+     * @return \Catalytic\Client\Model\ActionInputDefinition[]
      */
     public function getInputs()
     {
@@ -347,7 +347,7 @@ class RegisterActionRequest implements ModelInterface, ArrayAccess
     /**
      * Sets inputs
      *
-     * @param \Swagger\Client\Model\ActionInputDefinition[] $inputs inputs
+     * @param \Catalytic\Client\Model\ActionInputDefinition[] $inputs inputs
      *
      * @return $this
      */
@@ -361,7 +361,7 @@ class RegisterActionRequest implements ModelInterface, ArrayAccess
     /**
      * Gets outputs
      *
-     * @return \Swagger\Client\Model\ActionOutputDefinition[]
+     * @return \Catalytic\Client\Model\ActionOutputDefinition[]
      */
     public function getOutputs()
     {
@@ -371,7 +371,7 @@ class RegisterActionRequest implements ModelInterface, ArrayAccess
     /**
      * Sets outputs
      *
-     * @param \Swagger\Client\Model\ActionOutputDefinition[] $outputs outputs
+     * @param \Catalytic\Client\Model\ActionOutputDefinition[] $outputs outputs
      *
      * @return $this
      */

@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * ActionsApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -91,11 +91,11 @@ class ActionsApi
      *
      * Define a new Action
      *
-     * @param  \Swagger\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
+     * @param  \Catalytic\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\Action
+     * @return \Catalytic\Client\Model\Action
      */
     public function createAction($body = null)
     {
@@ -108,15 +108,15 @@ class ActionsApi
      *
      * Define a new Action
      *
-     * @param  \Swagger\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
+     * @param  \Catalytic\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\Action, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\Action, HTTP status code, HTTP response headers (array of strings)
      */
     public function createActionWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\Action';
+        $returnType = '\Catalytic\Client\Model\Action';
         $request = $this->createActionRequest($body);
 
         try {
@@ -168,7 +168,7 @@ class ActionsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -176,7 +176,7 @@ class ActionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\Action',
+                        '\Catalytic\Client\Model\Action',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -191,7 +191,7 @@ class ActionsApi
      *
      * Define a new Action
      *
-     * @param  \Swagger\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
+     * @param  \Catalytic\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -211,14 +211,14 @@ class ActionsApi
      *
      * Define a new Action
      *
-     * @param  \Swagger\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
+     * @param  \Catalytic\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createActionAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\Action';
+        $returnType = '\Catalytic\Client\Model\Action';
         $request = $this->createActionRequest($body);
 
         return $this->client
@@ -261,7 +261,7 @@ class ActionsApi
     /**
      * Create request for operation 'createAction'
      *
-     * @param  \Swagger\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
+     * @param  \Catalytic\Client\Model\RegisterActionRequest $body The definition of the action to create (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -356,9 +356,9 @@ class ActionsApi
      *
      * @param  string $id The ID of the Action to delete (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\IActionResult
+     * @return \Catalytic\Client\Model\IActionResult
      */
     public function deleteAction($id)
     {
@@ -373,13 +373,13 @@ class ActionsApi
      *
      * @param  string $id The ID of the Action to delete (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\IActionResult, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\IActionResult, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteActionWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\IActionResult';
+        $returnType = '\Catalytic\Client\Model\IActionResult';
         $request = $this->deleteActionRequest($id);
 
         try {
@@ -431,7 +431,7 @@ class ActionsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -439,7 +439,7 @@ class ActionsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -447,7 +447,7 @@ class ActionsApi
                 case 204:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\IActionResult',
+                        '\Catalytic\Client\Model\IActionResult',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -489,7 +489,7 @@ class ActionsApi
      */
     public function deleteActionAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\IActionResult';
+        $returnType = '\Catalytic\Client\Model\IActionResult';
         $request = $this->deleteActionRequest($id);
 
         return $this->client
@@ -645,9 +645,9 @@ class ActionsApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionsPage
+     * @return \Catalytic\Client\Model\ActionsPage
      */
     public function findActions($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
@@ -669,13 +669,13 @@ class ActionsApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionsPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionsPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findActionsWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionsPage';
+        $returnType = '\Catalytic\Client\Model\ActionsPage';
         $request = $this->findActionsRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         try {
@@ -727,7 +727,7 @@ class ActionsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -735,7 +735,7 @@ class ActionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionsPage',
+                        '\Catalytic\Client\Model\ActionsPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -791,7 +791,7 @@ class ActionsApi
      */
     public function findActionsAsyncWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionsPage';
+        $returnType = '\Catalytic\Client\Model\ActionsPage';
         $request = $this->findActionsRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         return $this->client
@@ -965,9 +965,9 @@ class ActionsApi
      *
      * @param  string $id The ID of the Action to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\Action
+     * @return \Catalytic\Client\Model\Action
      */
     public function getAction($id)
     {
@@ -982,13 +982,13 @@ class ActionsApi
      *
      * @param  string $id The ID of the Action to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\Action, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\Action, HTTP status code, HTTP response headers (array of strings)
      */
     public function getActionWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Action';
+        $returnType = '\Catalytic\Client\Model\Action';
         $request = $this->getActionRequest($id);
 
         try {
@@ -1040,7 +1040,7 @@ class ActionsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1048,7 +1048,7 @@ class ActionsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1056,7 +1056,7 @@ class ActionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\Action',
+                        '\Catalytic\Client\Model\Action',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1098,7 +1098,7 @@ class ActionsApi
      */
     public function getActionAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Action';
+        $returnType = '\Catalytic\Client\Model\Action';
         $request = $this->getActionRequest($id);
 
         return $this->client
@@ -1246,11 +1246,11 @@ class ActionsApi
      * Update an Action
      *
      * @param  string $id The id of the action to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\Action
+     * @return \Catalytic\Client\Model\Action
      */
     public function updateAction($id, $body = null)
     {
@@ -1264,15 +1264,15 @@ class ActionsApi
      * Update an Action
      *
      * @param  string $id The id of the action to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\Action, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\Action, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateActionWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\Action';
+        $returnType = '\Catalytic\Client\Model\Action';
         $request = $this->updateActionRequest($id, $body);
 
         try {
@@ -1324,7 +1324,7 @@ class ActionsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1332,7 +1332,7 @@ class ActionsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1340,7 +1340,7 @@ class ActionsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\Action',
+                        '\Catalytic\Client\Model\Action',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1356,7 +1356,7 @@ class ActionsApi
      * Update an Action
      *
      * @param  string $id The id of the action to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1377,14 +1377,14 @@ class ActionsApi
      * Update an Action
      *
      * @param  string $id The id of the action to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function updateActionAsyncWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\Action';
+        $returnType = '\Catalytic\Client\Model\Action';
         $request = $this->updateActionRequest($id, $body);
 
         return $this->client
@@ -1428,7 +1428,7 @@ class ActionsApi
      * Create request for operation 'updateAction'
      *
      * @param  string $id The id of the action to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionRequest $body The updates to apply to the action (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request

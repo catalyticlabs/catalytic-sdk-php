@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * ActionExecutionApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -91,11 +91,11 @@ class ActionExecutionApi
      *
      * Acquire new Action Tasks to Execute
      *
-     * @param  \Swagger\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
+     * @param  \Catalytic\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\AcquiredTasks
+     * @return \Catalytic\Client\Model\AcquiredTasks
      */
     public function acquireActionTasks($body = null)
     {
@@ -108,15 +108,15 @@ class ActionExecutionApi
      *
      * Acquire new Action Tasks to Execute
      *
-     * @param  \Swagger\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
+     * @param  \Catalytic\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\AcquiredTasks, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\AcquiredTasks, HTTP status code, HTTP response headers (array of strings)
      */
     public function acquireActionTasksWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\AcquiredTasks';
+        $returnType = '\Catalytic\Client\Model\AcquiredTasks';
         $request = $this->acquireActionTasksRequest($body);
 
         try {
@@ -168,7 +168,7 @@ class ActionExecutionApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -176,7 +176,7 @@ class ActionExecutionApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\AcquiredTasks',
+                        '\Catalytic\Client\Model\AcquiredTasks',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -191,7 +191,7 @@ class ActionExecutionApi
      *
      * Acquire new Action Tasks to Execute
      *
-     * @param  \Swagger\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
+     * @param  \Catalytic\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -211,14 +211,14 @@ class ActionExecutionApi
      *
      * Acquire new Action Tasks to Execute
      *
-     * @param  \Swagger\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
+     * @param  \Catalytic\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function acquireActionTasksAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\AcquiredTasks';
+        $returnType = '\Catalytic\Client\Model\AcquiredTasks';
         $request = $this->acquireActionTasksRequest($body);
 
         return $this->client
@@ -261,7 +261,7 @@ class ActionExecutionApi
     /**
      * Create request for operation 'acquireActionTasks'
      *
-     * @param  \Swagger\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
+     * @param  \Catalytic\Client\Model\AcquireActionTasksRequest $body Allows specifying the number of tasks to acquire and how long to hold the lock for (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -355,11 +355,11 @@ class ActionExecutionApi
      * Completes an acquired action task, optionally including output values.
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionTask
+     * @return \Catalytic\Client\Model\ActionTask
      */
     public function completeActionTask($id, $body = null)
     {
@@ -373,15 +373,15 @@ class ActionExecutionApi
      * Completes an acquired action task, optionally including output values.
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
      */
     public function completeActionTaskWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->completeActionTaskRequest($id, $body);
 
         try {
@@ -433,7 +433,7 @@ class ActionExecutionApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -441,7 +441,7 @@ class ActionExecutionApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionTask',
+                        '\Catalytic\Client\Model\ActionTask',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -457,7 +457,7 @@ class ActionExecutionApi
      * Completes an acquired action task, optionally including output values.
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -478,14 +478,14 @@ class ActionExecutionApi
      * Completes an acquired action task, optionally including output values.
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function completeActionTaskAsyncWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->completeActionTaskRequest($id, $body);
 
         return $this->client
@@ -529,7 +529,7 @@ class ActionExecutionApi
      * Create request for operation 'completeActionTask'
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskCompleteRequest $body Output parameters, if any. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -637,11 +637,11 @@ class ActionExecutionApi
      * Post a comment to an action task
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskComment $body The comment text to post (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskComment $body The comment text to post (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionTask
+     * @return \Catalytic\Client\Model\ActionTask
      */
     public function createActionTaskComment($id, $body = null)
     {
@@ -655,15 +655,15 @@ class ActionExecutionApi
      * Post a comment to an action task
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskComment $body The comment text to post (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskComment $body The comment text to post (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
      */
     public function createActionTaskCommentWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->createActionTaskCommentRequest($id, $body);
 
         try {
@@ -715,7 +715,7 @@ class ActionExecutionApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -723,7 +723,7 @@ class ActionExecutionApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionTask',
+                        '\Catalytic\Client\Model\ActionTask',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -739,7 +739,7 @@ class ActionExecutionApi
      * Post a comment to an action task
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskComment $body The comment text to post (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskComment $body The comment text to post (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -760,14 +760,14 @@ class ActionExecutionApi
      * Post a comment to an action task
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskComment $body The comment text to post (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskComment $body The comment text to post (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createActionTaskCommentAsyncWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->createActionTaskCommentRequest($id, $body);
 
         return $this->client
@@ -811,7 +811,7 @@ class ActionExecutionApi
      * Create request for operation 'createActionTaskComment'
      *
      * @param  string $id The ID of the acquired Action Task to complete (required)
-     * @param  \Swagger\Client\Model\ActionTaskComment $body The comment text to post (optional)
+     * @param  \Catalytic\Client\Model\ActionTaskComment $body The comment text to post (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -921,7 +921,7 @@ class ActionExecutionApi
      * @param  string $id The ID of the acquired Action Task (required)
      * @param  string $file_id The ID of the file input (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -939,7 +939,7 @@ class ActionExecutionApi
      * @param  string $id The ID of the acquired Action Task (required)
      * @param  string $file_id The ID of the file input (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of string, HTTP status code, HTTP response headers (array of strings)
      */
@@ -997,7 +997,7 @@ class ActionExecutionApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1212,12 +1212,12 @@ class ActionExecutionApi
      * Updates an acquired action task. This can incude updates to outputs, progress percent or description, and  can extend the task lock duration.
      *
      * @param  string $id The ID of the acquired Action Task to update (required)
-     * @param  \Swagger\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
+     * @param  \Catalytic\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
             and task lock duration. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionTask
+     * @return \Catalytic\Client\Model\ActionTask
      */
     public function updateActionTask($id, $body = null)
     {
@@ -1231,16 +1231,16 @@ class ActionExecutionApi
      * Updates an acquired action task. This can incude updates to outputs, progress percent or description, and  can extend the task lock duration.
      *
      * @param  string $id The ID of the acquired Action Task to update (required)
-     * @param  \Swagger\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
+     * @param  \Catalytic\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
             and task lock duration. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateActionTaskWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->updateActionTaskRequest($id, $body);
 
         try {
@@ -1292,7 +1292,7 @@ class ActionExecutionApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1300,7 +1300,7 @@ class ActionExecutionApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionTask',
+                        '\Catalytic\Client\Model\ActionTask',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1316,7 +1316,7 @@ class ActionExecutionApi
      * Updates an acquired action task. This can incude updates to outputs, progress percent or description, and  can extend the task lock duration.
      *
      * @param  string $id The ID of the acquired Action Task to update (required)
-     * @param  \Swagger\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
+     * @param  \Catalytic\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
             and task lock duration. (optional)
      *
      * @throws \InvalidArgumentException
@@ -1338,7 +1338,7 @@ class ActionExecutionApi
      * Updates an acquired action task. This can incude updates to outputs, progress percent or description, and  can extend the task lock duration.
      *
      * @param  string $id The ID of the acquired Action Task to update (required)
-     * @param  \Swagger\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
+     * @param  \Catalytic\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
             and task lock duration. (optional)
      *
      * @throws \InvalidArgumentException
@@ -1346,7 +1346,7 @@ class ActionExecutionApi
      */
     public function updateActionTaskAsyncWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->updateActionTaskRequest($id, $body);
 
         return $this->client
@@ -1390,7 +1390,7 @@ class ActionExecutionApi
      * Create request for operation 'updateActionTask'
      *
      * @param  string $id The ID of the acquired Action Task to update (required)
-     * @param  \Swagger\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
+     * @param  \Catalytic\Client\Model\ActionTaskUpdateRequest $body The update request, including updates to outputs, progress percent or description,
             and task lock duration. (optional)
      *
      * @throws \InvalidArgumentException
@@ -1503,9 +1503,9 @@ class ActionExecutionApi
      * @param  string $output_name The name of the output parameter to assocate the upload file with (optional)
      * @param  int $lock_duration_seconds Optional number of seconds to extend the task lock duration (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionTask
+     * @return \Catalytic\Client\Model\ActionTask
      */
     public function uploadActionTaskOutputFile($id, $file = null, $output_name = null, $lock_duration_seconds = null)
     {
@@ -1523,13 +1523,13 @@ class ActionExecutionApi
      * @param  string $output_name The name of the output parameter to assocate the upload file with (optional)
      * @param  int $lock_duration_seconds Optional number of seconds to extend the task lock duration (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionTask, HTTP status code, HTTP response headers (array of strings)
      */
     public function uploadActionTaskOutputFileWithHttpInfo($id, $file = null, $output_name = null, $lock_duration_seconds = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->uploadActionTaskOutputFileRequest($id, $file, $output_name, $lock_duration_seconds);
 
         try {
@@ -1581,7 +1581,7 @@ class ActionExecutionApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1589,7 +1589,7 @@ class ActionExecutionApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionTask',
+                        '\Catalytic\Client\Model\ActionTask',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1637,7 +1637,7 @@ class ActionExecutionApi
      */
     public function uploadActionTaskOutputFileAsyncWithHttpInfo($id, $file = null, $output_name = null, $lock_duration_seconds = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionTask';
+        $returnType = '\Catalytic\Client\Model\ActionTask';
         $request = $this->uploadActionTaskOutputFileRequest($id, $file, $output_name, $lock_duration_seconds);
 
         return $this->client

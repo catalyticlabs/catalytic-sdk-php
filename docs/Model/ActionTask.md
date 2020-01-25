@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**inputs** | [**\Swagger\Client\Model\ActionInput[]**](ActionInput.md) |  | [optional] 
-**outputs** | [**\Swagger\Client\Model\ActionOutput[]**](ActionOutput.md) |  | [optional] 
+**inputs** | [**\Catalytic\Client\Model\ActionInput[]**](ActionInput.md) |  | [optional] 
+**outputs** | [**\Catalytic\Client\Model\ActionOutput[]**](ActionOutput.md) |  | [optional] 
 **id** | **string** |  | [optional] 
 **team_name** | **string** |  | [optional] 
 **required_worker_tags** | **string[]** |  | [optional] 

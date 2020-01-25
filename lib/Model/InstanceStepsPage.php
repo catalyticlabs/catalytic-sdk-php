@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * InstanceStepsPage Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class InstanceStepsPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'steps' => '\Swagger\Client\Model\InstanceStep[]',
+        'steps' => '\Catalytic\Client\Model\InstanceStep[]',
 'next_page_token' => 'string',
 'count' => 'int'    ];
 
@@ -211,7 +211,7 @@ class InstanceStepsPage implements ModelInterface, ArrayAccess
     /**
      * Gets steps
      *
-     * @return \Swagger\Client\Model\InstanceStep[]
+     * @return \Catalytic\Client\Model\InstanceStep[]
      */
     public function getSteps()
     {
@@ -221,7 +221,7 @@ class InstanceStepsPage implements ModelInterface, ArrayAccess
     /**
      * Sets steps
      *
-     * @param \Swagger\Client\Model\InstanceStep[] $steps steps
+     * @param \Catalytic\Client\Model\InstanceStep[] $steps steps
      *
      * @return $this
      */

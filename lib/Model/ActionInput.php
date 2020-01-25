@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * ActionInput Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -61,7 +61,7 @@ class ActionInput implements ModelInterface, ArrayAccess
 'default_value_serialized' => 'string',
 'name' => 'string',
 'description' => 'string',
-'type' => '\Swagger\Client\Model\ActionParameterType',
+'type' => '\Catalytic\Client\Model\ActionParameterType',
 'meta_data' => 'string'    ];
 
     /**
@@ -355,7 +355,7 @@ class ActionInput implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \Swagger\Client\Model\ActionParameterType
+     * @return \Catalytic\Client\Model\ActionParameterType
      */
     public function getType()
     {
@@ -365,7 +365,7 @@ class ActionInput implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Swagger\Client\Model\ActionParameterType $type type
+     * @param \Catalytic\Client\Model\ActionParameterType $type type
      *
      * @return $this
      */

@@ -1,4 +1,4 @@
-# Swagger\Client\FilesApi
+# Catalytic\Client\FilesApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -19,12 +19,12 @@ Download a file
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\FilesApi(
+$apiInstance = new Catalytic\Client\Api\FilesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **findFiles**
-> \Swagger\Client\Model\FilesPage findFiles($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
+> \Catalytic\Client\Model\FilesPage findFiles($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
 
 Find Files
 
@@ -72,12 +72,12 @@ Find Files
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\FilesApi(
+$apiInstance = new Catalytic\Client\Api\FilesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\FilesPage**](../Model/FilesPage.md)
+[**\Catalytic\Client\Model\FilesPage**](../Model/FilesPage.md)
 
 ### Authorization
 
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getFile**
-> \Swagger\Client\Model\File getFile($id)
+> \Catalytic\Client\Model\File getFile($id)
 
 Get metadata of a file
 
@@ -139,12 +139,12 @@ Get metadata of a file
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\FilesApi(
+$apiInstance = new Catalytic\Client\Api\FilesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\File**](../Model/File.md)
+[**\Catalytic\Client\Model\File**](../Model/File.md)
 
 ### Authorization
 
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **uploadFiles**
-> \Swagger\Client\Model\File uploadFiles($files)
+> \Catalytic\Client\Model\File uploadFiles($files)
 
 Upload a file
 
@@ -192,12 +192,12 @@ Upload a file
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\FilesApi(
+$apiInstance = new Catalytic\Client\Api\FilesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\File**](../Model/File.md)
+[**\Catalytic\Client\Model\File**](../Model/File.md)
 
 ### Authorization
 

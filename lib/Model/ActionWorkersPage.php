@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * ActionWorkersPage Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class ActionWorkersPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'action_workers' => '\Swagger\Client\Model\ActionWorker[]',
+        'action_workers' => '\Catalytic\Client\Model\ActionWorker[]',
 'next_page_token' => 'string',
 'count' => 'int'    ];
 
@@ -211,7 +211,7 @@ class ActionWorkersPage implements ModelInterface, ArrayAccess
     /**
      * Gets action_workers
      *
-     * @return \Swagger\Client\Model\ActionWorker[]
+     * @return \Catalytic\Client\Model\ActionWorker[]
      */
     public function getActionWorkers()
     {
@@ -221,7 +221,7 @@ class ActionWorkersPage implements ModelInterface, ArrayAccess
     /**
      * Sets action_workers
      *
-     * @param \Swagger\Client\Model\ActionWorker[] $action_workers action_workers
+     * @param \Catalytic\Client\Model\ActionWorker[] $action_workers action_workers
      *
      * @return $this
      */

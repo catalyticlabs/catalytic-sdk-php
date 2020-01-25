@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * StartInstanceRequest Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -59,7 +59,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
         'pushbot_id' => 'string',
 'name' => 'string',
 'description' => 'string',
-'input_fields' => '\Swagger\Client\Model\InstanceInputField[]'    ];
+'input_fields' => '\Catalytic\Client\Model\InstanceInputField[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -289,7 +289,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     /**
      * Gets input_fields
      *
-     * @return \Swagger\Client\Model\InstanceInputField[]
+     * @return \Catalytic\Client\Model\InstanceInputField[]
      */
     public function getInputFields()
     {
@@ -299,7 +299,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     /**
      * Sets input_fields
      *
-     * @param \Swagger\Client\Model\InstanceInputField[] $input_fields input_fields
+     * @param \Catalytic\Client\Model\InstanceInputField[] $input_fields input_fields
      *
      * @return $this
      */

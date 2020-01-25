@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**actions** | [**\Swagger\Client\Model\Action[]**](Action.md) |  | [optional] 
+**actions** | [**\Catalytic\Client\Model\Action[]**](Action.md) |  | [optional] 
 **next_page_token** | **string** |  | [optional] 
 **count** | **int** |  | [optional] 
 

@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * CompleteStepRequest Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -57,7 +57,7 @@ class CompleteStepRequest implements ModelInterface, ArrayAccess
       */
     protected static $swaggerTypes = [
         'id' => 'string',
-'step_output_fields' => '\Swagger\Client\Model\InstanceInputField[]'    ];
+'step_output_fields' => '\Catalytic\Client\Model\InstanceInputField[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -229,7 +229,7 @@ class CompleteStepRequest implements ModelInterface, ArrayAccess
     /**
      * Gets step_output_fields
      *
-     * @return \Swagger\Client\Model\InstanceInputField[]
+     * @return \Catalytic\Client\Model\InstanceInputField[]
      */
     public function getStepOutputFields()
     {
@@ -239,7 +239,7 @@ class CompleteStepRequest implements ModelInterface, ArrayAccess
     /**
      * Sets step_output_fields
      *
-     * @param \Swagger\Client\Model\InstanceInputField[] $step_output_fields step_output_fields
+     * @param \Catalytic\Client\Model\InstanceInputField[] $step_output_fields step_output_fields
      *
      * @return $this
      */

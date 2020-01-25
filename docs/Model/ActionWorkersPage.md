@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action_workers** | [**\Swagger\Client\Model\ActionWorker[]**](ActionWorker.md) |  | [optional] 
+**action_workers** | [**\Catalytic\Client\Model\ActionWorker[]**](ActionWorker.md) |  | [optional] 
 **next_page_token** | **string** |  | [optional] 
 **count** | **int** |  | [optional] 
 

@@ -1,4 +1,4 @@
-# Swagger\Client\InstanceStepsApi
+# Catalytic\Client\InstanceStepsApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**startStep**](InstanceStepsApi.md#startstep) | **POST** /api/instances/{instanceId}/steps/{id}:start | Starts a pending Instance Step
 
 # **completeStep**
-> \Swagger\Client\Model\InstanceStep completeStep($id, $instance_id, $body)
+> \Catalytic\Client\Model\InstanceStep completeStep($id, $instance_id, $body)
 
 Completes an Instance Step
 
@@ -21,12 +21,12 @@ Completes an Instance Step
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstanceStepsApi(
+$apiInstance = new Catalytic\Client\Api\InstanceStepsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -34,7 +34,7 @@ $apiInstance = new Swagger\Client\Api\InstanceStepsApi(
 );
 $id = "id_example"; // string | The ID of the Instance Step to complete
 $instance_id = "instance_id_example"; // string | 
-$body = new \Swagger\Client\Model\CompleteStepRequest(); // \Swagger\Client\Model\CompleteStepRequest | The values of the fields to complete the task with
+$body = new \Catalytic\Client\Model\CompleteStepRequest(); // \Catalytic\Client\Model\CompleteStepRequest | The values of the fields to complete the task with
 
 try {
     $result = $apiInstance->completeStep($id, $instance_id, $body);
@@ -51,11 +51,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the Instance Step to complete |
  **instance_id** | **string**|  |
- **body** | [**\Swagger\Client\Model\CompleteStepRequest**](../Model/CompleteStepRequest.md)| The values of the fields to complete the task with | [optional]
+ **body** | [**\Catalytic\Client\Model\CompleteStepRequest**](../Model/CompleteStepRequest.md)| The values of the fields to complete the task with | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\InstanceStep**](../Model/InstanceStep.md)
+[**\Catalytic\Client\Model\InstanceStep**](../Model/InstanceStep.md)
 
 ### Authorization
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **findInstanceSteps**
-> \Swagger\Client\Model\InstanceStepsPage findInstanceSteps($instance_id, $query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
+> \Catalytic\Client\Model\InstanceStepsPage findInstanceSteps($instance_id, $query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
 
 Find Instance Steps
 
@@ -78,12 +78,12 @@ Find Instance Steps
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstanceStepsApi(
+$apiInstance = new Catalytic\Client\Api\InstanceStepsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InstanceStepsPage**](../Model/InstanceStepsPage.md)
+[**\Catalytic\Client\Model\InstanceStepsPage**](../Model/InstanceStepsPage.md)
 
 ### Authorization
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getInstanceStep**
-> \Swagger\Client\Model\InstanceStep getInstanceStep($id, $instance_id)
+> \Catalytic\Client\Model\InstanceStep getInstanceStep($id, $instance_id)
 
 Gets details of a specific Instance Step
 
@@ -147,12 +147,12 @@ Gets details of a specific Instance Step
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstanceStepsApi(
+$apiInstance = new Catalytic\Client\Api\InstanceStepsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -179,7 +179,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InstanceStep**](../Model/InstanceStep.md)
+[**\Catalytic\Client\Model\InstanceStep**](../Model/InstanceStep.md)
 
 ### Authorization
 
@@ -193,7 +193,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **reassignStep**
-> \Swagger\Client\Model\InstanceStep reassignStep($id, $instance_id, $body)
+> \Catalytic\Client\Model\InstanceStep reassignStep($id, $instance_id, $body)
 
 Reassigns a Instance Step
 
@@ -202,12 +202,12 @@ Reassigns a Instance Step
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstanceStepsApi(
+$apiInstance = new Catalytic\Client\Api\InstanceStepsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -215,7 +215,7 @@ $apiInstance = new Swagger\Client\Api\InstanceStepsApi(
 );
 $id = "id_example"; // string | The ID of the Instance Step to reassign
 $instance_id = "instance_id_example"; // string | 
-$body = new \Swagger\Client\Model\ReassignTaskRequest(); // \Swagger\Client\Model\ReassignTaskRequest | Contains the email address of the user to reassign the Instance Step to
+$body = new \Catalytic\Client\Model\ReassignTaskRequest(); // \Catalytic\Client\Model\ReassignTaskRequest | Contains the email address of the user to reassign the Instance Step to
 
 try {
     $result = $apiInstance->reassignStep($id, $instance_id, $body);
@@ -232,11 +232,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the Instance Step to reassign |
  **instance_id** | **string**|  |
- **body** | [**\Swagger\Client\Model\ReassignTaskRequest**](../Model/ReassignTaskRequest.md)| Contains the email address of the user to reassign the Instance Step to | [optional]
+ **body** | [**\Catalytic\Client\Model\ReassignTaskRequest**](../Model/ReassignTaskRequest.md)| Contains the email address of the user to reassign the Instance Step to | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\InstanceStep**](../Model/InstanceStep.md)
+[**\Catalytic\Client\Model\InstanceStep**](../Model/InstanceStep.md)
 
 ### Authorization
 
@@ -250,7 +250,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **snoozeStep**
-> \Swagger\Client\Model\InstanceStep snoozeStep($id, $instance_id)
+> \Catalytic\Client\Model\InstanceStep snoozeStep($id, $instance_id)
 
 Snooze a pending Instance Step
 
@@ -259,12 +259,12 @@ Snooze a pending Instance Step
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstanceStepsApi(
+$apiInstance = new Catalytic\Client\Api\InstanceStepsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -291,7 +291,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InstanceStep**](../Model/InstanceStep.md)
+[**\Catalytic\Client\Model\InstanceStep**](../Model/InstanceStep.md)
 
 ### Authorization
 
@@ -305,7 +305,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **startStep**
-> \Swagger\Client\Model\InstanceStep startStep($id, $instance_id)
+> \Catalytic\Client\Model\InstanceStep startStep($id, $instance_id)
 
 Starts a pending Instance Step
 
@@ -314,12 +314,12 @@ Starts a pending Instance Step
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstanceStepsApi(
+$apiInstance = new Catalytic\Client\Api\InstanceStepsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -346,7 +346,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InstanceStep**](../Model/InstanceStep.md)
+[**\Catalytic\Client\Model\InstanceStep**](../Model/InstanceStep.md)
 
 ### Authorization
 

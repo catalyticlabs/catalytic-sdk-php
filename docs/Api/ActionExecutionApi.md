@@ -1,4 +1,4 @@
-# Swagger\Client\ActionExecutionApi
+# Catalytic\Client\ActionExecutionApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 [**uploadActionTaskOutputFile**](ActionExecutionApi.md#uploadactiontaskoutputfile) | **POST** /api/action-tasks/{id}/files/:upload | Upload a Task Output File
 
 # **acquireActionTasks**
-> \Swagger\Client\Model\AcquiredTasks acquireActionTasks($body)
+> \Catalytic\Client\Model\AcquiredTasks acquireActionTasks($body)
 
 Acquire new Action Tasks to Execute
 
@@ -21,18 +21,18 @@ Acquire new Action Tasks to Execute
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\AcquireActionTasksRequest(); // \Swagger\Client\Model\AcquireActionTasksRequest | Allows specifying the number of tasks to acquire and how long to hold the lock for
+$body = new \Catalytic\Client\Model\AcquireActionTasksRequest(); // \Catalytic\Client\Model\AcquireActionTasksRequest | Allows specifying the number of tasks to acquire and how long to hold the lock for
 
 try {
     $result = $apiInstance->acquireActionTasks($body);
@@ -47,11 +47,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\AcquireActionTasksRequest**](../Model/AcquireActionTasksRequest.md)| Allows specifying the number of tasks to acquire and how long to hold the lock for | [optional]
+ **body** | [**\Catalytic\Client\Model\AcquireActionTasksRequest**](../Model/AcquireActionTasksRequest.md)| Allows specifying the number of tasks to acquire and how long to hold the lock for | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\AcquiredTasks**](../Model/AcquiredTasks.md)
+[**\Catalytic\Client\Model\AcquiredTasks**](../Model/AcquiredTasks.md)
 
 ### Authorization
 
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **completeActionTask**
-> \Swagger\Client\Model\ActionTask completeActionTask($id, $body)
+> \Catalytic\Client\Model\ActionTask completeActionTask($id, $body)
 
 Completes an acquired action task, optionally including output values.
 
@@ -74,19 +74,19 @@ Completes an acquired action task, optionally including output values.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The ID of the acquired Action Task to complete
-$body = new \Swagger\Client\Model\ActionTaskCompleteRequest(); // \Swagger\Client\Model\ActionTaskCompleteRequest | Output parameters, if any.
+$body = new \Catalytic\Client\Model\ActionTaskCompleteRequest(); // \Catalytic\Client\Model\ActionTaskCompleteRequest | Output parameters, if any.
 
 try {
     $result = $apiInstance->completeActionTask($id, $body);
@@ -102,11 +102,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the acquired Action Task to complete |
- **body** | [**\Swagger\Client\Model\ActionTaskCompleteRequest**](../Model/ActionTaskCompleteRequest.md)| Output parameters, if any. | [optional]
+ **body** | [**\Catalytic\Client\Model\ActionTaskCompleteRequest**](../Model/ActionTaskCompleteRequest.md)| Output parameters, if any. | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionTask**](../Model/ActionTask.md)
+[**\Catalytic\Client\Model\ActionTask**](../Model/ActionTask.md)
 
 ### Authorization
 
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **createActionTaskComment**
-> \Swagger\Client\Model\ActionTask createActionTaskComment($id, $body)
+> \Catalytic\Client\Model\ActionTask createActionTaskComment($id, $body)
 
 Post a comment to an action task
 
@@ -129,19 +129,19 @@ Post a comment to an action task
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The ID of the acquired Action Task to complete
-$body = new \Swagger\Client\Model\ActionTaskComment(); // \Swagger\Client\Model\ActionTaskComment | The comment text to post
+$body = new \Catalytic\Client\Model\ActionTaskComment(); // \Catalytic\Client\Model\ActionTaskComment | The comment text to post
 
 try {
     $result = $apiInstance->createActionTaskComment($id, $body);
@@ -157,11 +157,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the acquired Action Task to complete |
- **body** | [**\Swagger\Client\Model\ActionTaskComment**](../Model/ActionTaskComment.md)| The comment text to post | [optional]
+ **body** | [**\Catalytic\Client\Model\ActionTaskComment**](../Model/ActionTaskComment.md)| The comment text to post | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionTask**](../Model/ActionTask.md)
+[**\Catalytic\Client\Model\ActionTask**](../Model/ActionTask.md)
 
 ### Authorization
 
@@ -184,12 +184,12 @@ Download Task Input File
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **updateActionTask**
-> \Swagger\Client\Model\ActionTask updateActionTask($id, $body)
+> \Catalytic\Client\Model\ActionTask updateActionTask($id, $body)
 
 Updates an acquired action task. This can incude updates to outputs, progress percent or description, and  can extend the task lock duration.
 
@@ -239,19 +239,19 @@ Updates an acquired action task. This can incude updates to outputs, progress pe
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The ID of the acquired Action Task to update
-$body = new \Swagger\Client\Model\ActionTaskUpdateRequest(); // \Swagger\Client\Model\ActionTaskUpdateRequest | The update request, including updates to outputs, progress percent or description,
+$body = new \Catalytic\Client\Model\ActionTaskUpdateRequest(); // \Catalytic\Client\Model\ActionTaskUpdateRequest | The update request, including updates to outputs, progress percent or description,
             and task lock duration.
 
 try {
@@ -268,12 +268,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the acquired Action Task to update |
- **body** | [**\Swagger\Client\Model\ActionTaskUpdateRequest**](../Model/ActionTaskUpdateRequest.md)| The update request, including updates to outputs, progress percent or description,
+ **body** | [**\Catalytic\Client\Model\ActionTaskUpdateRequest**](../Model/ActionTaskUpdateRequest.md)| The update request, including updates to outputs, progress percent or description,
             and task lock duration. | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionTask**](../Model/ActionTask.md)
+[**\Catalytic\Client\Model\ActionTask**](../Model/ActionTask.md)
 
 ### Authorization
 
@@ -287,7 +287,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **uploadActionTaskOutputFile**
-> \Swagger\Client\Model\ActionTask uploadActionTaskOutputFile($id, $file, $output_name, $lock_duration_seconds)
+> \Catalytic\Client\Model\ActionTask uploadActionTaskOutputFile($id, $file, $output_name, $lock_duration_seconds)
 
 Upload a Task Output File
 
@@ -296,12 +296,12 @@ Upload a Task Output File
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -332,7 +332,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionTask**](../Model/ActionTask.md)
+[**\Catalytic\Client\Model\ActionTask**](../Model/ActionTask.md)
 
 ### Authorization
 

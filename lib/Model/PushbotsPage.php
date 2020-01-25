@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * PushbotsPage Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class PushbotsPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'pushbots' => '\Swagger\Client\Model\Pushbot[]',
+        'pushbots' => '\Catalytic\Client\Model\Pushbot[]',
 'next_page_token' => 'string',
 'count' => 'int'    ];
 
@@ -211,7 +211,7 @@ class PushbotsPage implements ModelInterface, ArrayAccess
     /**
      * Gets pushbots
      *
-     * @return \Swagger\Client\Model\Pushbot[]
+     * @return \Catalytic\Client\Model\Pushbot[]
      */
     public function getPushbots()
     {
@@ -221,7 +221,7 @@ class PushbotsPage implements ModelInterface, ArrayAccess
     /**
      * Sets pushbots
      *
-     * @param \Swagger\Client\Model\Pushbot[] $pushbots pushbots
+     * @param \Catalytic\Client\Model\Pushbot[] $pushbots pushbots
      *
      * @return $this
      */

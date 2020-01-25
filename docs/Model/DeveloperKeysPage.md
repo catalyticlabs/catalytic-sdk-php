@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**developer_keys** | [**\Swagger\Client\Model\DeveloperKey[]**](DeveloperKey.md) |  | [optional] 
+**developer_keys** | [**\Catalytic\Client\Model\DeveloperKey[]**](DeveloperKey.md) |  | [optional] 
 **next_page_token** | **string** |  | [optional] 
 **count** | **int** |  | [optional] 
 

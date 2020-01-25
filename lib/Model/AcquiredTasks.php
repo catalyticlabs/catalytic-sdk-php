@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * AcquiredTasks Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,11 +56,11 @@ class AcquiredTasks implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'status' => '\Swagger\Client\Model\LockStatus',
+        'status' => '\Catalytic\Client\Model\LockStatus',
 'lock_request_id' => 'string',
 'count' => 'int',
 'waiting_task_count' => 'int',
-'tasks' => '\Swagger\Client\Model\ActionTask[]'    ];
+'tasks' => '\Catalytic\Client\Model\ActionTask[]'    ];
 
     /**
       * Array of property to format mappings. Used for (de)serialization
@@ -223,7 +223,7 @@ class AcquiredTasks implements ModelInterface, ArrayAccess
     /**
      * Gets status
      *
-     * @return \Swagger\Client\Model\LockStatus
+     * @return \Catalytic\Client\Model\LockStatus
      */
     public function getStatus()
     {
@@ -233,7 +233,7 @@ class AcquiredTasks implements ModelInterface, ArrayAccess
     /**
      * Sets status
      *
-     * @param \Swagger\Client\Model\LockStatus $status status
+     * @param \Catalytic\Client\Model\LockStatus $status status
      *
      * @return $this
      */
@@ -319,7 +319,7 @@ class AcquiredTasks implements ModelInterface, ArrayAccess
     /**
      * Gets tasks
      *
-     * @return \Swagger\Client\Model\ActionTask[]
+     * @return \Catalytic\Client\Model\ActionTask[]
      */
     public function getTasks()
     {
@@ -329,7 +329,7 @@ class AcquiredTasks implements ModelInterface, ArrayAccess
     /**
      * Sets tasks
      *
-     * @param \Swagger\Client\Model\ActionTask[] $tasks tasks
+     * @param \Catalytic\Client\Model\ActionTask[] $tasks tasks
      *
      * @return $this
      */

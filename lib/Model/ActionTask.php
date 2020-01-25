@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * ActionTask Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,8 +56,8 @@ class ActionTask implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'inputs' => '\Swagger\Client\Model\ActionInput[]',
-'outputs' => '\Swagger\Client\Model\ActionOutput[]',
+        'inputs' => '\Catalytic\Client\Model\ActionInput[]',
+'outputs' => '\Catalytic\Client\Model\ActionOutput[]',
 'id' => 'string',
 'team_name' => 'string',
 'required_worker_tags' => 'string[]',
@@ -253,7 +253,7 @@ class ActionTask implements ModelInterface, ArrayAccess
     /**
      * Gets inputs
      *
-     * @return \Swagger\Client\Model\ActionInput[]
+     * @return \Catalytic\Client\Model\ActionInput[]
      */
     public function getInputs()
     {
@@ -263,7 +263,7 @@ class ActionTask implements ModelInterface, ArrayAccess
     /**
      * Sets inputs
      *
-     * @param \Swagger\Client\Model\ActionInput[] $inputs inputs
+     * @param \Catalytic\Client\Model\ActionInput[] $inputs inputs
      *
      * @return $this
      */
@@ -277,7 +277,7 @@ class ActionTask implements ModelInterface, ArrayAccess
     /**
      * Gets outputs
      *
-     * @return \Swagger\Client\Model\ActionOutput[]
+     * @return \Catalytic\Client\Model\ActionOutput[]
      */
     public function getOutputs()
     {
@@ -287,7 +287,7 @@ class ActionTask implements ModelInterface, ArrayAccess
     /**
      * Sets outputs
      *
-     * @param \Swagger\Client\Model\ActionOutput[] $outputs outputs
+     * @param \Catalytic\Client\Model\ActionOutput[] $outputs outputs
      *
      * @return $this
      */

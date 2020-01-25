@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * FilesPage Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class FilesPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'files' => '\Swagger\Client\Model\File[]',
+        'files' => '\Catalytic\Client\Model\File[]',
 'next_page_token' => 'string',
 'count' => 'int'    ];
 
@@ -211,7 +211,7 @@ class FilesPage implements ModelInterface, ArrayAccess
     /**
      * Gets files
      *
-     * @return \Swagger\Client\Model\File[]
+     * @return \Catalytic\Client\Model\File[]
      */
     public function getFiles()
     {
@@ -221,7 +221,7 @@ class FilesPage implements ModelInterface, ArrayAccess
     /**
      * Sets files
      *
-     * @param \Swagger\Client\Model\File[] $files files
+     * @param \Catalytic\Client\Model\File[] $files files
      *
      * @return $this
      */

@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access_identifier** | **string** |  | 
 **secret** | **string** |  | [optional] 
-**status** | [**\Swagger\Client\Model\DeveloperKeyStatus**](DeveloperKeyStatus.md) |  | 
+**status** | [**\Catalytic\Client\Model\DeveloperKeyStatus**](DeveloperKeyStatus.md) |  | 
 **created_by_id** | **string** |  | [optional] 
 **domain** | **string** |  | 
 **environment** | **string** |  | [optional] 

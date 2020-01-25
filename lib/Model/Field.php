@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * Field Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -61,8 +61,8 @@ class Field implements ModelInterface, ArrayAccess
 'reference_name' => 'string',
 'description' => 'string',
 'position' => 'int',
-'restrictions' => '\Swagger\Client\Model\FieldRestrictions',
-'field_type' => '\Swagger\Client\Model\FieldType',
+'restrictions' => '\Catalytic\Client\Model\FieldRestrictions',
+'field_type' => '\Catalytic\Client\Model\FieldType',
 'value' => 'string',
 'default_value' => 'string'    ];
 
@@ -367,7 +367,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Gets restrictions
      *
-     * @return \Swagger\Client\Model\FieldRestrictions
+     * @return \Catalytic\Client\Model\FieldRestrictions
      */
     public function getRestrictions()
     {
@@ -377,7 +377,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets restrictions
      *
-     * @param \Swagger\Client\Model\FieldRestrictions $restrictions restrictions
+     * @param \Catalytic\Client\Model\FieldRestrictions $restrictions restrictions
      *
      * @return $this
      */
@@ -391,7 +391,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Gets field_type
      *
-     * @return \Swagger\Client\Model\FieldType
+     * @return \Catalytic\Client\Model\FieldType
      */
     public function getFieldType()
     {
@@ -401,7 +401,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets field_type
      *
-     * @param \Swagger\Client\Model\FieldType $field_type field_type
+     * @param \Catalytic\Client\Model\FieldType $field_type field_type
      *
      * @return $this
      */

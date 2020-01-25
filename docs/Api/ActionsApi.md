@@ -1,4 +1,4 @@
-# Swagger\Client\ActionsApi
+# Catalytic\Client\ActionsApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**updateAction**](ActionsApi.md#updateaction) | **PATCH** /api/actions/{id} | Update an Action
 
 # **createAction**
-> \Swagger\Client\Model\Action createAction($body)
+> \Catalytic\Client\Model\Action createAction($body)
 
 Define a new Action
 
@@ -20,18 +20,18 @@ Define a new Action
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionsApi(
+$apiInstance = new Catalytic\Client\Api\ActionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\RegisterActionRequest(); // \Swagger\Client\Model\RegisterActionRequest | The definition of the action to create
+$body = new \Catalytic\Client\Model\RegisterActionRequest(); // \Catalytic\Client\Model\RegisterActionRequest | The definition of the action to create
 
 try {
     $result = $apiInstance->createAction($body);
@@ -46,11 +46,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\RegisterActionRequest**](../Model/RegisterActionRequest.md)| The definition of the action to create | [optional]
+ **body** | [**\Catalytic\Client\Model\RegisterActionRequest**](../Model/RegisterActionRequest.md)| The definition of the action to create | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\Action**](../Model/Action.md)
+[**\Catalytic\Client\Model\Action**](../Model/Action.md)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **deleteAction**
-> \Swagger\Client\Model\IActionResult deleteAction($id)
+> \Catalytic\Client\Model\IActionResult deleteAction($id)
 
 Deletes a specific Action definition
 
@@ -73,12 +73,12 @@ Deletes a specific Action definition
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionsApi(
+$apiInstance = new Catalytic\Client\Api\ActionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\IActionResult**](../Model/IActionResult.md)
+[**\Catalytic\Client\Model\IActionResult**](../Model/IActionResult.md)
 
 ### Authorization
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **findActions**
-> \Swagger\Client\Model\ActionsPage findActions($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
+> \Catalytic\Client\Model\ActionsPage findActions($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
 
 Find Actions
 
@@ -126,12 +126,12 @@ Find Actions
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionsApi(
+$apiInstance = new Catalytic\Client\Api\ActionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -170,7 +170,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionsPage**](../Model/ActionsPage.md)
+[**\Catalytic\Client\Model\ActionsPage**](../Model/ActionsPage.md)
 
 ### Authorization
 
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getAction**
-> \Swagger\Client\Model\Action getAction($id)
+> \Catalytic\Client\Model\Action getAction($id)
 
 Gets details of a specific Action definition
 
@@ -193,12 +193,12 @@ Gets details of a specific Action definition
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionsApi(
+$apiInstance = new Catalytic\Client\Api\ActionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Action**](../Model/Action.md)
+[**\Catalytic\Client\Model\Action**](../Model/Action.md)
 
 ### Authorization
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **updateAction**
-> \Swagger\Client\Model\Action updateAction($id, $body)
+> \Catalytic\Client\Model\Action updateAction($id, $body)
 
 Update an Action
 
@@ -246,19 +246,19 @@ Update an Action
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionsApi(
+$apiInstance = new Catalytic\Client\Api\ActionsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The id of the action to update
-$body = new \Swagger\Client\Model\UpdateActionRequest(); // \Swagger\Client\Model\UpdateActionRequest | The updates to apply to the action
+$body = new \Catalytic\Client\Model\UpdateActionRequest(); // \Catalytic\Client\Model\UpdateActionRequest | The updates to apply to the action
 
 try {
     $result = $apiInstance->updateAction($id, $body);
@@ -274,11 +274,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The id of the action to update |
- **body** | [**\Swagger\Client\Model\UpdateActionRequest**](../Model/UpdateActionRequest.md)| The updates to apply to the action | [optional]
+ **body** | [**\Catalytic\Client\Model\UpdateActionRequest**](../Model/UpdateActionRequest.md)| The updates to apply to the action | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\Action**](../Model/Action.md)
+[**\Catalytic\Client\Model\Action**](../Model/Action.md)
 
 ### Authorization
 

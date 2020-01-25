@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * ActionTaskUpdateRequest Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class ActionTaskUpdateRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'outputs' => '\Swagger\Client\Model\ActionOutput[]',
+        'outputs' => '\Catalytic\Client\Model\ActionOutput[]',
 'progress_status' => 'string',
 'progress_percent' => 'int',
 'lock_duration_seconds' => 'int'    ];
@@ -217,7 +217,7 @@ class ActionTaskUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Gets outputs
      *
-     * @return \Swagger\Client\Model\ActionOutput[]
+     * @return \Catalytic\Client\Model\ActionOutput[]
      */
     public function getOutputs()
     {
@@ -227,7 +227,7 @@ class ActionTaskUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets outputs
      *
-     * @param \Swagger\Client\Model\ActionOutput[] $outputs outputs
+     * @param \Catalytic\Client\Model\ActionOutput[] $outputs outputs
      *
      * @return $this
      */

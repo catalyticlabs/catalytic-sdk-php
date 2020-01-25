@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * DeveloperKeysApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -94,9 +94,9 @@ class DeveloperKeysApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DeveloperKeysPage
+     * @return \Catalytic\Client\Model\DeveloperKeysPage
      */
     public function findDeveloperKeys($page_token = null, $page_size = null)
     {
@@ -112,13 +112,13 @@ class DeveloperKeysApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DeveloperKeysPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DeveloperKeysPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findDeveloperKeysWithHttpInfo($page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKeysPage';
+        $returnType = '\Catalytic\Client\Model\DeveloperKeysPage';
         $request = $this->findDeveloperKeysRequest($page_token, $page_size);
 
         try {
@@ -170,7 +170,7 @@ class DeveloperKeysApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -178,7 +178,7 @@ class DeveloperKeysApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DeveloperKeysPage',
+                        '\Catalytic\Client\Model\DeveloperKeysPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -222,7 +222,7 @@ class DeveloperKeysApi
      */
     public function findDeveloperKeysAsyncWithHttpInfo($page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKeysPage';
+        $returnType = '\Catalytic\Client\Model\DeveloperKeysPage';
         $request = $this->findDeveloperKeysRequest($page_token, $page_size);
 
         return $this->client
@@ -366,9 +366,9 @@ class DeveloperKeysApi
      *
      * @param  string $access_identifier The public Access Identifier of the Developer Key (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DeveloperKey
+     * @return \Catalytic\Client\Model\DeveloperKey
      */
     public function revokeDeveloperKey($access_identifier)
     {
@@ -383,13 +383,13 @@ class DeveloperKeysApi
      *
      * @param  string $access_identifier The public Access Identifier of the Developer Key (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
      */
     public function revokeDeveloperKeyWithHttpInfo($access_identifier)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->revokeDeveloperKeyRequest($access_identifier);
 
         try {
@@ -441,7 +441,7 @@ class DeveloperKeysApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -449,7 +449,7 @@ class DeveloperKeysApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DeveloperKey',
+                        '\Catalytic\Client\Model\DeveloperKey',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -491,7 +491,7 @@ class DeveloperKeysApi
      */
     public function revokeDeveloperKeyAsyncWithHttpInfo($access_identifier)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->revokeDeveloperKeyRequest($access_identifier);
 
         return $this->client

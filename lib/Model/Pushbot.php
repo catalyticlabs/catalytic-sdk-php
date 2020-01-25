@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * Pushbot Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -61,11 +61,11 @@ class Pushbot implements ModelInterface, ArrayAccess
 'team_name' => 'string',
 'description' => 'string',
 'category' => 'string',
-'input_fields' => '\Swagger\Client\Model\Field[]',
+'input_fields' => '\Catalytic\Client\Model\Field[]',
 'is_published' => 'bool',
 'is_archived' => 'bool',
-'field_visibility' => '\Swagger\Client\Model\FieldVisibility',
-'instance_visibility' => '\Swagger\Client\Model\InstanceVisibilty',
+'field_visibility' => '\Catalytic\Client\Model\FieldVisibility',
+'instance_visibility' => '\Catalytic\Client\Model\InstanceVisibilty',
 'admin_users' => 'string[]',
 'standard_users' => 'string[]',
 'read_only_users' => 'string[]',
@@ -442,7 +442,7 @@ class Pushbot implements ModelInterface, ArrayAccess
     /**
      * Gets input_fields
      *
-     * @return \Swagger\Client\Model\Field[]
+     * @return \Catalytic\Client\Model\Field[]
      */
     public function getInputFields()
     {
@@ -452,7 +452,7 @@ class Pushbot implements ModelInterface, ArrayAccess
     /**
      * Sets input_fields
      *
-     * @param \Swagger\Client\Model\Field[] $input_fields input_fields
+     * @param \Catalytic\Client\Model\Field[] $input_fields input_fields
      *
      * @return $this
      */
@@ -514,7 +514,7 @@ class Pushbot implements ModelInterface, ArrayAccess
     /**
      * Gets field_visibility
      *
-     * @return \Swagger\Client\Model\FieldVisibility
+     * @return \Catalytic\Client\Model\FieldVisibility
      */
     public function getFieldVisibility()
     {
@@ -524,7 +524,7 @@ class Pushbot implements ModelInterface, ArrayAccess
     /**
      * Sets field_visibility
      *
-     * @param \Swagger\Client\Model\FieldVisibility $field_visibility field_visibility
+     * @param \Catalytic\Client\Model\FieldVisibility $field_visibility field_visibility
      *
      * @return $this
      */
@@ -538,7 +538,7 @@ class Pushbot implements ModelInterface, ArrayAccess
     /**
      * Gets instance_visibility
      *
-     * @return \Swagger\Client\Model\InstanceVisibilty
+     * @return \Catalytic\Client\Model\InstanceVisibilty
      */
     public function getInstanceVisibility()
     {
@@ -548,7 +548,7 @@ class Pushbot implements ModelInterface, ArrayAccess
     /**
      * Sets instance_visibility
      *
-     * @param \Swagger\Client\Model\InstanceVisibilty $instance_visibility instance_visibility
+     * @param \Catalytic\Client\Model\InstanceVisibilty $instance_visibility instance_visibility
      *
      * @return $this
      */

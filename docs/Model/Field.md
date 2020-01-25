@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **reference_name** | **string** |  | [optional] 
 **description** | **string** |  | [optional] 
 **position** | **int** |  | [optional] 
-**restrictions** | [**\Swagger\Client\Model\FieldRestrictions**](FieldRestrictions.md) |  | [optional] 
-**field_type** | [**\Swagger\Client\Model\FieldType**](FieldType.md) |  | [optional] 
+**restrictions** | [**\Catalytic\Client\Model\FieldRestrictions**](FieldRestrictions.md) |  | [optional] 
+**field_type** | [**\Catalytic\Client\Model\FieldType**](FieldType.md) |  | [optional] 
 **value** | **string** |  | [optional] 
 **default_value** | **string** |  | [optional] 
 

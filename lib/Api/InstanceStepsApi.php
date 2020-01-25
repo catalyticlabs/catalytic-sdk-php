@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * InstanceStepsApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -93,11 +93,11 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to complete (required)
      * @param  string $instance_id instance_id (required)
-     * @param  \Swagger\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
+     * @param  \Catalytic\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InstanceStep
+     * @return \Catalytic\Client\Model\InstanceStep
      */
     public function completeStep($id, $instance_id, $body = null)
     {
@@ -112,15 +112,15 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to complete (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
+     * @param  \Catalytic\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
      */
     public function completeStepWithHttpInfo($id, $instance_id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->completeStepRequest($id, $instance_id, $body);
 
         try {
@@ -172,7 +172,7 @@ class InstanceStepsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -180,7 +180,7 @@ class InstanceStepsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -188,7 +188,7 @@ class InstanceStepsApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -196,7 +196,7 @@ class InstanceStepsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InstanceStep',
+                        '\Catalytic\Client\Model\InstanceStep',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -213,7 +213,7 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to complete (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
+     * @param  \Catalytic\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -235,14 +235,14 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to complete (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
+     * @param  \Catalytic\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function completeStepAsyncWithHttpInfo($id, $instance_id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->completeStepRequest($id, $instance_id, $body);
 
         return $this->client
@@ -287,7 +287,7 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to complete (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
+     * @param  \Catalytic\Client\Model\CompleteStepRequest $body The values of the fields to complete the task with (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -418,9 +418,9 @@ class InstanceStepsApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InstanceStepsPage
+     * @return \Catalytic\Client\Model\InstanceStepsPage
      */
     public function findInstanceSteps($instance_id, $query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
@@ -443,13 +443,13 @@ class InstanceStepsApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InstanceStepsPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\InstanceStepsPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findInstanceStepsWithHttpInfo($instance_id, $query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStepsPage';
+        $returnType = '\Catalytic\Client\Model\InstanceStepsPage';
         $request = $this->findInstanceStepsRequest($instance_id, $query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         try {
@@ -501,7 +501,7 @@ class InstanceStepsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -509,7 +509,7 @@ class InstanceStepsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InstanceStepsPage',
+                        '\Catalytic\Client\Model\InstanceStepsPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -567,7 +567,7 @@ class InstanceStepsApi
      */
     public function findInstanceStepsAsyncWithHttpInfo($instance_id, $query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStepsPage';
+        $returnType = '\Catalytic\Client\Model\InstanceStepsPage';
         $request = $this->findInstanceStepsRequest($instance_id, $query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         return $this->client
@@ -757,9 +757,9 @@ class InstanceStepsApi
      * @param  string $id The ID of the Instance Steps to get (required)
      * @param  string $instance_id instance_id (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InstanceStep
+     * @return \Catalytic\Client\Model\InstanceStep
      */
     public function getInstanceStep($id, $instance_id)
     {
@@ -775,13 +775,13 @@ class InstanceStepsApi
      * @param  string $id The ID of the Instance Steps to get (required)
      * @param  string $instance_id (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
      */
     public function getInstanceStepWithHttpInfo($id, $instance_id)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->getInstanceStepRequest($id, $instance_id);
 
         try {
@@ -833,7 +833,7 @@ class InstanceStepsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -841,7 +841,7 @@ class InstanceStepsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -849,7 +849,7 @@ class InstanceStepsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InstanceStep',
+                        '\Catalytic\Client\Model\InstanceStep',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -893,7 +893,7 @@ class InstanceStepsApi
      */
     public function getInstanceStepAsyncWithHttpInfo($id, $instance_id)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->getInstanceStepRequest($id, $instance_id);
 
         return $this->client
@@ -1057,11 +1057,11 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to reassign (required)
      * @param  string $instance_id instance_id (required)
-     * @param  \Swagger\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
+     * @param  \Catalytic\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InstanceStep
+     * @return \Catalytic\Client\Model\InstanceStep
      */
     public function reassignStep($id, $instance_id, $body = null)
     {
@@ -1076,15 +1076,15 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to reassign (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
+     * @param  \Catalytic\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
      */
     public function reassignStepWithHttpInfo($id, $instance_id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->reassignStepRequest($id, $instance_id, $body);
 
         try {
@@ -1136,7 +1136,7 @@ class InstanceStepsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1144,7 +1144,7 @@ class InstanceStepsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1152,7 +1152,7 @@ class InstanceStepsApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1160,7 +1160,7 @@ class InstanceStepsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InstanceStep',
+                        '\Catalytic\Client\Model\InstanceStep',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1177,7 +1177,7 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to reassign (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
+     * @param  \Catalytic\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1199,14 +1199,14 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to reassign (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
+     * @param  \Catalytic\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function reassignStepAsyncWithHttpInfo($id, $instance_id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->reassignStepRequest($id, $instance_id, $body);
 
         return $this->client
@@ -1251,7 +1251,7 @@ class InstanceStepsApi
      *
      * @param  string $id The ID of the Instance Step to reassign (required)
      * @param  string $instance_id (required)
-     * @param  \Swagger\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
+     * @param  \Catalytic\Client\Model\ReassignTaskRequest $body Contains the email address of the user to reassign the Instance Step to (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -1375,9 +1375,9 @@ class InstanceStepsApi
      * @param  string $id The ID of the Instance Step to snooze (required)
      * @param  string $instance_id instance_id (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InstanceStep
+     * @return \Catalytic\Client\Model\InstanceStep
      */
     public function snoozeStep($id, $instance_id)
     {
@@ -1393,13 +1393,13 @@ class InstanceStepsApi
      * @param  string $id The ID of the Instance Step to snooze (required)
      * @param  string $instance_id (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
      */
     public function snoozeStepWithHttpInfo($id, $instance_id)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->snoozeStepRequest($id, $instance_id);
 
         try {
@@ -1451,7 +1451,7 @@ class InstanceStepsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1459,7 +1459,7 @@ class InstanceStepsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1467,7 +1467,7 @@ class InstanceStepsApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1475,7 +1475,7 @@ class InstanceStepsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InstanceStep',
+                        '\Catalytic\Client\Model\InstanceStep',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1519,7 +1519,7 @@ class InstanceStepsApi
      */
     public function snoozeStepAsyncWithHttpInfo($id, $instance_id)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->snoozeStepRequest($id, $instance_id);
 
         return $this->client
@@ -1684,9 +1684,9 @@ class InstanceStepsApi
      * @param  string $id The ID of the Instance Step to start (required)
      * @param  string $instance_id instance_id (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InstanceStep
+     * @return \Catalytic\Client\Model\InstanceStep
      */
     public function startStep($id, $instance_id)
     {
@@ -1702,13 +1702,13 @@ class InstanceStepsApi
      * @param  string $id The ID of the Instance Step to start (required)
      * @param  string $instance_id (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\InstanceStep, HTTP status code, HTTP response headers (array of strings)
      */
     public function startStepWithHttpInfo($id, $instance_id)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->startStepRequest($id, $instance_id);
 
         try {
@@ -1760,7 +1760,7 @@ class InstanceStepsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1768,7 +1768,7 @@ class InstanceStepsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1776,7 +1776,7 @@ class InstanceStepsApi
                 case 409:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1784,7 +1784,7 @@ class InstanceStepsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InstanceStep',
+                        '\Catalytic\Client\Model\InstanceStep',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1828,7 +1828,7 @@ class InstanceStepsApi
      */
     public function startStepAsyncWithHttpInfo($id, $instance_id)
     {
-        $returnType = '\Swagger\Client\Model\InstanceStep';
+        $returnType = '\Catalytic\Client\Model\InstanceStep';
         $request = $this->startStepRequest($id, $instance_id);
 
         return $this->client

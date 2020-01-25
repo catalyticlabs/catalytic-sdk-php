@@ -1,4 +1,4 @@
-# Swagger\Client\ActionWorkersApi
+# Catalytic\Client\ActionWorkersApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**updateActionWorker**](ActionWorkersApi.md#updateactionworker) | **PATCH** /api/action-workers/{id} | Update an Action Worker
 
 # **createActionWorker**
-> \Swagger\Client\Model\ActionWorkerWithCredentials createActionWorker($body)
+> \Catalytic\Client\Model\ActionWorkerWithCredentials createActionWorker($body)
 
 Define a new Action Worker
 
@@ -20,18 +20,18 @@ Define a new Action Worker
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionWorkersApi(
+$apiInstance = new Catalytic\Client\Api\ActionWorkersApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\CreateActionWorkerRequest(); // \Swagger\Client\Model\CreateActionWorkerRequest | The definition of the action worker to create
+$body = new \Catalytic\Client\Model\CreateActionWorkerRequest(); // \Catalytic\Client\Model\CreateActionWorkerRequest | The definition of the action worker to create
 
 try {
     $result = $apiInstance->createActionWorker($body);
@@ -46,11 +46,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\CreateActionWorkerRequest**](../Model/CreateActionWorkerRequest.md)| The definition of the action worker to create | [optional]
+ **body** | [**\Catalytic\Client\Model\CreateActionWorkerRequest**](../Model/CreateActionWorkerRequest.md)| The definition of the action worker to create | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionWorkerWithCredentials**](../Model/ActionWorkerWithCredentials.md)
+[**\Catalytic\Client\Model\ActionWorkerWithCredentials**](../Model/ActionWorkerWithCredentials.md)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **deleteActionWorker**
-> \Swagger\Client\Model\IActionResult deleteActionWorker($id)
+> \Catalytic\Client\Model\IActionResult deleteActionWorker($id)
 
 Deletes a specific Action Worker
 
@@ -73,12 +73,12 @@ Deletes a specific Action Worker
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionWorkersApi(
+$apiInstance = new Catalytic\Client\Api\ActionWorkersApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -103,7 +103,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\IActionResult**](../Model/IActionResult.md)
+[**\Catalytic\Client\Model\IActionResult**](../Model/IActionResult.md)
 
 ### Authorization
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **findActionWorkers**
-> \Swagger\Client\Model\ActionWorkersPage findActionWorkers($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
+> \Catalytic\Client\Model\ActionWorkersPage findActionWorkers($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
 
 Find ActionWorkers
 
@@ -126,12 +126,12 @@ Find ActionWorkers
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionWorkersApi(
+$apiInstance = new Catalytic\Client\Api\ActionWorkersApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -170,7 +170,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionWorkersPage**](../Model/ActionWorkersPage.md)
+[**\Catalytic\Client\Model\ActionWorkersPage**](../Model/ActionWorkersPage.md)
 
 ### Authorization
 
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getActionWorker**
-> \Swagger\Client\Model\ActionWorker getActionWorker($id)
+> \Catalytic\Client\Model\ActionWorker getActionWorker($id)
 
 Gets details of a specific Action Worker
 
@@ -193,12 +193,12 @@ Gets details of a specific Action Worker
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionWorkersApi(
+$apiInstance = new Catalytic\Client\Api\ActionWorkersApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -223,7 +223,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionWorker**](../Model/ActionWorker.md)
+[**\Catalytic\Client\Model\ActionWorker**](../Model/ActionWorker.md)
 
 ### Authorization
 
@@ -237,7 +237,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **updateActionWorker**
-> \Swagger\Client\Model\ActionWorker updateActionWorker($id, $body)
+> \Catalytic\Client\Model\ActionWorker updateActionWorker($id, $body)
 
 Update an Action Worker
 
@@ -246,19 +246,19 @@ Update an Action Worker
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\ActionWorkersApi(
+$apiInstance = new Catalytic\Client\Api\ActionWorkersApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The id of the action worker to update
-$body = new \Swagger\Client\Model\UpdateActionWorkerRequest(); // \Swagger\Client\Model\UpdateActionWorkerRequest | The updates to apply to the action worker
+$body = new \Catalytic\Client\Model\UpdateActionWorkerRequest(); // \Catalytic\Client\Model\UpdateActionWorkerRequest | The updates to apply to the action worker
 
 try {
     $result = $apiInstance->updateActionWorker($id, $body);
@@ -274,11 +274,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The id of the action worker to update |
- **body** | [**\Swagger\Client\Model\UpdateActionWorkerRequest**](../Model/UpdateActionWorkerRequest.md)| The updates to apply to the action worker | [optional]
+ **body** | [**\Catalytic\Client\Model\UpdateActionWorkerRequest**](../Model/UpdateActionWorkerRequest.md)| The updates to apply to the action worker | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\ActionWorker**](../Model/ActionWorker.md)
+[**\Catalytic\Client\Model\ActionWorker**](../Model/ActionWorker.md)
 
 ### Authorization
 

@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **name** | **string** |  | 
 **team_name** | **string** |  | 
 **description** | **string** |  | [optional] 
-**columns** | [**\Swagger\Client\Model\DataTableColumn[]**](DataTableColumn.md) |  | [optional] 
+**columns** | [**\Catalytic\Client\Model\DataTableColumn[]**](DataTableColumn.md) |  | [optional] 
 **is_archived** | **bool** |  | [optional] 
-**type** | [**\Swagger\Client\Model\DataTableType**](DataTableType.md) |  | [optional] 
-**visibility** | [**\Swagger\Client\Model\TableVisibility**](TableVisibility.md) |  | [optional] 
+**type** | [**\Catalytic\Client\Model\DataTableType**](DataTableType.md) |  | [optional] 
+**visibility** | [**\Catalytic\Client\Model\TableVisibility**](TableVisibility.md) |  | [optional] 
 **admin_users** | **string[]** |  | [optional] 
 **standard_users** | **string[]** |  | [optional] 
 **read_only_users** | **string[]** |  | [optional] 

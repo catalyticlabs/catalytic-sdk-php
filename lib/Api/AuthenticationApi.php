@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * AuthenticationApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -91,11 +91,11 @@ class AuthenticationApi
      *
      * Create a new Developer Key using provided Catalytic team domain and Activate using provided email and password.
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DeveloperKey
+     * @return \Catalytic\Client\Model\DeveloperKey
      */
     public function createAndActivateDeveloperKey($body = null)
     {
@@ -108,15 +108,15 @@ class AuthenticationApi
      *
      * Create a new Developer Key using provided Catalytic team domain and Activate using provided email and password.
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
      */
     public function createAndActivateDeveloperKeyWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->createAndActivateDeveloperKeyRequest($body);
 
         try {
@@ -168,7 +168,7 @@ class AuthenticationApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -176,7 +176,7 @@ class AuthenticationApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DeveloperKey',
+                        '\Catalytic\Client\Model\DeveloperKey',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -191,7 +191,7 @@ class AuthenticationApi
      *
      * Create a new Developer Key using provided Catalytic team domain and Activate using provided email and password.
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -211,14 +211,14 @@ class AuthenticationApi
      *
      * Create a new Developer Key using provided Catalytic team domain and Activate using provided email and password.
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createAndActivateDeveloperKeyAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->createAndActivateDeveloperKeyRequest($body);
 
         return $this->client
@@ -261,7 +261,7 @@ class AuthenticationApi
     /**
      * Create request for operation 'createAndActivateDeveloperKey'
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationWithEmailAndPasswordRequest $body Params required to create and activate a new Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -350,11 +350,11 @@ class AuthenticationApi
      *
      * Create a new Developer Key in the provided Catalytic team domain
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DeveloperKey
+     * @return \Catalytic\Client\Model\DeveloperKey
      */
     public function createDeveloperKey($body = null)
     {
@@ -367,15 +367,15 @@ class AuthenticationApi
      *
      * Create a new Developer Key in the provided Catalytic team domain
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
      */
     public function createDeveloperKeyWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->createDeveloperKeyRequest($body);
 
         try {
@@ -427,7 +427,7 @@ class AuthenticationApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -435,7 +435,7 @@ class AuthenticationApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DeveloperKey',
+                        '\Catalytic\Client\Model\DeveloperKey',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -450,7 +450,7 @@ class AuthenticationApi
      *
      * Create a new Developer Key in the provided Catalytic team domain
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -470,14 +470,14 @@ class AuthenticationApi
      *
      * Create a new Developer Key in the provided Catalytic team domain
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createDeveloperKeyAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->createDeveloperKeyRequest($body);
 
         return $this->client
@@ -520,7 +520,7 @@ class AuthenticationApi
     /**
      * Create request for operation 'createDeveloperKey'
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyCreationRequest $body Params required to create a new Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -609,11 +609,11 @@ class AuthenticationApi
      *
      * Wait until Developer Key is in approved state, the activate Developer Key
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DeveloperKey
+     * @return \Catalytic\Client\Model\DeveloperKey
      */
     public function waitForDeveloperKeyActivation($body = null)
     {
@@ -626,15 +626,15 @@ class AuthenticationApi
      *
      * Wait until Developer Key is in approved state, the activate Developer Key
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DeveloperKey, HTTP status code, HTTP response headers (array of strings)
      */
     public function waitForDeveloperKeyActivationWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->waitForDeveloperKeyActivationRequest($body);
 
         try {
@@ -686,7 +686,7 @@ class AuthenticationApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -694,7 +694,7 @@ class AuthenticationApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DeveloperKey',
+                        '\Catalytic\Client\Model\DeveloperKey',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -709,7 +709,7 @@ class AuthenticationApi
      *
      * Wait until Developer Key is in approved state, the activate Developer Key
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -729,14 +729,14 @@ class AuthenticationApi
      *
      * Wait until Developer Key is in approved state, the activate Developer Key
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function waitForDeveloperKeyActivationAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\DeveloperKey';
+        $returnType = '\Catalytic\Client\Model\DeveloperKey';
         $request = $this->waitForDeveloperKeyActivationRequest($body);
 
         return $this->client
@@ -779,7 +779,7 @@ class AuthenticationApi
     /**
      * Create request for operation 'waitForDeveloperKeyActivation'
      *
-     * @param  \Swagger\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
+     * @param  \Catalytic\Client\Model\DeveloperKeyActivationRequest $body Params required to poll for and activate Developer Key (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request

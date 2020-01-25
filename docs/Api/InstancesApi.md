@@ -1,4 +1,4 @@
-# Swagger\Client\InstancesApi
+# Catalytic\Client\InstancesApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**stopInstance**](InstancesApi.md#stopinstance) | **GET** /api/instances/{id}:stop | Stops a specific Instance
 
 # **findInstances**
-> \Swagger\Client\Model\InstancesPage findInstances($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
+> \Catalytic\Client\Model\InstancesPage findInstances($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
 
 Find Instances
 
@@ -19,12 +19,12 @@ Find Instances
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstancesApi(
+$apiInstance = new Catalytic\Client\Api\InstancesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\InstancesPage**](../Model/InstancesPage.md)
+[**\Catalytic\Client\Model\InstancesPage**](../Model/InstancesPage.md)
 
 ### Authorization
 
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getInstance**
-> \Swagger\Client\Model\Instance getInstance($id)
+> \Catalytic\Client\Model\Instance getInstance($id)
 
 Gets details of a specific Instance
 
@@ -86,12 +86,12 @@ Gets details of a specific Instance
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstancesApi(
+$apiInstance = new Catalytic\Client\Api\InstancesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Instance**](../Model/Instance.md)
+[**\Catalytic\Client\Model\Instance**](../Model/Instance.md)
 
 ### Authorization
 
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **startInstance**
-> \Swagger\Client\Model\Instance startInstance($body)
+> \Catalytic\Client\Model\Instance startInstance($body)
 
 Starts a new Instance
 
@@ -139,18 +139,18 @@ Starts a new Instance
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstancesApi(
+$apiInstance = new Catalytic\Client\Api\InstancesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\StartInstanceRequest(); // \Swagger\Client\Model\StartInstanceRequest | The details of the Instance to start
+$body = new \Catalytic\Client\Model\StartInstanceRequest(); // \Catalytic\Client\Model\StartInstanceRequest | The details of the Instance to start
 
 try {
     $result = $apiInstance->startInstance($body);
@@ -165,11 +165,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\Swagger\Client\Model\StartInstanceRequest**](../Model/StartInstanceRequest.md)| The details of the Instance to start | [optional]
+ **body** | [**\Catalytic\Client\Model\StartInstanceRequest**](../Model/StartInstanceRequest.md)| The details of the Instance to start | [optional]
 
 ### Return type
 
-[**\Swagger\Client\Model\Instance**](../Model/Instance.md)
+[**\Catalytic\Client\Model\Instance**](../Model/Instance.md)
 
 ### Authorization
 
@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **stopInstance**
-> \Swagger\Client\Model\Instance stopInstance($id)
+> \Catalytic\Client\Model\Instance stopInstance($id)
 
 Stops a specific Instance
 
@@ -192,12 +192,12 @@ Stops a specific Instance
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\InstancesApi(
+$apiInstance = new Catalytic\Client\Api\InstancesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Instance**](../Model/Instance.md)
+[**\Catalytic\Client\Model\Instance**](../Model/Instance.md)
 
 ### Authorization
 

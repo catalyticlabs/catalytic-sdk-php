@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**instances** | [**\Swagger\Client\Model\Instance[]**](Instance.md) |  | [optional] 
+**instances** | [**\Catalytic\Client\Model\Instance[]**](Instance.md) |  | [optional] 
 **next_page_token** | **string** |  | [optional] 
 **count** | **int** |  | [optional] 
 

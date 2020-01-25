@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * ActionWorkersApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -91,11 +91,11 @@ class ActionWorkersApi
      *
      * Define a new Action Worker
      *
-     * @param  \Swagger\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
+     * @param  \Catalytic\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionWorkerWithCredentials
+     * @return \Catalytic\Client\Model\ActionWorkerWithCredentials
      */
     public function createActionWorker($body = null)
     {
@@ -108,15 +108,15 @@ class ActionWorkersApi
      *
      * Define a new Action Worker
      *
-     * @param  \Swagger\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
+     * @param  \Catalytic\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionWorkerWithCredentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionWorkerWithCredentials, HTTP status code, HTTP response headers (array of strings)
      */
     public function createActionWorkerWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorkerWithCredentials';
+        $returnType = '\Catalytic\Client\Model\ActionWorkerWithCredentials';
         $request = $this->createActionWorkerRequest($body);
 
         try {
@@ -168,7 +168,7 @@ class ActionWorkersApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -176,7 +176,7 @@ class ActionWorkersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionWorkerWithCredentials',
+                        '\Catalytic\Client\Model\ActionWorkerWithCredentials',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -191,7 +191,7 @@ class ActionWorkersApi
      *
      * Define a new Action Worker
      *
-     * @param  \Swagger\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
+     * @param  \Catalytic\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -211,14 +211,14 @@ class ActionWorkersApi
      *
      * Define a new Action Worker
      *
-     * @param  \Swagger\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
+     * @param  \Catalytic\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function createActionWorkerAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorkerWithCredentials';
+        $returnType = '\Catalytic\Client\Model\ActionWorkerWithCredentials';
         $request = $this->createActionWorkerRequest($body);
 
         return $this->client
@@ -261,7 +261,7 @@ class ActionWorkersApi
     /**
      * Create request for operation 'createActionWorker'
      *
-     * @param  \Swagger\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
+     * @param  \Catalytic\Client\Model\CreateActionWorkerRequest $body The definition of the action worker to create (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -356,9 +356,9 @@ class ActionWorkersApi
      *
      * @param  string $id The ID of the Action Worker to delete (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\IActionResult
+     * @return \Catalytic\Client\Model\IActionResult
      */
     public function deleteActionWorker($id)
     {
@@ -373,13 +373,13 @@ class ActionWorkersApi
      *
      * @param  string $id The ID of the Action Worker to delete (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\IActionResult, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\IActionResult, HTTP status code, HTTP response headers (array of strings)
      */
     public function deleteActionWorkerWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\IActionResult';
+        $returnType = '\Catalytic\Client\Model\IActionResult';
         $request = $this->deleteActionWorkerRequest($id);
 
         try {
@@ -431,7 +431,7 @@ class ActionWorkersApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -439,7 +439,7 @@ class ActionWorkersApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -447,7 +447,7 @@ class ActionWorkersApi
                 case 204:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\IActionResult',
+                        '\Catalytic\Client\Model\IActionResult',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -489,7 +489,7 @@ class ActionWorkersApi
      */
     public function deleteActionWorkerAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\IActionResult';
+        $returnType = '\Catalytic\Client\Model\IActionResult';
         $request = $this->deleteActionWorkerRequest($id);
 
         return $this->client
@@ -645,9 +645,9 @@ class ActionWorkersApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionWorkersPage
+     * @return \Catalytic\Client\Model\ActionWorkersPage
      */
     public function findActionWorkers($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
@@ -669,13 +669,13 @@ class ActionWorkersApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionWorkersPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionWorkersPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findActionWorkersWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorkersPage';
+        $returnType = '\Catalytic\Client\Model\ActionWorkersPage';
         $request = $this->findActionWorkersRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         try {
@@ -727,7 +727,7 @@ class ActionWorkersApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -735,7 +735,7 @@ class ActionWorkersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionWorkersPage',
+                        '\Catalytic\Client\Model\ActionWorkersPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -791,7 +791,7 @@ class ActionWorkersApi
      */
     public function findActionWorkersAsyncWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorkersPage';
+        $returnType = '\Catalytic\Client\Model\ActionWorkersPage';
         $request = $this->findActionWorkersRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         return $this->client
@@ -965,9 +965,9 @@ class ActionWorkersApi
      *
      * @param  string $id The ID of the Action Worker to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionWorker
+     * @return \Catalytic\Client\Model\ActionWorker
      */
     public function getActionWorker($id)
     {
@@ -982,13 +982,13 @@ class ActionWorkersApi
      *
      * @param  string $id The ID of the Action Worker to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionWorker, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionWorker, HTTP status code, HTTP response headers (array of strings)
      */
     public function getActionWorkerWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorker';
+        $returnType = '\Catalytic\Client\Model\ActionWorker';
         $request = $this->getActionWorkerRequest($id);
 
         try {
@@ -1040,7 +1040,7 @@ class ActionWorkersApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1048,7 +1048,7 @@ class ActionWorkersApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1056,7 +1056,7 @@ class ActionWorkersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionWorker',
+                        '\Catalytic\Client\Model\ActionWorker',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1098,7 +1098,7 @@ class ActionWorkersApi
      */
     public function getActionWorkerAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorker';
+        $returnType = '\Catalytic\Client\Model\ActionWorker';
         $request = $this->getActionWorkerRequest($id);
 
         return $this->client
@@ -1246,11 +1246,11 @@ class ActionWorkersApi
      * Update an Action Worker
      *
      * @param  string $id The id of the action worker to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\ActionWorker
+     * @return \Catalytic\Client\Model\ActionWorker
      */
     public function updateActionWorker($id, $body = null)
     {
@@ -1264,15 +1264,15 @@ class ActionWorkersApi
      * Update an Action Worker
      *
      * @param  string $id The id of the action worker to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\ActionWorker, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\ActionWorker, HTTP status code, HTTP response headers (array of strings)
      */
     public function updateActionWorkerWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorker';
+        $returnType = '\Catalytic\Client\Model\ActionWorker';
         $request = $this->updateActionWorkerRequest($id, $body);
 
         try {
@@ -1324,7 +1324,7 @@ class ActionWorkersApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1332,7 +1332,7 @@ class ActionWorkersApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1340,7 +1340,7 @@ class ActionWorkersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ActionWorker',
+                        '\Catalytic\Client\Model\ActionWorker',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1356,7 +1356,7 @@ class ActionWorkersApi
      * Update an Action Worker
      *
      * @param  string $id The id of the action worker to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -1377,14 +1377,14 @@ class ActionWorkersApi
      * Update an Action Worker
      *
      * @param  string $id The id of the action worker to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function updateActionWorkerAsyncWithHttpInfo($id, $body = null)
     {
-        $returnType = '\Swagger\Client\Model\ActionWorker';
+        $returnType = '\Catalytic\Client\Model\ActionWorker';
         $request = $this->updateActionWorkerRequest($id, $body);
 
         return $this->client
@@ -1428,7 +1428,7 @@ class ActionWorkersApi
      * Create request for operation 'updateActionWorker'
      *
      * @param  string $id The id of the action worker to update (required)
-     * @param  \Swagger\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
+     * @param  \Catalytic\Client\Model\UpdateActionWorkerRequest $body The updates to apply to the action worker (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request

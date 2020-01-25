@@ -10,8 +10,8 @@ Name | Type | Description | Notes
 **description** | **string** |  | [optional] 
 **tags** | **string[]** |  | [optional] 
 **required_worker_tags** | **string[]** |  | [optional] 
-**inputs** | [**\Swagger\Client\Model\ActionInputDefinition[]**](ActionInputDefinition.md) |  | [optional] 
-**outputs** | [**\Swagger\Client\Model\ActionOutputDefinition[]**](ActionOutputDefinition.md) |  | [optional] 
+**inputs** | [**\Catalytic\Client\Model\ActionInputDefinition[]**](ActionInputDefinition.md) |  | [optional] 
+**outputs** | [**\Catalytic\Client\Model\ActionOutputDefinition[]**](ActionOutputDefinition.md) |  | [optional] 
 **is_published** | **bool** |  | [optional] 
 **meta_data** | **string** |  | [optional] 
 
