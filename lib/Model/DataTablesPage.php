@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * DataTablesPage Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class DataTablesPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'data_tables' => '\Swagger\Client\Model\DataTable[]',
+        'data_tables' => '\Catalytic\Client\Model\DataTable[]',
 'next_page_token' => 'string',
 'count' => 'int'    ];
 
@@ -211,7 +211,7 @@ class DataTablesPage implements ModelInterface, ArrayAccess
     /**
      * Gets data_tables
      *
-     * @return \Swagger\Client\Model\DataTable[]
+     * @return \Catalytic\Client\Model\DataTable[]
      */
     public function getDataTables()
     {
@@ -221,7 +221,7 @@ class DataTablesPage implements ModelInterface, ArrayAccess
     /**
      * Sets data_tables
      *
-     * @param \Swagger\Client\Model\DataTable[] $data_tables data_tables
+     * @param \Catalytic\Client\Model\DataTable[] $data_tables data_tables
      *
      * @return $this
      */

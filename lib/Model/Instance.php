@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * Instance Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -62,11 +62,11 @@ class Instance implements ModelInterface, ArrayAccess
 'team_name' => 'string',
 'description' => 'string',
 'category' => 'string',
-'steps' => '\Swagger\Client\Model\InstanceStep[]',
-'fields' => '\Swagger\Client\Model\Field[]',
-'status' => '\Swagger\Client\Model\InstanceStatus',
-'field_visibility' => '\Swagger\Client\Model\FieldVisibility',
-'visibility' => '\Swagger\Client\Model\InstanceVisibilty',
+'steps' => '\Catalytic\Client\Model\InstanceStep[]',
+'fields' => '\Catalytic\Client\Model\Field[]',
+'status' => '\Catalytic\Client\Model\InstanceStatus',
+'field_visibility' => '\Catalytic\Client\Model\FieldVisibility',
+'visibility' => '\Catalytic\Client\Model\InstanceVisibilty',
 'admin_users' => 'string[]',
 'standard_users' => 'string[]'    ];
 
@@ -424,7 +424,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Gets steps
      *
-     * @return \Swagger\Client\Model\InstanceStep[]
+     * @return \Catalytic\Client\Model\InstanceStep[]
      */
     public function getSteps()
     {
@@ -434,7 +434,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets steps
      *
-     * @param \Swagger\Client\Model\InstanceStep[] $steps steps
+     * @param \Catalytic\Client\Model\InstanceStep[] $steps steps
      *
      * @return $this
      */
@@ -448,7 +448,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Gets fields
      *
-     * @return \Swagger\Client\Model\Field[]
+     * @return \Catalytic\Client\Model\Field[]
      */
     public function getFields()
     {
@@ -458,7 +458,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets fields
      *
-     * @param \Swagger\Client\Model\Field[] $fields fields
+     * @param \Catalytic\Client\Model\Field[] $fields fields
      *
      * @return $this
      */
@@ -472,7 +472,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Gets status
      *
-     * @return \Swagger\Client\Model\InstanceStatus
+     * @return \Catalytic\Client\Model\InstanceStatus
      */
     public function getStatus()
     {
@@ -482,7 +482,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets status
      *
-     * @param \Swagger\Client\Model\InstanceStatus $status status
+     * @param \Catalytic\Client\Model\InstanceStatus $status status
      *
      * @return $this
      */
@@ -496,7 +496,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Gets field_visibility
      *
-     * @return \Swagger\Client\Model\FieldVisibility
+     * @return \Catalytic\Client\Model\FieldVisibility
      */
     public function getFieldVisibility()
     {
@@ -506,7 +506,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets field_visibility
      *
-     * @param \Swagger\Client\Model\FieldVisibility $field_visibility field_visibility
+     * @param \Catalytic\Client\Model\FieldVisibility $field_visibility field_visibility
      *
      * @return $this
      */
@@ -520,7 +520,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Gets visibility
      *
-     * @return \Swagger\Client\Model\InstanceVisibilty
+     * @return \Catalytic\Client\Model\InstanceVisibilty
      */
     public function getVisibility()
     {
@@ -530,7 +530,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets visibility
      *
-     * @param \Swagger\Client\Model\InstanceVisibilty $visibility visibility
+     * @param \Catalytic\Client\Model\InstanceVisibilty $visibility visibility
      *
      * @return $this
      */

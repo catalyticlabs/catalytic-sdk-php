@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**pushbots** | [**\Swagger\Client\Model\Pushbot[]**](Pushbot.md) |  | [optional] 
+**pushbots** | [**\Catalytic\Client\Model\Pushbot[]**](Pushbot.md) |  | [optional] 
 **next_page_token** | **string** |  | [optional] 
 **count** | **int** |  | [optional] 
 

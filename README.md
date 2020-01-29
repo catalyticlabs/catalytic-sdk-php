@@ -57,17 +57,17 @@ Please follow the [installation procedure](#installation--usage) and then run th
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
     ->setUsername('YOUR_USERNAME')
     ->setPassword('YOUR_PASSWORD');
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$body = new \Swagger\Client\Model\AcquireActionTasksRequest(); // \Swagger\Client\Model\AcquireActionTasksRequest | Allows specifying the number of tasks to acquire and how long to hold the lock for
+$body = new \Catalytic\Client\Model\AcquireActionTasksRequest(); // \Catalytic\Client\Model\AcquireActionTasksRequest | Allows specifying the number of tasks to acquire and how long to hold the lock for
 
 try {
     $result = $apiInstance->acquireActionTasks($body);
@@ -76,18 +76,18 @@ try {
     echo 'Exception when calling ActionExecutionApi->acquireActionTasks: ', $e->getMessage(), PHP_EOL;
 }
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
     ->setUsername('YOUR_USERNAME')
     ->setPassword('YOUR_PASSWORD');
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The ID of the acquired Action Task to complete
-$body = new \Swagger\Client\Model\ActionTaskCompleteRequest(); // \Swagger\Client\Model\ActionTaskCompleteRequest | Output parameters, if any.
+$body = new \Catalytic\Client\Model\ActionTaskCompleteRequest(); // \Catalytic\Client\Model\ActionTaskCompleteRequest | Output parameters, if any.
 
 try {
     $result = $apiInstance->completeActionTask($id, $body);
@@ -96,18 +96,18 @@ try {
     echo 'Exception when calling ActionExecutionApi->completeActionTask: ', $e->getMessage(), PHP_EOL;
 }
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
     ->setUsername('YOUR_USERNAME')
     ->setPassword('YOUR_PASSWORD');
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The ID of the acquired Action Task to complete
-$body = new \Swagger\Client\Model\ActionTaskComment(); // \Swagger\Client\Model\ActionTaskComment | The comment text to post
+$body = new \Catalytic\Client\Model\ActionTaskComment(); // \Catalytic\Client\Model\ActionTaskComment | The comment text to post
 
 try {
     $result = $apiInstance->createActionTaskComment($id, $body);
@@ -116,11 +116,11 @@ try {
     echo 'Exception when calling ActionExecutionApi->createActionTaskComment: ', $e->getMessage(), PHP_EOL;
 }
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
     ->setUsername('YOUR_USERNAME')
     ->setPassword('YOUR_PASSWORD');
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -136,18 +136,18 @@ try {
     echo 'Exception when calling ActionExecutionApi->downloadActionTaskInputFile: ', $e->getMessage(), PHP_EOL;
 }
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
     ->setUsername('YOUR_USERNAME')
     ->setPassword('YOUR_PASSWORD');
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The ID of the acquired Action Task to update
-$body = new \Swagger\Client\Model\ActionTaskUpdateRequest(); // \Swagger\Client\Model\ActionTaskUpdateRequest | The update request, including updates to outputs, progress percent or description,
+$body = new \Catalytic\Client\Model\ActionTaskUpdateRequest(); // \Catalytic\Client\Model\ActionTaskUpdateRequest | The update request, including updates to outputs, progress percent or description,
             and task lock duration.
 
 try {
@@ -157,11 +157,11 @@ try {
     echo 'Exception when calling ActionExecutionApi->updateActionTask: ', $e->getMessage(), PHP_EOL;
 }
 // Configure HTTP basic authorization: ActionWorker
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
     ->setUsername('YOUR_USERNAME')
     ->setPassword('YOUR_PASSWORD');
 
-$apiInstance = new Swagger\Client\Api\ActionExecutionApi(
+$apiInstance = new Catalytic\Client\Api\ActionExecutionApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),

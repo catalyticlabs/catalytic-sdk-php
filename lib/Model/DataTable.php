@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * DataTable Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -62,10 +62,10 @@ class DataTable implements ModelInterface, ArrayAccess
 'name' => 'string',
 'team_name' => 'string',
 'description' => 'string',
-'columns' => '\Swagger\Client\Model\DataTableColumn[]',
+'columns' => '\Catalytic\Client\Model\DataTableColumn[]',
 'is_archived' => 'bool',
-'type' => '\Swagger\Client\Model\DataTableType',
-'visibility' => '\Swagger\Client\Model\TableVisibility',
+'type' => '\Catalytic\Client\Model\DataTableType',
+'visibility' => '\Catalytic\Client\Model\TableVisibility',
 'admin_users' => 'string[]',
 'standard_users' => 'string[]',
 'read_only_users' => 'string[]',
@@ -442,7 +442,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Gets columns
      *
-     * @return \Swagger\Client\Model\DataTableColumn[]
+     * @return \Catalytic\Client\Model\DataTableColumn[]
      */
     public function getColumns()
     {
@@ -452,7 +452,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets columns
      *
-     * @param \Swagger\Client\Model\DataTableColumn[] $columns columns
+     * @param \Catalytic\Client\Model\DataTableColumn[] $columns columns
      *
      * @return $this
      */
@@ -490,7 +490,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \Swagger\Client\Model\DataTableType
+     * @return \Catalytic\Client\Model\DataTableType
      */
     public function getType()
     {
@@ -500,7 +500,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Swagger\Client\Model\DataTableType $type type
+     * @param \Catalytic\Client\Model\DataTableType $type type
      *
      * @return $this
      */
@@ -514,7 +514,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Gets visibility
      *
-     * @return \Swagger\Client\Model\TableVisibility
+     * @return \Catalytic\Client\Model\TableVisibility
      */
     public function getVisibility()
     {
@@ -524,7 +524,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets visibility
      *
-     * @param \Swagger\Client\Model\TableVisibility $visibility visibility
+     * @param \Catalytic\Client\Model\TableVisibility $visibility visibility
      *
      * @return $this
      */

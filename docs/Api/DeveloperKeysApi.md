@@ -1,4 +1,4 @@
-# Swagger\Client\DeveloperKeysApi
+# Catalytic\Client\DeveloperKeysApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**revokeDeveloperKey**](DeveloperKeysApi.md#revokedeveloperkey) | **PATCH** /api/developer-keys/{accessIdentifier}:revoke | Revoke Developer Key
 
 # **findDeveloperKeys**
-> \Swagger\Client\Model\DeveloperKeysPage findDeveloperKeys($page_token, $page_size)
+> \Catalytic\Client\Model\DeveloperKeysPage findDeveloperKeys($page_token, $page_size)
 
 Find Developer Keys
 
@@ -17,12 +17,12 @@ Find Developer Keys
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\DeveloperKeysApi(
+$apiInstance = new Catalytic\Client\Api\DeveloperKeysApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -49,7 +49,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\DeveloperKeysPage**](../Model/DeveloperKeysPage.md)
+[**\Catalytic\Client\Model\DeveloperKeysPage**](../Model/DeveloperKeysPage.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **revokeDeveloperKey**
-> \Swagger\Client\Model\DeveloperKey revokeDeveloperKey($access_identifier)
+> \Catalytic\Client\Model\DeveloperKey revokeDeveloperKey($access_identifier)
 
 Revoke Developer Key
 
@@ -72,12 +72,12 @@ Revoke Developer Key
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\DeveloperKeysApi(
+$apiInstance = new Catalytic\Client\Api\DeveloperKeysApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -102,7 +102,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\DeveloperKey**](../Model/DeveloperKey.md)
+[**\Catalytic\Client\Model\DeveloperKey**](../Model/DeveloperKey.md)
 
 ### Authorization
 

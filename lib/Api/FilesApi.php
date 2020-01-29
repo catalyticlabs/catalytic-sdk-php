@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * FilesApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -93,7 +93,7 @@ class FilesApi
      *
      * @param  string $id The ID of the file to download (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -110,7 +110,7 @@ class FilesApi
      *
      * @param  string $id The ID of the file to download (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of string, HTTP status code, HTTP response headers (array of strings)
      */
@@ -168,7 +168,7 @@ class FilesApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -176,7 +176,7 @@ class FilesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -382,9 +382,9 @@ class FilesApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\FilesPage
+     * @return \Catalytic\Client\Model\FilesPage
      */
     public function findFiles($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
@@ -406,13 +406,13 @@ class FilesApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\FilesPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\FilesPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findFilesWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\FilesPage';
+        $returnType = '\Catalytic\Client\Model\FilesPage';
         $request = $this->findFilesRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         try {
@@ -464,7 +464,7 @@ class FilesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -472,7 +472,7 @@ class FilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\FilesPage',
+                        '\Catalytic\Client\Model\FilesPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -528,7 +528,7 @@ class FilesApi
      */
     public function findFilesAsyncWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\FilesPage';
+        $returnType = '\Catalytic\Client\Model\FilesPage';
         $request = $this->findFilesRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         return $this->client
@@ -702,9 +702,9 @@ class FilesApi
      *
      * @param  string $id The ID of the File to get metadata for (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\File
+     * @return \Catalytic\Client\Model\File
      */
     public function getFile($id)
     {
@@ -719,13 +719,13 @@ class FilesApi
      *
      * @param  string $id The ID of the File to get metadata for (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\File, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\File, HTTP status code, HTTP response headers (array of strings)
      */
     public function getFileWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\File';
+        $returnType = '\Catalytic\Client\Model\File';
         $request = $this->getFileRequest($id);
 
         try {
@@ -777,7 +777,7 @@ class FilesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -785,7 +785,7 @@ class FilesApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -793,7 +793,7 @@ class FilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\File',
+                        '\Catalytic\Client\Model\File',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -835,7 +835,7 @@ class FilesApi
      */
     public function getFileAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\File';
+        $returnType = '\Catalytic\Client\Model\File';
         $request = $this->getFileRequest($id);
 
         return $this->client
@@ -984,9 +984,9 @@ class FilesApi
      *
      * @param  string[] $files files (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\File
+     * @return \Catalytic\Client\Model\File
      */
     public function uploadFiles($files = null)
     {
@@ -1001,13 +1001,13 @@ class FilesApi
      *
      * @param  string[] $files (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\File, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\File, HTTP status code, HTTP response headers (array of strings)
      */
     public function uploadFilesWithHttpInfo($files = null)
     {
-        $returnType = '\Swagger\Client\Model\File';
+        $returnType = '\Catalytic\Client\Model\File';
         $request = $this->uploadFilesRequest($files);
 
         try {
@@ -1059,7 +1059,7 @@ class FilesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1067,7 +1067,7 @@ class FilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\File',
+                        '\Catalytic\Client\Model\File',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1109,7 +1109,7 @@ class FilesApi
      */
     public function uploadFilesAsyncWithHttpInfo($files = null)
     {
-        $returnType = '\Swagger\Client\Model\File';
+        $returnType = '\Catalytic\Client\Model\File';
         $request = $this->uploadFilesRequest($files);
 
         return $this->client

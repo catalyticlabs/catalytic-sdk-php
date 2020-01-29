@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * DeveloperKey Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -58,7 +58,7 @@ class DeveloperKey implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'access_identifier' => 'string',
 'secret' => 'string',
-'status' => '\Swagger\Client\Model\DeveloperKeyStatus',
+'status' => '\Catalytic\Client\Model\DeveloperKeyStatus',
 'created_by_id' => 'string',
 'domain' => 'string',
 'environment' => 'string',
@@ -304,7 +304,7 @@ class DeveloperKey implements ModelInterface, ArrayAccess
     /**
      * Gets status
      *
-     * @return \Swagger\Client\Model\DeveloperKeyStatus
+     * @return \Catalytic\Client\Model\DeveloperKeyStatus
      */
     public function getStatus()
     {
@@ -314,7 +314,7 @@ class DeveloperKey implements ModelInterface, ArrayAccess
     /**
      * Sets status
      *
-     * @param \Swagger\Client\Model\DeveloperKeyStatus $status status
+     * @param \Catalytic\Client\Model\DeveloperKeyStatus $status status
      *
      * @return $this
      */

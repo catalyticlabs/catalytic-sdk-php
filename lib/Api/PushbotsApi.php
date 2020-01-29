@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * PushbotsApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -100,9 +100,9 @@ class PushbotsApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\PushbotsPage
+     * @return \Catalytic\Client\Model\PushbotsPage
      */
     public function findPushbots($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
@@ -124,13 +124,13 @@ class PushbotsApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\PushbotsPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\PushbotsPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findPushbotsWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\PushbotsPage';
+        $returnType = '\Catalytic\Client\Model\PushbotsPage';
         $request = $this->findPushbotsRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         try {
@@ -182,7 +182,7 @@ class PushbotsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -190,7 +190,7 @@ class PushbotsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\PushbotsPage',
+                        '\Catalytic\Client\Model\PushbotsPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -246,7 +246,7 @@ class PushbotsApi
      */
     public function findPushbotsAsyncWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\PushbotsPage';
+        $returnType = '\Catalytic\Client\Model\PushbotsPage';
         $request = $this->findPushbotsRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         return $this->client
@@ -420,9 +420,9 @@ class PushbotsApi
      *
      * @param  string $id The ID of the Pushbot to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\Pushbot
+     * @return \Catalytic\Client\Model\Pushbot
      */
     public function getPushbot($id)
     {
@@ -437,13 +437,13 @@ class PushbotsApi
      *
      * @param  string $id The ID of the Pushbot to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\Pushbot, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\Pushbot, HTTP status code, HTTP response headers (array of strings)
      */
     public function getPushbotWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Pushbot';
+        $returnType = '\Catalytic\Client\Model\Pushbot';
         $request = $this->getPushbotRequest($id);
 
         try {
@@ -495,7 +495,7 @@ class PushbotsApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -503,7 +503,7 @@ class PushbotsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -511,7 +511,7 @@ class PushbotsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\Pushbot',
+                        '\Catalytic\Client\Model\Pushbot',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -553,7 +553,7 @@ class PushbotsApi
      */
     public function getPushbotAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Pushbot';
+        $returnType = '\Catalytic\Client\Model\Pushbot';
         $request = $this->getPushbotRequest($id);
 
         return $this->client

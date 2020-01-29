@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * InstancesApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -100,9 +100,9 @@ class InstancesApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\InstancesPage
+     * @return \Catalytic\Client\Model\InstancesPage
      */
     public function findInstances($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
@@ -124,13 +124,13 @@ class InstancesApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\InstancesPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\InstancesPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findInstancesWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\InstancesPage';
+        $returnType = '\Catalytic\Client\Model\InstancesPage';
         $request = $this->findInstancesRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         try {
@@ -182,7 +182,7 @@ class InstancesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -190,7 +190,7 @@ class InstancesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\InstancesPage',
+                        '\Catalytic\Client\Model\InstancesPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -246,7 +246,7 @@ class InstancesApi
      */
     public function findInstancesAsyncWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\InstancesPage';
+        $returnType = '\Catalytic\Client\Model\InstancesPage';
         $request = $this->findInstancesRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         return $this->client
@@ -420,9 +420,9 @@ class InstancesApi
      *
      * @param  string $id The ID of the Instance to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\Instance
+     * @return \Catalytic\Client\Model\Instance
      */
     public function getInstance($id)
     {
@@ -437,13 +437,13 @@ class InstancesApi
      *
      * @param  string $id The ID of the Instance to get (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\Instance, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\Instance, HTTP status code, HTTP response headers (array of strings)
      */
     public function getInstanceWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Instance';
+        $returnType = '\Catalytic\Client\Model\Instance';
         $request = $this->getInstanceRequest($id);
 
         try {
@@ -495,7 +495,7 @@ class InstancesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -503,7 +503,7 @@ class InstancesApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -511,7 +511,7 @@ class InstancesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\Instance',
+                        '\Catalytic\Client\Model\Instance',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -553,7 +553,7 @@ class InstancesApi
      */
     public function getInstanceAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Instance';
+        $returnType = '\Catalytic\Client\Model\Instance';
         $request = $this->getInstanceRequest($id);
 
         return $this->client
@@ -700,11 +700,11 @@ class InstancesApi
      *
      * Starts a new Instance
      *
-     * @param  \Swagger\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
+     * @param  \Catalytic\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\Instance
+     * @return \Catalytic\Client\Model\Instance
      */
     public function startInstance($body = null)
     {
@@ -717,15 +717,15 @@ class InstancesApi
      *
      * Starts a new Instance
      *
-     * @param  \Swagger\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
+     * @param  \Catalytic\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\Instance, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\Instance, HTTP status code, HTTP response headers (array of strings)
      */
     public function startInstanceWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\Instance';
+        $returnType = '\Catalytic\Client\Model\Instance';
         $request = $this->startInstanceRequest($body);
 
         try {
@@ -777,7 +777,7 @@ class InstancesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -785,7 +785,7 @@ class InstancesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\Instance',
+                        '\Catalytic\Client\Model\Instance',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -800,7 +800,7 @@ class InstancesApi
      *
      * Starts a new Instance
      *
-     * @param  \Swagger\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
+     * @param  \Catalytic\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -820,14 +820,14 @@ class InstancesApi
      *
      * Starts a new Instance
      *
-     * @param  \Swagger\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
+     * @param  \Catalytic\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function startInstanceAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\Swagger\Client\Model\Instance';
+        $returnType = '\Catalytic\Client\Model\Instance';
         $request = $this->startInstanceRequest($body);
 
         return $this->client
@@ -870,7 +870,7 @@ class InstancesApi
     /**
      * Create request for operation 'startInstance'
      *
-     * @param  \Swagger\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
+     * @param  \Catalytic\Client\Model\StartInstanceRequest $body The details of the Instance to start (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -965,9 +965,9 @@ class InstancesApi
      *
      * @param  string $id The ID of the Instance to stop (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\Instance
+     * @return \Catalytic\Client\Model\Instance
      */
     public function stopInstance($id)
     {
@@ -982,13 +982,13 @@ class InstancesApi
      *
      * @param  string $id The ID of the Instance to stop (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\Instance, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\Instance, HTTP status code, HTTP response headers (array of strings)
      */
     public function stopInstanceWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Instance';
+        $returnType = '\Catalytic\Client\Model\Instance';
         $request = $this->stopInstanceRequest($id);
 
         try {
@@ -1040,7 +1040,7 @@ class InstancesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1048,7 +1048,7 @@ class InstancesApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1056,7 +1056,7 @@ class InstancesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\Instance',
+                        '\Catalytic\Client\Model\Instance',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1098,7 +1098,7 @@ class InstancesApi
      */
     public function stopInstanceAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\Instance';
+        $returnType = '\Catalytic\Client\Model\Instance';
         $request = $this->stopInstanceRequest($id);
 
         return $this->client

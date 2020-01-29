@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data_tables** | [**\Swagger\Client\Model\DataTable[]**](DataTable.md) |  | [optional] 
+**data_tables** | [**\Catalytic\Client\Model\DataTable[]**](DataTable.md) |  | [optional] 
 **next_page_token** | **string** |  | [optional] 
 **count** | **int** |  | [optional] 
 

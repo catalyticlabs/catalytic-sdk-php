@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * InstancesPage Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class InstancesPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'instances' => '\Swagger\Client\Model\Instance[]',
+        'instances' => '\Catalytic\Client\Model\Instance[]',
 'next_page_token' => 'string',
 'count' => 'int'    ];
 
@@ -211,7 +211,7 @@ class InstancesPage implements ModelInterface, ArrayAccess
     /**
      * Gets instances
      *
-     * @return \Swagger\Client\Model\Instance[]
+     * @return \Catalytic\Client\Model\Instance[]
      */
     public function getInstances()
     {
@@ -221,7 +221,7 @@ class InstancesPage implements ModelInterface, ArrayAccess
     /**
      * Sets instances
      *
-     * @param \Swagger\Client\Model\Instance[] $instances instances
+     * @param \Catalytic\Client\Model\Instance[] $instances instances
      *
      * @return $this
      */

@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * InstanceStep Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -64,7 +64,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
 'team_name' => 'string',
 'position' => 'int',
 'description' => 'string',
-'status' => '\Swagger\Client\Model\InstanceStepStatus',
+'status' => '\Catalytic\Client\Model\InstanceStepStatus',
 'assigned_to' => 'string'    ];
 
     /**
@@ -463,7 +463,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Gets status
      *
-     * @return \Swagger\Client\Model\InstanceStepStatus
+     * @return \Catalytic\Client\Model\InstanceStepStatus
      */
     public function getStatus()
     {
@@ -473,7 +473,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets status
      *
-     * @param \Swagger\Client\Model\InstanceStepStatus $status status
+     * @param \Catalytic\Client\Model\InstanceStepStatus $status status
      *
      * @return $this
      */

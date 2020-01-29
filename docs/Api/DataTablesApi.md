@@ -1,4 +1,4 @@
-# Swagger\Client\DataTablesApi
+# Catalytic\Client\DataTablesApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -19,19 +19,19 @@ Download a Data Table as a CSV or Excel file
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\DataTablesApi(
+$apiInstance = new Catalytic\Client\Api\DataTablesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
 $id = "id_example"; // string | The ID of the Data Table to download
-$format = new \Swagger\Client\Model\DataTableExportFormat(); // \Swagger\Client\Model\DataTableExportFormat | The format to export the data table in. csv (default) or excel
+$format = new \Catalytic\Client\Model\DataTableExportFormat(); // \Catalytic\Client\Model\DataTableExportFormat | The format to export the data table in. csv (default) or excel
 
 try {
     $result = $apiInstance->downloadDataTable($id, $format);
@@ -47,7 +47,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **string**| The ID of the Data Table to download |
- **format** | [**\Swagger\Client\Model\DataTableExportFormat**](../Model/.md)| The format to export the data table in. csv (default) or excel | [optional]
+ **format** | [**\Catalytic\Client\Model\DataTableExportFormat**](../Model/.md)| The format to export the data table in. csv (default) or excel | [optional]
 
 ### Return type
 
@@ -65,7 +65,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **findDataTables**
-> \Swagger\Client\Model\DataTablesPage findDataTables($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
+> \Catalytic\Client\Model\DataTablesPage findDataTables($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
 
 Find Data Tables
 
@@ -74,12 +74,12 @@ Find Data Tables
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\DataTablesApi(
+$apiInstance = new Catalytic\Client\Api\DataTablesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -118,7 +118,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\DataTablesPage**](../Model/DataTablesPage.md)
+[**\Catalytic\Client\Model\DataTablesPage**](../Model/DataTablesPage.md)
 
 ### Authorization
 
@@ -132,7 +132,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getDataTable**
-> \Swagger\Client\Model\DataTable getDataTable($id)
+> \Catalytic\Client\Model\DataTable getDataTable($id)
 
 Get metadata for a Data Table by ID
 
@@ -141,12 +141,12 @@ Get metadata for a Data Table by ID
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\DataTablesApi(
+$apiInstance = new Catalytic\Client\Api\DataTablesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\DataTable**](../Model/DataTable.md)
+[**\Catalytic\Client\Model\DataTable**](../Model/DataTable.md)
 
 ### Authorization
 
@@ -185,7 +185,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **uploadDataTable**
-> \Swagger\Client\Model\DataTable uploadDataTable($files, $table_name, $header_row, $sheet_number)
+> \Catalytic\Client\Model\DataTable uploadDataTable($files, $table_name, $header_row, $sheet_number)
 
 Upload a csv or excel file to create a data table
 
@@ -194,12 +194,12 @@ Upload a csv or excel file to create a data table
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\DataTablesApi(
+$apiInstance = new Catalytic\Client\Api\DataTablesApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -230,7 +230,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\DataTable**](../Model/DataTable.md)
+[**\Catalytic\Client\Model\DataTable**](../Model/DataTable.md)
 
 ### Authorization
 

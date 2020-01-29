@@ -1,4 +1,4 @@
-# Swagger\Client\PushbotsApi
+# Catalytic\Client\PushbotsApi
 
 All URIs are relative to *https://catalyticsdkapi.azurewebsites.net*
 
@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**getPushbot**](PushbotsApi.md#getpushbot) | **GET** /api/pushbots/{id} | Gets details of a specific Pushbot process template
 
 # **findPushbots**
-> \Swagger\Client\Model\PushbotsPage findPushbots($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
+> \Catalytic\Client\Model\PushbotsPage findPushbots($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size)
 
 Find Pushbots
 
@@ -17,12 +17,12 @@ Find Pushbots
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\PushbotsApi(
+$apiInstance = new Catalytic\Client\Api\PushbotsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -61,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\PushbotsPage**](../Model/PushbotsPage.md)
+[**\Catalytic\Client\Model\PushbotsPage**](../Model/PushbotsPage.md)
 
 ### Authorization
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getPushbot**
-> \Swagger\Client\Model\Pushbot getPushbot($id)
+> \Catalytic\Client\Model\Pushbot getPushbot($id)
 
 Gets details of a specific Pushbot process template
 
@@ -84,12 +84,12 @@ Gets details of a specific Pushbot process template
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 // Configure HTTP basic authorization: Basic
-$config = Swagger\Client\Configuration::getDefaultConfiguration()
+$config = Catalytic\Client\Configuration::getDefaultConfiguration()
               ->setUsername('YOUR_USERNAME')
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new Swagger\Client\Api\PushbotsApi(
+$apiInstance = new Catalytic\Client\Api\PushbotsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\Swagger\Client\Model\Pushbot**](../Model/Pushbot.md)
+[**\Catalytic\Client\Model\Pushbot**](../Model/Pushbot.md)
 
 ### Authorization
 

@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Api;
+namespace Catalytic\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use Swagger\Client\ApiException;
-use Swagger\Client\Configuration;
-use Swagger\Client\HeaderSelector;
-use Swagger\Client\ObjectSerializer;
+use Catalytic\Client\ApiException;
+use Catalytic\Client\Configuration;
+use Catalytic\Client\HeaderSelector;
+use Catalytic\Client\ObjectSerializer;
 
 /**
  * DataTablesApi Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -92,9 +92,9 @@ class DataTablesApi
      * Download a Data Table as a CSV or Excel file
      *
      * @param  string $id The ID of the Data Table to download (required)
-     * @param  \Swagger\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
+     * @param  \Catalytic\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return string
      */
@@ -110,9 +110,9 @@ class DataTablesApi
      * Download a Data Table as a CSV or Excel file
      *
      * @param  string $id The ID of the Data Table to download (required)
-     * @param  \Swagger\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
+     * @param  \Catalytic\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of string, HTTP status code, HTTP response headers (array of strings)
      */
@@ -170,7 +170,7 @@ class DataTablesApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -178,7 +178,7 @@ class DataTablesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -202,7 +202,7 @@ class DataTablesApi
      * Download a Data Table as a CSV or Excel file
      *
      * @param  string $id The ID of the Data Table to download (required)
-     * @param  \Swagger\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
+     * @param  \Catalytic\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -223,7 +223,7 @@ class DataTablesApi
      * Download a Data Table as a CSV or Excel file
      *
      * @param  string $id The ID of the Data Table to download (required)
-     * @param  \Swagger\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
+     * @param  \Catalytic\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -274,7 +274,7 @@ class DataTablesApi
      * Create request for operation 'downloadDataTable'
      *
      * @param  string $id The ID of the Data Table to download (required)
-     * @param  \Swagger\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
+     * @param  \Catalytic\Client\Model\DataTableExportFormat $format The format to export the data table in. csv (default) or excel (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -391,9 +391,9 @@ class DataTablesApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DataTablesPage
+     * @return \Catalytic\Client\Model\DataTablesPage
      */
     public function findDataTables($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
@@ -415,13 +415,13 @@ class DataTablesApi
      * @param  string $page_token The token representing the result page to get (optional)
      * @param  int $page_size The page size requested (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DataTablesPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DataTablesPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findDataTablesWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\DataTablesPage';
+        $returnType = '\Catalytic\Client\Model\DataTablesPage';
         $request = $this->findDataTablesRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         try {
@@ -473,7 +473,7 @@ class DataTablesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -481,7 +481,7 @@ class DataTablesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DataTablesPage',
+                        '\Catalytic\Client\Model\DataTablesPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -537,7 +537,7 @@ class DataTablesApi
      */
     public function findDataTablesAsyncWithHttpInfo($query = null, $status = null, $process_id = null, $run_id = null, $owner = null, $category = null, $page_token = null, $page_size = null)
     {
-        $returnType = '\Swagger\Client\Model\DataTablesPage';
+        $returnType = '\Catalytic\Client\Model\DataTablesPage';
         $request = $this->findDataTablesRequest($query, $status, $process_id, $run_id, $owner, $category, $page_token, $page_size);
 
         return $this->client
@@ -711,9 +711,9 @@ class DataTablesApi
      *
      * @param  string $id The ID of the Data Table to get metadata for (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DataTable
+     * @return \Catalytic\Client\Model\DataTable
      */
     public function getDataTable($id)
     {
@@ -728,13 +728,13 @@ class DataTablesApi
      *
      * @param  string $id The ID of the Data Table to get metadata for (required)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DataTable, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DataTable, HTTP status code, HTTP response headers (array of strings)
      */
     public function getDataTableWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\DataTable';
+        $returnType = '\Catalytic\Client\Model\DataTable';
         $request = $this->getDataTableRequest($id);
 
         try {
@@ -786,7 +786,7 @@ class DataTablesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -794,7 +794,7 @@ class DataTablesApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -802,7 +802,7 @@ class DataTablesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DataTable',
+                        '\Catalytic\Client\Model\DataTable',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -844,7 +844,7 @@ class DataTablesApi
      */
     public function getDataTableAsyncWithHttpInfo($id)
     {
-        $returnType = '\Swagger\Client\Model\DataTable';
+        $returnType = '\Catalytic\Client\Model\DataTable';
         $request = $this->getDataTableRequest($id);
 
         return $this->client
@@ -996,9 +996,9 @@ class DataTablesApi
      * @param  int $header_row The row number that contains the column headers. Defaults to 1. (optional)
      * @param  int $sheet_number The number of the sheet to import. Only applies to Excel files. The first sheet is imported by default. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Swagger\Client\Model\DataTable
+     * @return \Catalytic\Client\Model\DataTable
      */
     public function uploadDataTable($files = null, $table_name = null, $header_row = null, $sheet_number = null)
     {
@@ -1016,13 +1016,13 @@ class DataTablesApi
      * @param  int $header_row The row number that contains the column headers. Defaults to 1. (optional)
      * @param  int $sheet_number The number of the sheet to import. Only applies to Excel files. The first sheet is imported by default. (optional)
      *
-     * @throws \Swagger\Client\ApiException on non-2xx response
+     * @throws \Catalytic\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Swagger\Client\Model\DataTable, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\Client\Model\DataTable, HTTP status code, HTTP response headers (array of strings)
      */
     public function uploadDataTableWithHttpInfo($files = null, $table_name = null, $header_row = null, $sheet_number = null)
     {
-        $returnType = '\Swagger\Client\Model\DataTable';
+        $returnType = '\Catalytic\Client\Model\DataTable';
         $request = $this->uploadDataTableRequest($files, $table_name, $header_row, $sheet_number);
 
         try {
@@ -1074,7 +1074,7 @@ class DataTablesApi
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\ProblemDetails',
+                        '\Catalytic\Client\Model\ProblemDetails',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1082,7 +1082,7 @@ class DataTablesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Swagger\Client\Model\DataTable',
+                        '\Catalytic\Client\Model\DataTable',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1130,7 +1130,7 @@ class DataTablesApi
      */
     public function uploadDataTableAsyncWithHttpInfo($files = null, $table_name = null, $header_row = null, $sheet_number = null)
     {
-        $returnType = '\Swagger\Client\Model\DataTable';
+        $returnType = '\Catalytic\Client\Model\DataTable';
         $request = $this->uploadDataTableRequest($files, $table_name, $header_row, $sheet_number);
 
         return $this->client

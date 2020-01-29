@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files** | [**\Swagger\Client\Model\File[]**](File.md) |  | [optional] 
+**files** | [**\Catalytic\Client\Model\File[]**](File.md) |  | [optional] 
 **next_page_token** | **string** |  | [optional] 
 **count** | **int** |  | [optional] 
 

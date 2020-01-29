@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace Swagger\Client\Model;
+namespace Catalytic\Client\Model;
 
 use \ArrayAccess;
-use \Swagger\Client\ObjectSerializer;
+use \Catalytic\Client\ObjectSerializer;
 
 /**
  * DeveloperKeysPage Class Doc Comment
  *
  * @category Class
- * @package  Swagger\Client
+ * @package  Catalytic\Client
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -56,7 +56,7 @@ class DeveloperKeysPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'developer_keys' => '\Swagger\Client\Model\DeveloperKey[]',
+        'developer_keys' => '\Catalytic\Client\Model\DeveloperKey[]',
 'next_page_token' => 'string',
 'count' => 'int'    ];
 
@@ -211,7 +211,7 @@ class DeveloperKeysPage implements ModelInterface, ArrayAccess
     /**
      * Gets developer_keys
      *
-     * @return \Swagger\Client\Model\DeveloperKey[]
+     * @return \Catalytic\Client\Model\DeveloperKey[]
      */
     public function getDeveloperKeys()
     {
@@ -221,7 +221,7 @@ class DeveloperKeysPage implements ModelInterface, ArrayAccess
     /**
      * Sets developer_keys
      *
-     * @param \Swagger\Client\Model\DeveloperKey[] $developer_keys developer_keys
+     * @param \Catalytic\Client\Model\DeveloperKey[] $developer_keys developer_keys
      *
      * @return $this
      */
