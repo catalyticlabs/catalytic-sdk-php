@@ -1,18 +1,20 @@
-# InstanceStep
+# # InstanceStep
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | 
-**instance_id** | **string** |  | 
-**pushbot_id** | **string** |  | 
+**instanceId** | **string** |  | 
+**pushbotId** | **string** |  | 
 **name** | **string** |  | 
-**reference_name** | **string** |  | 
-**team_name** | **string** |  | 
+**teamName** | **string** |  | 
 **position** | **int** |  | [optional] 
 **description** | **string** |  | [optional] 
-**status** | [**\Catalytic\Client\Model\InstanceStepStatus**](InstanceStepStatus.md) |  | [optional] 
-**assigned_to** | **string** |  | [optional] 
+**status** | [**\Catalytic\SDK\Model\InstanceStepStatus**](InstanceStepStatus.md) |  | [optional] 
+**assignedTo** | **string** |  | [optional] 
+**outputFields** | [**\Catalytic\SDK\Model\Field[]**](Field.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+
 

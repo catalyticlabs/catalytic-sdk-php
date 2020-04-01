@@ -1,11 +1,14 @@
-# InstanceStepsPage
+# # InstanceStepsPage
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**steps** | [**\Catalytic\Client\Model\InstanceStep[]**](InstanceStep.md) |  | [optional] 
-**next_page_token** | **string** |  | [optional] 
-**count** | **int** |  | [optional] 
+**steps** | [**\Catalytic\SDK\Model\InstanceStep[]**](InstanceStep.md) |  | [optional] [readonly] 
+**nextPageOptions** | [**\Catalytic\SDK\Model\PagingOptions**](PagingOptions.md) |  | [optional] 
+**nextPageToken** | **string** |  | [optional] 
+**count** | **int** |  | [optional] [readonly] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+
 

@@ -1,21 +1,24 @@
-# Instance
+# # Instance
 
 ## Properties
+
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **string** |  | 
-**pushbot_id** | **string** |  | 
+**pushbotId** | **string** |  | 
 **name** | **string** |  | [optional] 
-**team_name** | **string** |  | 
+**teamName** | **string** |  | 
 **description** | **string** |  | [optional] 
 **category** | **string** |  | [optional] 
-**steps** | [**\Catalytic\Client\Model\InstanceStep[]**](InstanceStep.md) |  | [optional] 
-**fields** | [**\Catalytic\Client\Model\Field[]**](Field.md) |  | [optional] 
-**status** | [**\Catalytic\Client\Model\InstanceStatus**](InstanceStatus.md) |  | [optional] 
-**field_visibility** | [**\Catalytic\Client\Model\FieldVisibility**](FieldVisibility.md) |  | [optional] 
-**visibility** | [**\Catalytic\Client\Model\InstanceVisibilty**](InstanceVisibilty.md) |  | [optional] 
-**admin_users** | **string[]** |  | [optional] 
-**standard_users** | **string[]** |  | [optional] 
+**owner** | **string** |  | [optional] 
+**createdBy** | **string** |  | [optional] 
+**steps** | [**\Catalytic\SDK\Model\InstanceStep[]**](InstanceStep.md) |  | [optional] 
+**fields** | [**\Catalytic\SDK\Model\Field[]**](Field.md) |  | [optional] 
+**status** | [**\Catalytic\SDK\Model\InstanceStatus**](InstanceStatus.md) |  | [optional] 
+**fieldVisibility** | [**\Catalytic\SDK\Model\FieldVisibility**](FieldVisibility.md) |  | [optional] 
+**visibility** | [**\Catalytic\SDK\Model\InstanceVisibilty**](InstanceVisibilty.md) |  | [optional] 
+**visibleToUsers** | **string[]** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+
 
