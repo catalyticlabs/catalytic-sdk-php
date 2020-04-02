@@ -10,6 +10,35 @@ use Exception;
 class Credentials
 {
     /**
+     * Tries to find a token.
+     *
+     * $tokenOrFile can either be null, the name of a file, or the path to a file.
+     *
+     * If $tokenOrFile is null, try to find a token in this order:
+     *
+     * 1. Read $CATALYTIC_CREDENTIALS env var
+     * 2. Read ~/.catalytic/credentials/default
+     *
+     * If $tokenOrFile is not null, try to find a token in this order:
+     *
+     * 1. Read ~/.catalytic/credentials/$tokenOrFile
+     * 2. Read $tokenOrFile as the path to a file
+     * 3. Assume it's an actual token that was passed in
+     *
+     * @param string $tokenOrFile (Optional)    The token, filename, or path to a file for fetching a token
+     * @return string                           The token
+     * @throws Exception                        If a token can't be found
+     */
+    public function fetchToken(string $tokenOrFile = null)
+    {
+        if ($tokenOrFile === null) {
+            return $this->fromDefault();
+        } else {
+            return $this->fromFile($tokenOrFile);
+        }
+    }
+
+    /**
      * Fetch the Catalytic token.
      *
      * First tries to fetch the token from the env var $CATALYTIC_CREDENTIALS,
@@ -18,19 +47,19 @@ class Credentials
      * @return string   The Catalytic access token
      * @throws Exception
      */
-    public static function default()
+    private function fromDefault()
     {
         // Try to get the token from the env var
-        $token = self::fetchTokenFromEnvVar();
+        $token = $this->fetchTokenFromEnvVar();
 
         // If it didn't exist, try to get it from the default file
         if (!$token) {
-            $token = self::fetchTokenFromFile();
+            $token = $this->fetchTokenFromFile();
         }
 
         // If it wasn't found, throw an exception
         if (!$token) {
-            $home = self::getHomeDir();
+            $home = $this->getHomeDir();
             throw new Exception('Cannot find credentials in $CATALYTIC_CREDENTIALS
                 environment variable or ' . "$home/.catalytic/credentials/default");
         }
@@ -45,13 +74,13 @@ class Credentials
      * @return string                   The Catalytic access token
      * @throws Exception
      */
-    public static function fromFile(string $fileName)
+    private function fromFile(string $fileName)
     {
-        $token = self::fetchTokenFromFile($fileName);
+        $token = $this->fetchTokenFromFile($fileName);
 
         // If it wasn't found, throw an exception
         if ($token === null) {
-            $home = self::getHomeDir();
+            $home = $this->getHomeDir();
             throw new Exception('Cannot find credentials in $CATALYTIC_CREDENTIALS
                 environment variable or ' . "$home/.catalytic/credentials/$fileName");
         }
@@ -64,7 +93,7 @@ class Credentials
      *
      * @return string   The Catalytic access token
      */
-    private static function fetchTokenFromEnvVar()
+    private function fetchTokenFromEnvVar()
     {
         $token = getenv('CATALYTIC_CREDENTIALS');
         return $token;
@@ -76,7 +105,7 @@ class Credentials
      * @param string $fileName (optional)   The name or path to the file to fetch the token from
      * @return string                       The Catalytic access token
      */
-    private static function fetchTokenFromFile(string $fileName = null)
+    private function fetchTokenFromFile(string $fileName = null)
     {
         // If it's a path to a file
         if (is_file($fileName)) {
@@ -84,7 +113,7 @@ class Credentials
             return $token;
         }
 
-        $home = self::getHomeDir();
+        $home = $this->getHomeDir();
 
         // If it's only the name of a file
         if ($fileName) {
@@ -102,7 +131,7 @@ class Credentials
      *
      * @return string   The home dir of the user executing the code
      */
-    private static function getHomeDir()
+    private function getHomeDir()
     {
         $user = posix_getpwuid(posix_getuid());
         $home = $user['dir'];
