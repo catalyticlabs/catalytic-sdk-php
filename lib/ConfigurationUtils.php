@@ -20,7 +20,7 @@ class ConfigurationUtils
         // If a configuration object doesn't exist, create one
         if (!isset(self::$config)) {
             self::$config = Configuration::getDefaultConfiguration();
-            self::$config->setAccessToken($secret);
+            self::$config->setAccessToken(trim($secret));
         }
 
         return self::$config;

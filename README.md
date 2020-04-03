@@ -15,3 +15,5 @@ Key Benefits:
 ## Documentation
 Documentation can be found at [https://catalytic-developer.readme.io/reference/catalytic-php-sdk](https://catalytic-developer.readme.io/reference/catalytic-php-sdk).
 
+## Source
+Source code can be found at [https://github.com/catalyticlabs/catalytic-sdk-php](https://github.com/catalyticlabs/catalytic-sdk-php).
