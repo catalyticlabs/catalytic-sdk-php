@@ -10,7 +10,7 @@ class InstanceStep
     private string $name;
     private string $teamName;
     private string $position;
-    private string $description;
+    private ?string $description;
     private string $status;
     private ?string $assignedTo;
     private ?array $outputFields;

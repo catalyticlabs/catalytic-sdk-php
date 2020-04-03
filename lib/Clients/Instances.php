@@ -5,7 +5,7 @@ namespace Catalytic\SDK\Clients;
 use Catalytic\SDK\Entities\Instance;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Entities\InstanceStep;
-use Catalytic\SDK\Model\{CompleteStepRequest, StartInstanceRequest};
+use Catalytic\SDK\Model\{CompleteStepRequest, FieldUpdateRequest, StartInstanceRequest};
 use Catalytic\SDK\Api\{InstancesApi, InstanceStepsApi};
 
 /**
@@ -64,13 +64,15 @@ class Instances
     /**
      * Start an instance of a pushbot for a given pushbot id
      *
-     * @param string $pushbotId The id of the pushbot to start an instance
+     * @param string $pushbotId                 The id of the pushbot to start an instance
+     * @param string $name (Optional)           The name to give to the instance
+     * @param string $description (Optional)    The description to give to the instance
+     * @param array  $fields (Optional)         The input fields to use when starting this instance
+     * @return Instance                         The newly created instance
      */
-    public function start(string $pushbotId)
+    public function start(string $pushbotId, string $name = null, string $description = null, array $fields = null)
     {
-        $request = new StartInstanceRequest(array('pushbotId' => $pushbotId));
-        // print_r($request);
-        // $internalInstance = $this->instancesApi->startInstance($request);
+        $request = $this->createStartInstanceRequest($pushbotId, $name, $description, $fields);
         $internalInstance = $this->instancesApi->startInstance($request);
         $instance = new Instance(
             $internalInstance->getId(),
@@ -168,14 +170,17 @@ class Instances
     /**
      * Completes a specific step
      *
-     * @param string $id  The id of the step to complete
-     * @param array $fields (Optional)  Fields and the values to use when completing a step
+     * @param string $id                The id of the step to complete
+     * @param array  $fields (Optional) Fields and the values to use when completing a step
      */
     public function completeStep(string $id, array $fields = null)
     {
+        $completeStepRequest = null;
+        if (isset($fields)) {
+            $completeStepRequest = $this->createCompleteStepRequest($id, $fields);
+        }
         $step = $this->getStepById($id);
-        $completeStepRequest = $this->createCompleteStepRequest($id, $fields);
-        $internalStep = $this->instanceStepsApi->completeStep($id, $step->getInstanceId());
+        $internalStep = $this->instanceStepsApi->completeStep($id, $step->getInstanceId(), $completeStepRequest);
         $completedStep = new InstanceStep(
             $internalStep->getId(),
             $internalStep->getInstanceId(),
@@ -192,6 +197,69 @@ class Instances
     }
 
     /**
+     * Creates a StartInstanceRequest object with the passed in params
+     *
+     * @param string $id                        The id to create the CompleteStepRequest with
+     * @param string $name (Optional)           The name to create the CompleteStepRequest with
+     * @param string $description (Optional)    The description to create the CompleteStepRequest with
+     * @param array  $fields (Optional)         The fields to create the CompleteStepRequest with
+     * @return StartInstanceRequest             The created StartInstanceRequest object
+     */
+    private function createStartInstanceRequest(string $pushbotId, string $name = null, string $description = null, array $fields = null)
+    {
+        $config = array('pushbotId' => $pushbotId);
+
+        if (isset($name)) {
+            $config['name'] = $name;
+        }
+
+        if (isset($description)) {
+            $config['description'] = $description;
+        }
+
+        if (isset($fields)) {
+            $inputFields = $this->formatFields($fields);
+            $config['inputFields'] = $inputFields;
+        }
+
+        $stepRequest = new StartInstanceRequest($config);
+        return $stepRequest;
+    }
+
+    /**
+     * Creates a CompleteStepRequest object from an id and fields
+     *
+     * @param string $id            The id to create the CompleteStepRequest with
+     * @param array  $fields        The fields to create the CompleteStepRequest with
+     * @return CompleteStepRequest  The created CompleteStepRequest
+     */
+    private function createCompleteStepRequest(string $id, array $fields)
+    {
+        $stepOutputFields = $this->formatFields($fields);
+        $stepRequest = new CompleteStepRequest(array('id' => $id, 'stepOutputFields' => $stepOutputFields));
+        return $stepRequest;
+    }
+
+    /**
+     * Creates a FieldUpdateRequest object for each of the fields
+     *
+     * @param  array $fields    The fields to create a FieldUpdateRequest for each one
+     * @return array            The formatted fields
+     */
+    private function formatFields(array $fields)
+    {
+        $formattedFields = [];
+
+        // Create a FieldUpdateRequest for each field
+        foreach ($fields as $key => $value) {
+            $fieldUpdateRequest = new FieldUpdateRequest(array('referenceName' => $key, 'value' => $value));
+            array_push($formattedFields, $fieldUpdateRequest);
+        }
+
+        return $formattedFields;
+    }
+
+    /**
      * Get an instance step by its id
      *
      * @param string $id    The id of the step to get
@@ -203,15 +271,5 @@ class Instances
         $wildcardInstanceId = '-';
         $step = $this->instanceStepsApi->getInstanceStep($id, $wildcardInstanceId);
         return $step;
-    }
-
-    private function createCompleteStepRequest(string $id, array $fields)
-    {
-        $stepRequest = new CompleteStepRequest(array('id' => $id, 'stepOutputFields' => $fields));
-        // $allFields = [];
-        // foreach($fields as $field) {
-        //     $newField = new CompleteStepRequest()
-        // }
-        return $stepRequest;
     }
 }
