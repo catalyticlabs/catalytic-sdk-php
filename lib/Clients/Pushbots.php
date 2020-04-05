@@ -56,9 +56,16 @@ class Pushbots
      */
     public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null)
     {
-        $text = $this->getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-        $owner = $this->getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
-        $category = $this->getSearchCriteriaValueByKey($filter->searchFilters, 'category');
+        $text = null;
+        $owner = null;
+        $category = null;
+
+        if ($filter !== null) {
+            $text = $this->getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+            $owner = $this->getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
+            $category = $this->getSearchCriteriaValueByKey($filter->searchFilters, 'category');
+        }
+
         $internalPushbots = $this->pushbotsApi->findPushbots($text, null, null, null, $owner, $category, null, $pageToken, $pageSize);
         $pushbots = [];
         foreach ($internalPushbots->getPushbots() as $internalPushbot) {

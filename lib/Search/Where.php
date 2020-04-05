@@ -11,24 +11,30 @@ class Where
 {
     /**
      * Text to be filtered
+     *
+     * @return Filter
      */
-    public static function text()
+    public function text()
     {
         return (new Filter())->text();
     }
 
     /**
      * Owner to be filtered
+     *
+     * @return Filter
      */
-    public static function owner()
+    public function owner()
     {
         return (new Filter())->owner();
     }
 
     /**
      * Category to be filtered
+     *
+     * @return Filter
      */
-    public static function category()
+    public function category()
     {
         return (new Filter())->category();
     }

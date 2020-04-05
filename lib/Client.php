@@ -2,7 +2,6 @@
 
 namespace Catalytic\SDK;
 
-use Exception;
 use \Catalytic\SDK\Clients\{Pushbots, Instances, Users, Files, DataTables, UserCredentials};
 
 /**
@@ -20,14 +19,12 @@ class Client
     /**
      * Instantiate the individual clients
      *
-     * @param string $token The token to use for making api requests
+     * @param string $tokenOrFile (Optional) The token/name/path of a file to fetch a token to use for making api requests
      */
-    public function __construct(string $token)
+    public function __construct(string $tokenOrFile = null)
     {
-        if ($token === null) {
-            throw new Exception('Cannot find credentials');
-        }
-
+        $credentials = new Credentials();
+        $token = $credentials->fetchToken($tokenOrFile);
         $this->pushbots = new Pushbots($token);
         $this->instances = new Instances($token);
         $this->users = new Users($token);
