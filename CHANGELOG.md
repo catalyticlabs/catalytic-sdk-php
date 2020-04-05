@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Require php >=7.2
+- Refactored the Where class so that you can no longer use static methods, but must first instantiate the class. This eases the ability to mock this class for testing.
+- Simplified the way you instantiate a Client. You no longer need to use static methods from the Credentials class.
 
 ## [0.0.1] - 2020-03-31
 ### Added
@@ -23,5 +25,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Get a user method
 - Find users method
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/0.0.1...HEAD
+[Unreleased]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.0.1...HEAD
 [0.0.1]: https://github.com/catalyticlabs/catalytic-sdk-php/releases/tag/0.0.1
