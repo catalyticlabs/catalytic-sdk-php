@@ -1,5 +1,7 @@
 # catalytic/sdk
 > Catalytic's PHP SDK
+>
+> Current version **0.1.0**
 
 The Catalytic SDK allows you to integration your app with the Catalytic Platform.
 
@@ -15,5 +17,6 @@ Key Benefits:
 ## Documentation
 Documentation can be found at [https://catalytic-developer.readme.io/reference/catalytic-php-sdk](https://catalytic-developer.readme.io/reference/catalytic-php-sdk).
 
-## Source
-Source code can be found at [https://github.com/catalyticlabs/catalytic-sdk-php](https://github.com/catalyticlabs/catalytic-sdk-php).
+## Requirements
+
+PHP 7.2 and later

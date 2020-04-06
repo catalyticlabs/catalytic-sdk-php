@@ -2,8 +2,8 @@
 
 namespace Catalytic\SDK\Clients;
 
-use Catalytic\SDK\Api\FilesApi;
 use Catalytic\SDK\ConfigurationUtils;
+use Catalytic\SDK\Api\FilesApi;
 
 /**
  * File client to be exposed to consumers

@@ -2,11 +2,17 @@
 
 namespace Catalytic\SDK\Clients;
 
-use Catalytic\SDK\Entities\Instance;
 use Catalytic\SDK\ConfigurationUtils;
-use Catalytic\SDK\Entities\InstanceStep;
-use Catalytic\SDK\Model\{CompleteStepRequest, FieldUpdateRequest, StartInstanceRequest};
 use Catalytic\SDK\Api\{InstancesApi, InstanceStepsApi};
+use Catalytic\SDK\Entities\{Instance, InstanceStep};
+use Catalytic\SDK\Model\{
+    CompleteStepRequest,
+    FieldUpdateRequest,
+    Instance as InternalInstance,
+    InstanceStep as InternalInstanceStep,
+    InstanceStepsPage,
+    StartInstanceRequest
+};
 
 /**
  * Instance client to be exposed to consumers
@@ -26,27 +32,13 @@ class Instances
     /**
      * Get a pushbot instance by id
      *
-     * @param string $id  The id of the pushbot instance to get
+     * @param string $id    The id of the pushbot instance to get
+     * @param Instance      The Instance object
      */
-    public function get(string $id)
+    public function get(string $id) : Instance
     {
         $internalInstance = $this->instancesApi->getInstance($id);
-        $instance = new Instance(
-            $internalInstance->getId(),
-            $internalInstance->getPushbotId(),
-            $internalInstance->getName(),
-            $internalInstance->getTeamName(),
-            $internalInstance->getDescription(),
-            $internalInstance->getCategory(),
-            $internalInstance->getOwner(),
-            $internalInstance->getCreatedBy(),
-            $internalInstance->getSteps(),
-            $internalInstance->getFields(),
-            $internalInstance->getStatus(),
-            $internalInstance->getFieldVisibility(),
-            $internalInstance->getVisibility(),
-            $internalInstance->getVisibleToUsers()
-        );
+        $instance = $this->createInstance($internalInstance);
         return $instance;
     }
 
@@ -70,35 +62,21 @@ class Instances
      * @param array  $fields (Optional)         The input fields to use when starting this instance
      * @return Instance                         The newly created instance
      */
-    public function start(string $pushbotId, string $name = null, string $description = null, array $fields = null)
+    public function start(string $pushbotId, string $name = null, string $description = null, array $fields = null) : Instance
     {
         $request = $this->createStartInstanceRequest($pushbotId, $name, $description, $fields);
         $internalInstance = $this->instancesApi->startInstance($request);
-        $instance = new Instance(
-            $internalInstance->getId(),
-            $internalInstance->getPushbotId(),
-            $internalInstance->getName(),
-            $internalInstance->getTeamName(),
-            $internalInstance->getDescription(),
-            $internalInstance->getCategory(),
-            $internalInstance->getOwner(),
-            $internalInstance->getCreatedBy(),
-            $internalInstance->getSteps(),
-            $internalInstance->getFields(),
-            $internalInstance->getStatus(),
-            $internalInstance->getFieldVisibility(),
-            $internalInstance->getVisibility(),
-            $internalInstance->getVisibleToUsers()
-        );
+        $instance = $this->createInstance($internalInstance);
         return $instance;
     }
 
     /**
      * Stops an instance by instance id
      *
-     * @param string $id  The id of the instance to stop
+     * @param string $id    The id of the instance to stop
+     * @param Instance      The Instance that was stopped
      */
-    public function stop(string $id)
+    public function stop(string $id) : Instance
     {
         $stoppedInstance = $this->instancesApi->stopInstance($id);
         return $stoppedInstance;
@@ -107,32 +85,23 @@ class Instances
     /**
      * Gets a step by step id
      *
-     * @param string $id  The id of the step to get
+     * @param string $id    The id of the step to get
+     * @return InstanceStep The InstanceStep object
      */
-    public function getStep(string $id)
+    public function getStep(string $id) : InstanceStep
     {
         $internalStep = $this->getStepById($id);
-        $step = new InstanceStep(
-            $internalStep->getId(),
-            $internalStep->getInstanceId(),
-            $internalStep->getPushbotId(),
-            $internalStep->getName(),
-            $internalStep->getTeamName(),
-            $internalStep->getPosition(),
-            $internalStep->getDescription(),
-            $internalStep->getStatus(),
-            $internalStep->getAssignedTo(),
-            $internalStep->getOutputFields()
-        );
+        $step = $this->createInstanceStep($internalStep);
         return $step;
     }
 
     /**
      * Gets all the steps for a specific instance id
      *
-     * @param string $instanceId  The id of the instances to get steps for
+     * @param string $instanceId    The id of the instances to get steps for
+     * @return array                The InstanceStepsPage which contains the results
      */
-    public function getSteps(string $instanceId)
+    public function getSteps(string $instanceId) : array
     {
         $internalSteps = $this->instanceStepsApi->findInstanceSteps($instanceId);
         // TODO: Need to paginate here
@@ -141,18 +110,7 @@ class Instances
 
         // Wrap each step in a step wrapper object
         foreach ($internalSteps->getSteps() as $step) {
-            $newStep = new InstanceStep(
-                $step->getId(),
-                $step->getInstanceId(),
-                $step->getPushbotId(),
-                $step->getName(),
-                $step->getTeamName(),
-                $step->getPosition(),
-                $step->getDescription(),
-                $step->getStatus(),
-                $step->getAssignedTo(),
-                $step->getOutputFields()
-            );
+            $newStep = $this->createInstanceStep($step);
             array_push($steps, $newStep);
         }
         return $steps;
@@ -172,8 +130,9 @@ class Instances
      *
      * @param string $id                The id of the step to complete
      * @param array  $fields (Optional) Fields and the values to use when completing a step
+     * @return InstanceStep             The completed InstanceStep
      */
-    public function completeStep(string $id, array $fields = null)
+    public function completeStep(string $id, array $fields = null) : InstanceStep
     {
         $completeStepRequest = null;
         if (isset($fields)) {
@@ -181,18 +140,7 @@ class Instances
         }
         $step = $this->getStepById($id);
         $internalStep = $this->instanceStepsApi->completeStep($id, $step->getInstanceId(), $completeStepRequest);
-        $completedStep = new InstanceStep(
-            $internalStep->getId(),
-            $internalStep->getInstanceId(),
-            $internalStep->getPushbotId(),
-            $internalStep->getName(),
-            $internalStep->getTeamName(),
-            $internalStep->getPosition(),
-            $internalStep->getDescription(),
-            $internalStep->getStatus(),
-            $internalStep->getAssignedTo(),
-            $internalStep->getOutputFields()
-        );
+        $completedStep = $this->createInstanceStep($internalStep);
         return $completedStep;
     }
 
@@ -205,7 +153,7 @@ class Instances
      * @param array  $fields (Optional)         The fields to create the CompleteStepRequest with
      * @return StartInstanceRequest             The created StartInstanceRequest object
      */
-    private function createStartInstanceRequest(string $pushbotId, string $name = null, string $description = null, array $fields = null)
+    private function createStartInstanceRequest(string $pushbotId, string $name = null, string $description = null, array $fields = null) : StartInstanceRequest
     {
         $config = array('pushbotId' => $pushbotId);
 
@@ -233,7 +181,7 @@ class Instances
      * @param array  $fields        The fields to create the CompleteStepRequest with
      * @return CompleteStepRequest  The created CompleteStepRequest
      */
-    private function createCompleteStepRequest(string $id, array $fields)
+    private function createCompleteStepRequest(string $id, array $fields) : CompleteStepRequest
     {
         $stepOutputFields = $this->formatFields($fields);
         $stepRequest = new CompleteStepRequest(array('id' => $id, 'stepOutputFields' => $stepOutputFields));
@@ -246,7 +194,7 @@ class Instances
      * @param  array $fields    The fields to create a FieldUpdateRequest for each one
      * @return array            The formatted fields
      */
-    private function formatFields(array $fields)
+    private function formatFields(array $fields) : array
     {
         $formattedFields = [];
 
@@ -263,13 +211,64 @@ class Instances
      * Get an instance step by its id
      *
      * @param string $id    The id of the step to get
+     * @return InternalInstanceStep The InstanceStep object
      */
-    private function getStepById(string $id)
+    private function getStepById(string $id) : InternalInstanceStep
     {
         // The REST api supports wildcard instance id when searching for instance steps
         // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
         $wildcardInstanceId = '-';
         $step = $this->instanceStepsApi->getInstanceStep($id, $wildcardInstanceId);
         return $step;
+    }
+
+    /**
+     * Create an Instance object from an internal Instance object
+     *
+     * @param InternalInstance  $internalInstance   The internal instance to create an Instance object from
+     * @return Instance         $instance           The created Instance object
+     */
+    private function createInstance(InternalInstance $internalInstance): Instance
+    {
+        $instance = new Instance(
+            $internalInstance->getId(),
+            $internalInstance->getPushbotId(),
+            $internalInstance->getName(),
+            $internalInstance->getTeamName(),
+            $internalInstance->getDescription(),
+            $internalInstance->getCategory(),
+            $internalInstance->getOwner(),
+            $internalInstance->getCreatedBy(),
+            $internalInstance->getSteps(),
+            $internalInstance->getFields(),
+            $internalInstance->getStatus(),
+            $internalInstance->getFieldVisibility(),
+            $internalInstance->getVisibility(),
+            $internalInstance->getVisibleToUsers()
+        );
+        return $instance;
+    }
+
+    /**
+     * Create an InstanceStep object from an internal InstanceStep object
+     *
+     * @param InternalInstanceStep  $internalInstanceStep   The internal instance step to create an InstanceStep object from
+     * @return InstanceStep         $instanceStep           The created InstanceStep object
+     */
+    private function createInstanceStep(InternalInstanceStep $internalInstanceStep) : InstanceStep
+    {
+        $instanceStep = new InstanceStep(
+            $internalInstanceStep->getId(),
+            $internalInstanceStep->getInstanceId(),
+            $internalInstanceStep->getPushbotId(),
+            $internalInstanceStep->getName(),
+            $internalInstanceStep->getTeamName(),
+            $internalInstanceStep->getPosition(),
+            $internalInstanceStep->getDescription(),
+            $internalInstanceStep->getStatus(),
+            $internalInstanceStep->getAssignedTo(),
+            $internalInstanceStep->getOutputFields()
+        );
+        return $instanceStep;
     }
 }

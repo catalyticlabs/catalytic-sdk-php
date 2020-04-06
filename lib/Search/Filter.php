@@ -16,25 +16,42 @@ class Filter
 
     /**
      * Syntactic sugar to allow chaining
+     *
+     * @return Filter   The Filter object
      */
-    public function and()
+    public function and() : Filter
     {
         return $this;
     }
 
-    public function text()
+    /**
+     * Creates a FilterCriteria object for filtering text
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function text() : FilterCriteria
     {
         $filterCriteria = new FilterCriteria($this, 'text');
         return $filterCriteria;
     }
 
-    public function owner()
+    /**
+     * Creates a FilterCriteria object for filtering owner
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function owner() : FilterCriteria
     {
         $filterCriteria = new FilterCriteria($this, 'owner');
         return $filterCriteria;
     }
 
-    public function category()
+    /**
+     * Creates a FilterCriteria object for filtering category
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function category() : FilterCriteria
     {
         $filterCriteria = new FilterCriteria($this, 'category');
         return $filterCriteria;

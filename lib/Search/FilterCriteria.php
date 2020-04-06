@@ -27,7 +27,7 @@ class FilterCriteria
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to
      */
-    public function matches(string $term)
+    public function matches(string $term) : Filter
     {
         return $this->addAsFilterCriteria($term);
     }
@@ -40,7 +40,7 @@ class FilterCriteria
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to
      */
-    public function is(string $term)
+    public function is(string $term) : Filter
     {
         return $this->addAsFilterCriteria($term);
     }
@@ -51,7 +51,7 @@ class FilterCriteria
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to
      */
-    private function addAsFilterCriteria(string $term)
+    private function addAsFilterCriteria(string $term) : Filter
     {
         $this->value = $term;
         array_push($this->filter->searchFilters, $this);

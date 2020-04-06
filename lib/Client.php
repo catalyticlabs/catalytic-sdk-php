@@ -2,7 +2,14 @@
 
 namespace Catalytic\SDK;
 
-use \Catalytic\SDK\Clients\{Pushbots, Instances, Users, Files, DataTables, UserCredentials};
+use Catalytic\SDK\Clients\{
+    Pushbots,
+    Instances,
+    Users,
+    Files,
+    DataTables,
+    UserCredentials
+};
 
 /**
  * Client for connecting to catalytic

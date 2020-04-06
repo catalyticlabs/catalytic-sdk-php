@@ -12,9 +12,9 @@ class Where
     /**
      * Text to be filtered
      *
-     * @return Filter
+     * @return FilterCriteria   The created FilterCriteria object
      */
-    public function text()
+    public function text() : FilterCriteria
     {
         return (new Filter())->text();
     }
@@ -22,9 +22,9 @@ class Where
     /**
      * Owner to be filtered
      *
-     * @return Filter
+     * @return FilterCriteria   The created FilterCriteria object
      */
-    public function owner()
+    public function owner() : FilterCriteria
     {
         return (new Filter())->owner();
     }
@@ -32,9 +32,9 @@ class Where
     /**
      * Category to be filtered
      *
-     * @return Filter
+     * @return FilterCriteria   The created FilterCriteria object
      */
-    public function category()
+    public function category() : FilterCriteria
     {
         return (new Filter())->category();
     }
