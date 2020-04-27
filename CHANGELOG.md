@@ -8,6 +8,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Removed unnecessary debug
 
+### Added
+- Get credentials method
+- Find credentials method
+- Revoke credentials method
+- Get dataTable method
+- Find dataTables method
+- Download dataTables method
+- Upload dataTables method
+- Replace dataTables method
+- Get file method
+- Find files method
+- Download file method
+- Upload file method
+- Find instances method
+- Stop instance method
+- Find instance steps method
+- Set user agent with sdk version
+
+### Changed
+- Moved generated code to its own folder
+- DRY'ed up search helpers
+- Renamed pushbot to workflow
+
+### Removed
+- Generated model docs
+
+### Fixed
+- Invalid search params when searching instances and steps
+
 ## [0.1.0] - 2020-04-04
 ### Added
 - Start an instance method

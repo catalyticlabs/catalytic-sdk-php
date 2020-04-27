@@ -14,9 +14,16 @@ Key Benefits:
  - Easily connect actions users take in your app to backoffice processes in your business.
  - Let Catalytic handle the compliance burden of storing and processing PII and ePHI securely
 
-## Documentation
-Documentation can be found at [https://catalytic-developer.readme.io/reference/catalytic-php-sdk](https://catalytic-developer.readme.io/reference/catalytic-php-sdk).
 
 ## Requirements
-
 PHP 7.2 and later
+
+## Installation
+Via composer
+
+```sh
+$ composer add catalytic/sdk
+```
+
+## Documentation
+Documentation can be found at [https://catalytic-developer.readme.io/reference/catalytic-php-sdk](https://catalytic-developer.readme.io/reference/catalytic-php-sdk).

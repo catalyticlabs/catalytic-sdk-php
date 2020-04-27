@@ -38,5 +38,35 @@ class Where
     {
         return (new Filter())->category();
     }
+
+    /**
+     * Status to be filtered
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function status() : FilterCriteria
+    {
+        return (new Filter())->status();
+    }
+
+    /**
+     * WorkflowId to be filtered
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function workflowId() : FilterCriteria
+    {
+        return (new Filter())->workflowId();
+    }
+
+    /**
+     * Assignee to be filtered
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function assignee(): FilterCriteria
+    {
+        return (new Filter())->assignee();
+    }
 }
 

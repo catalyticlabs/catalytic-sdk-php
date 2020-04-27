@@ -22,7 +22,7 @@ class FilterCriteria
     /**
      * Adds the $term as the filter criteria value
      *
-     * The name is for syntactic sugar
+     * The name of this method is for syntactic sugar
      *
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to
@@ -35,7 +35,7 @@ class FilterCriteria
     /**
      * Adds the $term as the filter criteria value
      *
-     * The name is for syntactic sugar
+     * The name of this method is for syntactic sugar
      *
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to

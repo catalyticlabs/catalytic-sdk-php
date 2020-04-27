@@ -81,8 +81,7 @@ class Credentials
         // If it wasn't found, throw an exception
         if ($token === null) {
             $home = $this->getHomeDir();
-            throw new Exception('Cannot find credentials in $CATALYTIC_CREDENTIALS
-                environment variable or ' . "$home/.catalytic/credentials/$fileName");
+            throw new Exception('Cannot find credentials in ' . "$home/.catalytic/credentials/$fileName" . "or $fileName");
         }
 
         return $token;

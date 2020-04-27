@@ -2,13 +2,14 @@
 
 namespace Catalytic\SDK;
 
+use Catalytic\SDK\Credentials as InternalCredentials;
 use Catalytic\SDK\Clients\{
-    Pushbots,
+    Workflows,
     Instances,
     Users,
     Files,
     DataTables,
-    UserCredentials
+    Credentials
 };
 
 /**
@@ -16,12 +17,12 @@ use Catalytic\SDK\Clients\{
  */
 class Client
 {
-    private Pushbots $pushbots;
+    private Workflows $workflows;
     private Instances $instances;
     private Users $users;
     private Files $files;
     private DataTables $dataTables;
-    private UserCredentials $userCredentials;
+    private Credentials $credentials;
 
     /**
      * Instantiate the individual clients
@@ -30,19 +31,19 @@ class Client
      */
     public function __construct(string $tokenOrFile = null)
     {
-        $credentials = new Credentials();
+        $credentials = new InternalCredentials();
         $token = $credentials->fetchToken($tokenOrFile);
-        $this->pushbots = new Pushbots($token);
+        $this->workflows = new Workflows($token);
         $this->instances = new Instances($token);
         $this->users = new Users($token);
         $this->files = new Files($token);
         $this->dataTables = new DataTables($token);
-        $this->userCredentials = new UserCredentials($token);
+        $this->credentials = new Credentials($token);
     }
 
-    public function pushbots()
+    public function workflows()
     {
-        return $this->pushbots;
+        return $this->workflows;
     }
 
     public function instances()
@@ -65,9 +66,9 @@ class Client
         return $this->dataTables;
     }
 
-    public function userCredentials()
+    public function credentials()
     {
-        return $this->userCredentials;
+        return $this->credentials;
     }
 
     /**

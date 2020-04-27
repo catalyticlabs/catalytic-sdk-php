@@ -6,12 +6,11 @@ use Catalytic\SDK\Search\FilterCriteria;
 
 /**
  * Class which creates and stores all the search filter criteria
- * to be used when making REST api calls
  */
 class Filter
 {
     // Contains all the search filter criteria objects to
-    // be used for actually filtering
+    // be used for actually filtering against the api
     public array $searchFilters = [];
 
     /**
@@ -54,6 +53,39 @@ class Filter
     public function category() : FilterCriteria
     {
         $filterCriteria = new FilterCriteria($this, 'category');
+        return $filterCriteria;
+    }
+
+    /**
+     * Creates a FilterCriteria object for filtering status
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function status() : FilterCriteria
+    {
+        $filterCriteria = new FilterCriteria($this, 'status');
+        return $filterCriteria;
+    }
+
+    /**
+     * Creates a FilterCriteria object for filtering workflowId
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function workflowId(): FilterCriteria
+    {
+        $filterCriteria = new FilterCriteria($this, 'workflowId');
+        return $filterCriteria;
+    }
+
+    /**
+     * Creates a FilterCriteria object for filtering assignee
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function assignee(): FilterCriteria
+    {
+        $filterCriteria = new FilterCriteria($this, 'assignee');
         return $filterCriteria;
     }
 }

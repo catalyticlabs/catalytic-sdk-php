@@ -4,7 +4,7 @@ namespace Catalytic\SDK\Clients;
 
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\{InstancesApi, InstanceStepsApi};
-use Catalytic\SDK\Entities\{Instance, InstanceStep};
+use Catalytic\SDK\Entities\{Instance, InstanceStep, InstancesPage};
 use Catalytic\SDK\Model\{
     CompleteStepRequest,
     FieldUpdateRequest,
@@ -13,6 +13,7 @@ use Catalytic\SDK\Model\{
     InstanceStepsPage,
     StartInstanceRequest
 };
+use Catalytic\SDK\Search\{Filter, SearchUtils};
 
 /**
  * Instance client to be exposed to consumers
@@ -30,10 +31,10 @@ class Instances
     }
 
     /**
-     * Get a pushbot instance by id
+     * Get a workflow instance by id
      *
-     * @param string $id    The id of the pushbot instance to get
-     * @param Instance      The Instance object
+     * @param string $id    The id of the workflow instance to get
+     * @return Instance     The Instance object
      */
     public function get(string $id) : Instance
     {
@@ -45,26 +46,48 @@ class Instances
     /**
      * Find instances by a variety of criteria
      *
-     * @param Where $filter The filter criteria to look up instances
+     * @param Filter $filter The filter criteria to search instances by
+     * @param string $pageToken The token of the page to fetch
+     * @param int    $pageSize  The number of workflows per page to fetch
+     * @return InstancesPage    An InstancesPage which contains the reults
      */
-    public function find(Where $filter)
+    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null) : InstancesPage
     {
-        $instances = $this->instancesApi->findInstances($filter);
-        return $instances;
+        $text = null;
+        $owner = null;
+        $status = null;
+        $workflowId = null;
+
+        if ($filter !== null) {
+            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+            $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
+            $status = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'status');
+            $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
+        }
+
+        $internalInstances = $this->instancesApi->findInstances($text, $status, $workflowId, null, $owner, null, null, $pageToken, $pageSize);
+        $instances = [];
+        foreach ($internalInstances->getInstances() as $internalInstance) {
+            $instance = $this->createInstance($internalInstance);
+            array_push($instances, $instance);
+        }
+
+        $instancesPage = new InstancesPage($instances, $internalInstances->getCount(), $internalInstances->getNextPageToken());
+        return $instancesPage;
     }
 
     /**
-     * Start an instance of a pushbot for a given pushbot id
+     * Start an instance of a workflow for a given workflow id
      *
-     * @param string $pushbotId                 The id of the pushbot to start an instance
+     * @param string $workflowId                 The id of the workflow to start an instance
      * @param string $name (Optional)           The name to give to the instance
      * @param string $description (Optional)    The description to give to the instance
      * @param array  $fields (Optional)         The input fields to use when starting this instance
      * @return Instance                         The newly created instance
      */
-    public function start(string $pushbotId, string $name = null, string $description = null, array $fields = null) : Instance
+    public function start(string $workflowId, string $name = null, string $description = null, array $fields = null) : Instance
     {
-        $request = $this->createStartInstanceRequest($pushbotId, $name, $description, $fields);
+        $request = $this->createStartInstanceRequest($workflowId, $name, $description, $fields);
         $internalInstance = $this->instancesApi->startInstance($request);
         $instance = $this->createInstance($internalInstance);
         return $instance;
@@ -78,7 +101,8 @@ class Instances
      */
     public function stop(string $id) : Instance
     {
-        $stoppedInstance = $this->instancesApi->stopInstance($id);
+        $internalStoppedInstance = $this->instancesApi->stopInstance($id);
+        $stoppedInstance = $this->createInstance($internalStoppedInstance);
         return $stoppedInstance;
     }
 
@@ -118,11 +142,34 @@ class Instances
 
     /**
      * Search for steps
+     *
+     * @param Filter $filter        The filter criteria to search instance steps by
+     * @param string $pageToken     The token of the page to fetch
+     * @param int    $pageSize      The number of instance steps per page to fetch
+     * @return InstanceStepsPage    An InstanceStepsPage which contains the reults
      */
-    public function findSteps(Where $filter)
+    public function findSteps(Filter $filter = null, string $pageToken = null, int $pageSize = null) : InstanceStepsPage
     {
-        $steps = $this->instanceStepsApi->findInstanceSteps(null, $filter);
-        return $steps;
+        $text = null;
+        $workflowId = null;
+        $assignee = null;
+
+        if ($filter !== null) {
+            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+            $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
+            $assignee = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'assignee');
+        }
+
+        $internalSteps = $this->instanceStepsApi->findInstanceSteps($instanceId, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
+        $steps = [];
+
+        foreach ($internalSteps->getSteps() as $internalStep) {
+            $step = $this->createInstanceStep($internalStep);
+            array_push($steps, $step);
+        }
+
+        $stepsPage = new InstanceStepsPage($steps, $internalSteps->getCount(), $internalSteps->getNextPageToken());
+        return $stepsPage;
     }
 
     /**
@@ -147,15 +194,15 @@ class Instances
     /**
      * Creates a StartInstanceRequest object with the passed in params
      *
-     * @param string $id                        The id to create the CompleteStepRequest with
-     * @param string $name (Optional)           The name to create the CompleteStepRequest with
-     * @param string $description (Optional)    The description to create the CompleteStepRequest with
-     * @param array  $fields (Optional)         The fields to create the CompleteStepRequest with
+     * @param string $workflowId                 The workflowId to create the StartInstanceRequest with
+     * @param string $name (Optional)           The name to create the StartInstanceRequest with
+     * @param string $description (Optional)    The description to create the StartInstanceRequest with
+     * @param array  $fields (Optional)         The fields to create the StartInstanceRequest with
      * @return StartInstanceRequest             The created StartInstanceRequest object
      */
-    private function createStartInstanceRequest(string $pushbotId, string $name = null, string $description = null, array $fields = null) : StartInstanceRequest
+    private function createStartInstanceRequest(string $workflowId, string $name = null, string $description = null, array $fields = null) : StartInstanceRequest
     {
-        $config = array('pushbotId' => $pushbotId);
+        $config = array('workflowId' => $workflowId);
 
         if (isset($name)) {
             $config['name'] = $name;
@@ -170,8 +217,8 @@ class Instances
             $config['inputFields'] = $inputFields;
         }
 
-        $stepRequest = new StartInstanceRequest($config);
-        return $stepRequest;
+        $startInstanceRequest = new StartInstanceRequest($config);
+        return $startInstanceRequest;
     }
 
     /**
@@ -226,13 +273,13 @@ class Instances
      * Create an Instance object from an internal Instance object
      *
      * @param InternalInstance  $internalInstance   The internal instance to create an Instance object from
-     * @return Instance         $instance           The created Instance object
+     * @return Instance                             The created Instance object
      */
-    private function createInstance(InternalInstance $internalInstance): Instance
+    private function createInstance(InternalInstance $internalInstance) : Instance
     {
         $instance = new Instance(
             $internalInstance->getId(),
-            $internalInstance->getPushbotId(),
+            $internalInstance->getWorkflowId(),
             $internalInstance->getName(),
             $internalInstance->getTeamName(),
             $internalInstance->getDescription(),
@@ -253,14 +300,14 @@ class Instances
      * Create an InstanceStep object from an internal InstanceStep object
      *
      * @param InternalInstanceStep  $internalInstanceStep   The internal instance step to create an InstanceStep object from
-     * @return InstanceStep         $instanceStep           The created InstanceStep object
+     * @return InstanceStep                                 The created InstanceStep object
      */
     private function createInstanceStep(InternalInstanceStep $internalInstanceStep) : InstanceStep
     {
         $instanceStep = new InstanceStep(
             $internalInstanceStep->getId(),
             $internalInstanceStep->getInstanceId(),
-            $internalInstanceStep->getPushbotId(),
+            $internalInstanceStep->getWorkflowId(),
             $internalInstanceStep->getName(),
             $internalInstanceStep->getTeamName(),
             $internalInstanceStep->getPosition(),

@@ -2,59 +2,59 @@
 
 namespace Catalytic\SDK\Entities;
 
-use Catalytic\SDK\Model\{InstanceStatus, FieldVisibility, InstanceVisibilty};
+use Catalytic\SDK\Model\{FieldVisibility, InstanceVisibilty};
 use Exception;
 
 /**
- * An instance object
+ * A Workflow object
  */
-class Instance
+class Workflow
 {
     private string $id;
-    private string $workflowId;
     private string $name;
     private string $teamName;
     private ?string $description;
-    private ?string $category;
+    private string $category;
     private string $owner;
     private string $createdBy;
-    private ?array $steps;
-    private array $fields;
-    private string $status;
+    private array $inputFields;
+    private bool $isPublished;
+    private bool $isArchived;
     private string $fieldVisibility;
-    private string $visibility;
-    private array $visibleToUsers;
+    private string $instanceVisibility;
+    private array $adminUsers;
+    private array $standardUsers;
 
     public function __construct(
         $id = null,
-        $workflowId = null,
         $name = null,
         $teamName = null,
         $description = null,
         $category = null,
         $owner = null,
         $createdBy = null,
-        $steps = null,
-        $fields = null,
-        $status = null,
+        $inputFields = null,
+        $isPublished = null,
+        $isArchived = null,
         $fieldVisibility = null,
-        $visibility = null,
-        $visibleToUsers = null
+        $instanceVisibility = null,
+        $adminUsers = null,
+        $standardUsers = null
     ) {
         $this->id = $id;
-        $this->workflowId = $workflowId;
         $this->name = $name;
         $this->teamName = $teamName;
         $this->description = $description;
         $this->category = $category;
         $this->owner = $owner;
         $this->createdBy = $createdBy;
-        $this->steps = $steps;
-        $this->fields = $fields;
-        $this->status = $status;
+        $this->inputFields = $inputFields;
+        $this->isPublished = $isPublished;
+        $this->isArchived = $isArchived;
         $this->fieldVisibility = $fieldVisibility;
-        $this->visibility = $visibility;
-        $this->visibleToUsers = $visibleToUsers;
+        $this->instanceVisibility = $instanceVisibility;
+        $this->adminUsers = $adminUsers;
+        $this->standardUsers = $standardUsers;
     }
 
     /**
@@ -76,25 +76,9 @@ class Instance
     /**
      * Alias for $this->id
      */
-    public function getInstanceId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Get the value of workflowId
-     */
     public function getWorkflowId()
     {
-        return $this->workflowId;
-    }
-
-    /**
-     * Set the value of workflowId
-     */
-    public function setWorkflowId($workflowId)
-    {
-        $this->workflowId = $workflowId;
+        return $this->id;
     }
 
     /**
@@ -194,56 +178,51 @@ class Instance
     }
 
     /**
-     * Get the value of steps
+     * Get the value of inputFields
      */
-    public function getSteps()
+    public function getInputFields()
     {
-        return $this->steps;
+        return $this->inputFields;
     }
 
     /**
-     * Set the value of steps
+     * Set the value of inputFields
      */
-    public function setSteps($steps)
+    public function setInputFields($inputFields)
     {
-        $this->steps = $steps;
+        $this->inputFields = $inputFields;
     }
 
     /**
-     * Get the value of fields
+     * Get the value of isPublished
      */
-    public function getFields()
+    public function isPublished()
     {
-        return $this->fields;
+        return $this->isPublished;
     }
 
     /**
-     * Set the value of fields
+     * Set the value of isPublished
      */
-    public function setFields($fields)
+    public function setIsPublished($isPublished)
     {
-        $this->fields = $fields;
+        $this->isPublished = $isPublished;
     }
 
     /**
-     * Get the value of status
+     * Get the value of isArchived
      */
-    public function getStatus()
+    public function isArchived()
     {
-        return $this->status;
+        return $this->isArchived;
     }
 
     /**
-     * Set the value of status
+     * Set the value of isArchived
      */
-    public function setStatus($status)
+    public function setIsArchived($isArchived)
     {
-        // Validate $status is a valid value
-        if (in_array($status, InstanceStatus::getAllowableEnumValues())) {
-            $possibleValues = implode(', ', InstanceStatus::getAllowableEnumValues());
-            throw new Exception('Invalid value for $status param. Must be one of ' . $possibleValues);
-        }
-        $this->status = $status;
+        $this->isArchived = $isArchived;
     }
 
     /**
@@ -257,7 +236,7 @@ class Instance
     /**
      * Set the value of fieldVisibility
      */
-    public function setFieldVisibility($fieldVisibility)
+    public function setFieldVisibility(string $fieldVisibility)
     {
         // Validate $fieldVisibility is a valid value
         if (in_array($fieldVisibility, FieldVisibility::getAllowableEnumValues())) {
@@ -268,39 +247,55 @@ class Instance
     }
 
     /**
-     * Get the value of visibility
+     * Get the value of instanceVisibility
      */
-    public function getVisibility()
+    public function getInstanceVisibility()
     {
-        return $this->visibility;
+        return $this->instanceVisibility;
     }
 
     /**
-     * Set the value of visibility
+     * Set the value of instanceVisibility
      */
-    public function setVisibility($visibility)
+    public function setInstanceVisibility(string $instanceVisibility)
     {
-        // Validate $visibility is a valid value
-        if (in_array($visibility, InstanceVisibilty::getAllowableEnumValues())) {
+        // Validate $instanceVisibility is a valid value
+        if (in_array($instanceVisibility, InstanceVisibilty::getAllowableEnumValues())) {
             $possibleValues = implode(', ', InstanceVisibilty::getAllowableEnumValues());
-            throw new Exception('Invalid value for $visibility param. Must be one of ' . $possibleValues);
+            throw new Exception('Invalid value for $instanceVisibility param. Must be one of ' . $possibleValues);
         }
-        $this->visibility = $visibility;
+        $this->instanceVisibility = $instanceVisibility;
     }
 
     /**
-     * Get the value of visibleToUsers
+     * Get the value of adminUsers
      */
-    public function getVisibleToUsers()
+    public function getAdminUsers()
     {
-        return $this->visibleToUsers;
+        return $this->adminUsers;
     }
 
     /**
-     * Set the value of visibleToUsers
+     * Set the value of adminUsers
      */
-    public function setVisibleToUsers($visibleToUsers)
+    public function setAdminUsers($adminUsers)
     {
-        $this->visibleToUsers = $visibleToUsers;
+        $this->adminUsers = $adminUsers;
+    }
+
+    /**
+     * Get the value of standardUsers
+     */
+    public function getStandardUsers()
+    {
+        return $this->standardUsers;
+    }
+
+    /**
+     * Set the value of standardUsers
+     */
+    public function setStandardUsers($standardUsers)
+    {
+        $this->standardUsers = $standardUsers;
     }
 }

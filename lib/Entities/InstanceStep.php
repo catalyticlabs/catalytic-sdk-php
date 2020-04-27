@@ -2,11 +2,14 @@
 
 namespace Catalytic\SDK\Entities;
 
+/**
+ * A object which represents a step on a particular instance of a workflow
+ */
 class InstanceStep
 {
     private string $id;
     private string $instanceId;
-    private string $pushbotId;
+    private string $workflowId;
     private string $name;
     private string $teamName;
     private string $position;
@@ -18,7 +21,7 @@ class InstanceStep
     public function __construct(
         $id = null,
         $instanceId = null,
-        $pushbotId = null,
+        $workflowId = null,
         $name = null,
         $teamName = null,
         $position = null,
@@ -29,7 +32,7 @@ class InstanceStep
     ) {
         $this->id = $id;
         $this->instanceId = $instanceId;
-        $this->pushbotId = $pushbotId;
+        $this->workflowId = $workflowId;
         $this->name = $name;
         $this->teamName = $teamName;
         $this->position = $position;
@@ -72,19 +75,19 @@ class InstanceStep
     }
 
     /**
-     * Get the value of pushbotId
+     * Get the value of workflowId
      */
-    public function getPushbotId()
+    public function getWorkflowId()
     {
-        return $this->pushbotId;
+        return $this->workflowId;
     }
 
     /**
-     * Set the value of pushbotId
+     * Set the value of workflowId
      */
-    public function setPushbotId($pushbotId)
+    public function setWorkflowId($workflowId)
     {
-        $this->pushbotId = $pushbotId;
+        $this->workflowId = $workflowId;
     }
 
     /**

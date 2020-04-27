@@ -5,7 +5,7 @@
     "keywords": [
         "Catalytic",
         "SDK",
-        "Pushbot",
+        "Workflow",
         "Automation"
     ],
     "homepage": "https://github.com/catalyticlabs/catalytic-sdk-php",
@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Catalytic\\SDK\\" : "lib/"
+            "Catalytic\\SDK\\" : ["lib/", "lib/generated"]
         }
     },
     "autoload-dev": {
