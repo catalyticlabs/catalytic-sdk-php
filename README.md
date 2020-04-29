@@ -1,7 +1,7 @@
 # catalytic/sdk
 > Catalytic's PHP SDK
 >
-> Current version **0.1.0**
+> Current version **0.2.0**
 
 The Catalytic SDK allows you to integration your app with the Catalytic Platform.
 
