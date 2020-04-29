@@ -4,13 +4,12 @@ namespace Catalytic\SDK\Clients;
 
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\{InstancesApi, InstanceStepsApi};
-use Catalytic\SDK\Entities\{Instance, InstanceStep, InstancesPage};
+use Catalytic\SDK\Entities\{Instance, InstanceStep, InstancesPage, InstanceStepsPage};
 use Catalytic\SDK\Model\{
     CompleteStepRequest,
     FieldUpdateRequest,
     Instance as InternalInstance,
     InstanceStep as InternalInstanceStep,
-    InstanceStepsPage,
     StartInstanceRequest
 };
 use Catalytic\SDK\Search\{Filter, SearchUtils};
@@ -127,13 +126,18 @@ class Instances
      */
     public function getSteps(string $instanceId) : array
     {
-        $internalSteps = $this->instanceStepsApi->findInstanceSteps($instanceId);
-        // TODO: Need to paginate here
-        echo $internalSteps;
+        $results = $this->instanceStepsApi->findInstanceSteps($instanceId);
+        $allSteps = $results->getSteps();
         $steps = [];
 
-        // Wrap each step in a step wrapper object
-        foreach ($internalSteps->getSteps() as $step) {
+        // Loop through and get all the steps
+        while ($results->getNextPageToken() != null) {
+            $results = $this->instanceStepsApi->findInstanceSteps($instanceId, $results->getNextPageToken());
+            array_push($allSteps, $allSteps);
+        }
+
+        // Create external InstanceStep from each internal InstanceStep
+        foreach ($allSteps as $step) {
             $newStep = $this->createInstanceStep($step);
             array_push($steps, $newStep);
         }
@@ -150,6 +154,9 @@ class Instances
      */
     public function findSteps(Filter $filter = null, string $pageToken = null, int $pageSize = null) : InstanceStepsPage
     {
+        // The REST api supports wildcard instance id when searching for instance steps
+        // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
+        $wildcardInstanceId = '-';
         $text = null;
         $workflowId = null;
         $assignee = null;
@@ -160,9 +167,10 @@ class Instances
             $assignee = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'assignee');
         }
 
-        $internalSteps = $this->instanceStepsApi->findInstanceSteps($instanceId, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
+        $internalSteps = $this->instanceStepsApi->findInstanceSteps($wildcardInstanceId, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
         $steps = [];
 
+        // Loop through and get all the steps
         foreach ($internalSteps->getSteps() as $internalStep) {
             $step = $this->createInstanceStep($internalStep);
             array_push($steps, $step);

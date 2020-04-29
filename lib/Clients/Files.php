@@ -7,7 +7,7 @@ use SplFileObject;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\FilesApi;
 use Catalytic\SDK\Entities\{File, FilesPage};
-use Catalytic\SDK\Model\File as InternalFile;
+use Catalytic\SDK\Model\FileMetadata as InternalFile;
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 
 /**
@@ -81,7 +81,7 @@ class Files
      * @return SplFileObject                An object containing the file info
      * @throws Exception
      */
-    public function downloadFile(string $id, string $directory = null)
+    public function download(string $id, string $directory = null)
     {
         // By default this downloads the file to a temp dir
         $file = $this->filesApi->downloadFile($id);
@@ -109,17 +109,13 @@ class Files
      * Uploads the passed in file
      *
      * @param SplFileObject $file   The file to upload
-     * @return ???
+     * @return File                 The file that was uploaded
      */
-    public function uploadFile(SplFileObject $file)
+    public function upload(SplFileObject $fileToUpload) : File
     {
-        // $filesArray = array($file);
-
-        // print_r($filesArray);
-        $file = $this->filesApi->uploadFiles($file);
-        // $file = $this->filesApi->uploadFiles($filesArray);
-
-        // print_r($file);
+        $internalFile = $this->filesApi->uploadFiles($fileToUpload);
+        $uploadedFile = $internalFile->getFiles()[0];
+        $file = $this->createFile($uploadedFile);
         return $file;
     }
 
@@ -127,7 +123,7 @@ class Files
      * Create a File object from an internal File object
      *
      * @param InternalFile  $internalFile   The internal file to create a File object from
-     * @return File         $file           The created File object
+     * @return File                         The created File object
      */
     private function createFile(InternalFile $internalFile): File
     {

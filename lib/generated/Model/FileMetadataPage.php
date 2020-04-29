@@ -1,6 +1,6 @@
 <?php
 /**
- * PushbotExport
+ * FileMetadataPage
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * PushbotExport Class Doc Comment
+ * FileMetadataPage Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class PushbotExport implements ModelInterface, ArrayAccess
+class FileMetadataPage implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PushbotExport implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PushbotExport';
+    protected static $openAPIModelName = 'FileMetadataPage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,10 @@ class PushbotExport implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'name' => 'string',
-        'fileId' => 'string',
-        'errorMessage' => 'string'
+        'files' => '\Catalytic\SDK\Model\FileMetadata[]',
+        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
+        'nextPageToken' => 'string',
+        'count' => 'int'
     ];
 
     /**
@@ -69,10 +69,10 @@ class PushbotExport implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'name' => null,
-        'fileId' => 'uuid',
-        'errorMessage' => null
+        'files' => null,
+        'nextPageOptions' => null,
+        'nextPageToken' => null,
+        'count' => 'int32'
     ];
 
     /**
@@ -102,10 +102,10 @@ class PushbotExport implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'fileId' => 'fileId',
-        'errorMessage' => 'errorMessage'
+        'files' => 'files',
+        'nextPageOptions' => 'nextPageOptions',
+        'nextPageToken' => 'nextPageToken',
+        'count' => 'count'
     ];
 
     /**
@@ -114,10 +114,10 @@ class PushbotExport implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'fileId' => 'setFileId',
-        'errorMessage' => 'setErrorMessage'
+        'files' => 'setFiles',
+        'nextPageOptions' => 'setNextPageOptions',
+        'nextPageToken' => 'setNextPageToken',
+        'count' => 'setCount'
     ];
 
     /**
@@ -126,10 +126,10 @@ class PushbotExport implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'fileId' => 'getFileId',
-        'errorMessage' => 'getErrorMessage'
+        'files' => 'getFiles',
+        'nextPageOptions' => 'getNextPageOptions',
+        'nextPageToken' => 'getNextPageToken',
+        'count' => 'getCount'
     ];
 
     /**
@@ -192,10 +192,10 @@ class PushbotExport implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['fileId'] = isset($data['fileId']) ? $data['fileId'] : null;
-        $this->container['errorMessage'] = isset($data['errorMessage']) ? $data['errorMessage'] : null;
+        $this->container['files'] = isset($data['files']) ? $data['files'] : null;
+        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
+        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
+        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
     }
 
     /**
@@ -223,97 +223,97 @@ class PushbotExport implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets files
      *
-     * @return string|null
+     * @return \Catalytic\SDK\Model\FileMetadata[]|null
      */
-    public function getId()
+    public function getFiles()
     {
-        return $this->container['id'];
+        return $this->container['files'];
     }
 
     /**
-     * Sets id
+     * Sets files
      *
-     * @param string|null $id id
+     * @param \Catalytic\SDK\Model\FileMetadata[]|null $files files
      *
      * @return $this
      */
-    public function setId($id)
+    public function setFiles($files)
     {
-        $this->container['id'] = $id;
+        $this->container['files'] = $files;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets nextPageOptions
      *
-     * @return string|null
+     * @return \Catalytic\SDK\Model\PagingOptions|null
      */
-    public function getName()
+    public function getNextPageOptions()
     {
-        return $this->container['name'];
+        return $this->container['nextPageOptions'];
     }
 
     /**
-     * Sets name
+     * Sets nextPageOptions
      *
-     * @param string|null $name name
+     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
      *
      * @return $this
      */
-    public function setName($name)
+    public function setNextPageOptions($nextPageOptions)
     {
-        $this->container['name'] = $name;
+        $this->container['nextPageOptions'] = $nextPageOptions;
 
         return $this;
     }
 
     /**
-     * Gets fileId
+     * Gets nextPageToken
      *
      * @return string|null
      */
-    public function getFileId()
+    public function getNextPageToken()
     {
-        return $this->container['fileId'];
+        return $this->container['nextPageToken'];
     }
 
     /**
-     * Sets fileId
+     * Sets nextPageToken
      *
-     * @param string|null $fileId fileId
+     * @param string|null $nextPageToken nextPageToken
      *
      * @return $this
      */
-    public function setFileId($fileId)
+    public function setNextPageToken($nextPageToken)
     {
-        $this->container['fileId'] = $fileId;
+        $this->container['nextPageToken'] = $nextPageToken;
 
         return $this;
     }
 
     /**
-     * Gets errorMessage
+     * Gets count
      *
-     * @return string|null
+     * @return int|null
      */
-    public function getErrorMessage()
+    public function getCount()
     {
-        return $this->container['errorMessage'];
+        return $this->container['count'];
     }
 
     /**
-     * Sets errorMessage
+     * Sets count
      *
-     * @param string|null $errorMessage errorMessage
+     * @param int|null $count count
      *
      * @return $this
      */
-    public function setErrorMessage($errorMessage)
+    public function setCount($count)
     {
-        $this->container['errorMessage'] = $errorMessage;
+        $this->container['count'] = $count;
 
         return $this;
     }

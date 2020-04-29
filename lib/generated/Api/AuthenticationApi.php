@@ -189,7 +189,7 @@ class AuthenticationApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
+                case 201:
                     if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -227,7 +227,7 @@ class AuthenticationApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\Credentials',
@@ -471,7 +471,7 @@ class AuthenticationApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
+                case 201:
                     if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -509,7 +509,7 @@ class AuthenticationApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\Credentials',

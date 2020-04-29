@@ -122,7 +122,7 @@ class UserCredentialsApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -132,7 +132,7 @@ class UserCredentialsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\CredentialsPage
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\CredentialsPage
      */
     public function findCredentials($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
@@ -147,7 +147,7 @@ class UserCredentialsApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -157,7 +157,7 @@ class UserCredentialsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\CredentialsPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\CredentialsPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findCredentialsWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
@@ -193,6 +193,18 @@ class UserCredentialsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
+                case 400:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 401:
                     if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -247,6 +259,14 @@ class UserCredentialsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
                 case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -283,7 +303,7 @@ class UserCredentialsApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -311,7 +331,7 @@ class UserCredentialsApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -366,7 +386,7 @@ class UserCredentialsApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -564,7 +584,7 @@ class UserCredentialsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
      */
     public function getCredentials($id)
     {
@@ -579,7 +599,7 @@ class UserCredentialsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
      */
     public function getCredentialsWithHttpInfo($id)
     {
@@ -639,6 +659,18 @@ class UserCredentialsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 404:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 200:
                     if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -678,6 +710,14 @@ class UserCredentialsApi
                     $e->setResponseObject($data);
                     break;
                 case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -879,7 +919,7 @@ class UserCredentialsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
      */
     public function revokeCredentials($id)
     {
@@ -896,7 +936,7 @@ class UserCredentialsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
      */
     public function revokeCredentialsWithHttpInfo($id)
     {
@@ -956,6 +996,18 @@ class UserCredentialsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 404:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 200:
                     if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -995,6 +1047,14 @@ class UserCredentialsApi
                     $e->setResponseObject($data);
                     break;
                 case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -1180,7 +1240,7 @@ class UserCredentialsApi
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
-            'PATCH',
+            'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

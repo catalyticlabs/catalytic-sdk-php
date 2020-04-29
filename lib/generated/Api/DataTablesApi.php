@@ -179,7 +179,7 @@ class DataTablesApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 404:
+                case 401:
                     if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -191,7 +191,7 @@ class DataTablesApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 401:
+                case 404:
                     if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -233,7 +233,7 @@ class DataTablesApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -241,7 +241,7 @@ class DataTablesApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 401:
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -351,7 +351,7 @@ class DataTablesApi
             );
         }
 
-        $resourcePath = '/api/tables/{id}:download';
+        $resourcePath = '/api/tables/{id}/download';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -455,7 +455,7 @@ class DataTablesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -480,7 +480,7 @@ class DataTablesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -596,7 +596,7 @@ class DataTablesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -624,7 +624,7 @@ class DataTablesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -679,7 +679,7 @@ class DataTablesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -1199,7 +1199,7 @@ class DataTablesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\SplFileObject
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\DataTable
      */
     public function replaceDataTable($id, $headerRow = 1, $sheetNumber = 1, $files = null)
     {
@@ -1219,7 +1219,7 @@ class DataTablesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\DataTable, HTTP status code, HTTP response headers (array of strings)
      */
     public function replaceDataTableWithHttpInfo($id, $headerRow = 1, $sheetNumber = 1, $files = null)
     {
@@ -1255,18 +1255,6 @@ class DataTablesApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 404:
-                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 401:
                     if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -1279,21 +1267,33 @@ class DataTablesApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
-                    if ('\SplFileObject' === '\SplFileObject') {
+                case 404:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 200:
+                    if ('\Catalytic\SDK\Model\DataTable' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\DataTable', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\SplFileObject';
+            $returnType = '\Catalytic\SDK\Model\DataTable';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1309,7 +1309,7 @@ class DataTablesApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -1317,7 +1317,7 @@ class DataTablesApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 401:
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -1328,7 +1328,7 @@ class DataTablesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Catalytic\SDK\Model\DataTable',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1376,7 +1376,7 @@ class DataTablesApi
      */
     public function replaceDataTableAsyncWithHttpInfo($id, $headerRow = 1, $sheetNumber = 1, $files = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Catalytic\SDK\Model\DataTable';
         $request = $this->replaceDataTableRequest($id, $headerRow, $sheetNumber, $files);
 
         return $this->client
@@ -1483,11 +1483,11 @@ class DataTablesApi
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json', 'application/octet-stream']
+                ['application/json']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                ['application/json', 'application/octet-stream'],
+                ['application/json'],
                 ['multipart/form-data']
             );
         }
@@ -1626,7 +1626,7 @@ class DataTablesApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
+                case 201:
                     if ('\Catalytic\SDK\Model\DataTable' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -1664,7 +1664,7 @@ class DataTablesApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\DataTable',

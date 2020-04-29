@@ -56,7 +56,7 @@ class FieldType
     const INSTRUCTIONS = 'instructions';
     const FILE = 'file';
     const TABLE = 'table';
-    const PUSHBOT = 'pushbot';
+    const WORKFLOW = 'workflow';
     const INSTANCE = 'instance';
     const USER = 'user';
     
@@ -80,7 +80,7 @@ class FieldType
             self::INSTRUCTIONS,
             self::FILE,
             self::TABLE,
-            self::PUSHBOT,
+            self::WORKFLOW,
             self::INSTANCE,
             self::USER,
         ];

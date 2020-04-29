@@ -1,6 +1,6 @@
 <?php
 /**
- * Pushbot
+ * Workflow
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * Pushbot Class Doc Comment
+ * Workflow Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class Pushbot implements ModelInterface, ArrayAccess
+class Workflow implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Pushbot implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Pushbot';
+    protected static $openAPIModelName = 'Workflow';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

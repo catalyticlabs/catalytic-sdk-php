@@ -1,6 +1,6 @@
 <?php
 /**
- * FilesPage
+ * WorkflowImport
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * FilesPage Class Doc Comment
+ * WorkflowImport Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class FilesPage implements ModelInterface, ArrayAccess
+class WorkflowImport implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class FilesPage implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FilesPage';
+    protected static $openAPIModelName = 'WorkflowImport';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,10 @@ class FilesPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'files' => '\Catalytic\SDK\Model\File[]',
-        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
-        'nextPageToken' => 'string',
-        'count' => 'int'
+        'id' => 'string',
+        'name' => 'string',
+        'workflowId' => 'string',
+        'errorMessage' => 'string'
     ];
 
     /**
@@ -69,10 +69,10 @@ class FilesPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'files' => null,
-        'nextPageOptions' => null,
-        'nextPageToken' => null,
-        'count' => 'int32'
+        'id' => 'uuid',
+        'name' => null,
+        'workflowId' => 'uuid',
+        'errorMessage' => null
     ];
 
     /**
@@ -102,10 +102,10 @@ class FilesPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'files' => 'files',
-        'nextPageOptions' => 'nextPageOptions',
-        'nextPageToken' => 'nextPageToken',
-        'count' => 'count'
+        'id' => 'id',
+        'name' => 'name',
+        'workflowId' => 'workflowId',
+        'errorMessage' => 'errorMessage'
     ];
 
     /**
@@ -114,10 +114,10 @@ class FilesPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'files' => 'setFiles',
-        'nextPageOptions' => 'setNextPageOptions',
-        'nextPageToken' => 'setNextPageToken',
-        'count' => 'setCount'
+        'id' => 'setId',
+        'name' => 'setName',
+        'workflowId' => 'setWorkflowId',
+        'errorMessage' => 'setErrorMessage'
     ];
 
     /**
@@ -126,10 +126,10 @@ class FilesPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'files' => 'getFiles',
-        'nextPageOptions' => 'getNextPageOptions',
-        'nextPageToken' => 'getNextPageToken',
-        'count' => 'getCount'
+        'id' => 'getId',
+        'name' => 'getName',
+        'workflowId' => 'getWorkflowId',
+        'errorMessage' => 'getErrorMessage'
     ];
 
     /**
@@ -192,10 +192,10 @@ class FilesPage implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['files'] = isset($data['files']) ? $data['files'] : null;
-        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
-        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
-        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['workflowId'] = isset($data['workflowId']) ? $data['workflowId'] : null;
+        $this->container['errorMessage'] = isset($data['errorMessage']) ? $data['errorMessage'] : null;
     }
 
     /**
@@ -223,97 +223,97 @@ class FilesPage implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets files
-     *
-     * @return \Catalytic\SDK\Model\File[]|null
-     */
-    public function getFiles()
-    {
-        return $this->container['files'];
-    }
-
-    /**
-     * Sets files
-     *
-     * @param \Catalytic\SDK\Model\File[]|null $files files
-     *
-     * @return $this
-     */
-    public function setFiles($files)
-    {
-        $this->container['files'] = $files;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextPageOptions
-     *
-     * @return \Catalytic\SDK\Model\PagingOptions|null
-     */
-    public function getNextPageOptions()
-    {
-        return $this->container['nextPageOptions'];
-    }
-
-    /**
-     * Sets nextPageOptions
-     *
-     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
-     *
-     * @return $this
-     */
-    public function setNextPageOptions($nextPageOptions)
-    {
-        $this->container['nextPageOptions'] = $nextPageOptions;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextPageToken
+     * Gets id
      *
      * @return string|null
      */
-    public function getNextPageToken()
+    public function getId()
     {
-        return $this->container['nextPageToken'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets nextPageToken
+     * Sets id
      *
-     * @param string|null $nextPageToken nextPageToken
+     * @param string|null $id id
      *
      * @return $this
      */
-    public function setNextPageToken($nextPageToken)
+    public function setId($id)
     {
-        $this->container['nextPageToken'] = $nextPageToken;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets count
+     * Gets name
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getCount()
+    public function getName()
     {
-        return $this->container['count'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets count
+     * Sets name
      *
-     * @param int|null $count count
+     * @param string|null $name name
      *
      * @return $this
      */
-    public function setCount($count)
+    public function setName($name)
     {
-        $this->container['count'] = $count;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets workflowId
+     *
+     * @return string|null
+     */
+    public function getWorkflowId()
+    {
+        return $this->container['workflowId'];
+    }
+
+    /**
+     * Sets workflowId
+     *
+     * @param string|null $workflowId workflowId
+     *
+     * @return $this
+     */
+    public function setWorkflowId($workflowId)
+    {
+        $this->container['workflowId'] = $workflowId;
+
+        return $this;
+    }
+
+    /**
+     * Gets errorMessage
+     *
+     * @return string|null
+     */
+    public function getErrorMessage()
+    {
+        return $this->container['errorMessage'];
+    }
+
+    /**
+     * Sets errorMessage
+     *
+     * @param string|null $errorMessage errorMessage
+     *
+     * @return $this
+     */
+    public function setErrorMessage($errorMessage)
+    {
+        $this->container['errorMessage'] = $errorMessage;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PushbotImportRequest
+ * WorkflowsPage
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * PushbotImportRequest Class Doc Comment
+ * WorkflowsPage Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class PushbotImportRequest implements ModelInterface, ArrayAccess
+class WorkflowsPage implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PushbotImportRequest';
+    protected static $openAPIModelName = 'WorkflowsPage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,10 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'fileId' => 'string',
-        'password' => 'string'
+        'workflows' => '\Catalytic\SDK\Model\Workflow[]',
+        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
+        'nextPageToken' => 'string',
+        'count' => 'int'
     ];
 
     /**
@@ -67,8 +69,10 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'fileId' => 'uuid',
-        'password' => null
+        'workflows' => null,
+        'nextPageOptions' => null,
+        'nextPageToken' => null,
+        'count' => 'int32'
     ];
 
     /**
@@ -98,8 +102,10 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'fileId' => 'fileId',
-        'password' => 'password'
+        'workflows' => 'workflows',
+        'nextPageOptions' => 'nextPageOptions',
+        'nextPageToken' => 'nextPageToken',
+        'count' => 'count'
     ];
 
     /**
@@ -108,8 +114,10 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'fileId' => 'setFileId',
-        'password' => 'setPassword'
+        'workflows' => 'setWorkflows',
+        'nextPageOptions' => 'setNextPageOptions',
+        'nextPageToken' => 'setNextPageToken',
+        'count' => 'setCount'
     ];
 
     /**
@@ -118,8 +126,10 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'fileId' => 'getFileId',
-        'password' => 'getPassword'
+        'workflows' => 'getWorkflows',
+        'nextPageOptions' => 'getNextPageOptions',
+        'nextPageToken' => 'getNextPageToken',
+        'count' => 'getCount'
     ];
 
     /**
@@ -182,8 +192,10 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['fileId'] = isset($data['fileId']) ? $data['fileId'] : null;
-        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
+        $this->container['workflows'] = isset($data['workflows']) ? $data['workflows'] : null;
+        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
+        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
+        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
     }
 
     /**
@@ -211,49 +223,97 @@ class PushbotImportRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets fileId
+     * Gets workflows
      *
-     * @return string|null
+     * @return \Catalytic\SDK\Model\Workflow[]|null
      */
-    public function getFileId()
+    public function getWorkflows()
     {
-        return $this->container['fileId'];
+        return $this->container['workflows'];
     }
 
     /**
-     * Sets fileId
+     * Sets workflows
      *
-     * @param string|null $fileId fileId
+     * @param \Catalytic\SDK\Model\Workflow[]|null $workflows workflows
      *
      * @return $this
      */
-    public function setFileId($fileId)
+    public function setWorkflows($workflows)
     {
-        $this->container['fileId'] = $fileId;
+        $this->container['workflows'] = $workflows;
 
         return $this;
     }
 
     /**
-     * Gets password
+     * Gets nextPageOptions
      *
-     * @return string|null
+     * @return \Catalytic\SDK\Model\PagingOptions|null
      */
-    public function getPassword()
+    public function getNextPageOptions()
     {
-        return $this->container['password'];
+        return $this->container['nextPageOptions'];
     }
 
     /**
-     * Sets password
+     * Sets nextPageOptions
      *
-     * @param string|null $password password
+     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
      *
      * @return $this
      */
-    public function setPassword($password)
+    public function setNextPageOptions($nextPageOptions)
     {
-        $this->container['password'] = $password;
+        $this->container['nextPageOptions'] = $nextPageOptions;
+
+        return $this;
+    }
+
+    /**
+     * Gets nextPageToken
+     *
+     * @return string|null
+     */
+    public function getNextPageToken()
+    {
+        return $this->container['nextPageToken'];
+    }
+
+    /**
+     * Sets nextPageToken
+     *
+     * @param string|null $nextPageToken nextPageToken
+     *
+     * @return $this
+     */
+    public function setNextPageToken($nextPageToken)
+    {
+        $this->container['nextPageToken'] = $nextPageToken;
+
+        return $this;
+    }
+
+    /**
+     * Gets count
+     *
+     * @return int|null
+     */
+    public function getCount()
+    {
+        return $this->container['count'];
+    }
+
+    /**
+     * Sets count
+     *
+     * @param int|null $count count
+     *
+     * @return $this
+     */
+    public function setCount($count)
+    {
+        $this->container['count'] = $count;
 
         return $this;
     }

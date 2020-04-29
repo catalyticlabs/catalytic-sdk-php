@@ -58,7 +58,7 @@ class Instance implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'id' => 'string',
-        'pushbotId' => 'string',
+        'workflowId' => 'string',
         'name' => 'string',
         'teamName' => 'string',
         'description' => 'string',
@@ -80,7 +80,7 @@ class Instance implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'id' => 'uuid',
-        'pushbotId' => 'uuid',
+        'workflowId' => 'uuid',
         'name' => null,
         'teamName' => null,
         'description' => null,
@@ -123,7 +123,7 @@ class Instance implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'id' => 'id',
-        'pushbotId' => 'pushbotId',
+        'workflowId' => 'workflowId',
         'name' => 'name',
         'teamName' => 'teamName',
         'description' => 'description',
@@ -145,7 +145,7 @@ class Instance implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'id' => 'setId',
-        'pushbotId' => 'setPushbotId',
+        'workflowId' => 'setWorkflowId',
         'name' => 'setName',
         'teamName' => 'setTeamName',
         'description' => 'setDescription',
@@ -167,7 +167,7 @@ class Instance implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'id' => 'getId',
-        'pushbotId' => 'getPushbotId',
+        'workflowId' => 'getWorkflowId',
         'name' => 'getName',
         'teamName' => 'getTeamName',
         'description' => 'getDescription',
@@ -243,7 +243,7 @@ class Instance implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['pushbotId'] = isset($data['pushbotId']) ? $data['pushbotId'] : null;
+        $this->container['workflowId'] = isset($data['workflowId']) ? $data['workflowId'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['teamName'] = isset($data['teamName']) ? $data['teamName'] : null;
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
@@ -270,8 +270,8 @@ class Instance implements ModelInterface, ArrayAccess
         if ($this->container['id'] === null) {
             $invalidProperties[] = "'id' can't be null";
         }
-        if ($this->container['pushbotId'] === null) {
-            $invalidProperties[] = "'pushbotId' can't be null";
+        if ($this->container['workflowId'] === null) {
+            $invalidProperties[] = "'workflowId' can't be null";
         }
         if ($this->container['teamName'] === null) {
             $invalidProperties[] = "'teamName' can't be null";
@@ -316,25 +316,25 @@ class Instance implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets pushbotId
+     * Gets workflowId
      *
      * @return string
      */
-    public function getPushbotId()
+    public function getWorkflowId()
     {
-        return $this->container['pushbotId'];
+        return $this->container['workflowId'];
     }
 
     /**
-     * Sets pushbotId
+     * Sets workflowId
      *
-     * @param string $pushbotId pushbotId
+     * @param string $workflowId workflowId
      *
      * @return $this
      */
-    public function setPushbotId($pushbotId)
+    public function setWorkflowId($workflowId)
     {
-        $this->container['pushbotId'] = $pushbotId;
+        $this->container['workflowId'] = $workflowId;
 
         return $this;
     }

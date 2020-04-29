@@ -1,6 +1,6 @@
 <?php
 /**
- * PushbotImport
+ * WorkflowImportRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * PushbotImport Class Doc Comment
+ * WorkflowImportRequest Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class PushbotImport implements ModelInterface, ArrayAccess
+class WorkflowImportRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PushbotImport implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PushbotImport';
+    protected static $openAPIModelName = 'WorkflowImportRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class PushbotImport implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'name' => 'string',
-        'pushbotId' => 'string',
-        'errorMessage' => 'string'
+        'fileId' => 'string',
+        'password' => 'string'
     ];
 
     /**
@@ -69,10 +67,8 @@ class PushbotImport implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => 'uuid',
-        'name' => null,
-        'pushbotId' => 'uuid',
-        'errorMessage' => null
+        'fileId' => 'uuid',
+        'password' => null
     ];
 
     /**
@@ -102,10 +98,8 @@ class PushbotImport implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'pushbotId' => 'pushbotId',
-        'errorMessage' => 'errorMessage'
+        'fileId' => 'fileId',
+        'password' => 'password'
     ];
 
     /**
@@ -114,10 +108,8 @@ class PushbotImport implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'pushbotId' => 'setPushbotId',
-        'errorMessage' => 'setErrorMessage'
+        'fileId' => 'setFileId',
+        'password' => 'setPassword'
     ];
 
     /**
@@ -126,10 +118,8 @@ class PushbotImport implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'pushbotId' => 'getPushbotId',
-        'errorMessage' => 'getErrorMessage'
+        'fileId' => 'getFileId',
+        'password' => 'getPassword'
     ];
 
     /**
@@ -192,10 +182,8 @@ class PushbotImport implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['pushbotId'] = isset($data['pushbotId']) ? $data['pushbotId'] : null;
-        $this->container['errorMessage'] = isset($data['errorMessage']) ? $data['errorMessage'] : null;
+        $this->container['fileId'] = isset($data['fileId']) ? $data['fileId'] : null;
+        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
     }
 
     /**
@@ -223,97 +211,49 @@ class PushbotImport implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets fileId
      *
      * @return string|null
      */
-    public function getId()
+    public function getFileId()
     {
-        return $this->container['id'];
+        return $this->container['fileId'];
     }
 
     /**
-     * Sets id
+     * Sets fileId
      *
-     * @param string|null $id id
+     * @param string|null $fileId fileId
      *
      * @return $this
      */
-    public function setId($id)
+    public function setFileId($fileId)
     {
-        $this->container['id'] = $id;
+        $this->container['fileId'] = $fileId;
 
         return $this;
     }
 
     /**
-     * Gets name
+     * Gets password
      *
      * @return string|null
      */
-    public function getName()
+    public function getPassword()
     {
-        return $this->container['name'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets name
+     * Sets password
      *
-     * @param string|null $name name
+     * @param string|null $password password
      *
      * @return $this
      */
-    public function setName($name)
+    public function setPassword($password)
     {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets pushbotId
-     *
-     * @return string|null
-     */
-    public function getPushbotId()
-    {
-        return $this->container['pushbotId'];
-    }
-
-    /**
-     * Sets pushbotId
-     *
-     * @param string|null $pushbotId pushbotId
-     *
-     * @return $this
-     */
-    public function setPushbotId($pushbotId)
-    {
-        $this->container['pushbotId'] = $pushbotId;
-
-        return $this;
-    }
-
-    /**
-     * Gets errorMessage
-     *
-     * @return string|null
-     */
-    public function getErrorMessage()
-    {
-        return $this->container['errorMessage'];
-    }
-
-    /**
-     * Sets errorMessage
-     *
-     * @param string|null $errorMessage errorMessage
-     *
-     * @return $this
-     */
-    public function setErrorMessage($errorMessage)
-    {
-        $this->container['errorMessage'] = $errorMessage;
+        $this->container['password'] = $password;
 
         return $this;
     }

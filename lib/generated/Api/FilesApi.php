@@ -177,7 +177,7 @@ class FilesApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 404:
+                case 401:
                     if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -189,7 +189,7 @@ class FilesApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 401:
+                case 404:
                     if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -231,7 +231,7 @@ class FilesApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -239,7 +239,7 @@ class FilesApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 401:
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -346,7 +346,7 @@ class FilesApi
             );
         }
 
-        $resourcePath = '/api/files/{id}:download';
+        $resourcePath = '/api/files/{id}/download';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -439,7 +439,7 @@ class FilesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -449,7 +449,7 @@ class FilesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FilesPage
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FileMetadataPage
      */
     public function findFiles($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
@@ -464,7 +464,7 @@ class FilesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -474,7 +474,7 @@ class FilesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FilesPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FileMetadataPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function findFilesWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
@@ -523,20 +523,20 @@ class FilesApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\FilesPage' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\FileMetadataPage' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\FilesPage', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\FileMetadataPage', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\FilesPage';
+            $returnType = '\Catalytic\SDK\Model\FileMetadataPage';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -563,7 +563,7 @@ class FilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\FilesPage',
+                        '\Catalytic\SDK\Model\FileMetadataPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -580,7 +580,7 @@ class FilesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -608,7 +608,7 @@ class FilesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -621,7 +621,7 @@ class FilesApi
      */
     public function findFilesAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
-        $returnType = '\Catalytic\SDK\Model\FilesPage';
+        $returnType = '\Catalytic\SDK\Model\FileMetadataPage';
         $request = $this->findFilesRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
 
         return $this->client
@@ -663,7 +663,7 @@ class FilesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -863,7 +863,7 @@ class FilesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\File
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FileMetadata
      */
     public function getFile($id)
     {
@@ -880,7 +880,7 @@ class FilesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\File, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FileMetadata, HTTP status code, HTTP response headers (array of strings)
      */
     public function getFileWithHttpInfo($id)
     {
@@ -941,20 +941,20 @@ class FilesApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\File' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\FileMetadata' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\File', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\FileMetadata', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\File';
+            $returnType = '\Catalytic\SDK\Model\FileMetadata';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -989,7 +989,7 @@ class FilesApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\File',
+                        '\Catalytic\SDK\Model\FileMetadata',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1031,7 +1031,7 @@ class FilesApi
      */
     public function getFileAsyncWithHttpInfo($id)
     {
-        $returnType = '\Catalytic\SDK\Model\File';
+        $returnType = '\Catalytic\SDK\Model\FileMetadata';
         $request = $this->getFileRequest($id);
 
         return $this->client
@@ -1180,7 +1180,7 @@ class FilesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\File
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FileMetadataPage
      */
     public function uploadFiles($files = null)
     {
@@ -1197,7 +1197,7 @@ class FilesApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\File, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\FileMetadataPage, HTTP status code, HTTP response headers (array of strings)
      */
     public function uploadFilesWithHttpInfo($files = null)
     {
@@ -1245,21 +1245,21 @@ class FilesApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
-                    if ('\Catalytic\SDK\Model\File' === '\SplFileObject') {
+                case 201:
+                    if ('\Catalytic\SDK\Model\FileMetadataPage' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\File', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\FileMetadataPage', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\File';
+            $returnType = '\Catalytic\SDK\Model\FileMetadataPage';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1283,10 +1283,10 @@ class FilesApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\File',
+                        '\Catalytic\SDK\Model\FileMetadataPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1328,7 +1328,7 @@ class FilesApi
      */
     public function uploadFilesAsyncWithHttpInfo($files = null)
     {
-        $returnType = '\Catalytic\SDK\Model\File';
+        $returnType = '\Catalytic\SDK\Model\FileMetadataPage';
         $request = $this->uploadFilesRequest($files);
 
         return $this->client

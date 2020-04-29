@@ -44,7 +44,7 @@ class DataTableExportFormat
      * Possible values of this enum
      */
     const CSV = 'csv';
-    const EXCEL = 'excel';
+    const XLSX = 'xlsx';
     
     /**
      * Gets allowable values of the enum
@@ -54,7 +54,7 @@ class DataTableExportFormat
     {
         return [
             self::CSV,
-            self::EXCEL,
+            self::XLSX,
         ];
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * PushbotsApi
+ * WorkflowsApi
  * PHP version 5
  *
  * @category Class
@@ -40,14 +40,14 @@ use Catalytic\SDK\HeaderSelector;
 use Catalytic\SDK\ObjectSerializer;
 
 /**
- * PushbotsApi Class Doc Comment
+ * WorkflowsApi Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class PushbotsApi
+class WorkflowsApi
 {
     /**
      * @var ClientInterface
@@ -116,38 +116,38 @@ class PushbotsApi
     }
 
     /**
-     * Operation exportPushbot
+     * Operation exportWorkflow
      *
-     * Exports an existing Pushbot
+     * Exports an existing Workflow
      *
-     * @param  string $id The ID of the Pushbot to export (required)
-     * @param  \Catalytic\SDK\Model\PushbotExportRequest $pushbotExportRequest The Pushbot Export request (optional)
+     * @param  string $id The ID of the Workflow to export (required)
+     * @param  \Catalytic\SDK\Model\WorkflowExportRequest $workflowExportRequest The Workflow Export request (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotExport
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowExport
      */
-    public function exportPushbot($id, $pushbotExportRequest = null)
+    public function exportWorkflow($id, $workflowExportRequest = null)
     {
-        list($response) = $this->exportPushbotWithHttpInfo($id, $pushbotExportRequest);
+        list($response) = $this->exportWorkflowWithHttpInfo($id, $workflowExportRequest);
         return $response;
     }
 
     /**
-     * Operation exportPushbotWithHttpInfo
+     * Operation exportWorkflowWithHttpInfo
      *
-     * Exports an existing Pushbot
+     * Exports an existing Workflow
      *
-     * @param  string $id The ID of the Pushbot to export (required)
-     * @param  \Catalytic\SDK\Model\PushbotExportRequest $pushbotExportRequest The Pushbot Export request (optional)
+     * @param  string $id The ID of the Workflow to export (required)
+     * @param  \Catalytic\SDK\Model\WorkflowExportRequest $workflowExportRequest The Workflow Export request (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotExport, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowExport, HTTP status code, HTTP response headers (array of strings)
      */
-    public function exportPushbotWithHttpInfo($id, $pushbotExportRequest = null)
+    public function exportWorkflowWithHttpInfo($id, $workflowExportRequest = null)
     {
-        $request = $this->exportPushbotRequest($id, $pushbotExportRequest);
+        $request = $this->exportWorkflowRequest($id, $workflowExportRequest);
 
         try {
             $options = $this->createHttpClientOption();
@@ -203,21 +203,21 @@ class PushbotsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
-                    if ('\Catalytic\SDK\Model\PushbotExport' === '\SplFileObject') {
+                case 201:
+                    if ('\Catalytic\SDK\Model\WorkflowExport' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\PushbotExport', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\WorkflowExport', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\PushbotExport';
+            $returnType = '\Catalytic\SDK\Model\WorkflowExport';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -249,10 +249,10 @@ class PushbotsApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\PushbotExport',
+                        '\Catalytic\SDK\Model\WorkflowExport',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -263,19 +263,19 @@ class PushbotsApi
     }
 
     /**
-     * Operation exportPushbotAsync
+     * Operation exportWorkflowAsync
      *
-     * Exports an existing Pushbot
+     * Exports an existing Workflow
      *
-     * @param  string $id The ID of the Pushbot to export (required)
-     * @param  \Catalytic\SDK\Model\PushbotExportRequest $pushbotExportRequest The Pushbot Export request (optional)
+     * @param  string $id The ID of the Workflow to export (required)
+     * @param  \Catalytic\SDK\Model\WorkflowExportRequest $workflowExportRequest The Workflow Export request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function exportPushbotAsync($id, $pushbotExportRequest = null)
+    public function exportWorkflowAsync($id, $workflowExportRequest = null)
     {
-        return $this->exportPushbotAsyncWithHttpInfo($id, $pushbotExportRequest)
+        return $this->exportWorkflowAsyncWithHttpInfo($id, $workflowExportRequest)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -284,20 +284,20 @@ class PushbotsApi
     }
 
     /**
-     * Operation exportPushbotAsyncWithHttpInfo
+     * Operation exportWorkflowAsyncWithHttpInfo
      *
-     * Exports an existing Pushbot
+     * Exports an existing Workflow
      *
-     * @param  string $id The ID of the Pushbot to export (required)
-     * @param  \Catalytic\SDK\Model\PushbotExportRequest $pushbotExportRequest The Pushbot Export request (optional)
+     * @param  string $id The ID of the Workflow to export (required)
+     * @param  \Catalytic\SDK\Model\WorkflowExportRequest $workflowExportRequest The Workflow Export request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function exportPushbotAsyncWithHttpInfo($id, $pushbotExportRequest = null)
+    public function exportWorkflowAsyncWithHttpInfo($id, $workflowExportRequest = null)
     {
-        $returnType = '\Catalytic\SDK\Model\PushbotExport';
-        $request = $this->exportPushbotRequest($id, $pushbotExportRequest);
+        $returnType = '\Catalytic\SDK\Model\WorkflowExport';
+        $request = $this->exportWorkflowRequest($id, $workflowExportRequest);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -334,24 +334,24 @@ class PushbotsApi
     }
 
     /**
-     * Create request for operation 'exportPushbot'
+     * Create request for operation 'exportWorkflow'
      *
-     * @param  string $id The ID of the Pushbot to export (required)
-     * @param  \Catalytic\SDK\Model\PushbotExportRequest $pushbotExportRequest The Pushbot Export request (optional)
+     * @param  string $id The ID of the Workflow to export (required)
+     * @param  \Catalytic\SDK\Model\WorkflowExportRequest $workflowExportRequest The Workflow Export request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function exportPushbotRequest($id, $pushbotExportRequest = null)
+    protected function exportWorkflowRequest($id, $workflowExportRequest = null)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling exportPushbot'
+                'Missing the required parameter $id when calling exportWorkflow'
             );
         }
 
-        $resourcePath = '/api/pushbots/{id}:export';
+        $resourcePath = '/api/workflows/{id}:export';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -371,8 +371,8 @@ class PushbotsApi
 
         // body params
         $_tempBody = null;
-        if (isset($pushbotExportRequest)) {
-            $_tempBody = $pushbotExportRequest;
+        if (isset($workflowExportRequest)) {
+            $_tempBody = $workflowExportRequest;
         }
 
         if ($multipart) {
@@ -441,13 +441,13 @@ class PushbotsApi
     }
 
     /**
-     * Operation findPushbots
+     * Operation findWorkflows
      *
-     * Find Pushbots
+     * Find Workflows
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -457,22 +457,22 @@ class PushbotsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotsPage
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowsPage
      */
-    public function findPushbots($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflows($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
-        list($response) = $this->findPushbotsWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        list($response) = $this->findWorkflowsWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
         return $response;
     }
 
     /**
-     * Operation findPushbotsWithHttpInfo
+     * Operation findWorkflowsWithHttpInfo
      *
-     * Find Pushbots
+     * Find Workflows
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -482,11 +482,11 @@ class PushbotsApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotsPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowsPage, HTTP status code, HTTP response headers (array of strings)
      */
-    public function findPushbotsWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflowsWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
-        $request = $this->findPushbotsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $request = $this->findWorkflowsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
 
         try {
             $options = $this->createHttpClientOption();
@@ -531,20 +531,20 @@ class PushbotsApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\PushbotsPage' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\WorkflowsPage' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\PushbotsPage', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\WorkflowsPage', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\PushbotsPage';
+            $returnType = '\Catalytic\SDK\Model\WorkflowsPage';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -571,7 +571,7 @@ class PushbotsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\PushbotsPage',
+                        '\Catalytic\SDK\Model\WorkflowsPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -582,13 +582,13 @@ class PushbotsApi
     }
 
     /**
-     * Operation findPushbotsAsync
+     * Operation findWorkflowsAsync
      *
-     * Find Pushbots
+     * Find Workflows
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -599,9 +599,9 @@ class PushbotsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findPushbotsAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflowsAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
-        return $this->findPushbotsAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize)
+        return $this->findWorkflowsAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -610,13 +610,13 @@ class PushbotsApi
     }
 
     /**
-     * Operation findPushbotsAsyncWithHttpInfo
+     * Operation findWorkflowsAsyncWithHttpInfo
      *
-     * Find Pushbots
+     * Find Workflows
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -627,10 +627,10 @@ class PushbotsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findPushbotsAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflowsAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
-        $returnType = '\Catalytic\SDK\Model\PushbotsPage';
-        $request = $this->findPushbotsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $returnType = '\Catalytic\SDK\Model\WorkflowsPage';
+        $request = $this->findWorkflowsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -667,11 +667,11 @@ class PushbotsApi
     }
 
     /**
-     * Create request for operation 'findPushbots'
+     * Create request for operation 'findWorkflows'
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -682,10 +682,10 @@ class PushbotsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function findPushbotsRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    protected function findWorkflowsRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
     {
 
-        $resourcePath = '/api/pushbots';
+        $resourcePath = '/api/workflows';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -863,36 +863,36 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbot
+     * Operation getWorkflow
      *
-     * Gets details of a specific Pushbot process template
+     * Gets details of a specific Workflow process template
      *
-     * @param  string $id The ID of the Pushbot to get (required)
+     * @param  string $id The ID of the Workflow to get (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Pushbot
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Workflow
      */
-    public function getPushbot($id)
+    public function getWorkflow($id)
     {
-        list($response) = $this->getPushbotWithHttpInfo($id);
+        list($response) = $this->getWorkflowWithHttpInfo($id);
         return $response;
     }
 
     /**
-     * Operation getPushbotWithHttpInfo
+     * Operation getWorkflowWithHttpInfo
      *
-     * Gets details of a specific Pushbot process template
+     * Gets details of a specific Workflow process template
      *
-     * @param  string $id The ID of the Pushbot to get (required)
+     * @param  string $id The ID of the Workflow to get (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Pushbot, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Workflow, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getPushbotWithHttpInfo($id)
+    public function getWorkflowWithHttpInfo($id)
     {
-        $request = $this->getPushbotRequest($id);
+        $request = $this->getWorkflowRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -949,20 +949,20 @@ class PushbotsApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\Pushbot' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\Workflow' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\Pushbot', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\Workflow', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\Pushbot';
+            $returnType = '\Catalytic\SDK\Model\Workflow';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -997,7 +997,7 @@ class PushbotsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\Pushbot',
+                        '\Catalytic\SDK\Model\Workflow',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1008,18 +1008,18 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotAsync
+     * Operation getWorkflowAsync
      *
-     * Gets details of a specific Pushbot process template
+     * Gets details of a specific Workflow process template
      *
-     * @param  string $id The ID of the Pushbot to get (required)
+     * @param  string $id The ID of the Workflow to get (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPushbotAsync($id)
+    public function getWorkflowAsync($id)
     {
-        return $this->getPushbotAsyncWithHttpInfo($id)
+        return $this->getWorkflowAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1028,19 +1028,19 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotAsyncWithHttpInfo
+     * Operation getWorkflowAsyncWithHttpInfo
      *
-     * Gets details of a specific Pushbot process template
+     * Gets details of a specific Workflow process template
      *
-     * @param  string $id The ID of the Pushbot to get (required)
+     * @param  string $id The ID of the Workflow to get (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPushbotAsyncWithHttpInfo($id)
+    public function getWorkflowAsyncWithHttpInfo($id)
     {
-        $returnType = '\Catalytic\SDK\Model\Pushbot';
-        $request = $this->getPushbotRequest($id);
+        $returnType = '\Catalytic\SDK\Model\Workflow';
+        $request = $this->getWorkflowRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1077,23 +1077,23 @@ class PushbotsApi
     }
 
     /**
-     * Create request for operation 'getPushbot'
+     * Create request for operation 'getWorkflow'
      *
-     * @param  string $id The ID of the Pushbot to get (required)
+     * @param  string $id The ID of the Workflow to get (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getPushbotRequest($id)
+    protected function getWorkflowRequest($id)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling getPushbot'
+                'Missing the required parameter $id when calling getWorkflow'
             );
         }
 
-        $resourcePath = '/api/pushbots/{id}';
+        $resourcePath = '/api/workflows/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1180,36 +1180,36 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotExport
+     * Operation getWorkflowExport
      *
-     * Fetch an existing PushbotExport request
+     * Fetch an existing WorkflowExport request
      *
-     * @param  string $id The Pushbot Export Id (required)
+     * @param  string $id The Workflow Export Id (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotExport
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowExport
      */
-    public function getPushbotExport($id)
+    public function getWorkflowExport($id)
     {
-        list($response) = $this->getPushbotExportWithHttpInfo($id);
+        list($response) = $this->getWorkflowExportWithHttpInfo($id);
         return $response;
     }
 
     /**
-     * Operation getPushbotExportWithHttpInfo
+     * Operation getWorkflowExportWithHttpInfo
      *
-     * Fetch an existing PushbotExport request
+     * Fetch an existing WorkflowExport request
      *
-     * @param  string $id The Pushbot Export Id (required)
+     * @param  string $id The Workflow Export Id (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotExport, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowExport, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getPushbotExportWithHttpInfo($id)
+    public function getWorkflowExportWithHttpInfo($id)
     {
-        $request = $this->getPushbotExportRequest($id);
+        $request = $this->getWorkflowExportRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1266,20 +1266,20 @@ class PushbotsApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\PushbotExport' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\WorkflowExport' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\PushbotExport', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\WorkflowExport', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\PushbotExport';
+            $returnType = '\Catalytic\SDK\Model\WorkflowExport';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1314,7 +1314,7 @@ class PushbotsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\PushbotExport',
+                        '\Catalytic\SDK\Model\WorkflowExport',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1325,18 +1325,18 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotExportAsync
+     * Operation getWorkflowExportAsync
      *
-     * Fetch an existing PushbotExport request
+     * Fetch an existing WorkflowExport request
      *
-     * @param  string $id The Pushbot Export Id (required)
+     * @param  string $id The Workflow Export Id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPushbotExportAsync($id)
+    public function getWorkflowExportAsync($id)
     {
-        return $this->getPushbotExportAsyncWithHttpInfo($id)
+        return $this->getWorkflowExportAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1345,19 +1345,19 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotExportAsyncWithHttpInfo
+     * Operation getWorkflowExportAsyncWithHttpInfo
      *
-     * Fetch an existing PushbotExport request
+     * Fetch an existing WorkflowExport request
      *
-     * @param  string $id The Pushbot Export Id (required)
+     * @param  string $id The Workflow Export Id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPushbotExportAsyncWithHttpInfo($id)
+    public function getWorkflowExportAsyncWithHttpInfo($id)
     {
-        $returnType = '\Catalytic\SDK\Model\PushbotExport';
-        $request = $this->getPushbotExportRequest($id);
+        $returnType = '\Catalytic\SDK\Model\WorkflowExport';
+        $request = $this->getWorkflowExportRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1394,23 +1394,23 @@ class PushbotsApi
     }
 
     /**
-     * Create request for operation 'getPushbotExport'
+     * Create request for operation 'getWorkflowExport'
      *
-     * @param  string $id The Pushbot Export Id (required)
+     * @param  string $id The Workflow Export Id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getPushbotExportRequest($id)
+    protected function getWorkflowExportRequest($id)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling getPushbotExport'
+                'Missing the required parameter $id when calling getWorkflowExport'
             );
         }
 
-        $resourcePath = '/api/pushbots/exports/{id}';
+        $resourcePath = '/api/workflows/exports/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1497,36 +1497,36 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotImport
+     * Operation getWorkflowImport
      *
-     * Fetch an existing PushbotImport request
+     * Fetch an existing WorkflowImport request
      *
-     * @param  string $id The Pushbot Import Id (required)
+     * @param  string $id The Workflow Import Id (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotImport
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowImport
      */
-    public function getPushbotImport($id)
+    public function getWorkflowImport($id)
     {
-        list($response) = $this->getPushbotImportWithHttpInfo($id);
+        list($response) = $this->getWorkflowImportWithHttpInfo($id);
         return $response;
     }
 
     /**
-     * Operation getPushbotImportWithHttpInfo
+     * Operation getWorkflowImportWithHttpInfo
      *
-     * Fetch an existing PushbotImport request
+     * Fetch an existing WorkflowImport request
      *
-     * @param  string $id The Pushbot Import Id (required)
+     * @param  string $id The Workflow Import Id (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotImport, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowImport, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getPushbotImportWithHttpInfo($id)
+    public function getWorkflowImportWithHttpInfo($id)
     {
-        $request = $this->getPushbotImportRequest($id);
+        $request = $this->getWorkflowImportRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1583,20 +1583,20 @@ class PushbotsApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\PushbotImport' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\WorkflowImport' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\PushbotImport', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\WorkflowImport', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\PushbotImport';
+            $returnType = '\Catalytic\SDK\Model\WorkflowImport';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1631,7 +1631,7 @@ class PushbotsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\PushbotImport',
+                        '\Catalytic\SDK\Model\WorkflowImport',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1642,18 +1642,18 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotImportAsync
+     * Operation getWorkflowImportAsync
      *
-     * Fetch an existing PushbotImport request
+     * Fetch an existing WorkflowImport request
      *
-     * @param  string $id The Pushbot Import Id (required)
+     * @param  string $id The Workflow Import Id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPushbotImportAsync($id)
+    public function getWorkflowImportAsync($id)
     {
-        return $this->getPushbotImportAsyncWithHttpInfo($id)
+        return $this->getWorkflowImportAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1662,19 +1662,19 @@ class PushbotsApi
     }
 
     /**
-     * Operation getPushbotImportAsyncWithHttpInfo
+     * Operation getWorkflowImportAsyncWithHttpInfo
      *
-     * Fetch an existing PushbotImport request
+     * Fetch an existing WorkflowImport request
      *
-     * @param  string $id The Pushbot Import Id (required)
+     * @param  string $id The Workflow Import Id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getPushbotImportAsyncWithHttpInfo($id)
+    public function getWorkflowImportAsyncWithHttpInfo($id)
     {
-        $returnType = '\Catalytic\SDK\Model\PushbotImport';
-        $request = $this->getPushbotImportRequest($id);
+        $returnType = '\Catalytic\SDK\Model\WorkflowImport';
+        $request = $this->getWorkflowImportRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1711,23 +1711,23 @@ class PushbotsApi
     }
 
     /**
-     * Create request for operation 'getPushbotImport'
+     * Create request for operation 'getWorkflowImport'
      *
-     * @param  string $id The Pushbot Import Id (required)
+     * @param  string $id The Workflow Import Id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getPushbotImportRequest($id)
+    protected function getWorkflowImportRequest($id)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling getPushbotImport'
+                'Missing the required parameter $id when calling getWorkflowImport'
             );
         }
 
-        $resourcePath = '/api/pushbots/imports/{id}';
+        $resourcePath = '/api/workflows/imports/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1814,36 +1814,36 @@ class PushbotsApi
     }
 
     /**
-     * Operation importPushbot
+     * Operation importWorkflow
      *
-     * Imports a new Pushbot
+     * Imports a new Workflow
      *
-     * @param  \Catalytic\SDK\Model\PushbotImportRequest $pushbotImportRequest The Pushbot Import request (optional)
+     * @param  \Catalytic\SDK\Model\WorkflowImportRequest $workflowImportRequest The Workflow Import request (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotImport
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowImport
      */
-    public function importPushbot($pushbotImportRequest = null)
+    public function importWorkflow($workflowImportRequest = null)
     {
-        list($response) = $this->importPushbotWithHttpInfo($pushbotImportRequest);
+        list($response) = $this->importWorkflowWithHttpInfo($workflowImportRequest);
         return $response;
     }
 
     /**
-     * Operation importPushbotWithHttpInfo
+     * Operation importWorkflowWithHttpInfo
      *
-     * Imports a new Pushbot
+     * Imports a new Workflow
      *
-     * @param  \Catalytic\SDK\Model\PushbotImportRequest $pushbotImportRequest The Pushbot Import request (optional)
+     * @param  \Catalytic\SDK\Model\WorkflowImportRequest $workflowImportRequest The Workflow Import request (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\PushbotImport, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowImport, HTTP status code, HTTP response headers (array of strings)
      */
-    public function importPushbotWithHttpInfo($pushbotImportRequest = null)
+    public function importWorkflowWithHttpInfo($workflowImportRequest = null)
     {
-        $request = $this->importPushbotRequest($pushbotImportRequest);
+        $request = $this->importWorkflowRequest($workflowImportRequest);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1899,21 +1899,21 @@ class PushbotsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
-                    if ('\Catalytic\SDK\Model\PushbotImport' === '\SplFileObject') {
+                case 201:
+                    if ('\Catalytic\SDK\Model\WorkflowImport' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\PushbotImport', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\WorkflowImport', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\PushbotImport';
+            $returnType = '\Catalytic\SDK\Model\WorkflowImport';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1945,10 +1945,10 @@ class PushbotsApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\PushbotImport',
+                        '\Catalytic\SDK\Model\WorkflowImport',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1959,18 +1959,18 @@ class PushbotsApi
     }
 
     /**
-     * Operation importPushbotAsync
+     * Operation importWorkflowAsync
      *
-     * Imports a new Pushbot
+     * Imports a new Workflow
      *
-     * @param  \Catalytic\SDK\Model\PushbotImportRequest $pushbotImportRequest The Pushbot Import request (optional)
+     * @param  \Catalytic\SDK\Model\WorkflowImportRequest $workflowImportRequest The Workflow Import request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importPushbotAsync($pushbotImportRequest = null)
+    public function importWorkflowAsync($workflowImportRequest = null)
     {
-        return $this->importPushbotAsyncWithHttpInfo($pushbotImportRequest)
+        return $this->importWorkflowAsyncWithHttpInfo($workflowImportRequest)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1979,19 +1979,19 @@ class PushbotsApi
     }
 
     /**
-     * Operation importPushbotAsyncWithHttpInfo
+     * Operation importWorkflowAsyncWithHttpInfo
      *
-     * Imports a new Pushbot
+     * Imports a new Workflow
      *
-     * @param  \Catalytic\SDK\Model\PushbotImportRequest $pushbotImportRequest The Pushbot Import request (optional)
+     * @param  \Catalytic\SDK\Model\WorkflowImportRequest $workflowImportRequest The Workflow Import request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function importPushbotAsyncWithHttpInfo($pushbotImportRequest = null)
+    public function importWorkflowAsyncWithHttpInfo($workflowImportRequest = null)
     {
-        $returnType = '\Catalytic\SDK\Model\PushbotImport';
-        $request = $this->importPushbotRequest($pushbotImportRequest);
+        $returnType = '\Catalytic\SDK\Model\WorkflowImport';
+        $request = $this->importWorkflowRequest($workflowImportRequest);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2028,17 +2028,19 @@ class PushbotsApi
     }
 
     /**
-     * Create request for operation 'importPushbot'
+     * Create request for operation 'importWorkflow'
      *
-     * @param  \Catalytic\SDK\Model\PushbotImportRequest $pushbotImportRequest The Pushbot Import request (optional)
+     * @param  \Catalytic\SDK\Model\WorkflowImportRequest $workflowImportRequest The Workflow Import request (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function importPushbotRequest($pushbotImportRequest = null)
+    protected function importWorkflowRequest($workflowImportRequest = null)
     {
 
-        $resourcePath = '/api/pushbots:import';
+        print_r($workflowImportRequest);
+
+        $resourcePath = '/api/workflows:import';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -2050,8 +2052,8 @@ class PushbotsApi
 
         // body params
         $_tempBody = null;
-        if (isset($pushbotImportRequest)) {
-            $_tempBody = $pushbotImportRequest;
+        if (isset($workflowImportRequest)) {
+            $_tempBody = $workflowImportRequest;
         }
 
         if ($multipart) {

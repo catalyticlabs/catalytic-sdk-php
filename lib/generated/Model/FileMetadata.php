@@ -1,6 +1,6 @@
 <?php
 /**
- * PushbotsPage
+ * FileMetadata
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * PushbotsPage Class Doc Comment
+ * FileMetadata Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class PushbotsPage implements ModelInterface, ArrayAccess
+class FileMetadata implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class PushbotsPage implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'PushbotsPage';
+    protected static $openAPIModelName = 'FileMetadata';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,15 @@ class PushbotsPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'pushbots' => '\Catalytic\SDK\Model\Pushbot[]',
-        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
-        'nextPageToken' => 'string',
-        'count' => 'int'
+        'id' => 'string',
+        'name' => 'string',
+        'teamName' => 'string',
+        'contentType' => 'string',
+        'sizeInBytes' => 'int',
+        'displaySize' => 'string',
+        'isPublic' => 'bool',
+        'md5Hash' => 'string',
+        'referenceName' => 'string'
     ];
 
     /**
@@ -69,10 +74,15 @@ class PushbotsPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'pushbots' => null,
-        'nextPageOptions' => null,
-        'nextPageToken' => null,
-        'count' => 'int32'
+        'id' => 'uuid',
+        'name' => null,
+        'teamName' => null,
+        'contentType' => null,
+        'sizeInBytes' => 'int32',
+        'displaySize' => null,
+        'isPublic' => null,
+        'md5Hash' => null,
+        'referenceName' => null
     ];
 
     /**
@@ -102,10 +112,15 @@ class PushbotsPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'pushbots' => 'pushbots',
-        'nextPageOptions' => 'nextPageOptions',
-        'nextPageToken' => 'nextPageToken',
-        'count' => 'count'
+        'id' => 'id',
+        'name' => 'name',
+        'teamName' => 'teamName',
+        'contentType' => 'contentType',
+        'sizeInBytes' => 'sizeInBytes',
+        'displaySize' => 'displaySize',
+        'isPublic' => 'isPublic',
+        'md5Hash' => 'md5Hash',
+        'referenceName' => 'referenceName'
     ];
 
     /**
@@ -114,10 +129,15 @@ class PushbotsPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'pushbots' => 'setPushbots',
-        'nextPageOptions' => 'setNextPageOptions',
-        'nextPageToken' => 'setNextPageToken',
-        'count' => 'setCount'
+        'id' => 'setId',
+        'name' => 'setName',
+        'teamName' => 'setTeamName',
+        'contentType' => 'setContentType',
+        'sizeInBytes' => 'setSizeInBytes',
+        'displaySize' => 'setDisplaySize',
+        'isPublic' => 'setIsPublic',
+        'md5Hash' => 'setMd5Hash',
+        'referenceName' => 'setReferenceName'
     ];
 
     /**
@@ -126,10 +146,15 @@ class PushbotsPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'pushbots' => 'getPushbots',
-        'nextPageOptions' => 'getNextPageOptions',
-        'nextPageToken' => 'getNextPageToken',
-        'count' => 'getCount'
+        'id' => 'getId',
+        'name' => 'getName',
+        'teamName' => 'getTeamName',
+        'contentType' => 'getContentType',
+        'sizeInBytes' => 'getSizeInBytes',
+        'displaySize' => 'getDisplaySize',
+        'isPublic' => 'getIsPublic',
+        'md5Hash' => 'getMd5Hash',
+        'referenceName' => 'getReferenceName'
     ];
 
     /**
@@ -192,10 +217,15 @@ class PushbotsPage implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['pushbots'] = isset($data['pushbots']) ? $data['pushbots'] : null;
-        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
-        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
-        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['teamName'] = isset($data['teamName']) ? $data['teamName'] : null;
+        $this->container['contentType'] = isset($data['contentType']) ? $data['contentType'] : null;
+        $this->container['sizeInBytes'] = isset($data['sizeInBytes']) ? $data['sizeInBytes'] : null;
+        $this->container['displaySize'] = isset($data['displaySize']) ? $data['displaySize'] : null;
+        $this->container['isPublic'] = isset($data['isPublic']) ? $data['isPublic'] : null;
+        $this->container['md5Hash'] = isset($data['md5Hash']) ? $data['md5Hash'] : null;
+        $this->container['referenceName'] = isset($data['referenceName']) ? $data['referenceName'] : null;
     }
 
     /**
@@ -223,97 +253,217 @@ class PushbotsPage implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets pushbots
-     *
-     * @return \Catalytic\SDK\Model\Pushbot[]|null
-     */
-    public function getPushbots()
-    {
-        return $this->container['pushbots'];
-    }
-
-    /**
-     * Sets pushbots
-     *
-     * @param \Catalytic\SDK\Model\Pushbot[]|null $pushbots pushbots
-     *
-     * @return $this
-     */
-    public function setPushbots($pushbots)
-    {
-        $this->container['pushbots'] = $pushbots;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextPageOptions
-     *
-     * @return \Catalytic\SDK\Model\PagingOptions|null
-     */
-    public function getNextPageOptions()
-    {
-        return $this->container['nextPageOptions'];
-    }
-
-    /**
-     * Sets nextPageOptions
-     *
-     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
-     *
-     * @return $this
-     */
-    public function setNextPageOptions($nextPageOptions)
-    {
-        $this->container['nextPageOptions'] = $nextPageOptions;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextPageToken
+     * Gets id
      *
      * @return string|null
      */
-    public function getNextPageToken()
+    public function getId()
     {
-        return $this->container['nextPageToken'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets nextPageToken
+     * Sets id
      *
-     * @param string|null $nextPageToken nextPageToken
+     * @param string|null $id The unique ID of the File in Catalytic
      *
      * @return $this
      */
-    public function setNextPageToken($nextPageToken)
+    public function setId($id)
     {
-        $this->container['nextPageToken'] = $nextPageToken;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets count
+     * Gets name
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getCount()
+    public function getName()
     {
-        return $this->container['count'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets count
+     * Sets name
      *
-     * @param int|null $count count
+     * @param string|null $name The name of the File
      *
      * @return $this
      */
-    public function setCount($count)
+    public function setName($name)
     {
-        $this->container['count'] = $count;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets teamName
+     *
+     * @return string|null
+     */
+    public function getTeamName()
+    {
+        return $this->container['teamName'];
+    }
+
+    /**
+     * Sets teamName
+     *
+     * @param string|null $teamName The name of the Catalytic team with which the File is associated
+     *
+     * @return $this
+     */
+    public function setTeamName($teamName)
+    {
+        $this->container['teamName'] = $teamName;
+
+        return $this;
+    }
+
+    /**
+     * Gets contentType
+     *
+     * @return string|null
+     */
+    public function getContentType()
+    {
+        return $this->container['contentType'];
+    }
+
+    /**
+     * Sets contentType
+     *
+     * @param string|null $contentType The content-type of the File
+     *
+     * @return $this
+     */
+    public function setContentType($contentType)
+    {
+        $this->container['contentType'] = $contentType;
+
+        return $this;
+    }
+
+    /**
+     * Gets sizeInBytes
+     *
+     * @return int|null
+     */
+    public function getSizeInBytes()
+    {
+        return $this->container['sizeInBytes'];
+    }
+
+    /**
+     * Sets sizeInBytes
+     *
+     * @param int|null $sizeInBytes The size of the File, in bytes
+     *
+     * @return $this
+     */
+    public function setSizeInBytes($sizeInBytes)
+    {
+        $this->container['sizeInBytes'] = $sizeInBytes;
+
+        return $this;
+    }
+
+    /**
+     * Gets displaySize
+     *
+     * @return string|null
+     */
+    public function getDisplaySize()
+    {
+        return $this->container['displaySize'];
+    }
+
+    /**
+     * Sets displaySize
+     *
+     * @param string|null $displaySize The human-readable size of the File
+     *
+     * @return $this
+     */
+    public function setDisplaySize($displaySize)
+    {
+        $this->container['displaySize'] = $displaySize;
+
+        return $this;
+    }
+
+    /**
+     * Gets isPublic
+     *
+     * @return bool|null
+     */
+    public function getIsPublic()
+    {
+        return $this->container['isPublic'];
+    }
+
+    /**
+     * Sets isPublic
+     *
+     * @param bool|null $isPublic Boolean indicating whether the File can be downloaded by unauthenticated users
+     *
+     * @return $this
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->container['isPublic'] = $isPublic;
+
+        return $this;
+    }
+
+    /**
+     * Gets md5Hash
+     *
+     * @return string|null
+     */
+    public function getMd5Hash()
+    {
+        return $this->container['md5Hash'];
+    }
+
+    /**
+     * Sets md5Hash
+     *
+     * @param string|null $md5Hash The MD5 hash of the File
+     *
+     * @return $this
+     */
+    public function setMd5Hash($md5Hash)
+    {
+        $this->container['md5Hash'] = $md5Hash;
+
+        return $this;
+    }
+
+    /**
+     * Gets referenceName
+     *
+     * @return string|null
+     */
+    public function getReferenceName()
+    {
+        return $this->container['referenceName'];
+    }
+
+    /**
+     * Sets referenceName
+     *
+     * @param string|null $referenceName The stringified ID of the File, used for reference in a !:FilesPage
+     *
+     * @return $this
+     */
+    public function setReferenceName($referenceName)
+    {
+        $this->container['referenceName'] = $referenceName;
 
         return $this;
     }

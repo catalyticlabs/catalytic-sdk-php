@@ -25,11 +25,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Stop instance method
 - Find instance steps method
 - Set user agent with sdk version
+- Workflow import method
+- Workflow export method
+- Upload file method
 
 ### Changed
 - Moved generated code to its own folder
 - DRY'ed up search helpers
 - Renamed pushbot to workflow
+- Renamed files->uploadFile to files->upload
+- Renamed files->downloadFile to files->download
+- Renamed dataTables->downloadDataTable to dataTables->download
+- Renamed dataTables->uploadDataTable to dataTables->upload
 
 ### Removed
 - Generated model docs

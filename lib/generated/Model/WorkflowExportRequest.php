@@ -1,6 +1,6 @@
 <?php
 /**
- * StartInstanceRequest
+ * WorkflowExportRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * StartInstanceRequest Class Doc Comment
+ * WorkflowExportRequest Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class StartInstanceRequest implements ModelInterface, ArrayAccess
+class WorkflowExportRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'StartInstanceRequest';
+    protected static $openAPIModelName = 'WorkflowExportRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'workflowId' => 'string',
-        'name' => 'string',
-        'description' => 'string',
-        'inputFields' => '\Catalytic\SDK\Model\FieldUpdateRequest[]'
+        'password' => 'string'
     ];
 
     /**
@@ -70,9 +68,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'workflowId' => 'uuid',
-        'name' => null,
-        'description' => null,
-        'inputFields' => null
+        'password' => null
     ];
 
     /**
@@ -103,9 +99,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'workflowId' => 'workflowId',
-        'name' => 'name',
-        'description' => 'description',
-        'inputFields' => 'inputFields'
+        'password' => 'password'
     ];
 
     /**
@@ -115,9 +109,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'workflowId' => 'setWorkflowId',
-        'name' => 'setName',
-        'description' => 'setDescription',
-        'inputFields' => 'setInputFields'
+        'password' => 'setPassword'
     ];
 
     /**
@@ -127,9 +119,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'workflowId' => 'getWorkflowId',
-        'name' => 'getName',
-        'description' => 'getDescription',
-        'inputFields' => 'getInputFields'
+        'password' => 'getPassword'
     ];
 
     /**
@@ -193,9 +183,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['workflowId'] = isset($data['workflowId']) ? $data['workflowId'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
-        $this->container['inputFields'] = isset($data['inputFields']) ? $data['inputFields'] : null;
+        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
     }
 
     /**
@@ -247,73 +235,25 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets name
+     * Gets password
      *
      * @return string|null
      */
-    public function getName()
+    public function getPassword()
     {
-        return $this->container['name'];
+        return $this->container['password'];
     }
 
     /**
-     * Sets name
+     * Sets password
      *
-     * @param string|null $name name
+     * @param string|null $password password
      *
      * @return $this
      */
-    public function setName($name)
+    public function setPassword($password)
     {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets description
-     *
-     * @return string|null
-     */
-    public function getDescription()
-    {
-        return $this->container['description'];
-    }
-
-    /**
-     * Sets description
-     *
-     * @param string|null $description description
-     *
-     * @return $this
-     */
-    public function setDescription($description)
-    {
-        $this->container['description'] = $description;
-
-        return $this;
-    }
-
-    /**
-     * Gets inputFields
-     *
-     * @return \Catalytic\SDK\Model\FieldUpdateRequest[]|null
-     */
-    public function getInputFields()
-    {
-        return $this->container['inputFields'];
-    }
-
-    /**
-     * Sets inputFields
-     *
-     * @param \Catalytic\SDK\Model\FieldUpdateRequest[]|null $inputFields inputFields
-     *
-     * @return $this
-     */
-    public function setInputFields($inputFields)
-    {
-        $this->container['inputFields'] = $inputFields;
+        $this->container['password'] = $password;
 
         return $this;
     }

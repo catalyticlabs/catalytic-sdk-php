@@ -59,7 +59,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'id' => 'string',
         'instanceId' => 'string',
-        'pushbotId' => 'string',
+        'workflowId' => 'string',
         'name' => 'string',
         'teamName' => 'string',
         'position' => 'int',
@@ -77,7 +77,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'id' => 'uuid',
         'instanceId' => 'uuid',
-        'pushbotId' => 'uuid',
+        'workflowId' => 'uuid',
         'name' => null,
         'teamName' => null,
         'position' => 'int32',
@@ -116,7 +116,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'id' => 'id',
         'instanceId' => 'instanceId',
-        'pushbotId' => 'pushbotId',
+        'workflowId' => 'workflowId',
         'name' => 'name',
         'teamName' => 'teamName',
         'position' => 'position',
@@ -134,7 +134,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     protected static $setters = [
         'id' => 'setId',
         'instanceId' => 'setInstanceId',
-        'pushbotId' => 'setPushbotId',
+        'workflowId' => 'setWorkflowId',
         'name' => 'setName',
         'teamName' => 'setTeamName',
         'position' => 'setPosition',
@@ -152,7 +152,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     protected static $getters = [
         'id' => 'getId',
         'instanceId' => 'getInstanceId',
-        'pushbotId' => 'getPushbotId',
+        'workflowId' => 'getWorkflowId',
         'name' => 'getName',
         'teamName' => 'getTeamName',
         'position' => 'getPosition',
@@ -224,7 +224,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['instanceId'] = isset($data['instanceId']) ? $data['instanceId'] : null;
-        $this->container['pushbotId'] = isset($data['pushbotId']) ? $data['pushbotId'] : null;
+        $this->container['workflowId'] = isset($data['workflowId']) ? $data['workflowId'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['teamName'] = isset($data['teamName']) ? $data['teamName'] : null;
         $this->container['position'] = isset($data['position']) ? $data['position'] : null;
@@ -249,8 +249,8 @@ class InstanceStep implements ModelInterface, ArrayAccess
         if ($this->container['instanceId'] === null) {
             $invalidProperties[] = "'instanceId' can't be null";
         }
-        if ($this->container['pushbotId'] === null) {
-            $invalidProperties[] = "'pushbotId' can't be null";
+        if ($this->container['workflowId'] === null) {
+            $invalidProperties[] = "'workflowId' can't be null";
         }
         if ($this->container['name'] === null) {
             $invalidProperties[] = "'name' can't be null";
@@ -322,25 +322,25 @@ class InstanceStep implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets pushbotId
+     * Gets workflowId
      *
      * @return string
      */
-    public function getPushbotId()
+    public function getWorkflowId()
     {
-        return $this->container['pushbotId'];
+        return $this->container['workflowId'];
     }
 
     /**
-     * Sets pushbotId
+     * Sets workflowId
      *
-     * @param string $pushbotId pushbotId
+     * @param string $workflowId workflowId
      *
      * @return $this
      */
-    public function setPushbotId($pushbotId)
+    public function setWorkflowId($workflowId)
     {
-        $this->container['pushbotId'] = $pushbotId;
+        $this->container['workflowId'] = $workflowId;
 
         return $this;
     }

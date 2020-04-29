@@ -4,9 +4,10 @@ namespace Catalytic\SDK\Clients;
 
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\WorkflowsApi;
-use Catalytic\SDK\Entities\{Workflow, WorkflowsPage, WorkflowExport};
-use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest};
+use Catalytic\SDK\Entities\{File, Workflow, WorkflowsPage};
+use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest, WorkflowImportRequest};
 use Catalytic\SDK\Search\{Filter, SearchUtils};
+use SplFileObject;
 
 /**
  * Workflow client to be exposed to consumers
@@ -14,11 +15,13 @@ use Catalytic\SDK\Search\{Filter, SearchUtils};
 class Workflows
 {
     private WorkflowsApi $workflowsApi;
+    private Files $filesClient;
 
     public function __construct($secret)
     {
         $config = ConfigurationUtils::getConfiguration($secret);
         $this->workflowsApi = new WorkflowsApi(null, $config);
+        $this->filesClient = new Files(trim($secret));
     }
 
     /**
@@ -69,9 +72,9 @@ class Workflows
      *
      * @param string $id                    The id of the workflow to export
      * @param string $password (Optional)   The password for the workflow
-     * @return WorkflowExport                The exported workflow object
+     * @return File                         The exported workflow file object
      */
-    public function export(string $id, string $password = null) : WorkflowExport
+    public function export(string $id, string $password = null) : File
     {
         $workflowExportRequest = null;
 
@@ -83,25 +86,47 @@ class Workflows
         $internalWorkflowExport = $this->workflowsApi->exportWorkflow($id, $workflowExportRequest);
 
         // Poll another request every second until the export is ready
-        while ($internalWorkflowExport['fileId'] === null) {
-            $exportId = $internalWorkflowExport['id'];
+        while ($internalWorkflowExport->getFileId() === null) {
+            $exportId = $internalWorkflowExport->getId();
             $internalWorkflowExport = $this->workflowsApi->getWorkflowExport($exportId, $workflowExportRequest);
             sleep(1);
         }
 
-        $workflowExport = new WorkflowExport(
-            $internalWorkflowExport->getId(),
-            $internalWorkflowExport->getName(),
-            $internalWorkflowExport->getFileId(),
-            $internalWorkflowExport->getErrorMessage()
-        );
-        return $workflowExport;
+        $file = $this->filesClient->get($internalWorkflowExport->getFileId());
+        return $file;
     }
 
-    // TODO: Finish/test
-    public function import(SplFileObject $importFile, string $password)
+    /**
+     * Import a workflow
+     *
+     * @param SplFileObject $importFile             The workflow to be imported
+     * @param string        $password (Optional)    The password for the workflow
+     * @return Workflow                             The imported workflow
+     */
+    public function import(SplFileObject $importFile, string $password = null) : Workflow
     {
-        $workflowImportRequest = $this->workflowsApi->importWorkflow($)
+        // Upload the file
+        $file = $this->filesClient->upload($importFile);
+        $workflowImportBody = array('fileId' => $file->getId());
+
+        if (isset($password)) {
+            $workflowImportBody['password'] = $password;
+        }
+
+        $workflowImportRequest = new WorkflowImportRequest($workflowImportBody);
+
+        // Submit a request to import the workflow
+        $internalWorkflowImport = $this->workflowsApi->importWorkflow($workflowImportRequest);
+
+        // Poll another request every second until the import is ready
+        while ($internalWorkflowImport->getWorkflowId() === null) {
+            $importId = $internalWorkflowImport->getId();
+            $internalWorkflowImport = $this->workflowsApi->getWorkflowImport($importId, $workflowImportRequest);
+            sleep(1);
+        }
+
+        $workflow = $this->get($internalWorkflowImport->getWorkflowId());
+        return $workflow;
     }
 
     /**

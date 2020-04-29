@@ -69,14 +69,8 @@ class DataTables
      * @return SplFileObject                An object containing the dataTable info
      * @throws Exception
      */
-    public function downloadDataTable(string $id, string $format, string $directory = null) : SplFileObject
+    public function download(string $id, string $format, string $directory = null) : SplFileObject
     {
-        // TODO: This is temp until we figure out if we're going to change the REST api to use xlsx instead of excel
-        // https://github.com/catalyticlabs/CatalyticSDKAPI/issues/104
-        if ($format === 'xlsx') {
-            $format = 'excel';
-        }
-
         // By default this downloads the file to a temp dir
         $dataTableFile = $this->dataTablesApi->downloadDataTable($id, $format);
 
@@ -108,7 +102,7 @@ class DataTables
      * @param int           $sheetNumber (Optional) The sheet number of an excel file to use
      * @return DataTable                            The DataTable that was uploaded
      */
-    public function uploadDataTable(SplFileObject $dataTableFile, string $tableName = null, int $headerRow = 1, int $sheetNumber = 1) : DataTable
+    public function upload(SplFileObject $dataTableFile, string $tableName = null, int $headerRow = 1, int $sheetNumber = 1) : DataTable
     {
         $internalDataTable = $this->dataTablesApi->uploadDataTable($tableName, $headerRow, $sheetNumber, $dataTableFile);
         $dataTable = $this->createDataTable($internalDataTable);

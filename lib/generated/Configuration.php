@@ -81,7 +81,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://catalyticsdkapi.azurewebsites.net';
+    protected $host = 'https://catalyticsdkapi-31.azurewebsites.net';
 
     /**
      * User agent of the HTTP request, set to "OpenAPI-Generator/{version}/PHP" by default
@@ -436,7 +436,7 @@ class Configuration
     {
         return array(
           array(
-            "url" => "https://catalyticsdkapi.azurewebsites.net",
+            "url" => "https://catalyticsdkapi-31.azurewebsites.net",
             "description" => "Catalytic SDK API",
           )
         );

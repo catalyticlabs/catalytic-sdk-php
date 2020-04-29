@@ -122,7 +122,7 @@ class InstancesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -147,7 +147,7 @@ class InstancesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -263,7 +263,7 @@ class InstancesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -291,7 +291,7 @@ class InstancesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -346,7 +346,7 @@ class InstancesApi
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
-     * @param  string $processId Process ID (aka Pushbot ID) to search for (optional)
+     * @param  string $processId Process ID (aka Pushbot ID or Workflow ID) to search for (optional)
      * @param  string $runId RunID (aka Instance ID) to search for (optional)
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
@@ -928,7 +928,7 @@ class InstancesApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
+                case 201:
                     if ('\Catalytic\SDK\Model\Instance' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
@@ -966,7 +966,7 @@ class InstancesApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
+                case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\Instance',
