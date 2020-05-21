@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * CredentialsPage Class Doc Comment
  *
  * @category Class
+ * @description Represents a page of Credentials
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class CredentialsPage implements ModelInterface, ArrayAccess
     /**
      * Sets credentials
      *
-     * @param \Catalytic\SDK\Model\Credentials[]|null $credentials credentials
+     * @param \Catalytic\SDK\Model\Credentials[]|null $credentials The Collection of Credentials in the page
      *
      * @return $this
      */

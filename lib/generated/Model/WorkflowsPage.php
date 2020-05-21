@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * WorkflowsPage Class Doc Comment
  *
  * @category Class
+ * @description A page of Workflows returned from a FindAsync request
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class WorkflowsPage implements ModelInterface, ArrayAccess
     /**
      * Sets workflows
      *
-     * @param \Catalytic\SDK\Model\Workflow[]|null $workflows workflows
+     * @param \Catalytic\SDK\Model\Workflow[]|null $workflows The List of Workflows
      *
      * @return $this
      */

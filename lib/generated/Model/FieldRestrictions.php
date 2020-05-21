@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * FieldRestrictions Class Doc Comment
  *
  * @category Class
+ * @description Contains validation rules for field values
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -223,7 +224,7 @@ class FieldRestrictions implements ModelInterface, ArrayAccess
     /**
      * Sets choices
      *
-     * @param string[]|null $choices choices
+     * @param string[]|null $choices A set of valid choices for this field. If set, FieldType must be  SingleChoice or MultipleChoice
      *
      * @return $this
      */
@@ -247,7 +248,7 @@ class FieldRestrictions implements ModelInterface, ArrayAccess
     /**
      * Sets valueRequired
      *
-     * @param bool|null $valueRequired valueRequired
+     * @param bool|null $valueRequired Indicates whether null or empty values will be rejected
      *
      * @return $this
      */

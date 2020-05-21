@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * InstancesPage Class Doc Comment
  *
  * @category Class
+ * @description A page of Instances returned from a FindAync request
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class InstancesPage implements ModelInterface, ArrayAccess
     /**
      * Sets instances
      *
-     * @param \Catalytic\SDK\Model\Instance[]|null $instances instances
+     * @param \Catalytic\SDK\Model\Instance[]|null $instances The list of Instances
      *
      * @return $this
      */

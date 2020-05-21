@@ -2038,8 +2038,6 @@ class WorkflowsApi
     protected function importWorkflowRequest($workflowImportRequest = null)
     {
 
-        print_r($workflowImportRequest);
-
         $resourcePath = '/api/workflows:import';
         $formParams = [];
         $queryParams = [];

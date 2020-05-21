@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * WorkflowImport Class Doc Comment
  *
  * @category Class
+ * @description Represents a Workflow Import
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class WorkflowImport implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id The Id of the Workflow Import
      *
      * @return $this
      */
@@ -283,7 +284,7 @@ class WorkflowImport implements ModelInterface, ArrayAccess
     /**
      * Sets workflowId
      *
-     * @param string|null $workflowId workflowId
+     * @param string|null $workflowId The Id of the Workflow created by a successful Import
      *
      * @return $this
      */
@@ -307,7 +308,7 @@ class WorkflowImport implements ModelInterface, ArrayAccess
     /**
      * Sets errorMessage
      *
-     * @param string|null $errorMessage errorMessage
+     * @param string|null $errorMessage The error message produced by a failed Import
      *
      * @return $this
      */

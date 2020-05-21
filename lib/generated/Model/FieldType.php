@@ -34,6 +34,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * FieldType Class Doc Comment
  *
  * @category Class
+ * @description Represents the types of data that may be stored in Fields.
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

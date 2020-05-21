@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * CredentialsCreationWithEmailAndPasswordRequest Class Doc Comment
  *
  * @category Class
+ * @description Represents a request to create and approve new Credentials for authentication into a Catalytic team  with passed username and password
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -244,7 +245,7 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
     /**
      * Sets email
      *
-     * @param string $email email
+     * @param string $email Optional email address of the Catalytic user for whom the Credentials should be created
      *
      * @return $this
      */
@@ -268,7 +269,7 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
     /**
      * Sets password
      *
-     * @param string $password password
+     * @param string $password Optional password of the Catalytic user for whom the Credentials should be created
      *
      * @return $this
      */
@@ -292,7 +293,7 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
     /**
      * Sets domain
      *
-     * @param string $domain domain
+     * @param string $domain Catalytic team domain to authenticate in to (ex: \"myteam.pushbot.com\")
      *
      * @return $this
      */
@@ -316,7 +317,7 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name Optional Name to assign to Credentials; visible in Catalytic UI
      *
      * @return $this
      */

@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * UsersPage Class Doc Comment
  *
  * @category Class
+ * @description A page of Users returned from a FindAsync request
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class UsersPage implements ModelInterface, ArrayAccess
     /**
      * Sets users
      *
-     * @param \Catalytic\SDK\Model\User[]|null $users users
+     * @param \Catalytic\SDK\Model\User[]|null $users The List of Users
      *
      * @return $this
      */

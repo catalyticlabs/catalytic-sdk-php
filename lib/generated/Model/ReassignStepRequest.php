@@ -223,7 +223,7 @@ class ReassignStepRequest implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id ID of the step to reassign
      *
      * @return $this
      */
@@ -247,7 +247,7 @@ class ReassignStepRequest implements ModelInterface, ArrayAccess
     /**
      * Sets assignTo
      *
-     * @param string|null $assignTo assignTo
+     * @param string|null $assignTo The email address of the user to reassign the task to
      *
      * @return $this
      */

@@ -4,11 +4,13 @@ namespace Catalytic\SDK\Clients;
 
 use Exception;
 use SplFileObject;
+use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Api\DataTablesApi;
 use Catalytic\SDK\ConfigurationUtils;
-use Catalytic\SDK\Entities\DataTable;
+use Catalytic\SDK\Entities\{DataTable, DataTablesPage};
 use Catalytic\SDK\Search\{Filter, SearchUtils};
-use Catalytic\SDK\Model\{DataTable as InternalDataTable, DataTablesPage};
+use Catalytic\SDK\Exceptions\{InternalErrorException, DataTableNotFoundException, UnauthorizedException};
+use Catalytic\SDK\Model\DataTable as InternalDataTable;
 
 /**
  * DataTables client
@@ -24,39 +26,62 @@ class DataTables
     }
 
     /**
-     * Get a datatable by id
+     * Get a Datatable by id
      *
-     * @param string $id    The id of the datatable to get
-     * @return DataTable    The Datatable object
+     * @param string $id                    The id of the Datatable to get
+     * @return DataTable                    The Datatable object
+     * @throws DataTableNotFoundException   If DataTable not found
+     * @throws InternalErrorException       If any errors fetching DataTable
+     * @throws UnauthorizedException        If unauthorized
      */
     public function get(string $id) : DataTable
     {
-        $internalDataTable = $this->dataTablesApi->getDataTable($id);
+        try {
+            $internalDataTable = $this->dataTablesApi->getDataTable($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new DataTableNotFoundException("DataTable with id $id not found", $e);
+            }
+            throw new InternalErrorException("Unable to get DataTable", $e);
+        }
         $dataTable = $this->createDataTable($internalDataTable);
         return $dataTable;
     }
 
     /**
-     * Find dataTables by a variety of filters
+     * Find DataTables by a variety of filters
      *
-     * @param string $filter    The filter to search dataTables by
-     * @return DataTablesPage   A DataTablesPage which contains the results
+     * @param string $filter            The filter to search DataTables by
+     * @return DataTablesPage           A DataTablesPage which contains the results
+     * @throws InternalErrorException   If any errors finding DataTables
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null) : DataTablesPage
+    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): DataTablesPage
     {
         $text = null;
+        $dataTables = [];
 
         if ($filter !== null) {
             $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
         }
 
-        $internalDataTables = $this->dataTablesApi->findDataTables($text, null, null, null, null, null, null, $pageToken, $pageSize);
-        $dataTables = [];
+        try {
+            $internalDataTables = $this->dataTablesApi->findDataTables($text, null, null, null, null, null, null, $pageToken, $pageSize);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to find DataTables");
+        }
+
         foreach ($internalDataTables->getDataTables() as $internalDataTable) {
             $dataTable = $this->createDataTable($internalDataTable);
             array_push($dataTables, $dataTable);
         }
-        $dataTablesPage = new DataTablesPage($dataTables, $internalDataTables->getCount(), $internalDataTable->getNextPageToken());
+
+        $dataTablesPage = new DataTablesPage($dataTables, $internalDataTables->getCount(), $internalDataTables->getNextPageToken());
         return $dataTablesPage;
     }
 
@@ -67,12 +92,23 @@ class DataTables
      * @param string $format                The format of the data table to download
      * @param string $directory (Optional)  The dir to download the dataTable to
      * @return SplFileObject                An object containing the dataTable info
-     * @throws Exception
+     * @throws DataTableNotFoundException   If DataTable not found
+     * @throws InternalErrorException       If errors saving to $directory
+     * @throws UnauthorizedException        If unauthorized
      */
     public function download(string $id, string $format, string $directory = null) : SplFileObject
     {
         // By default this downloads the file to a temp dir
-        $dataTableFile = $this->dataTablesApi->downloadDataTable($id, $format);
+        try {
+            $dataTableFile = $this->dataTablesApi->downloadDataTable($id, $format);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new DataTableNotFoundException("DataTable with id $id not found", $e);
+            }
+            throw new InternalErrorException("Unable to download dataTable", $e);
+        }
 
         // If no directory was passed in, return the downloaded data table
         // as a SplFileInfoObject
@@ -86,6 +122,7 @@ class DataTables
         $renamed = rename($dataTableFile->getRealPath(), $newPath);
 
         if (!$renamed) {
+            // TODO: This should be some other more specific exception
             throw new Exception('Failed to download data table to ' . $directory);
         }
 
@@ -101,10 +138,19 @@ class DataTables
      * @param int           $headerRow (Optional)   The header row
      * @param int           $sheetNumber (Optional) The sheet number of an excel file to use
      * @return DataTable                            The DataTable that was uploaded
+     * @throws InternalErrorException               If any errors uploading the DataTable
+     * @throws UnauthorizedException                If unauthorized
      */
-    public function upload(SplFileObject $dataTableFile, string $tableName = null, int $headerRow = 1, int $sheetNumber = 1) : DataTable
+    public function upload(SplFileObject $dataTableFile, string $tableName = null, int $headerRow = 1, int $sheetNumber = 1): DataTable
     {
-        $internalDataTable = $this->dataTablesApi->uploadDataTable($tableName, $headerRow, $sheetNumber, $dataTableFile);
+        try {
+            $internalDataTable = $this->dataTablesApi->uploadDataTable($tableName, $headerRow, $sheetNumber, $dataTableFile);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to upload DataTable", $e);
+        }
         $dataTable = $this->createDataTable($internalDataTable);
         return $dataTable;
     }
@@ -116,11 +162,23 @@ class DataTables
      * @param SplFileObject $dataTableFile          The data table to replace with
      * @param int           $headerRow (Optional)   The header row
      * @param int           $sheetNumber (Optional) The sheet number of an excel file to use
-     * @return DataTable
+     * @return DataTable                            The new DataTable
+     * @throws DataTableNotFoundException           If DataTable is not found
+     * @throws InternalErrorException               If any errors replacing DataTable
+     * @throws UnauthorizedException                If unauthorized
      */
-    public function replaceWithDataTable(string $id, SplFileObject $dataTableFile, int $headerRow = 1, int $sheetNumber = 1) : DataTable
+    public function replace(string $id, SplFileObject $dataTableFile, int $headerRow = 1, int $sheetNumber = 1): DataTable
     {
-        $internalDataTable = $this->dataTablesApi->replaceDataTable($id, $headerRow, $sheetNumber, $dataTableFile);
+        try {
+            $internalDataTable = $this->dataTablesApi->replaceDataTable($id, $headerRow, $sheetNumber, $dataTableFile);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new DataTableNotFoundException("DataTable with id $id not found");
+            }
+            throw new InternalErrorException("Unable to replace DataTable");
+        }
         $dataTable = $this->createDataTable($internalDataTable);
         return $dataTable;
     }

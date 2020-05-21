@@ -34,6 +34,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * DataTableType Class Doc Comment
  *
  * @category Class
+ * @description The type of data table
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

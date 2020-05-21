@@ -235,7 +235,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
     /**
      * Sets files
      *
-     * @param \Catalytic\SDK\Model\FileMetadata[]|null $files files
+     * @param \Catalytic\SDK\Model\FileMetadata[]|null $files A Collection of items with Dictionaries keyed by both ID and Name
      *
      * @return $this
      */

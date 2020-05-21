@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * DataTablesPage Class Doc Comment
  *
  * @category Class
+ * @description A page of DataTables returned from a FindAync request
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class DataTablesPage implements ModelInterface, ArrayAccess
     /**
      * Sets dataTables
      *
-     * @param \Catalytic\SDK\Model\DataTable[]|null $dataTables dataTables
+     * @param \Catalytic\SDK\Model\DataTable[]|null $dataTables The list of DataTables
      *
      * @return $this
      */

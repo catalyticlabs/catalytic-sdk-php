@@ -3,10 +3,12 @@
 namespace Catalytic\SDK\Clients;
 
 use Catalytic\SDK\Api\UsersApi;
+use Catalytic\SDK\ApiException;
 use Catalytic\SDK\ConfigurationUtils;
-use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Entities\{User, UsersPage};
+use Catalytic\SDK\Exceptions\{UserNotFoundException, InternalErrorException, UnauthorizedException};
 use Catalytic\SDK\Model\User as InternalUser;
+use Catalytic\SDK\Search\{Filter, SearchUtils};
 
 /**
  * User client to be exposed to consumers
@@ -22,36 +24,59 @@ class Users
     }
 
     /**
-     * Get a user by either id, email, or username
+     * Get a User by either id, email, or username
      *
-     * @param string $identifier    The id, email, or username of the user to get
-     * @return User                 The User object
+     * @param string $identifier        The id, email, or username of the User to get
+     * @return User                     The User object
+     * @throws UserNotFoundException    If User is not found
+     * @throws InternalErrorException   If any errors fetching User
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function get(string $identifier) : User
+    public function get(string $identifier): User
     {
-        $internalUser = $this->usersApi->getUser($identifier);
+        try {
+            $internalUser = $this->usersApi->getUser($identifier);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new UserNotFoundException("User with id, email, or username $identifier not found", $e);
+            }
+            throw new InternalErrorException("Unable to get user", $e);
+        }
+
         $user = $this->createUser($internalUser);
         return $user;
     }
 
     /**
-     * Find users by a variety of filters
+     * Find Users by a variety of filters
      *
-     * @param string $filter    The filter to search users by
-     * @param string $pageToken The token of the page to fetch
-     * @param int    $pageSize  The number of users per page to fetch
-     * @param UsersPage         A UsersPage which contains the results
+     * @param string $filter            The filter to search users by
+     * @param string $pageToken         The token of the page to fetch
+     * @param int    $pageSize          The number of users per page to fetch
+     * @param UsersPage                 A UsersPage which contains the results
+     * @throws InternalErrorException   If any errors finding Users
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null) : UsersPage
+    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): UsersPage
     {
         $text = null;
+        $users = [];
 
         if ($filter !== null) {
             $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
         }
 
-        $internalUsers = $this->usersApi->findUsers($text, null, null, null, null, null, null, $pageToken, $pageSize);
-        $users = [];
+        try {
+            $internalUsers = $this->usersApi->findUsers($text, null, null, null, null, null, null, $pageToken, $pageSize);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to find users", $e);
+        }
+
         foreach ($internalUsers->getUsers() as $internalUser) {
             $user = $this->createUser($internalUser);
             array_push($users, $user);

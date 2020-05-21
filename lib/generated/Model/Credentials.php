@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * Credentials Class Doc Comment
  *
  * @category Class
+ * @description A set of Credentials used for authentication via the SDK
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -265,7 +266,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id The public Id of the Credentials
      *
      * @return $this
      */
@@ -289,7 +290,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets domain
      *
-     * @param string $domain domain
+     * @param string $domain The Domain of the Catalytic team with which these Credentials are associated
      *
      * @return $this
      */
@@ -313,7 +314,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name The name associated with the Credentials
      *
      * @return $this
      */
@@ -361,7 +362,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param string|null $token token
+     * @param string|null $token The serialized Credentials Token
      *
      * @return $this
      */
@@ -385,7 +386,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets secret
      *
-     * @param string|null $secret secret
+     * @param string|null $secret The confidential Secret of the Credentials
      *
      * @return $this
      */
@@ -409,7 +410,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param string|null $environment environment
+     * @param string|null $environment The environment of the Catalytic team associated with the Credentials
      *
      * @return $this
      */
@@ -433,7 +434,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets owner
      *
-     * @param string|null $owner owner
+     * @param string|null $owner The email address of the user who these Credentials belong to
      *
      * @return $this
      */

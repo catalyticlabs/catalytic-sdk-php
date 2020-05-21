@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * WorkflowImportRequest Class Doc Comment
  *
  * @category Class
+ * @description A request to import a Workflow from a .catalytic Workflow Export file
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -223,7 +224,7 @@ class WorkflowImportRequest implements ModelInterface, ArrayAccess
     /**
      * Sets fileId
      *
-     * @param string|null $fileId fileId
+     * @param string|null $fileId The FileID of the uploaded .catalytic Workflow Export file
      *
      * @return $this
      */
@@ -247,7 +248,7 @@ class WorkflowImportRequest implements ModelInterface, ArrayAccess
     /**
      * Sets password
      *
-     * @param string|null $password password
+     * @param string|null $password The optional password used to secure the .catalytic Workflow Export file
      *
      * @return $this
      */

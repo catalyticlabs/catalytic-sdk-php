@@ -2,12 +2,14 @@
 
 namespace Catalytic\SDK\Clients;
 
-use Catalytic\SDK\ConfigurationUtils;
+use SplFileObject;
+use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Api\WorkflowsApi;
+use Catalytic\SDK\ConfigurationUtils;
+use Catalytic\SDK\Search\{Filter, SearchUtils};
+use Catalytic\SDK\Exceptions\{InternalErrorException, WorkflowNotFoundException, UnauthorizedException};
 use Catalytic\SDK\Entities\{File, Workflow, WorkflowsPage};
 use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest, WorkflowImportRequest};
-use Catalytic\SDK\Search\{Filter, SearchUtils};
-use SplFileObject;
 
 /**
  * Workflow client to be exposed to consumers
@@ -25,31 +27,46 @@ class Workflows
     }
 
     /**
-     * Get a workflow by id
+     * Get a Workflow by id
      *
-     * @param string $id    The id of the workflow to get
-     * @return Workflow      The Workflow object
+     * @param string $id                    The id of the workflow to get
+     * @return Workflow                     The Workflow object
+     * @throws WorkflowNotFoundException    If Workflow not found
+     * @throws InternalErrorException       If any errors fetching Workflow
+     * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id) : Workflow
+    public function get(string $id): Workflow
     {
-        $internalWorkflow = $this->workflowsApi->getWorkflow($id);
+        try {
+            $internalWorkflow = $this->workflowsApi->getWorkflow($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new WorkflowNotFoundException("Workflow with id $id not found", $e);
+            }
+            throw new InternalErrorException("Unable to get Workflow", $e);
+        }
         $workflow = $this->createWorkflow($internalWorkflow);
         return $workflow;
     }
 
     /**
-     * Find workflows by a variety of filters
+     * Find Workflows by a variety of filters
      *
-     * @param Filter $filter    The filter criteria to search workflows by
-     * @param string $pageToken The token of the page to fetch
-     * @param int    $pageSize  The number of workflows per page to fetch
-     * @return WorkflowsPage     A WorkflowsPage which contains the reults
+     * @param Filter $filter            The filter criteria to search Workflows by
+     * @param string $pageToken         The token of the page to fetch
+     * @param int    $pageSize          The number of Workflows per page to fetch
+     * @return WorkflowsPage            A WorkflowsPage which contains the reults
+     * @throws InternalErrorException   If any errors finding Workflows
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null) : WorkflowsPage
+    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): WorkflowsPage
     {
         $text = null;
         $owner = null;
         $category = null;
+        $workflows = [];
 
         if ($filter !== null) {
             $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
@@ -57,8 +74,15 @@ class Workflows
             $category = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'category');
         }
 
-        $internalWorkflows = $this->workflowsApi->findWorkflows($text, null, null, null, $owner, $category, null, $pageToken, $pageSize);
-        $workflows = [];
+        try {
+            $internalWorkflows = $this->workflowsApi->findWorkflows($text, null, null, null, $owner, $category, null, $pageToken, $pageSize);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException();
+            }
+            throw new InternalErrorException("Unable to find Workflows", $e);
+        }
+
         foreach ($internalWorkflows->getWorkflows() as $internalWorkflow) {
             $workflow = $this->createWorkflow($internalWorkflow);
             array_push($workflows, $workflow);
@@ -68,13 +92,16 @@ class Workflows
     }
 
     /**
-     * Export a workflow by id
+     * Export a Workflow by id
      *
-     * @param string $id                    The id of the workflow to export
-     * @param string $password (Optional)   The password for the workflow
-     * @return File                         The exported workflow file object
+     * @param string $id                    The id of the Workflow to export
+     * @param string $password (Optional)   The password for the Workflow
+     * @return File                         The exported Workflow file object
+     * @throws WorkflowNotFoundException    If Workflow is not found
+     * @throws InternalErrorException       If any errors exporting Workflow
+     * @throws UnauthorizedException        If unauthorized
      */
-    public function export(string $id, string $password = null) : File
+    public function export(string $id, string $password = null): File
     {
         $workflowExportRequest = null;
 
@@ -83,12 +110,25 @@ class Workflows
         }
 
         // Submit a request to export a workflow
-        $internalWorkflowExport = $this->workflowsApi->exportWorkflow($id, $workflowExportRequest);
+        try {
+            $internalWorkflowExport = $this->workflowsApi->exportWorkflow($id, $workflowExportRequest);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new WorkflowNotFoundException("Workflow with id $id not found", $e);
+            }
+            throw new InternalErrorException("Unable to export workflow with id $id", $e);
+        }
 
         // Poll another request every second until the export is ready
         while ($internalWorkflowExport->getFileId() === null) {
             $exportId = $internalWorkflowExport->getId();
-            $internalWorkflowExport = $this->workflowsApi->getWorkflowExport($exportId, $workflowExportRequest);
+            try {
+                $internalWorkflowExport = $this->workflowsApi->getWorkflowExport($exportId, $workflowExportRequest);
+            } catch (ApiException $e) {
+                throw new InternalErrorException("Unable to export workflow with id $id", $e);
+            }
             sleep(1);
         }
 
@@ -97,13 +137,15 @@ class Workflows
     }
 
     /**
-     * Import a workflow
+     * Import a Workflow
      *
      * @param SplFileObject $importFile             The workflow to be imported
      * @param string        $password (Optional)    The password for the workflow
      * @return Workflow                             The imported workflow
+     * @throws InternalErrorException               If any errors importing Workflow
+     * @throws UnauthorizedException                If unauthorized
      */
-    public function import(SplFileObject $importFile, string $password = null) : Workflow
+    public function import(SplFileObject $importFile, string $password = null): Workflow
     {
         // Upload the file
         $file = $this->filesClient->upload($importFile);
@@ -116,12 +158,23 @@ class Workflows
         $workflowImportRequest = new WorkflowImportRequest($workflowImportBody);
 
         // Submit a request to import the workflow
-        $internalWorkflowImport = $this->workflowsApi->importWorkflow($workflowImportRequest);
+        try {
+            $internalWorkflowImport = $this->workflowsApi->importWorkflow($workflowImportRequest);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to import Workflow", $e);
+        }
 
         // Poll another request every second until the import is ready
         while ($internalWorkflowImport->getWorkflowId() === null) {
             $importId = $internalWorkflowImport->getId();
-            $internalWorkflowImport = $this->workflowsApi->getWorkflowImport($importId, $workflowImportRequest);
+            try {
+                $internalWorkflowImport = $this->workflowsApi->getWorkflowImport($importId, $workflowImportRequest);
+            } catch (ApiException $e) {
+                throw new InternalErrorException("Unable to import Workflow", $e);
+            }
             sleep(1);
         }
 

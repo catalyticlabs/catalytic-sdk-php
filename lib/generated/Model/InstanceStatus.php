@@ -34,6 +34,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * InstanceStatus Class Doc Comment
  *
  * @category Class
+ * @description Represents the status of an instance
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

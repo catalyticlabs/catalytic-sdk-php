@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * InstanceStep Class Doc Comment
  *
  * @category Class
+ * @description Represents a single Step of an Instance
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -286,7 +287,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id Unique ID of this Task
      *
      * @return $this
      */
@@ -310,7 +311,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets instanceId
      *
-     * @param string $instanceId instanceId
+     * @param string $instanceId Unique ID of this Instance to which this Step belongs
      *
      * @return $this
      */
@@ -334,7 +335,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets workflowId
      *
-     * @param string $workflowId workflowId
+     * @param string $workflowId Unique ID of the Workflow to which this Step belongs
      *
      * @return $this
      */
@@ -358,7 +359,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name name
+     * @param string $name Display name of this Task
      *
      * @return $this
      */
@@ -382,7 +383,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets teamName
      *
-     * @param string $teamName teamName
+     * @param string $teamName The name of the Catalytic team in which this Task exists
      *
      * @return $this
      */
@@ -406,7 +407,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets position
      *
-     * @param int|null $position position
+     * @param int|null $position The position of this Task amongst the other Tasks in the Instance
      *
      * @return $this
      */
@@ -430,7 +431,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A description or instructions of the Task
      *
      * @return $this
      */
@@ -478,7 +479,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets assignedTo
      *
-     * @param string|null $assignedTo assignedTo
+     * @param string|null $assignedTo The email of the user (if any) that this InstanceStep is assigned to
      *
      * @return $this
      */
@@ -502,7 +503,7 @@ class InstanceStep implements ModelInterface, ArrayAccess
     /**
      * Sets outputFields
      *
-     * @param \Catalytic\SDK\Model\Field[]|null $outputFields outputFields
+     * @param \Catalytic\SDK\Model\Field[]|null $outputFields A collection of the required and optional output fields  that can be set by this InstanceStep when completing it.
      *
      * @return $this
      */

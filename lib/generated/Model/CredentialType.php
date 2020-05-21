@@ -34,6 +34,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * CredentialType Class Doc Comment
  *
  * @category Class
+ * @description Represents the type of the entity associated with the Credentials
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

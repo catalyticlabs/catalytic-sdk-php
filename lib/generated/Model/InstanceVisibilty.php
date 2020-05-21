@@ -34,6 +34,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * InstanceVisibilty Class Doc Comment
  *
  * @category Class
+ * @description Represents whether or not an instance can be viewed by any  team member, or just specific team members
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

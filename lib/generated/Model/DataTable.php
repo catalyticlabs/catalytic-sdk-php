@@ -304,7 +304,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id The unique ID of the Data Table
      *
      * @return $this
      */
@@ -328,7 +328,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets dataTableId
      *
-     * @param string|null $dataTableId dataTableId
+     * @param string|null $dataTableId Alias for `Id`
      *
      * @return $this
      */
@@ -352,7 +352,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets referenceName
      *
-     * @param string|null $referenceName referenceName
+     * @param string|null $referenceName Gets a unique reference name for this Data Table
      *
      * @return $this
      */
@@ -376,7 +376,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name name
+     * @param string $name The descriptive name of the Data Table
      *
      * @return $this
      */
@@ -400,7 +400,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets teamName
      *
-     * @param string $teamName teamName
+     * @param string $teamName The name of the team in which the Data Table is defined
      *
      * @return $this
      */
@@ -424,7 +424,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A description of what kind of data is stored in the Table
      *
      * @return $this
      */
@@ -448,7 +448,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets columns
      *
-     * @param \Catalytic\SDK\Model\DataTableColumn[]|null $columns columns
+     * @param \Catalytic\SDK\Model\DataTableColumn[]|null $columns The ordered names of the columns in this Data Table
      *
      * @return $this
      */
@@ -472,7 +472,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets isArchived
      *
-     * @param bool|null $isArchived isArchived
+     * @param bool|null $isArchived Whether or not this table is archived and excluded from default searches
      *
      * @return $this
      */
@@ -544,7 +544,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets visibleToUsers
      *
-     * @param string[]|null $visibleToUsers visibleToUsers
+     * @param string[]|null $visibleToUsers The users who can find and modify this Data Table
      *
      * @return $this
      */
@@ -568,7 +568,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets rowLimit
      *
-     * @param int|null $rowLimit rowLimit
+     * @param int|null $rowLimit The maximum number of rows in this Data Table
      *
      * @return $this
      */
@@ -592,7 +592,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets columnLimit
      *
-     * @param int|null $columnLimit columnLimit
+     * @param int|null $columnLimit The maximum number of columns in this Data Table
      *
      * @return $this
      */
@@ -616,7 +616,7 @@ class DataTable implements ModelInterface, ArrayAccess
     /**
      * Sets cellLimit
      *
-     * @param int|null $cellLimit cellLimit
+     * @param int|null $cellLimit The maximum number of cells in this Data Table
      *
      * @return $this
      */

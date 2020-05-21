@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * FieldUpdateRequest Class Doc Comment
  *
  * @category Class
+ * @description Request to update the value of a field
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -229,7 +230,7 @@ class FieldUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name The name of the field
      *
      * @return $this
      */
@@ -253,7 +254,7 @@ class FieldUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets referenceName
      *
-     * @param string|null $referenceName referenceName
+     * @param string|null $referenceName The reference name of the field
      *
      * @return $this
      */
@@ -277,7 +278,7 @@ class FieldUpdateRequest implements ModelInterface, ArrayAccess
     /**
      * Sets value
      *
-     * @param string|null $value value
+     * @param string|null $value The string-serialized value of the field
      *
      * @return $this
      */

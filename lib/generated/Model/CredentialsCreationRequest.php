@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * CredentialsCreationRequest Class Doc Comment
  *
  * @category Class
+ * @description Represents a request to generate new Credentials for authentication into a Catalytic team
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -226,7 +227,7 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Sets domain
      *
-     * @param string $domain domain
+     * @param string $domain Catalytic team domain to authenticate in to (ex: \"myteam.pushbot.com\")
      *
      * @return $this
      */
@@ -250,7 +251,7 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name Optional Name to assign to Credentials; visible in Catalytic UI
      *
      * @return $this
      */

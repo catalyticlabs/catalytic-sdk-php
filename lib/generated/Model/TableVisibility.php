@@ -34,6 +34,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * TableVisibility Class Doc Comment
  *
  * @category Class
+ * @description Enum of possible Table Visibility values
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

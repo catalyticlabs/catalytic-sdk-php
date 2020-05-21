@@ -235,7 +235,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     /**
      * Sets workflowId
      *
-     * @param string|null $workflowId workflowId
+     * @param string|null $workflowId ID of the Workflow to start
      *
      * @return $this
      */
@@ -259,7 +259,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name Optional name for the instance
      *
      * @return $this
      */
@@ -283,7 +283,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description Optional description for the instance
      *
      * @return $this
      */
@@ -307,7 +307,7 @@ class StartInstanceRequest implements ModelInterface, ArrayAccess
     /**
      * Sets inputFields
      *
-     * @param \Catalytic\SDK\Model\FieldUpdateRequest[]|null $inputFields inputFields
+     * @param \Catalytic\SDK\Model\FieldUpdateRequest[]|null $inputFields A collection of the required and optional input fields  that can be passed to this Workflow when starting it.
      *
      * @return $this
      */

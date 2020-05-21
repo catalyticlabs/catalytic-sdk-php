@@ -223,7 +223,7 @@ class CompleteStepRequest implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id ID of the step to complete
      *
      * @return $this
      */
@@ -247,7 +247,7 @@ class CompleteStepRequest implements ModelInterface, ArrayAccess
     /**
      * Sets stepOutputFields
      *
-     * @param \Catalytic\SDK\Model\FieldUpdateRequest[]|null $stepOutputFields stepOutputFields
+     * @param \Catalytic\SDK\Model\FieldUpdateRequest[]|null $stepOutputFields A collection of the required and optional input fields  that can be passed to this Workflow when starting it.
      *
      * @return $this
      */

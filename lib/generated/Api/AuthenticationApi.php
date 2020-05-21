@@ -124,7 +124,7 @@ class AuthenticationApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
      */
     public function createAndApproveCredentials($credentialsCreationWithEmailAndPasswordRequest = null)
     {
@@ -141,7 +141,7 @@ class AuthenticationApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
      */
     public function createAndApproveCredentialsWithHttpInfo($credentialsCreationWithEmailAndPasswordRequest = null)
     {
@@ -189,6 +189,18 @@ class AuthenticationApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 401:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 201:
                     if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -220,6 +232,14 @@ class AuthenticationApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -406,7 +426,7 @@ class AuthenticationApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
      */
     public function createCredentials($credentialsCreationRequest = null)
     {
@@ -423,7 +443,7 @@ class AuthenticationApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
      */
     public function createCredentialsWithHttpInfo($credentialsCreationRequest = null)
     {
@@ -471,6 +491,18 @@ class AuthenticationApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 401:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 201:
                     if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -502,6 +534,14 @@ class AuthenticationApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',
@@ -688,7 +728,7 @@ class AuthenticationApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|object
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|object
      */
     public function waitForCredentialsApproval($waitForCredentialsApprovalRequest = null)
     {
@@ -705,7 +745,7 @@ class AuthenticationApi
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|object, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|object, HTTP status code, HTTP response headers (array of strings)
      */
     public function waitForCredentialsApprovalWithHttpInfo($waitForCredentialsApprovalRequest = null)
     {
@@ -753,6 +793,18 @@ class AuthenticationApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 401:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 200:
                     if ('object' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -784,6 +836,14 @@ class AuthenticationApi
         } catch (ApiException $e) {
             switch ($e->getCode()) {
                 case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Catalytic\SDK\Model\ProblemDetails',

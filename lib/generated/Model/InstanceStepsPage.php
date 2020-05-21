@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * InstanceStepsPage Class Doc Comment
  *
  * @category Class
+ * @description A page of Instance Steps returned from a FindAync request
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class InstanceStepsPage implements ModelInterface, ArrayAccess
     /**
      * Sets steps
      *
-     * @param \Catalytic\SDK\Model\InstanceStep[]|null $steps steps
+     * @param \Catalytic\SDK\Model\InstanceStep[]|null $steps The list of Steps
      *
      * @return $this
      */

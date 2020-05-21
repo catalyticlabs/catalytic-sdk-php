@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * Field Class Doc Comment
  *
  * @category Class
+ * @description Represents a named and typed variable within a Workflow or Instance
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -265,7 +266,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id The unique ID of the field
      *
      * @return $this
      */
@@ -289,7 +290,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name The descriptive name of the Field
      *
      * @return $this
      */
@@ -313,7 +314,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets referenceName
      *
-     * @param string|null $referenceName referenceName
+     * @param string|null $referenceName A unique name (within the scope of the Workflow or Instance) that  can be used to reference the value of this field in  a template or operation.
      *
      * @return $this
      */
@@ -337,7 +338,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A description of this field. This can be used as instructions   for users filling out this field in a form
      *
      * @return $this
      */
@@ -361,7 +362,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets position
      *
-     * @param int|null $position position
+     * @param int|null $position The visual position of this field relative others in the same scope
      *
      * @return $this
      */
@@ -433,7 +434,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets value
      *
-     * @param string|null $value value
+     * @param string|null $value The value of this field, serialized as a string
      *
      * @return $this
      */
@@ -457,7 +458,7 @@ class Field implements ModelInterface, ArrayAccess
     /**
      * Sets defaultValue
      *
-     * @param string|null $defaultValue defaultValue
+     * @param string|null $defaultValue The optional default value of this field, serialized as a string. The   serialization format depends on the type of field.
      *
      * @return $this
      */

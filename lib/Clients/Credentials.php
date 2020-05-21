@@ -2,11 +2,13 @@
 
 namespace Catalytic\SDK\Clients;
 
+use Catalytic\SDK\ApiException;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\UserCredentialsApi;
 use Catalytic\SDK\Search\{Filter, SearchUtils};
-use Catalytic\SDK\Entities\{Credentials as UserCredentials, CredentialsPage};
+use Catalytic\SDK\Exceptions\{CredentialsNotFoundException, UnauthorizedException, InternalErrorException};
 use Catalytic\SDK\Model\Credentials as InternalCredentials;
+use Catalytic\SDK\Entities\{Credentials as UserCredentials, CredentialsPage};
 
 /**
  * Credentials client
@@ -22,14 +24,26 @@ class Credentials
     }
 
     /**
-     * Get credentials by id
+     * Get Credentials by id
      *
-     * @param string $id        The id of the credentials to get
-     * @return UserCredentials  The Credentials object
+     * @param string $id                    The id of the Credentials to get
+     * @return UserCredentials              The Credentials object
+     * @throws CredentialsNotFoundException If Credentials are not found
+     * @throws InternalErrorException       If any errors fetching Credentials
+     * @throws UnauthorizedException        If unauthorized
      */
     public function get(string $id) : UserCredentials
     {
-        $internalCredentials = $this->userCredentialsApi->getCredentials($id);
+        try {
+            $internalCredentials = $this->userCredentialsApi->getCredentials($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new CredentialsNotFoundException("Credentials with id $id not found", $e);
+            }
+            throw new InternalErrorException("Unable to get credentials", $e);
+        }
         $credentials = $this->createCredentials($internalCredentials);
         return $credentials;
     }
@@ -37,23 +51,32 @@ class Credentials
     /**
      * Find credentials by a variety of filters
      *
-     * @param Filter $filter    The filter criteria to search credentials by
-     * @param string $pageToken The token of the page to fetch
-     * @param int    $pageSize  The number of credentials per page to fetch
-     * @return CredentialsPage  A CredentialsPage which contains the reults
+     * @param Filter $filter            The filter criteria to search credentials by
+     * @param string $pageToken         The token of the page to fetch
+     * @param int    $pageSize          The number of credentials per page to fetch
+     * @return CredentialsPage          A CredentialsPage which contains the reults
+     * @throws InternalErrorException   If any errors finding Credentials
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null) : CredentialsPage
+    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): CredentialsPage
     {
         $text = null;
         $owner = null;
+        $credentials = [];
 
         if ($filter !== null) {
             $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
             $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
         }
 
-        $internalCredentials = $this->userCredentialsApi->findCredentials($text, null, null, null, $owner, null, null, $pageToken, $pageSize);
-        $credentials = [];
+        try {
+            $internalCredentials = $this->userCredentialsApi->findCredentials($text, null, null, null, $owner, null, null, $pageToken, $pageSize);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to find credentials", $e);
+        }
         foreach ($internalCredentials->getCredentials() as $internalCredential) {
             $credential = $this->createCredentials($internalCredential);
             array_push($credentials, $credential);
@@ -70,13 +93,23 @@ class Credentials
     /**
      * Revoke credentials for a specific id
      *
-     * @param string $id        The id of the credentials to revoke
-     * @return UserCredentials  The credentals that have been revoked
+     * @param string $id                The id of the credentials to revoke
+     * @return UserCredentials          The credentals that have been revoked
+     * @throws InternalErrorException   If any errors revoking credentials
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function revoke(string $id) : UserCredentials
+    public function revoke(string $id): UserCredentials
     {
-        $internalCredentials = $this->userCredentialsApi->revokeCredentials($id);
-        print_r($internalCredentials);
+        try {
+            $internalCredentials = $this->userCredentialsApi->revokeCredentials($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new CredentialsNotFoundException("Credentials with id $id not found", $e);
+            }
+            throw new InternalErrorException("Unable to revoke credentials", $e);
+        }
         $credentials = $this->createCredentials($internalCredentials);
         return $credentials;
     }
@@ -87,7 +120,7 @@ class Credentials
      * @param InternalCredentials  $internalCredentials   The internal credentials to create a Credentials object from
      * @return UserCredentials     $credentials           The created Credentials object
      */
-    private function createCredentials(InternalCredentials $internalCredentials) : UserCredentials
+    private function createCredentials(InternalCredentials $internalCredentials): UserCredentials
     {
         $credentials = new UserCredentials(
             $internalCredentials->getId(),

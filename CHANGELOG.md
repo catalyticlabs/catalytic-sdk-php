@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Changed
 - Drop support for PHP 7.2
+- Renamed DataTables->replaceWithDataTable to DataTables->replace
+- Now throwing specific exceptions instead of letting the internal ApiException get thrown
 
 ## [0.2.0] - 2020-04-29
 ### Fixed

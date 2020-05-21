@@ -6,7 +6,9 @@ use Exception;
 use SplFileObject;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\FilesApi;
+use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Entities\{File, FilesPage};
+use Catalytic\SDK\Exceptions\{DataTableNotFoundException, FileNotFoundException, InternalErrorException, UnauthorizedException};
 use Catalytic\SDK\Model\FileMetadata as InternalFile;
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 
@@ -24,14 +26,26 @@ class Files
     }
 
     /**
-     * Get a file by id
+     * Get a File by id
      *
-     * @param string $id    The id of the file to get
-     * @return File         The File object
+     * @param string $id                The id of the File to get
+     * @return File                     The File object
+     * @throws FileNotFoundException    If File is not found
+     * @throws InternalErrorException   If any errors fetching File
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function get(string $id) : File
+    public function get(string $id): File
     {
-        $internalFile = $this->filesApi->getFile($id);
+        try {
+            $internalFile = $this->filesApi->getFile($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new FileNotFoundException("Unable to find file with id $id");
+            }
+            throw new InternalErrorException("Unable to get File", $e);
+        }
         $file = $this->createFile($internalFile);
         return $file;
     }
@@ -42,17 +56,27 @@ class Files
     }
 
     /**
-     * Downloads a file to the users temp dir or a specified dir if passed in
+     * Downloads a File to the users temp dir or a specified dir if passed in
      *
-     * @param string $id                    The id of the file to download
-     * @param string $directory (Optional)  The dir to download the file to
-     * @return SplFileObject                An object containing the file info
-     * @throws Exception
+     * @param string $id                    The id of the File to download
+     * @param string $directory (Optional)  The dir to download the File to
+     * @return SplFileObject                An object containing the File info
+     * @throws InternalErrorException       If any errors downloading File
+     * @throws UnauthorizedException        If unauthorized
      */
-    public function download(string $id, string $directory = null)
+    public function download(string $id, string $directory = null): SplFileObject
     {
         // By default this downloads the file to a temp dir
-        $file = $this->filesApi->downloadFile($id);
+        try {
+            $file = $this->filesApi->downloadFile($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new FileNotFoundException("File with id $id not found", $e)
+            }
+            throw new InternalErrorException("Unable to download File", $e);
+        }
 
         // If no directory was passed in, return the downloaded file
         // as a SplFileInfo object
@@ -66,6 +90,7 @@ class Files
         $renamed = rename($file->getRealPath(), $newPath);
 
         if (!$renamed) {
+            // TODO: Use some other more specific exception
             throw new Exception('Failed to download file to ' . $directory);
         }
 
@@ -74,14 +99,23 @@ class Files
     }
 
     /**
-     * Uploads the passed in file
+     * Uploads the passed in File
      *
-     * @param SplFileObject $file   The file to upload
-     * @return File                 The file that was uploaded
+     * @param SplFileObject $file       The File to upload
+     * @return File                     The File that was uploaded
+     * @throws InternalErrorExeption    If any errors uploading File
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function upload(SplFileObject $fileToUpload) : File
+    public function upload(SplFileObject $fileToUpload): File
     {
-        $internalFile = $this->filesApi->uploadFiles($fileToUpload);
+        try {
+            $internalFile = $this->filesApi->uploadFiles($fileToUpload);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to upload File", $e);
+        }
         $uploadedFile = $internalFile->getFiles()[0];
         $file = $this->createFile($uploadedFile);
         return $file;

@@ -2,9 +2,17 @@
 
 namespace Catalytic\SDK\Clients;
 
+use Catalytic\SDK\ApiException;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\{InstancesApi, InstanceStepsApi};
 use Catalytic\SDK\Entities\{Instance, InstanceStep, InstancesPage, InstanceStepsPage};
+use Catalytic\SDK\Exceptions\{
+    InstanceNotFoundException,
+    InstanceStepNotFoundException,
+    InternalErrorException,
+    WorkflowNotFoundException,
+    UnauthorizedException
+};
 use Catalytic\SDK\Model\{
     CompleteStepRequest,
     FieldUpdateRequest,
@@ -30,32 +38,47 @@ class Instances
     }
 
     /**
-     * Get a workflow instance by id
+     * Get a workflow Instance by id
      *
-     * @param string $id    The id of the workflow instance to get
-     * @return Instance     The Instance object
+     * @param string $id                    The id of the workflow Instance to get
+     * @return Instance                     The Instance object
+     * @throws InstanceNotFoundException    If Instance is not found
+     * @throws InternalErrorException       If any errors fetching Instance
+     * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id) : Instance
+    public function get(string $id): Instance
     {
-        $internalInstance = $this->instancesApi->getInstance($id);
+        try {
+            $internalInstance = $this->instancesApi->getInstance($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new InstanceNotFoundException("Unable to find Instance with id $id", $e);
+            }
+            throw new InternalErrorException("Unable to get Instance", $e);
+        }
         $instance = $this->createInstance($internalInstance);
         return $instance;
     }
 
     /**
-     * Find instances by a variety of criteria
+     * Find Instances by a variety of criteria
      *
-     * @param Filter $filter The filter criteria to search instances by
-     * @param string $pageToken The token of the page to fetch
-     * @param int    $pageSize  The number of workflows per page to fetch
-     * @return InstancesPage    An InstancesPage which contains the reults
+     * @param Filter $filter            The filter criteria to search instances by
+     * @param string $pageToken         The token of the page to fetch
+     * @param int    $pageSize          The number of workflows per page to fetch
+     * @return InstancesPage            An InstancesPage which contains the results
+     * @throws InternalErrorException   If any errors finding Instances
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null) : InstancesPage
+    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): InstancesPage
     {
         $text = null;
         $owner = null;
         $status = null;
         $workflowId = null;
+        $instances = [];
 
         if ($filter !== null) {
             $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
@@ -64,8 +87,15 @@ class Instances
             $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
         }
 
-        $internalInstances = $this->instancesApi->findInstances($text, $status, $workflowId, null, $owner, null, null, $pageToken, $pageSize);
-        $instances = [];
+        try {
+            $internalInstances = $this->instancesApi->findInstances($text, $status, $workflowId, null, $owner, null, null, $pageToken, $pageSize);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to find Instances", $e);
+        }
+
         foreach ($internalInstances->getInstances() as $internalInstance) {
             $instance = $this->createInstance($internalInstance);
             array_push($instances, $instance);
@@ -78,29 +108,54 @@ class Instances
     /**
      * Start an instance of a workflow for a given workflow id
      *
-     * @param string $workflowId                 The id of the workflow to start an instance
+     * @param string $workflowId                The id of the workflow to start an instance
      * @param string $name (Optional)           The name to give to the instance
      * @param string $description (Optional)    The description to give to the instance
      * @param array  $fields (Optional)         The input fields to use when starting this instance
      * @return Instance                         The newly created instance
+     * @throws WorkflowNotFoundException        If Workflow not found
+     * @throws InternalErrorException           If any errors starting Instance
+     * @throws UnauthorizedException            If unauthorized
      */
-    public function start(string $workflowId, string $name = null, string $description = null, array $fields = null) : Instance
+    public function start(string $workflowId, string $name = null, string $description = null, array $fields = null): Instance
     {
         $request = $this->createStartInstanceRequest($workflowId, $name, $description, $fields);
-        $internalInstance = $this->instancesApi->startInstance($request);
+
+        try {
+            $internalInstance = $this->instancesApi->startInstance($request);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new WorkflowNotFoundException("Workflow with id $workflowId not found", $e);
+            }
+            throw new InternalErrorException("Unable to start Workflow Instance", $e);
+        }
         $instance = $this->createInstance($internalInstance);
         return $instance;
     }
 
     /**
-     * Stops an instance by instance id
+     * Stops an Instance by Instance id
      *
-     * @param string $id    The id of the instance to stop
-     * @param Instance      The Instance that was stopped
+     * @param string $id                    The id of the Instance to stop
+     * @param Instance                      The Instance that was stopped
+     * @throws InstanceNotFoundException    If Instance not found
+     * @throws InternalErrorException       If any errors stopping Instance
+     * @throws UnauthorizedException        If unauthorized
      */
-    public function stop(string $id) : Instance
+    public function stop(string $id): Instance
     {
-        $internalStoppedInstance = $this->instancesApi->stopInstance($id);
+        try {
+            $internalStoppedInstance = $this->instancesApi->stopInstance($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new InstanceNotFoundException("Unable to find Instance with id $id", $e);
+            }
+            throw new InternalErrorException("Unable to stop Instance", $e);
+        }
         $stoppedInstance = $this->createInstance($internalStoppedInstance);
         return $stoppedInstance;
     }
@@ -108,31 +163,58 @@ class Instances
     /**
      * Gets a step by step id
      *
-     * @param string $id    The id of the step to get
-     * @return InstanceStep The InstanceStep object
+     * @param string $id                        The id of the step to get
+     * @return InstanceStep                     The InstanceStep object
+     * @throws InstanceStepNotFoundException    If Instance Step not found
+     * @throws InternalErrorException           If any errors fetching Instance Step
+     * @throws UnauthorizedException            If unauthorized
      */
-    public function getStep(string $id) : InstanceStep
+    public function getStep(string $id): InstanceStep
     {
-        $internalStep = $this->getStepById($id);
+        try {
+            $internalStep = $this->getStepById($id);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new InstanceStepNotFoundException("Unable to find Instance Step with id $id", $e);
+            }
+            throw new InternalErrorException("Unable to get Instance Step", $e);
+        }
         $step = $this->createInstanceStep($internalStep);
         return $step;
     }
 
     /**
-     * Gets all the steps for a specific instance id
+     * Gets all the steps for a specific Instance id
      *
-     * @param string $instanceId    The id of the instances to get steps for
-     * @return array                The InstanceStepsPage which contains the results
+     * @param string $instanceId        The id of the Instance to get steps for
+     * @return InstanceStepsPage        The InstanceStepsPage which contains the results
+     * @throws InternalErrorException   If any errors fetching Instance Steps
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function getSteps(string $instanceId) : array
+    public function getSteps(string $instanceId): InstanceStepsPage
     {
-        $results = $this->instanceStepsApi->findInstanceSteps($instanceId);
-        $allSteps = $results->getSteps();
         $steps = [];
+
+        try {
+            $results = $this->instanceStepsApi->findInstanceSteps($instanceId);
+        } catch (ApiException $e) {
+            throw new InternalErrorException("Unable to get Instance Steps", $e);
+        }
+
+        $allSteps = $results->getSteps();
 
         // Loop through and get all the steps
         while ($results->getNextPageToken() != null) {
-            $results = $this->instanceStepsApi->findInstanceSteps($instanceId, $results->getNextPageToken());
+            try {
+                $results = $this->instanceStepsApi->findInstanceSteps($instanceId, $results->getNextPageToken());
+            } catch (ApiException $e) {
+                if ($e->getCode() === 401) {
+                    throw new UnauthorizedException(null, $e);
+                }
+                throw new InternalErrorException("Unable to get Instance Steps", $e);
+            }
             array_push($allSteps, $allSteps);
         }
 
@@ -147,12 +229,14 @@ class Instances
     /**
      * Search for steps
      *
-     * @param Filter $filter        The filter criteria to search instance steps by
-     * @param string $pageToken     The token of the page to fetch
-     * @param int    $pageSize      The number of instance steps per page to fetch
-     * @return InstanceStepsPage    An InstanceStepsPage which contains the reults
+     * @param Filter $filter            The filter criteria to search instance steps by
+     * @param string $pageToken         The token of the page to fetch
+     * @param int    $pageSize          The number of instance steps per page to fetch
+     * @return InstanceStepsPage        An InstanceStepsPage which contains the reults
+     * @throws InternalErrorException   If any errors finding Instance Steps
+     * @throws UnauthorizedException    If unauthorized
      */
-    public function findSteps(Filter $filter = null, string $pageToken = null, int $pageSize = null) : InstanceStepsPage
+    public function findSteps(Filter $filter = null, string $pageToken = null, int $pageSize = null): InstanceStepsPage
     {
         // The REST api supports wildcard instance id when searching for instance steps
         // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
@@ -160,6 +244,7 @@ class Instances
         $text = null;
         $workflowId = null;
         $assignee = null;
+        $steps = [];
 
         if ($filter !== null) {
             $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
@@ -167,8 +252,14 @@ class Instances
             $assignee = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'assignee');
         }
 
-        $internalSteps = $this->instanceStepsApi->findInstanceSteps($wildcardInstanceId, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
-        $steps = [];
+        try {
+            $internalSteps = $this->instanceStepsApi->findInstanceSteps($wildcardInstanceId, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            }
+            throw new InternalErrorException("Unable to find Instance Steps", $e);
+        }
 
         // Loop through and get all the steps
         foreach ($internalSteps->getSteps() as $internalStep) {
@@ -183,18 +274,30 @@ class Instances
     /**
      * Completes a specific step
      *
-     * @param string $id                The id of the step to complete
-     * @param array  $fields (Optional) Fields and the values to use when completing a step
-     * @return InstanceStep             The completed InstanceStep
+     * @param string $id                        The id of the step to complete
+     * @param array  $fields (Optional)         Fields and the values to use when completing a step
+     * @return InstanceStep                     The completed InstanceStep
+     * @throws InstanceStepNotFoundException    If Instance Step not found
+     * @throws InternalErrorException           If any errors completing Instance Step
+     * @throws UnauthorizedException            If unauthorized
      */
-    public function completeStep(string $id, array $fields = null) : InstanceStep
+    public function completeStep(string $id, array $fields = null): InstanceStep
     {
         $completeStepRequest = null;
         if (isset($fields)) {
             $completeStepRequest = $this->createCompleteStepRequest($id, $fields);
         }
         $step = $this->getStepById($id);
-        $internalStep = $this->instanceStepsApi->completeStep($id, $step->getInstanceId(), $completeStepRequest);
+        try {
+            $internalStep = $this->instanceStepsApi->completeStep($id, $step->getInstanceId(), $completeStepRequest);
+        } catch (ApiException $e) {
+            if ($e->getCode() === 401) {
+                throw new UnauthorizedException(null, $e);
+            } elseif ($e->getCode() === 404) {
+                throw new InstanceStepNotFoundException("Unable to find Instance Step with id $id", $e);
+            }
+            throw new InternalErrorException("Unable to complete step", $e);
+        }
         $completedStep = $this->createInstanceStep($internalStep);
         return $completedStep;
     }
@@ -202,13 +305,13 @@ class Instances
     /**
      * Creates a StartInstanceRequest object with the passed in params
      *
-     * @param string $workflowId                 The workflowId to create the StartInstanceRequest with
+     * @param string $workflowId                The workflowId to create the StartInstanceRequest with
      * @param string $name (Optional)           The name to create the StartInstanceRequest with
      * @param string $description (Optional)    The description to create the StartInstanceRequest with
      * @param array  $fields (Optional)         The fields to create the StartInstanceRequest with
      * @return StartInstanceRequest             The created StartInstanceRequest object
      */
-    private function createStartInstanceRequest(string $workflowId, string $name = null, string $description = null, array $fields = null) : StartInstanceRequest
+    private function createStartInstanceRequest(string $workflowId, string $name = null, string $description = null, array $fields = null): StartInstanceRequest
     {
         $config = array('workflowId' => $workflowId);
 
@@ -236,7 +339,7 @@ class Instances
      * @param array  $fields        The fields to create the CompleteStepRequest with
      * @return CompleteStepRequest  The created CompleteStepRequest
      */
-    private function createCompleteStepRequest(string $id, array $fields) : CompleteStepRequest
+    private function createCompleteStepRequest(string $id, array $fields): CompleteStepRequest
     {
         $stepOutputFields = $this->formatFields($fields);
         $stepRequest = new CompleteStepRequest(array('id' => $id, 'stepOutputFields' => $stepOutputFields));
@@ -249,7 +352,7 @@ class Instances
      * @param  array $fields    The fields to create a FieldUpdateRequest for each one
      * @return array            The formatted fields
      */
-    private function formatFields(array $fields) : array
+    private function formatFields(array $fields): array
     {
         $formattedFields = [];
 
@@ -268,7 +371,7 @@ class Instances
      * @param string $id    The id of the step to get
      * @return InternalInstanceStep The InstanceStep object
      */
-    private function getStepById(string $id) : InternalInstanceStep
+    private function getStepById(string $id): InternalInstanceStep
     {
         // The REST api supports wildcard instance id when searching for instance steps
         // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
@@ -283,7 +386,7 @@ class Instances
      * @param InternalInstance  $internalInstance   The internal instance to create an Instance object from
      * @return Instance                             The created Instance object
      */
-    private function createInstance(InternalInstance $internalInstance) : Instance
+    private function createInstance(InternalInstance $internalInstance): Instance
     {
         $instance = new Instance(
             $internalInstance->getId(),
@@ -310,7 +413,7 @@ class Instances
      * @param InternalInstanceStep  $internalInstanceStep   The internal instance step to create an InstanceStep object from
      * @return InstanceStep                                 The created InstanceStep object
      */
-    private function createInstanceStep(InternalInstanceStep $internalInstanceStep) : InstanceStep
+    private function createInstanceStep(InternalInstanceStep $internalInstanceStep): InstanceStep
     {
         $instanceStep = new InstanceStep(
             $internalInstanceStep->getId(),

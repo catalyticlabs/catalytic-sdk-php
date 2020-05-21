@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * WaitForCredentialsApprovalRequest Class Doc Comment
  *
  * @category Class
+ * @description A request to activate Credentials
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -226,7 +227,7 @@ class WaitForCredentialsApprovalRequest implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param string $token token
+     * @param string $token Credentials Token
      *
      * @return $this
      */
@@ -250,7 +251,7 @@ class WaitForCredentialsApprovalRequest implements ModelInterface, ArrayAccess
     /**
      * Sets waitTimeMillis
      *
-     * @param int|null $waitTimeMillis waitTimeMillis
+     * @param int|null $waitTimeMillis Optional timeout to wait for Credentials to be approved via UI (milliseconds)  Defaults to 300000ms (5 minutes)
      *
      * @return $this
      */

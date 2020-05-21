@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * User Class Doc Comment
  *
  * @category Class
+ * @description Represents a user on a Catalytic team
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -253,7 +254,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id Unique ID for the user
      *
      * @return $this
      */
@@ -277,7 +278,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets username
      *
-     * @param string|null $username username
+     * @param string|null $username Unique username of user
      *
      * @return $this
      */
@@ -301,7 +302,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets email
      *
-     * @param string $email email
+     * @param string $email The email address associated with this user
      *
      * @return $this
      */
@@ -325,7 +326,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets fullName
      *
-     * @param string $fullName fullName
+     * @param string $fullName The user's full name
      *
      * @return $this
      */
@@ -349,7 +350,7 @@ class User implements ModelInterface, ArrayAccess
     /**
      * Sets teamName
      *
-     * @param string $teamName teamName
+     * @param string $teamName The name of this User's Catalytic team
      *
      * @return $this
      */

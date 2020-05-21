@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * PagingOptions Class Doc Comment
  *
  * @category Class
+ * @description Properties required for executing a search request
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -229,7 +230,7 @@ class PagingOptions implements ModelInterface, ArrayAccess
     /**
      * Sets size
      *
-     * @param int|null $size size
+     * @param int|null $size The page size of search results
      *
      * @return $this
      */
@@ -253,7 +254,7 @@ class PagingOptions implements ModelInterface, ArrayAccess
     /**
      * Sets pageToken
      *
-     * @param string|null $pageToken pageToken
+     * @param string|null $pageToken A token used to retrieve the next page of results
      *
      * @return $this
      */
@@ -277,7 +278,7 @@ class PagingOptions implements ModelInterface, ArrayAccess
     /**
      * Sets getAllResults
      *
-     * @param bool|null $getAllResults getAllResults
+     * @param bool|null $getAllResults Indicates whether all results should be retrieved
      *
      * @return $this
      */

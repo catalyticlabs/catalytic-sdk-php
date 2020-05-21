@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * Instance Class Doc Comment
  *
  * @category Class
+ * @description Represents an Instance of a Workflow
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -304,7 +305,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id The unique ID of the Instance
      *
      * @return $this
      */
@@ -328,7 +329,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets workflowId
      *
-     * @param string $workflowId workflowId
+     * @param string $workflowId The unique ID of the Workflow this Instance was started from
      *
      * @return $this
      */
@@ -352,7 +353,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name name
+     * @param string|null $name The descriptive name of the Instance
      *
      * @return $this
      */
@@ -376,7 +377,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets teamName
      *
-     * @param string $teamName teamName
+     * @param string $teamName The name of the Catalytic team in which this Instance was started
      *
      * @return $this
      */
@@ -400,7 +401,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A description of the Instance
      *
      * @return $this
      */
@@ -424,7 +425,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets category
      *
-     * @param string|null $category category
+     * @param string|null $category A descriptive grouping for the Instance
      *
      * @return $this
      */
@@ -448,7 +449,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets owner
      *
-     * @param string|null $owner owner
+     * @param string|null $owner The email address of the user who owns this Instance
      *
      * @return $this
      */
@@ -472,7 +473,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets createdBy
      *
-     * @param string|null $createdBy createdBy
+     * @param string|null $createdBy The email address of the user who created this Instance
      *
      * @return $this
      */
@@ -496,7 +497,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets steps
      *
-     * @param \Catalytic\SDK\Model\InstanceStep[]|null $steps steps
+     * @param \Catalytic\SDK\Model\InstanceStep[]|null $steps A collection of the Tasks belonging to this Instance
      *
      * @return $this
      */
@@ -520,7 +521,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets fields
      *
-     * @param \Catalytic\SDK\Model\Field[]|null $fields fields
+     * @param \Catalytic\SDK\Model\Field[]|null $fields A collection of the Fields belonging to this Instance
      *
      * @return $this
      */
@@ -616,7 +617,7 @@ class Instance implements ModelInterface, ArrayAccess
     /**
      * Sets visibleToUsers
      *
-     * @param string[]|null $visibleToUsers visibleToUsers
+     * @param string[]|null $visibleToUsers The users who can find and interact with this Instance
      *
      * @return $this
      */

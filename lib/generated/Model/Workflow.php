@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * Workflow Class Doc Comment
  *
  * @category Class
+ * @description A Workflow is an automation on the Catalytic platform. It is a template  of the process you want to run each time your Workflow is started.
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -346,7 +347,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id id
+     * @param string $id The unique ID of the Workflow
      *
      * @return $this
      */
@@ -370,7 +371,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name name
+     * @param string $name The descriptive name of the Workflow
      *
      * @return $this
      */
@@ -394,7 +395,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets teamName
      *
-     * @param string $teamName teamName
+     * @param string $teamName The name of the team in which the Workflow is defined
      *
      * @return $this
      */
@@ -418,7 +419,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string|null $description description
+     * @param string|null $description A description of what the Workflow does
      *
      * @return $this
      */
@@ -442,7 +443,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets category
      *
-     * @param string|null $category category
+     * @param string|null $category A descriptive grouping for your Workflow
      *
      * @return $this
      */
@@ -466,7 +467,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets owner
      *
-     * @param string|null $owner owner
+     * @param string|null $owner The email address of the user who owns this Workflow
      *
      * @return $this
      */
@@ -490,7 +491,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets createdBy
      *
-     * @param string|null $createdBy createdBy
+     * @param string|null $createdBy The email address of the user who created this Workflow
      *
      * @return $this
      */
@@ -514,7 +515,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets inputFields
      *
-     * @param \Catalytic\SDK\Model\Field[]|null $inputFields inputFields
+     * @param \Catalytic\SDK\Model\Field[]|null $inputFields A collection of the required and optional input fields  that can be passed to this Workflow when starting it.
      *
      * @return $this
      */
@@ -538,7 +539,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets isPublished
      *
-     * @param bool|null $isPublished isPublished
+     * @param bool|null $isPublished Indicates whether the Workflow is published; if false, Workflow is in draft mode
      *
      * @return $this
      */
@@ -562,7 +563,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets isArchived
      *
-     * @param bool|null $isArchived isArchived
+     * @param bool|null $isArchived Indicates whether is Archived and no longer available for users to find, start or edit.
      *
      * @return $this
      */
@@ -634,7 +635,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets adminUsers
      *
-     * @param string[]|null $adminUsers adminUsers
+     * @param string[]|null $adminUsers The users who may view, start, and edit this Workflow in addition to Catalytic.Sdk.Entities.Workflow.Owner
      *
      * @return $this
      */
@@ -658,7 +659,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets standardUsers
      *
-     * @param string[]|null $standardUsers standardUsers
+     * @param string[]|null $standardUsers The users who can view and start this Workflow
      *
      * @return $this
      */
@@ -682,7 +683,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets taskCountLimit
      *
-     * @param int|null $taskCountLimit taskCountLimit
+     * @param int|null $taskCountLimit The maximum number of steps that can appear in an Instance of this Workflow
      *
      * @return $this
      */
@@ -706,7 +707,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets fieldCountLimit
      *
-     * @param int|null $fieldCountLimit fieldCountLimit
+     * @param int|null $fieldCountLimit The maximum number of fields that can appear in an Instance of this Workflow
      *
      * @return $this
      */
@@ -730,7 +731,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets fieldSizeLimit
      *
-     * @param int|null $fieldSizeLimit fieldSizeLimit
+     * @param int|null $fieldSizeLimit The maximum size of data stored in any field in an Instance of this Workflow
      *
      * @return $this
      */
@@ -754,7 +755,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets fieldTotalSizeLimit
      *
-     * @param int|null $fieldTotalSizeLimit fieldTotalSizeLimit
+     * @param int|null $fieldTotalSizeLimit The maximum total size of data stored in all fields in an Instance of this Workflow
      *
      * @return $this
      */
@@ -778,7 +779,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets dataTableRowLimit
      *
-     * @param int|null $dataTableRowLimit dataTableRowLimit
+     * @param int|null $dataTableRowLimit The maximum number of rows of any data table created in an Instance of this Workflow
      *
      * @return $this
      */
@@ -802,7 +803,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets dataTableColumnLimit
      *
-     * @param int|null $dataTableColumnLimit dataTableColumnLimit
+     * @param int|null $dataTableColumnLimit The maximum number of columns of any data table created in an Instance of this Workflow
      *
      * @return $this
      */
@@ -826,7 +827,7 @@ class Workflow implements ModelInterface, ArrayAccess
     /**
      * Sets dataTableCellLimit
      *
-     * @param int|null $dataTableCellLimit dataTableCellLimit
+     * @param int|null $dataTableCellLimit The maximum number of cells of any data table created in an Instance of this Workflow
      *
      * @return $this
      */

@@ -36,6 +36,7 @@ use \Catalytic\SDK\ObjectSerializer;
  * WorkflowExport Class Doc Comment
  *
  * @category Class
+ * @description Represents a Workflow Export
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -235,7 +236,7 @@ class WorkflowExport implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string|null $id The Id of the Workflow Export
      *
      * @return $this
      */
@@ -283,7 +284,7 @@ class WorkflowExport implements ModelInterface, ArrayAccess
     /**
      * Sets fileId
      *
-     * @param string|null $fileId fileId
+     * @param string|null $fileId The Id of the File created by a successful Export
      *
      * @return $this
      */
@@ -307,7 +308,7 @@ class WorkflowExport implements ModelInterface, ArrayAccess
     /**
      * Sets errorMessage
      *
-     * @param string|null $errorMessage errorMessage
+     * @param string|null $errorMessage The error message produced by a failed Export
      *
      * @return $this
      */
