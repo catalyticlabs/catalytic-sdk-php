@@ -36,38 +36,6 @@ class Files
         return $file;
     }
 
-    /**
-     * Find files by a variety of criteria
-     *
-     * @param Filter $filter    The filter criteria to search files by
-     * @param string $pageToken The token of the page to fetch
-     * @param int    $pageSize  The number of files per page to fetch
-     * @return FilesPage        A FilesPage which contains the reults
-     */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): FilesPage
-    {
-        $text = null;
-        $owner = null;
-        $workflowId = null;
-        $instanceId = null;
-
-        if ($filter !== null) {
-            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-            $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
-            $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
-            $instanceId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'instanceId');
-        }
-        $internalFiles = $this->filesApi->findFiles($text, null, $workflowId, $instanceId, $owner, null, null, $pageToken, $pageSize);
-        $files = [];
-        foreach ($internalFiles->getFiles() as $internalFile) {
-            $file = $this->createFile($internalFile);
-            array_push($files, $file);
-        }
-
-        $filesPage = new FilesPage($files, $internalFiles->getCount(), $internalFiles->getNextPageToken());
-        return $filesPage;
-    }
-
     public function getFileStream($id)
     {
         throw new Exception('Not yet implemented');
