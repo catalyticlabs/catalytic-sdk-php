@@ -15,7 +15,7 @@ use Catalytic\SDK\Clients\{
 /**
  * Client for connecting to catalytic
  */
-class Client
+class CatalyticClient
 {
     private Workflows $workflows;
     private Instances $instances;
