@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Drop support for PHP 7.2
+- Drop support for PHP 7.2 and PHP 7.3 since we're using Typed Properties and they are only supported starting with PHP 7.4
 - Renamed DataTables->replaceWithDataTable to DataTables->replace
 - Now throwing specific exceptions instead of letting the internal ApiException get thrown
 - Renamed Client to CatalyicClient

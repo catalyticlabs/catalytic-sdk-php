@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Regenerate from the openapi spec and dump to dir /new
-openapi-generator generate -i https://catalyticsdkapi-31.azurewebsites.net/swagger/v1/swagger.json \
+openapi-generator generate -i https://sdk.catalytic.com/v1.0.1-pre-33/swagger/v1/swagger.json \
     -g php \
     -o new \
     --additional-properties=invokerPackage=Catalytic\\SDK,variableNamingConvention=camelCase \
     --skip-validate-spec;
 
+# Remove existing generated code
 rm -fr ./lib/generated;
 
 # Move the files we need from /new to /lib/generated

@@ -88,4 +88,15 @@ class Filter
         $filterCriteria = new FilterCriteria($this, 'assignee');
         return $filterCriteria;
     }
+
+    /**
+     * Creates a FilterCriteria object for filtering instanceId
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function instanceId(): FilterCriteria
+    {
+        $filterCriteria = new FilterCriteria($this, 'run_id');
+        return $filterCriteria;
+    }
 }

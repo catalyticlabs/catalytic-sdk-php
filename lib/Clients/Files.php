@@ -73,7 +73,7 @@ class Files
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             } elseif ($e->getCode() === 404) {
-                throw new FileNotFoundException("File with id $id not found", $e)
+                throw new FileNotFoundException("File with id $id not found", $e);
             }
             throw new InternalErrorException("Unable to download File", $e);
         }

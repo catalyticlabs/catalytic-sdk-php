@@ -68,5 +68,15 @@ class Where
     {
         return (new Filter())->assignee();
     }
+
+    /**
+     * InstanceId to be filtered
+     *
+     * @return FilterCriteria   The created FilterCriteria object
+     */
+    public function instanceId(): FilterCriteria
+    {
+        return (new Filter())->instanceId();
+    }
 }
 

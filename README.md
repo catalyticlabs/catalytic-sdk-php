@@ -1,7 +1,10 @@
+[![Version](https://poser.pugx.org/catalytic/sdk/version)](//packagist.org/packages/catalytic/sdk)
+![PHP CI with Composer](https://github.com/catalyticlabs/catalytic-sdk-php/workflows/PHP%20CI%20with%20Composer/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/074d5f6e2669c1685181/maintainability)](https://codeclimate.com/github/catalyticlabs/catalytic-sdk-php/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/074d5f6e2669c1685181/test_coverage)](https://codeclimate.com/github/catalyticlabs/catalytic-sdk-php/test_coverage)
+
 # catalytic/sdk
 > Catalytic's PHP SDK
->
-> Current version **0.2.0**
 
 The Catalytic SDK allows you to integration your app with the Catalytic Platform.
 
@@ -16,7 +19,7 @@ Key Benefits:
 
 
 ## Requirements
-PHP 7.3 and later
+PHP 7.4 and later
 
 ## Installation
 Via composer

@@ -17,10 +17,20 @@ class Users
 {
     private UsersApi $usersApi;
 
-    public function __construct($secret)
+    /**
+     * Constructor for Users client
+     *
+     * @param string $secret                The token used to make the underlying api calls
+     * @param UsersApi $usersApi (Optional) The injected UsersApi. Used for unit testing
+     */
+    public function __construct(?string $secret, UsersApi $usersApi = null)
     {
-        $config = ConfigurationUtils::getConfiguration($secret);
-        $this->usersApi = new UsersApi(null, $config);
+        if ($usersApi) {
+            $this->usersApi = $usersApi;
+        } else {
+            $config = ConfigurationUtils::getConfiguration($secret);
+            $this->usersApi = new UsersApi(null, $config);
+        }
     }
 
     /**
