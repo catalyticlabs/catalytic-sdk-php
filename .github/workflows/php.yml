@@ -58,3 +58,9 @@ jobs:
       with:
         coverageCommand: "composer run-script cover-xml"
         coverageLocations: ${{ github.workspace }}/build/coverage/clover:clover
+
+    - name: Publish code coverage
+      uses: codecov/codecov-action@v1
+      with:
+        # token: ${{ secrets.CODECOV_TOKEN }}
+        file: ${{ github.workspace }}/build/coverage/clover
