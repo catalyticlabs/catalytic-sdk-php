@@ -84,7 +84,7 @@ class Users
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             }
-            throw new InternalErrorException("Unable to find users", $e);
+            throw new InternalErrorException("Unable to find Users", $e);
         }
 
         foreach ($internalUsers->getUsers() as $internalUser) {

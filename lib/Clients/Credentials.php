@@ -17,10 +17,20 @@ class Credentials
 {
     private UserCredentialsApi $userCredentialsApi;
 
-    public function __construct($secret)
+    /**
+     * Constructor for UserCredentials
+     *
+     * @param string $secret                                    The token used to make the underlying api calls
+     * @param UserCredentialsApi $userCredentialsApi (Optional) The injected UserCredentialsApi. Used for unit testing
+     */
+    public function __construct(?string $secret, UserCredentialsApi $userCredentialsApi = null)
     {
-        $config = ConfigurationUtils::getConfiguration($secret);
-        $this->userCredentialsApi = new UserCredentialsApi(null, $config);
+        if ($userCredentialsApi) {
+            $this->userCredentialsApi = $userCredentialsApi;
+        } else {
+            $config = ConfigurationUtils::getConfiguration($secret);
+            $this->userCredentialsApi = new UserCredentialsApi(null, $config);
+        }
     }
 
     /**
@@ -32,7 +42,7 @@ class Credentials
      * @throws InternalErrorException       If any errors fetching Credentials
      * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id) : UserCredentials
+    public function get(string $id): UserCredentials
     {
         try {
             $internalCredentials = $this->userCredentialsApi->getCredentials($id);
@@ -75,7 +85,7 @@ class Credentials
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             }
-            throw new InternalErrorException("Unable to find credentials", $e);
+            throw new InternalErrorException("Unable to find Credentials", $e);
         }
         foreach ($internalCredentials->getCredentials() as $internalCredential) {
             $credential = $this->createCredentials($internalCredential);
@@ -108,7 +118,7 @@ class Credentials
             } elseif ($e->getCode() === 404) {
                 throw new CredentialsNotFoundException("Credentials with id $id not found", $e);
             }
-            throw new InternalErrorException("Unable to revoke credentials", $e);
+            throw new InternalErrorException("Unable to revoke Credentials", $e);
         }
         $credentials = $this->createCredentials($internalCredentials);
         return $credentials;

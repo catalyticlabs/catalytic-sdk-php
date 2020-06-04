@@ -86,7 +86,7 @@ class UsersTest extends MockeryTestCase
     public function testFindUsers_ItShouldThrowUInternalErrorExceptionIfUserDoesNotExist()
     {
         $this->expectException(InternalErrorException::class);
-        $this->expectExceptionMessage("Unable to find users");
+        $this->expectExceptionMessage("Unable to find Users");
 
         $usersApi = Mockery::mock('Catalytic\SDK\Api\UsersApi');
         $usersApi->shouldReceive('findUsers')
