@@ -19,10 +19,20 @@ class DataTables
 {
     private DataTablesApi $dataTablesApi;
 
-    public function __construct($secret)
+    /**
+     * Constructor for DataTables client
+     *
+     * @param string $secret                            The token used to make the underlying api calls
+     * @param DataTablesApi $dataTablesApi (Optional)   The injected DataTablesApi. Used for unit testing
+     */
+    public function __construct(?string $secret, DataTablesApi $dataTablesApi = null)
     {
-        $config = ConfigurationUtils::getConfiguration($secret);
-        $this->dataTablesApi = new DataTablesApi(null, $config);
+        if ($dataTablesApi) {
+            $this->dataTablesApi = $dataTablesApi;
+        } else {
+            $config = ConfigurationUtils::getConfiguration($secret);
+            $this->dataTablesApi = new DataTablesApi(null, $config);
+        }
     }
 
     /**
@@ -34,7 +44,7 @@ class DataTables
      * @throws InternalErrorException       If any errors fetching DataTable
      * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id) : DataTable
+    public function get(string $id): DataTable
     {
         try {
             $internalDataTable = $this->dataTablesApi->getDataTable($id);
@@ -96,7 +106,7 @@ class DataTables
      * @throws InternalErrorException       If errors saving to $directory
      * @throws UnauthorizedException        If unauthorized
      */
-    public function download(string $id, string $format, string $directory = null) : SplFileObject
+    public function download(string $id, string $format, string $directory = null): SplFileObject
     {
         // By default this downloads the file to a temp dir
         try {
@@ -107,7 +117,7 @@ class DataTables
             } elseif ($e->getCode() === 404) {
                 throw new DataTableNotFoundException("DataTable with id $id not found", $e);
             }
-            throw new InternalErrorException("Unable to download dataTable", $e);
+            throw new InternalErrorException("Unable to download DataTable", $e);
         }
 
         // If no directory was passed in, return the downloaded data table
@@ -189,7 +199,7 @@ class DataTables
      * @param InternalDataTable $internalDataTable  The internal datatable to create a DataTable object from
      * @return DataTable        $dataTable          The created DataTable object
      */
-    private function createDataTable(InternalDataTable $internalDataTable) : DataTable
+    private function createDataTable(InternalDataTable $internalDataTable): DataTable
     {
         $dataTable = new DataTable(
             $internalDataTable->getId(),

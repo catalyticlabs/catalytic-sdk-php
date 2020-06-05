@@ -1,7 +1,6 @@
 <?php
 require __DIR__ . '/../../vendor/autoload.php';
 
-use Catalytic\SDK\Api\UsersApi;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Clients\Users;
 use Catalytic\SDK\Search\Where;
