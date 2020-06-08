@@ -7,10 +7,13 @@ use SplFileObject;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\FilesApi;
 use Catalytic\SDK\ApiException;
-use Catalytic\SDK\Entities\{File, FilesPage};
-use Catalytic\SDK\Exceptions\{DataTableNotFoundException, FileNotFoundException, InternalErrorException, UnauthorizedException};
+use Catalytic\SDK\Entities\File;
+use Catalytic\SDK\Exceptions\{
+    FileNotFoundException,
+    InternalErrorException,
+    UnauthorizedException
+};
 use Catalytic\SDK\Model\FileMetadata as InternalFile;
-use Catalytic\SDK\Search\{Filter, SearchUtils};
 
 /**
  * Files client
@@ -19,10 +22,20 @@ class Files
 {
     private FilesApi $filesApi;
 
-    public function __construct($secret)
+    /**
+     * Constructor for Files client
+     *
+     * @param string $secret                            The token used to make the underlying api calls
+     * @param FilesApi $filesApi (Optional)   The injected DataTablesApi. Used for unit testing
+     */
+    public function __construct(?string $secret, FilesApi $filesApi = null)
     {
-        $config = ConfigurationUtils::getConfiguration($secret);
-        $this->filesApi = new FilesApi(null, $config);
+        if ($filesApi) {
+            $this->filesApi = $filesApi;
+        } else {
+            $config = ConfigurationUtils::getConfiguration($secret);
+            $this->filesApi = new FilesApi(null, $config);
+        }
     }
 
     /**
@@ -42,7 +55,7 @@ class Files
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             } elseif ($e->getCode() === 404) {
-                throw new FileNotFoundException("Unable to find file with id $id");
+                throw new FileNotFoundException("File with id $id not found", $e);
             }
             throw new InternalErrorException("Unable to get File", $e);
         }
