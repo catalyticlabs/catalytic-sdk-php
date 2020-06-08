@@ -51,23 +51,23 @@ class UsersTest extends MockeryTestCase
         $usersClient->get('alice@catalytic.com');
     }
 
-    public function testGetUser_ItShouldGetAUser()
-    {
-        $user = new \Catalytic\SDK\Model\User(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'username' => 'alice',
-                'email' => 'alice@catalytic.com'
-            )
-        );
-        $usersApi = Mockery::mock('Catalytic\SDK\Api\UsersApi');
-        $usersApi->shouldReceive('getUser')
-            ->andReturn($user);
+    // public function testGetUser_ItShouldGetAUser()
+    // {
+    //     $user = new \Catalytic\SDK\Model\User(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'username' => 'alice',
+    //             'email' => 'alice@catalytic.com'
+    //         )
+    //     );
+    //     $usersApi = Mockery::mock('Catalytic\SDK\Api\UsersApi');
+    //     $usersApi->shouldReceive('getUser')
+    //         ->andReturn($user);
 
-        $usersClient = new Users(null, $usersApi);
-        $user = $usersClient->get('alice@catalytic.com');
-        $this->assertInstanceOf(User::class, $user);
-    }
+    //     $usersClient = new Users(null, $usersApi);
+    //     $user = $usersClient->get('alice@catalytic.com');
+    //     $this->assertInstanceOf(User::class, $user);
+    // }
 
     public function testFindUsers_ItShouldThrowUnauthorizedExceptionIfUserDoesNotExist()
     {
