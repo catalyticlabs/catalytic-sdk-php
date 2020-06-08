@@ -19,11 +19,27 @@ class Workflows
     private WorkflowsApi $workflowsApi;
     private Files $filesClient;
 
-    public function __construct($secret)
+    /**
+     * Constructor for Workflows client
+     *
+     * @param string $secret                            The token used to make the underlying api calls
+     * @param WorkflowsApi  $workflowsApi (Optional)    The injected WorkflowsApi. Used for unit testing
+     * @param Files         $filesClient                The injected FilesClient. Used for unit testing
+     */
+    public function __construct(?string $secret, WorkflowsApi $workflowsApi = null, Files $filesClient = null)
     {
-        $config = ConfigurationUtils::getConfiguration($secret);
-        $this->workflowsApi = new WorkflowsApi(null, $config);
-        $this->filesClient = new Files(trim($secret));
+        if ($workflowsApi) {
+            $this->workflowsApi = $workflowsApi;
+        } else {
+            $config = ConfigurationUtils::getConfiguration($secret);
+            $this->workflowsApi = new WorkflowsApi(null, $config);
+        }
+
+        if ($filesClient) {
+            $this->filesClient = $filesClient;
+        } else {
+            $this->filesClient = new Files(trim($secret));
+        }
     }
 
     /**
@@ -78,7 +94,7 @@ class Workflows
             $internalWorkflows = $this->workflowsApi->findWorkflows($text, null, null, null, $owner, $category, null, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
-                throw new UnauthorizedException();
+                throw new UnauthorizedException(null, $e);
             }
             throw new InternalErrorException("Unable to find Workflows", $e);
         }
@@ -118,7 +134,7 @@ class Workflows
             } elseif ($e->getCode() === 404) {
                 throw new WorkflowNotFoundException("Workflow with id $id not found", $e);
             }
-            throw new InternalErrorException("Unable to export workflow with id $id", $e);
+            throw new InternalErrorException("Unable to export Workflow with id $id", $e);
         }
 
         // Poll another request every second until the export is ready
@@ -127,7 +143,7 @@ class Workflows
             try {
                 $internalWorkflowExport = $this->workflowsApi->getWorkflowExport($exportId, $workflowExportRequest);
             } catch (ApiException $e) {
-                throw new InternalErrorException("Unable to export workflow with id $id", $e);
+                throw new InternalErrorException("Unable to export Workflow with id $id", $e);
             }
             sleep(1);
         }
@@ -188,7 +204,7 @@ class Workflows
      * @param InternalWorkflow  $internalWorkflow     The internal workflow to create a Workflow object from
      * @return Workflow         $workflow             The created Workflow object
      */
-    private function createWorkflow(InternalWorkflow $internalWorkflow) : Workflow
+    private function createWorkflow(InternalWorkflow $internalWorkflow): Workflow
     {
         $workflow = new Workflow(
             $internalWorkflow->getId(),
