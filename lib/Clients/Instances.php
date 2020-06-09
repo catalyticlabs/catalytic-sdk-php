@@ -30,11 +30,25 @@ class Instances
     private InstancesApi $instancesApi;
     private InstanceStepsApi $instanceStepsApi;
 
-    public function __construct($secret)
+    public function __construct(?string $secret, InstancesApi $instancesApi = null, InstanceStepsApi $instanceStepsApi = null)
     {
-        $config = ConfigurationUtils::getConfiguration($secret);
-        $this->instancesApi = new InstancesApi(null, $config);
-        $this->instanceStepsApi = new InstanceStepsApi(null, $config);
+        $config = null;
+
+        if ($secret) {
+            $config = ConfigurationUtils::getConfiguration($secret);
+        }
+
+        if ($instancesApi) {
+            $this->instancesApi = $instancesApi;
+        } else {
+            $this->instancesApi = new InstancesApi(null, $config);
+        }
+
+        if ($instanceStepsApi) {
+            $this->instanceStepsApi = $instanceStepsApi;
+        } else {
+            $this->instanceStepsApi = new InstanceStepsApi(null, $config);
+        }
     }
 
     /**
@@ -54,7 +68,7 @@ class Instances
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             } elseif ($e->getCode() === 404) {
-                throw new InstanceNotFoundException("Unable to find Instance with id $id", $e);
+                throw new InstanceNotFoundException("Instance with id $id not found", $e);
             }
             throw new InternalErrorException("Unable to get Instance", $e);
         }
@@ -152,9 +166,9 @@ class Instances
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             } elseif ($e->getCode() === 404) {
-                throw new InstanceNotFoundException("Unable to find Instance with id $id", $e);
+                throw new InstanceNotFoundException("Instance with id $id not found", $e);
             }
-            throw new InternalErrorException("Unable to stop Instance", $e);
+            throw new InternalErrorException("Unable to stop Workflow Instance", $e);
         }
         $stoppedInstance = $this->createInstance($internalStoppedInstance);
         return $stoppedInstance;
@@ -177,7 +191,7 @@ class Instances
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             } elseif ($e->getCode() === 404) {
-                throw new InstanceStepNotFoundException("Unable to find Instance Step with id $id", $e);
+                throw new InstanceStepNotFoundException("Instance Step with id $id not found", $e);
             }
             throw new InternalErrorException("Unable to get Instance Step", $e);
         }
@@ -193,7 +207,7 @@ class Instances
      * @throws InternalErrorException   If any errors fetching Instance Steps
      * @throws UnauthorizedException    If unauthorized
      */
-    public function getSteps(string $instanceId): InstanceStepsPage
+    public function getSteps(string $instanceId): Array
     {
         $steps = [];
 
@@ -215,7 +229,7 @@ class Instances
                 }
                 throw new InternalErrorException("Unable to get Instance Steps", $e);
             }
-            array_push($allSteps, $allSteps);
+            array_push($allSteps, $results->getSteps());
         }
 
         // Create external InstanceStep from each internal InstanceStep
@@ -294,9 +308,9 @@ class Instances
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
             } elseif ($e->getCode() === 404) {
-                throw new InstanceStepNotFoundException("Unable to find Instance Step with id $id", $e);
+                throw new InstanceStepNotFoundException("Instance Step with id $id not found", $e);
             }
-            throw new InternalErrorException("Unable to complete step", $e);
+            throw new InternalErrorException("Unable to complete Instance Step", $e);
         }
         $completedStep = $this->createInstanceStep($internalStep);
         return $completedStep;

@@ -28,10 +28,13 @@ class Workflows
      */
     public function __construct(?string $secret, WorkflowsApi $workflowsApi = null, Files $filesClient = null)
     {
+        if ($secret) {
+            $config = ConfigurationUtils::getConfiguration($secret);
+        }
+
         if ($workflowsApi) {
             $this->workflowsApi = $workflowsApi;
         } else {
-            $config = ConfigurationUtils::getConfiguration($secret);
             $this->workflowsApi = new WorkflowsApi(null, $config);
         }
 

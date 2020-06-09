@@ -15,10 +15,6 @@
             <directory suffix=".php">./lib</directory>
         </whitelist>
     </filter>
-    <!-- <logging>
-        <log type="coverage-clover" target="build/coverage/clover" />
-        <log type="coverage-html" target="build/coverage" />
-    </logging> -->
     <php>
         <ini name="error_reporting" value="E_ALL" />
     </php>
