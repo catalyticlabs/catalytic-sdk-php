@@ -25,3 +25,8 @@ Or to run the unit tests with colors, run the command manually:
 $ ./vendor/bin/phpunit tests --testdox
 ```
 
+## Publishing
+
+1. Update the version in `.version`
+2. Update `CHANGELOG.md`
+3. Create a release in github or a git tag manually
