@@ -3,18 +3,21 @@
 namespace Catalytic\SDK\Clients;
 
 use Catalytic\SDK\ApiException;
+use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\UserCredentialsApi;
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{CredentialsNotFoundException, UnauthorizedException, InternalErrorException};
 use Catalytic\SDK\Model\Credentials as InternalCredentials;
 use Catalytic\SDK\Entities\{Credentials as UserCredentials, CredentialsPage};
+use Monolog\Logger;
 
 /**
  * Credentials client
  */
 class Credentials
 {
+    private Logger $logger;
     private UserCredentialsApi $userCredentialsApi;
 
     /**
@@ -25,6 +28,7 @@ class Credentials
      */
     public function __construct(?string $secret, UserCredentialsApi $userCredentialsApi = null)
     {
+        $this->logger = CatalyticLogger::getLogger(Credentials::class);
         if ($userCredentialsApi) {
             $this->userCredentialsApi = $userCredentialsApi;
         } else {
@@ -45,6 +49,7 @@ class Credentials
     public function get(string $id): UserCredentials
     {
         try {
+            $this->logger->debug("Getting Credentials with id $id");
             $internalCredentials = $this->userCredentialsApi->getCredentials($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -80,6 +85,7 @@ class Credentials
         }
 
         try {
+            $this->logger->debug("Finding Credentials with text $text and owner $owner");
             $internalCredentials = $this->userCredentialsApi->findCredentials($text, null, null, null, $owner, null, null, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -111,6 +117,7 @@ class Credentials
     public function revoke(string $id): UserCredentials
     {
         try {
+            $this->logger->debug("Revoking Credentials with id $id");
             $internalCredentials = $this->userCredentialsApi->revokeCredentials($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {

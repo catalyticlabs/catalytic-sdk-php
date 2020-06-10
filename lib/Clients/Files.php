@@ -5,6 +5,7 @@ namespace Catalytic\SDK\Clients;
 use Exception;
 use SplFileObject;
 use Catalytic\SDK\ConfigurationUtils;
+use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\Api\FilesApi;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Entities\File;
@@ -14,12 +15,14 @@ use Catalytic\SDK\Exceptions\{
     UnauthorizedException
 };
 use Catalytic\SDK\Model\FileMetadata as InternalFile;
+use Monolog\Logger;
 
 /**
  * Files client
  */
 class Files
 {
+    private Logger $logger;
     private FilesApi $filesApi;
 
     /**
@@ -30,6 +33,7 @@ class Files
      */
     public function __construct(?string $secret, FilesApi $filesApi = null)
     {
+        $this->logger = CatalyticLogger::getLogger(Files::class);
         if ($filesApi) {
             $this->filesApi = $filesApi;
         } else {
@@ -50,6 +54,7 @@ class Files
     public function get(string $id): File
     {
         try {
+            $this->logger->debug("Getting File with id $id");
             $internalFile = $this->filesApi->getFile($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -81,6 +86,7 @@ class Files
     {
         // By default this downloads the file to a temp dir
         try {
+            $this->logger->debug("Downloading File with id $id");
             $file = $this->filesApi->downloadFile($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -122,6 +128,7 @@ class Files
     public function upload(SplFileObject $fileToUpload): File
     {
         try {
+            $this->logger->debug("Uploading File");
             $internalFile = $this->filesApi->uploadFiles($fileToUpload);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {

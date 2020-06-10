@@ -4,12 +4,14 @@ namespace Catalytic\SDK\Clients;
 
 use SplFileObject;
 use Catalytic\SDK\ApiException;
+use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\Api\WorkflowsApi;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{InternalErrorException, WorkflowNotFoundException, UnauthorizedException};
 use Catalytic\SDK\Entities\{File, Workflow, WorkflowsPage};
 use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest, WorkflowImportRequest};
+use Monolog\Logger;
 
 /**
  * Workflow client to be exposed to consumers
@@ -28,6 +30,7 @@ class Workflows
      */
     public function __construct(?string $secret, WorkflowsApi $workflowsApi = null, Files $filesClient = null)
     {
+        $this->logger = CatalyticLogger::getLogger(Workflows::class);
         if ($secret) {
             $config = ConfigurationUtils::getConfiguration($secret);
         }
@@ -57,6 +60,7 @@ class Workflows
     public function get(string $id): Workflow
     {
         try {
+            $this->logger->debug("Getting Workflow with id $id");
             $internalWorkflow = $this->workflowsApi->getWorkflow($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -94,6 +98,7 @@ class Workflows
         }
 
         try {
+            $this->logger->debug("Finding Workflows with text $text, owner $owner, category $category");
             $internalWorkflows = $this->workflowsApi->findWorkflows($text, null, null, null, $owner, $category, null, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -130,6 +135,7 @@ class Workflows
 
         // Submit a request to export a workflow
         try {
+            $this->logger->debug("Exporting Workflow with id $id");
             $internalWorkflowExport = $this->workflowsApi->exportWorkflow($id, $workflowExportRequest);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -144,6 +150,7 @@ class Workflows
         while ($internalWorkflowExport->getFileId() === null) {
             $exportId = $internalWorkflowExport->getId();
             try {
+                $this->logger->debug("Getting Workflow Export with id $exportId");
                 $internalWorkflowExport = $this->workflowsApi->getWorkflowExport($exportId, $workflowExportRequest);
             } catch (ApiException $e) {
                 throw new InternalErrorException("Unable to export Workflow with id $id", $e);
@@ -178,6 +185,7 @@ class Workflows
 
         // Submit a request to import the workflow
         try {
+            $this->logger->debug("Importing workflow");
             $internalWorkflowImport = $this->workflowsApi->importWorkflow($workflowImportRequest);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -190,6 +198,7 @@ class Workflows
         while ($internalWorkflowImport->getWorkflowId() === null) {
             $importId = $internalWorkflowImport->getId();
             try {
+                $this->logger->debug("Getting Workflow Import with id $importId");
                 $internalWorkflowImport = $this->workflowsApi->getWorkflowImport($importId, $workflowImportRequest);
             } catch (ApiException $e) {
                 throw new InternalErrorException("Unable to import Workflow", $e);

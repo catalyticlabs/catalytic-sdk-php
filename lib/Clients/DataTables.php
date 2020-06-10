@@ -5,18 +5,21 @@ namespace Catalytic\SDK\Clients;
 use Exception;
 use SplFileObject;
 use Catalytic\SDK\ApiException;
+use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\Api\DataTablesApi;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Entities\{DataTable, DataTablesPage};
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{InternalErrorException, DataTableNotFoundException, UnauthorizedException};
 use Catalytic\SDK\Model\DataTable as InternalDataTable;
+use Monolog\Logger;
 
 /**
  * DataTables client
  */
 class DataTables
 {
+    private Logger $logger;
     private DataTablesApi $dataTablesApi;
 
     /**
@@ -27,6 +30,7 @@ class DataTables
      */
     public function __construct(?string $secret, DataTablesApi $dataTablesApi = null)
     {
+        $this->logger = CatalyticLogger::getLogger(DataTables::class);
         if ($dataTablesApi) {
             $this->dataTablesApi = $dataTablesApi;
         } else {
@@ -47,6 +51,7 @@ class DataTables
     public function get(string $id): DataTable
     {
         try {
+            $this->logger->debug("Getting DataTable with id $id");
             $internalDataTable = $this->dataTablesApi->getDataTable($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -78,6 +83,7 @@ class DataTables
         }
 
         try {
+            $this->logger->debug("Finding DataTables with text $text");
             $internalDataTables = $this->dataTablesApi->findDataTables($text, null, null, null, null, null, null, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -110,6 +116,7 @@ class DataTables
     {
         // By default this downloads the file to a temp dir
         try {
+            $this->logger->debug("Downloading DataTable with id $id and format $format");
             $dataTableFile = $this->dataTablesApi->downloadDataTable($id, $format);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -154,6 +161,7 @@ class DataTables
     public function upload(SplFileObject $dataTableFile, string $tableName = null, int $headerRow = 1, int $sheetNumber = 1): DataTable
     {
         try {
+            $this->logger->debug("Uploading DataTable with tableName $tableName");
             $internalDataTable = $this->dataTablesApi->uploadDataTable($tableName, $headerRow, $sheetNumber, $dataTableFile);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -180,6 +188,7 @@ class DataTables
     public function replace(string $id, SplFileObject $dataTableFile, int $headerRow = 1, int $sheetNumber = 1): DataTable
     {
         try {
+            $this->logger->debug("Replacing DataTable with id $id");
             $internalDataTable = $this->dataTablesApi->replaceDataTable($id, $headerRow, $sheetNumber, $dataTableFile);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {

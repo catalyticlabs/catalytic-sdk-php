@@ -2,6 +2,7 @@
 
 namespace Catalytic\SDK\Clients;
 
+use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\Api\UsersApi;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\ConfigurationUtils;
@@ -9,12 +10,14 @@ use Catalytic\SDK\Entities\{User, UsersPage};
 use Catalytic\SDK\Exceptions\{UserNotFoundException, InternalErrorException, UnauthorizedException};
 use Catalytic\SDK\Model\User as InternalUser;
 use Catalytic\SDK\Search\{Filter, SearchUtils};
+use Monolog\Logger;
 
 /**
  * User client to be exposed to consumers
  */
 class Users
 {
+    private Logger $logger;
     private UsersApi $usersApi;
 
     /**
@@ -25,6 +28,7 @@ class Users
      */
     public function __construct(?string $secret, UsersApi $usersApi = null)
     {
+        $this->logger = CatalyticLogger::getLogger(Users::class);
         if ($usersApi) {
             $this->usersApi = $usersApi;
         } else {
@@ -45,6 +49,7 @@ class Users
     public function get(string $identifier): User
     {
         try {
+            $this->logger->debug("Getting user with identifier $identifier");
             $internalUser = $this->usersApi->getUser($identifier);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -79,6 +84,7 @@ class Users
         }
 
         try {
+            $this->logger->debug("Finding users with text $text");
             $internalUsers = $this->usersApi->findUsers($text, null, null, null, null, null, null, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {

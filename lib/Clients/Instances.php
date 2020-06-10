@@ -3,6 +3,7 @@
 namespace Catalytic\SDK\Clients;
 
 use Catalytic\SDK\ApiException;
+use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\{InstancesApi, InstanceStepsApi};
 use Catalytic\SDK\Entities\{Instance, InstanceStep, InstancesPage, InstanceStepsPage};
@@ -21,17 +22,20 @@ use Catalytic\SDK\Model\{
     StartInstanceRequest
 };
 use Catalytic\SDK\Search\{Filter, SearchUtils};
+use Monolog\Logger;
 
 /**
  * Instance client to be exposed to consumers
  */
 class Instances
 {
+    private Logger $logger;
     private InstancesApi $instancesApi;
     private InstanceStepsApi $instanceStepsApi;
 
     public function __construct(?string $secret, InstancesApi $instancesApi = null, InstanceStepsApi $instanceStepsApi = null)
     {
+        $this->logger = CatalyticLogger::getLogger(Instances::class);
         $config = null;
 
         if ($secret) {
@@ -63,6 +67,7 @@ class Instances
     public function get(string $id): Instance
     {
         try {
+            $this->logger->debug("Getting Instance with id $id");
             $internalInstance = $this->instancesApi->getInstance($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -102,6 +107,7 @@ class Instances
         }
 
         try {
+            $this->logger->debug("Finding Instances with text $text, owner $owner, status $status, workflowId $workflowId");
             $internalInstances = $this->instancesApi->findInstances($text, $status, $workflowId, null, $owner, null, null, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -136,6 +142,7 @@ class Instances
         $request = $this->createStartInstanceRequest($workflowId, $name, $description, $fields);
 
         try {
+            $this->logger->debug("Starting Instance with workflowId $workflowId");
             $internalInstance = $this->instancesApi->startInstance($request);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -161,6 +168,7 @@ class Instances
     public function stop(string $id): Instance
     {
         try {
+            $this->logger->debug("Stopping Instance with id $id");
             $internalStoppedInstance = $this->instancesApi->stopInstance($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -186,6 +194,7 @@ class Instances
     public function getStep(string $id): InstanceStep
     {
         try {
+            $this->logger->debug("Getting step with id $id");
             $internalStep = $this->getStepById($id);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -212,6 +221,7 @@ class Instances
         $steps = [];
 
         try {
+            $this->logger->debug("Getting all the steps for Instance $instanceId");
             $results = $this->instanceStepsApi->findInstanceSteps($instanceId);
         } catch (ApiException $e) {
             throw new InternalErrorException("Unable to get Instance Steps", $e);
@@ -267,6 +277,7 @@ class Instances
         }
 
         try {
+            $this->logger->debug("Finding steps with text $text, workflowId $workflowId, assignee $assignee");
             $internalSteps = $this->instanceStepsApi->findInstanceSteps($wildcardInstanceId, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -303,6 +314,7 @@ class Instances
         }
         $step = $this->getStepById($id);
         try {
+            $this->logger->debug("Completing step with id $id");
             $internalStep = $this->instanceStepsApi->completeStep($id, $step->getInstanceId(), $completeStepRequest);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
