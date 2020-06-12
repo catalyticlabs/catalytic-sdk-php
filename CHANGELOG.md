@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Basic logging
+- Create Credentials method
+- Create Credentials with web approval flow method
+- Get approval url method
+- Wait for approval method
 
 ## [0.3.0] - 2020-05-28
 ### Changed
