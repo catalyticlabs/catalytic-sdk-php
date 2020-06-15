@@ -16,6 +16,7 @@ use Catalytic\SDK\Model\{
     CredentialsCreationWithEmailAndPasswordRequest,
     WaitForCredentialsApprovalRequest,
 };
+use InvalidArgumentException;
 use Monolog\Logger;
 
 /**
@@ -122,16 +123,17 @@ class Credentials
     /**
      * Create Credentials
      *
-     * @param string $domain            The domain to create the Credentials for
-     * @param string $email             The email to create the Credentials for
-     * @param string $password          The password used to create the Credentials
+     * @param string $teamName          The name or hostname of your Catalytic team
+     * @param string $email             The email you use to login to Catalytic
+     * @param string $password          The password you use to login to Catalytic
      * @param string $name (Optional)   A name to identify the Credentials
      * @return UserCredentials          The newly created Credentials
      * @throws InternalErrorException   If any errors creating Credentials
      * @throws UnauthorizedException    If unauthorized
      */
-    public function create(string $domain, string $email, string $password, string $name = null): UserCredentials
+    public function create(string $teamName, string $email, string $password, string $name = null): UserCredentials
     {
+        $domain = $this->getDomainFromTeamName($teamName);
         $credentialsRequest = new CredentialsCreationWithEmailAndPasswordRequest(
             array(
                 'email' => $email,
@@ -142,7 +144,7 @@ class Credentials
         );
 
         try {
-            $this->logger->debug("Creating Credentials with email $email, domain $domain, name $name");
+            $this->logger->debug("Creating Credentials with email $email, domain $teamName, name $name");
             $internalCredentials = $this->authenticationApi->createAndApproveCredentials($credentialsRequest);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -158,18 +160,19 @@ class Credentials
     /**
      * Create Credentials
      *
-     * @param string $domain            The domain to create the Credentials for
+     * @param string $teamname          The name or hostname of your Catalytic team
      * @param string $name (Optional)   A name to identify the Credentials
      * @return UserCredentials          The newly created Credentials
      * @throws InternalErrorException   If any errors creating Credentials
      * @throws UnauthorizedException    If unauthorized
      */
-    public function createWithWebApprovalFlow(string $domain, string $name = null): UserCredentials
+    public function createWithWebApprovalFlow(string $teamName, string $name = null): UserCredentials
     {
+        $domain = $this->getDomainFromTeamName($teamName);
         $credentialsRequest = new CredentialsCreationRequest(array('domain' => $domain,'name' => $name));
 
         try {
-            $this->logger->debug("Creating Credentials with domain $domain, name $name");
+            $this->logger->debug("Creating Credentials with domain $teamName, name $name");
             $internalCredentials = $this->authenticationApi->createCredentials($credentialsRequest);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
@@ -263,5 +266,40 @@ class Credentials
             $internalCredentials->getOwner()
         );
         return $credentials;
+    }
+
+    /**
+     * Gets the domain from the passed in teamName
+     *
+     * @param string $teamNameOrDomain  The teamName to get the domain from
+     * @return string                   The domain
+     */
+    private function getDomainFromTeamName(string $teamNameOrDomain): string
+    {
+        // If the domain was passed in, validate the teamName and return the domain
+        if (strpos($teamNameOrDomain, '.') !== false) {
+            $pieces = explode('.', $teamNameOrDomain);
+            $teamName = $pieces[0];
+            $this->validateTeamName($teamName);
+            return $teamNameOrDomain;
+        }
+
+        // Otherwise teamName was passed in so validate it, build the domain, and return it
+        $this->validateTeamName($teamNameOrDomain);
+        return "$teamNameOrDomain.pushbot.com";
+    }
+
+    /**
+     * Validates the passed in team name
+     *
+     * @param string $teamName          The team name to validate
+     * @throws InvalidArgumentException If the passed in team name is not valid
+     */
+    private function validateTeamName(string $teamName): void
+    {
+        $validTeamNameRegex = '/^[a-z0-9][a-z0-9-_]+$/';
+        if (!preg_match($validTeamNameRegex, $teamName)) {
+            throw new InvalidArgumentException('Invalid teamName');
+        }
     }
 }

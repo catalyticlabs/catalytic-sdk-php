@@ -8,7 +8,7 @@ use Catalytic\SDK\Exceptions\{
     InternalErrorException,
     UnauthorizedException
 };
-use Catalytic\SDK\Entities\{Credentials as UserCredentials, CredentialsPage};
+use Catalytic\SDK\Entities\{Credentials as UserCredentials};
 use PHPUnit\Framework\TestCase;
 
 class CredentialsTest extends TestCase
@@ -244,7 +244,7 @@ class CredentialsTest extends TestCase
         $credentialsClient->create('example', 'alice@example.com', 'mypassword');
     }
 
-    public function testCreateCredentials_ItShouldCreateCredentials()
+    public function testCreateCredentials_ItShouldCreateCredentialsWithTeamName()
     {
         $credentials = new \Catalytic\SDK\Model\Credentials(
             array(
@@ -264,6 +264,51 @@ class CredentialsTest extends TestCase
         $credentialsClient = new Credentials(null, $userCredentialsApi, $authenticationApi);
         $credentials = $credentialsClient->create('example', 'alice@example.com', 'mypassword');
         $this->assertInstanceOf(UserCredentials::class, $credentials);
+    }
+
+    public function testCreateCredentials_ItShouldCreateCredentialsWithDomain()
+    {
+        $credentials = new \Catalytic\SDK\Model\Credentials(
+            array(
+                'id' => '114c0d7d-c291-4ad2-a10d-68c5dd532af3',
+                'domain' => 'https://catalytic.com',
+                'name' => 'catalytic',
+                'type' => 'foobar',
+                'environment' => 'prod',
+                'owner' => 'alice@catalytic.com'
+            )
+        );
+        $userCredentialsApi = Mockery::mock('Catalytic\SDK\Api\UserCredentialsApi');
+        $authenticationApi = Mockery::mock('Catalytic\SDK\Api\AuthenticationApi');
+        $authenticationApi->shouldReceive('createAndApproveCredentials')
+        ->andReturn($credentials);
+
+        $credentialsClient = new Credentials(null, $userCredentialsApi, $authenticationApi);
+        $credentials = $credentialsClient->create('example.pushbot.com', 'alice@example.com', 'mypassword');
+        $this->assertInstanceOf(UserCredentials::class, $credentials);
+    }
+
+    public function testCreateCredentials_ItShouldThrowInvalidArgumentException()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid teamName");
+        $credentials = new \Catalytic\SDK\Model\Credentials(
+            array(
+                'id' => '114c0d7d-c291-4ad2-a10d-68c5dd532af3',
+                'domain' => 'https://catalytic.com',
+                'name' => 'catalytic',
+                'type' => 'foobar',
+                'environment' => 'prod',
+                'owner' => 'alice@catalytic.com'
+            )
+        );
+        $userCredentialsApi = Mockery::mock('Catalytic\SDK\Api\UserCredentialsApi');
+        $authenticationApi = Mockery::mock('Catalytic\SDK\Api\AuthenticationApi');
+        $authenticationApi->shouldReceive('createAndApproveCredentials')
+        ->andReturn($credentials);
+
+        $credentialsClient = new Credentials(null, $userCredentialsApi, $authenticationApi);
+        $credentials = $credentialsClient->create('http://example.pushbot.com', 'alice@example.com', 'mypassword');
     }
 
     public function testCreateCredentialsWithWebApprovalFlow_ItShouldThrowUnauthorizedExceptionIfUnauthorized()
