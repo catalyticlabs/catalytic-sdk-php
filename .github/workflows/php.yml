@@ -52,15 +52,6 @@ jobs:
       run: composer run-script test
 
     - name: Publish code coverage
-      uses: paambaati/codeclimate-action@v2.6.0
-      env:
-        CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-      with:
-        coverageCommand: "composer run-script cover-xml"
-        coverageLocations: ${{ github.workspace }}/build/coverage/clover:clover
-
-    - name: Publish code coverage
       uses: codecov/codecov-action@v1
       with:
-        # token: ${{ secrets.CODECOV_TOKEN }}
         file: ${{ github.workspace }}/build/coverage/clover
