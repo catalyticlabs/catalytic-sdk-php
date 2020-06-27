@@ -116,36 +116,36 @@ class AuthenticationApi
     }
 
     /**
-     * Operation createAndApproveCredentials
+     * Operation createAccessToken
      *
-     * Create new Credentials using provided Catalytic team domain and Approve using provided email and password.
+     * Create new AccessToken in the provided Catalytic team domain.  AccessToken must be approved prior to use.
      *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationWithEmailAndPasswordRequest $credentialsCreationWithEmailAndPasswordRequest Params required to create and approve new Credentials (optional)
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationRequest $accessTokenCreationRequest Params required to create new AccessToken (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken
      */
-    public function createAndApproveCredentials($credentialsCreationWithEmailAndPasswordRequest = null)
+    public function createAccessToken($accessTokenCreationRequest = null)
     {
-        list($response) = $this->createAndApproveCredentialsWithHttpInfo($credentialsCreationWithEmailAndPasswordRequest);
+        list($response) = $this->createAccessTokenWithHttpInfo($accessTokenCreationRequest);
         return $response;
     }
 
     /**
-     * Operation createAndApproveCredentialsWithHttpInfo
+     * Operation createAccessTokenWithHttpInfo
      *
-     * Create new Credentials using provided Catalytic team domain and Approve using provided email and password.
+     * Create new AccessToken in the provided Catalytic team domain.  AccessToken must be approved prior to use.
      *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationWithEmailAndPasswordRequest $credentialsCreationWithEmailAndPasswordRequest Params required to create and approve new Credentials (optional)
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationRequest $accessTokenCreationRequest Params required to create new AccessToken (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createAndApproveCredentialsWithHttpInfo($credentialsCreationWithEmailAndPasswordRequest = null)
+    public function createAccessTokenWithHttpInfo($accessTokenCreationRequest = null)
     {
-        $request = $this->createAndApproveCredentialsRequest($credentialsCreationWithEmailAndPasswordRequest);
+        $request = $this->createAccessTokenRequest($accessTokenCreationRequest);
 
         try {
             $options = $this->createHttpClientOption();
@@ -202,20 +202,20 @@ class AuthenticationApi
                         $response->getHeaders()
                     ];
                 case 201:
-                    if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\AccessToken' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\Credentials', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\AccessToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\Credentials';
+            $returnType = '\Catalytic\SDK\Model\AccessToken';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -250,7 +250,7 @@ class AuthenticationApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\Credentials',
+                        '\Catalytic\SDK\Model\AccessToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -261,18 +261,18 @@ class AuthenticationApi
     }
 
     /**
-     * Operation createAndApproveCredentialsAsync
+     * Operation createAccessTokenAsync
      *
-     * Create new Credentials using provided Catalytic team domain and Approve using provided email and password.
+     * Create new AccessToken in the provided Catalytic team domain.  AccessToken must be approved prior to use.
      *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationWithEmailAndPasswordRequest $credentialsCreationWithEmailAndPasswordRequest Params required to create and approve new Credentials (optional)
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationRequest $accessTokenCreationRequest Params required to create new AccessToken (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAndApproveCredentialsAsync($credentialsCreationWithEmailAndPasswordRequest = null)
+    public function createAccessTokenAsync($accessTokenCreationRequest = null)
     {
-        return $this->createAndApproveCredentialsAsyncWithHttpInfo($credentialsCreationWithEmailAndPasswordRequest)
+        return $this->createAccessTokenAsyncWithHttpInfo($accessTokenCreationRequest)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -281,19 +281,19 @@ class AuthenticationApi
     }
 
     /**
-     * Operation createAndApproveCredentialsAsyncWithHttpInfo
+     * Operation createAccessTokenAsyncWithHttpInfo
      *
-     * Create new Credentials using provided Catalytic team domain and Approve using provided email and password.
+     * Create new AccessToken in the provided Catalytic team domain.  AccessToken must be approved prior to use.
      *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationWithEmailAndPasswordRequest $credentialsCreationWithEmailAndPasswordRequest Params required to create and approve new Credentials (optional)
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationRequest $accessTokenCreationRequest Params required to create new AccessToken (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createAndApproveCredentialsAsyncWithHttpInfo($credentialsCreationWithEmailAndPasswordRequest = null)
+    public function createAccessTokenAsyncWithHttpInfo($accessTokenCreationRequest = null)
     {
-        $returnType = '\Catalytic\SDK\Model\Credentials';
-        $request = $this->createAndApproveCredentialsRequest($credentialsCreationWithEmailAndPasswordRequest);
+        $returnType = '\Catalytic\SDK\Model\AccessToken';
+        $request = $this->createAccessTokenRequest($accessTokenCreationRequest);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -330,316 +330,14 @@ class AuthenticationApi
     }
 
     /**
-     * Create request for operation 'createAndApproveCredentials'
+     * Create request for operation 'createAccessToken'
      *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationWithEmailAndPasswordRequest $credentialsCreationWithEmailAndPasswordRequest Params required to create and approve new Credentials (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function createAndApproveCredentialsRequest($credentialsCreationWithEmailAndPasswordRequest = null)
-    {
-
-        $resourcePath = '/api/auth/create-and-approve';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-
-        // body params
-        $_tempBody = null;
-        if (isset($credentialsCreationWithEmailAndPasswordRequest)) {
-            $_tempBody = $credentialsCreationWithEmailAndPasswordRequest;
-        }
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation createCredentials
-     *
-     * Create new Credentials in the provided Catalytic team domain.  Credentials must be approved prior to use.
-     *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationRequest $credentialsCreationRequest Params required to create new Credentials (optional)
-     *
-     * @throws \Catalytic\SDK\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
-     */
-    public function createCredentials($credentialsCreationRequest = null)
-    {
-        list($response) = $this->createCredentialsWithHttpInfo($credentialsCreationRequest);
-        return $response;
-    }
-
-    /**
-     * Operation createCredentialsWithHttpInfo
-     *
-     * Create new Credentials in the provided Catalytic team domain.  Credentials must be approved prior to use.
-     *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationRequest $credentialsCreationRequest Params required to create new Credentials (optional)
-     *
-     * @throws \Catalytic\SDK\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function createCredentialsWithHttpInfo($credentialsCreationRequest = null)
-    {
-        $request = $this->createCredentialsRequest($credentialsCreationRequest);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 400:
-                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 401:
-                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 201:
-                    if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\Credentials', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\Catalytic\SDK\Model\Credentials';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = (string) $responseBody;
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 401:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\ProblemDetails',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 201:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\Credentials',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation createCredentialsAsync
-     *
-     * Create new Credentials in the provided Catalytic team domain.  Credentials must be approved prior to use.
-     *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationRequest $credentialsCreationRequest Params required to create new Credentials (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function createCredentialsAsync($credentialsCreationRequest = null)
-    {
-        return $this->createCredentialsAsyncWithHttpInfo($credentialsCreationRequest)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation createCredentialsAsyncWithHttpInfo
-     *
-     * Create new Credentials in the provided Catalytic team domain.  Credentials must be approved prior to use.
-     *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationRequest $credentialsCreationRequest Params required to create new Credentials (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function createCredentialsAsyncWithHttpInfo($credentialsCreationRequest = null)
-    {
-        $returnType = '\Catalytic\SDK\Model\Credentials';
-        $request = $this->createCredentialsRequest($credentialsCreationRequest);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'createCredentials'
-     *
-     * @param  \Catalytic\SDK\Model\CredentialsCreationRequest $credentialsCreationRequest Params required to create new Credentials (optional)
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationRequest $accessTokenCreationRequest Params required to create new AccessToken (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function createCredentialsRequest($credentialsCreationRequest = null)
+    protected function createAccessTokenRequest($accessTokenCreationRequest = null)
     {
 
         $resourcePath = '/api/auth';
@@ -654,8 +352,8 @@ class AuthenticationApi
 
         // body params
         $_tempBody = null;
-        if (isset($credentialsCreationRequest)) {
-            $_tempBody = $credentialsCreationRequest;
+        if (isset($accessTokenCreationRequest)) {
+            $_tempBody = $accessTokenCreationRequest;
         }
 
         if ($multipart) {
@@ -720,36 +418,338 @@ class AuthenticationApi
     }
 
     /**
-     * Operation waitForCredentialsApproval
+     * Operation createAndApproveAccessToken
      *
-     * Wait until Credentials are approved
+     * Create new AccessToken using provided Catalytic team domain and Approve using provided email and password.
      *
-     * @param  \Catalytic\SDK\Model\WaitForCredentialsApprovalRequest $waitForCredentialsApprovalRequest Params required to poll approved Credentials (optional)
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationWithEmailAndPasswordRequest $accessTokenCreationWithEmailAndPasswordRequest Params required to create and approve new AccessToken (optional)
+     *
+     * @throws \Catalytic\SDK\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken
+     */
+    public function createAndApproveAccessToken($accessTokenCreationWithEmailAndPasswordRequest = null)
+    {
+        list($response) = $this->createAndApproveAccessTokenWithHttpInfo($accessTokenCreationWithEmailAndPasswordRequest);
+        return $response;
+    }
+
+    /**
+     * Operation createAndApproveAccessTokenWithHttpInfo
+     *
+     * Create new AccessToken using provided Catalytic team domain and Approve using provided email and password.
+     *
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationWithEmailAndPasswordRequest $accessTokenCreationWithEmailAndPasswordRequest Params required to create and approve new AccessToken (optional)
+     *
+     * @throws \Catalytic\SDK\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createAndApproveAccessTokenWithHttpInfo($accessTokenCreationWithEmailAndPasswordRequest = null)
+    {
+        $request = $this->createAndApproveAccessTokenRequest($accessTokenCreationWithEmailAndPasswordRequest);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 400:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\Catalytic\SDK\Model\ProblemDetails' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\ProblemDetails', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 201:
+                    if ('\Catalytic\SDK\Model\AccessToken' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\AccessToken', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\Catalytic\SDK\Model\AccessToken';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\ProblemDetails',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Catalytic\SDK\Model\AccessToken',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createAndApproveAccessTokenAsync
+     *
+     * Create new AccessToken using provided Catalytic team domain and Approve using provided email and password.
+     *
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationWithEmailAndPasswordRequest $accessTokenCreationWithEmailAndPasswordRequest Params required to create and approve new AccessToken (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAndApproveAccessTokenAsync($accessTokenCreationWithEmailAndPasswordRequest = null)
+    {
+        return $this->createAndApproveAccessTokenAsyncWithHttpInfo($accessTokenCreationWithEmailAndPasswordRequest)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createAndApproveAccessTokenAsyncWithHttpInfo
+     *
+     * Create new AccessToken using provided Catalytic team domain and Approve using provided email and password.
+     *
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationWithEmailAndPasswordRequest $accessTokenCreationWithEmailAndPasswordRequest Params required to create and approve new AccessToken (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createAndApproveAccessTokenAsyncWithHttpInfo($accessTokenCreationWithEmailAndPasswordRequest = null)
+    {
+        $returnType = '\Catalytic\SDK\Model\AccessToken';
+        $request = $this->createAndApproveAccessTokenRequest($accessTokenCreationWithEmailAndPasswordRequest);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createAndApproveAccessToken'
+     *
+     * @param  \Catalytic\SDK\Model\AccessTokenCreationWithEmailAndPasswordRequest $accessTokenCreationWithEmailAndPasswordRequest Params required to create and approve new AccessToken (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function createAndApproveAccessTokenRequest($accessTokenCreationWithEmailAndPasswordRequest = null)
+    {
+
+        $resourcePath = '/api/auth/create-and-approve';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($accessTokenCreationWithEmailAndPasswordRequest)) {
+            $_tempBody = $accessTokenCreationWithEmailAndPasswordRequest;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json-patch+json', 'application/json', 'text/json', 'application/_*+json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
+            } else {
+                $httpBody = $_tempBody;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation waitForAccessTokenApproval
+     *
+     * Wait until AccessToken is approved
+     *
+     * @param  \Catalytic\SDK\Model\WaitForAccessTokenApprovalRequest $waitForAccessTokenApprovalRequest Params required to poll approved AccessToken (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|object
      */
-    public function waitForCredentialsApproval($waitForCredentialsApprovalRequest = null)
+    public function waitForAccessTokenApproval($waitForAccessTokenApprovalRequest = null)
     {
-        list($response) = $this->waitForCredentialsApprovalWithHttpInfo($waitForCredentialsApprovalRequest);
+        list($response) = $this->waitForAccessTokenApprovalWithHttpInfo($waitForAccessTokenApprovalRequest);
         return $response;
     }
 
     /**
-     * Operation waitForCredentialsApprovalWithHttpInfo
+     * Operation waitForAccessTokenApprovalWithHttpInfo
      *
-     * Wait until Credentials are approved
+     * Wait until AccessToken is approved
      *
-     * @param  \Catalytic\SDK\Model\WaitForCredentialsApprovalRequest $waitForCredentialsApprovalRequest Params required to poll approved Credentials (optional)
+     * @param  \Catalytic\SDK\Model\WaitForAccessTokenApprovalRequest $waitForAccessTokenApprovalRequest Params required to poll approved AccessToken (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|object, HTTP status code, HTTP response headers (array of strings)
      */
-    public function waitForCredentialsApprovalWithHttpInfo($waitForCredentialsApprovalRequest = null)
+    public function waitForAccessTokenApprovalWithHttpInfo($waitForAccessTokenApprovalRequest = null)
     {
-        $request = $this->waitForCredentialsApprovalRequest($waitForCredentialsApprovalRequest);
+        $request = $this->waitForAccessTokenApprovalRequest($waitForAccessTokenApprovalRequest);
 
         try {
             $options = $this->createHttpClientOption();
@@ -865,18 +865,18 @@ class AuthenticationApi
     }
 
     /**
-     * Operation waitForCredentialsApprovalAsync
+     * Operation waitForAccessTokenApprovalAsync
      *
-     * Wait until Credentials are approved
+     * Wait until AccessToken is approved
      *
-     * @param  \Catalytic\SDK\Model\WaitForCredentialsApprovalRequest $waitForCredentialsApprovalRequest Params required to poll approved Credentials (optional)
+     * @param  \Catalytic\SDK\Model\WaitForAccessTokenApprovalRequest $waitForAccessTokenApprovalRequest Params required to poll approved AccessToken (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function waitForCredentialsApprovalAsync($waitForCredentialsApprovalRequest = null)
+    public function waitForAccessTokenApprovalAsync($waitForAccessTokenApprovalRequest = null)
     {
-        return $this->waitForCredentialsApprovalAsyncWithHttpInfo($waitForCredentialsApprovalRequest)
+        return $this->waitForAccessTokenApprovalAsyncWithHttpInfo($waitForAccessTokenApprovalRequest)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -885,19 +885,19 @@ class AuthenticationApi
     }
 
     /**
-     * Operation waitForCredentialsApprovalAsyncWithHttpInfo
+     * Operation waitForAccessTokenApprovalAsyncWithHttpInfo
      *
-     * Wait until Credentials are approved
+     * Wait until AccessToken is approved
      *
-     * @param  \Catalytic\SDK\Model\WaitForCredentialsApprovalRequest $waitForCredentialsApprovalRequest Params required to poll approved Credentials (optional)
+     * @param  \Catalytic\SDK\Model\WaitForAccessTokenApprovalRequest $waitForAccessTokenApprovalRequest Params required to poll approved AccessToken (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function waitForCredentialsApprovalAsyncWithHttpInfo($waitForCredentialsApprovalRequest = null)
+    public function waitForAccessTokenApprovalAsyncWithHttpInfo($waitForAccessTokenApprovalRequest = null)
     {
         $returnType = 'object';
-        $request = $this->waitForCredentialsApprovalRequest($waitForCredentialsApprovalRequest);
+        $request = $this->waitForAccessTokenApprovalRequest($waitForAccessTokenApprovalRequest);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -934,14 +934,14 @@ class AuthenticationApi
     }
 
     /**
-     * Create request for operation 'waitForCredentialsApproval'
+     * Create request for operation 'waitForAccessTokenApproval'
      *
-     * @param  \Catalytic\SDK\Model\WaitForCredentialsApprovalRequest $waitForCredentialsApprovalRequest Params required to poll approved Credentials (optional)
+     * @param  \Catalytic\SDK\Model\WaitForAccessTokenApprovalRequest $waitForAccessTokenApprovalRequest Params required to poll approved AccessToken (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function waitForCredentialsApprovalRequest($waitForCredentialsApprovalRequest = null)
+    protected function waitForAccessTokenApprovalRequest($waitForAccessTokenApprovalRequest = null)
     {
 
         $resourcePath = '/api/auth/wait-for-approval';
@@ -956,8 +956,8 @@ class AuthenticationApi
 
         // body params
         $_tempBody = null;
-        if (isset($waitForCredentialsApprovalRequest)) {
-            $_tempBody = $waitForCredentialsApprovalRequest;
+        if (isset($waitForAccessTokenApprovalRequest)) {
+            $_tempBody = $waitForAccessTokenApprovalRequest;
         }
 
         if ($multipart) {

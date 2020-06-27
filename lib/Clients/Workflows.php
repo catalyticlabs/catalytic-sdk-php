@@ -11,7 +11,6 @@ use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{InternalErrorException, WorkflowNotFoundException, UnauthorizedException};
 use Catalytic\SDK\Entities\{File, Workflow, WorkflowsPage};
 use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest, WorkflowImportRequest};
-use Monolog\Logger;
 
 /**
  * Workflow client to be exposed to consumers

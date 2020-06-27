@@ -1,6 +1,6 @@
 <?php
 /**
- * UserCredentialsApi
+ * AccessTokensApi
  * PHP version 5
  *
  * @category Class
@@ -40,14 +40,14 @@ use Catalytic\SDK\HeaderSelector;
 use Catalytic\SDK\ObjectSerializer;
 
 /**
- * UserCredentialsApi Class Doc Comment
+ * AccessTokensApi Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class UserCredentialsApi
+class AccessTokensApi
 {
     /**
      * @var ClientInterface
@@ -116,9 +116,9 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation findCredentials
+     * Operation findAccessTokens
      *
-     * Find User Tokens
+     * Find Access Tokens
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
@@ -127,23 +127,27 @@ class UserCredentialsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\CredentialsPage
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessTokensPage
      */
-    public function findCredentials($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findAccessTokens($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        list($response) = $this->findCredentialsWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        list($response) = $this->findAccessTokensWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
         return $response;
     }
 
     /**
-     * Operation findCredentialsWithHttpInfo
+     * Operation findAccessTokensWithHttpInfo
      *
-     * Find User Tokens
+     * Find Access Tokens
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
@@ -152,16 +156,20 @@ class UserCredentialsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\CredentialsPage, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessTokensPage, HTTP status code, HTTP response headers (array of strings)
      */
-    public function findCredentialsWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findAccessTokensWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        $request = $this->findCredentialsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $request = $this->findAccessTokensRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
 
         try {
             $options = $this->createHttpClientOption();
@@ -230,20 +238,20 @@ class UserCredentialsApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\CredentialsPage' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\AccessTokensPage' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\CredentialsPage', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\AccessTokensPage', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\CredentialsPage';
+            $returnType = '\Catalytic\SDK\Model\AccessTokensPage';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -286,7 +294,7 @@ class UserCredentialsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\CredentialsPage',
+                        '\Catalytic\SDK\Model\AccessTokensPage',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -297,9 +305,9 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation findCredentialsAsync
+     * Operation findAccessTokensAsync
      *
-     * Find User Tokens
+     * Find Access Tokens
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
@@ -308,15 +316,19 @@ class UserCredentialsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findCredentialsAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findAccessTokensAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        return $this->findCredentialsAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize)
+        return $this->findAccessTokensAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -325,9 +337,9 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation findCredentialsAsyncWithHttpInfo
+     * Operation findAccessTokensAsyncWithHttpInfo
      *
-     * Find User Tokens
+     * Find Access Tokens
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
@@ -336,16 +348,20 @@ class UserCredentialsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findCredentialsAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findAccessTokensAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        $returnType = '\Catalytic\SDK\Model\CredentialsPage';
-        $request = $this->findCredentialsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $returnType = '\Catalytic\SDK\Model\AccessTokensPage';
+        $request = $this->findAccessTokensRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -382,7 +398,7 @@ class UserCredentialsApi
     }
 
     /**
-     * Create request for operation 'findCredentials'
+     * Create request for operation 'findAccessTokens'
      *
      * @param  string $query Free text query terms to search all attributes for (optional)
      * @param  string $status Run or task status to search for (optional)
@@ -391,16 +407,20 @@ class UserCredentialsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function findCredentialsRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    protected function findAccessTokensRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
 
-        $resourcePath = '/api/credentials';
+        $resourcePath = '/api/access-tokens';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -482,6 +502,50 @@ class UserCredentialsApi
             }
             else {
                 $queryParams['participating_users'] = $participatingUsers;
+            }
+        }
+        // query params
+        if ($startedBefore !== null) {
+            if('form' === 'form' && is_array($startedBefore)) {
+                foreach($startedBefore as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['started_before'] = $startedBefore;
+            }
+        }
+        // query params
+        if ($startedAfter !== null) {
+            if('form' === 'form' && is_array($startedAfter)) {
+                foreach($startedAfter as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['started_after'] = $startedAfter;
+            }
+        }
+        // query params
+        if ($endedBefore !== null) {
+            if('form' === 'form' && is_array($endedBefore)) {
+                foreach($endedBefore as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['ended_before'] = $endedBefore;
+            }
+        }
+        // query params
+        if ($endedAfter !== null) {
+            if('form' === 'form' && is_array($endedAfter)) {
+                foreach($endedAfter as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['ended_after'] = $endedAfter;
             }
         }
         // query params
@@ -578,32 +642,32 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation getCredentials
+     * Operation getAccessToken
      *
      * @param  string $id id (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken
      */
-    public function getCredentials($id)
+    public function getAccessToken($id)
     {
-        list($response) = $this->getCredentialsWithHttpInfo($id);
+        list($response) = $this->getAccessTokenWithHttpInfo($id);
         return $response;
     }
 
     /**
-     * Operation getCredentialsWithHttpInfo
+     * Operation getAccessTokenWithHttpInfo
      *
      * @param  string $id (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getCredentialsWithHttpInfo($id)
+    public function getAccessTokenWithHttpInfo($id)
     {
-        $request = $this->getCredentialsRequest($id);
+        $request = $this->getAccessTokenRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -672,20 +736,20 @@ class UserCredentialsApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\AccessToken' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\Credentials', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\AccessToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\Credentials';
+            $returnType = '\Catalytic\SDK\Model\AccessToken';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -728,7 +792,7 @@ class UserCredentialsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\Credentials',
+                        '\Catalytic\SDK\Model\AccessToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -739,7 +803,7 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation getCredentialsAsync
+     * Operation getAccessTokenAsync
      *
      * 
      *
@@ -748,9 +812,9 @@ class UserCredentialsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCredentialsAsync($id)
+    public function getAccessTokenAsync($id)
     {
-        return $this->getCredentialsAsyncWithHttpInfo($id)
+        return $this->getAccessTokenAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -759,7 +823,7 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation getCredentialsAsyncWithHttpInfo
+     * Operation getAccessTokenAsyncWithHttpInfo
      *
      * 
      *
@@ -768,10 +832,10 @@ class UserCredentialsApi
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getCredentialsAsyncWithHttpInfo($id)
+    public function getAccessTokenAsyncWithHttpInfo($id)
     {
-        $returnType = '\Catalytic\SDK\Model\Credentials';
-        $request = $this->getCredentialsRequest($id);
+        $returnType = '\Catalytic\SDK\Model\AccessToken';
+        $request = $this->getAccessTokenRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -808,23 +872,23 @@ class UserCredentialsApi
     }
 
     /**
-     * Create request for operation 'getCredentials'
+     * Create request for operation 'getAccessToken'
      *
      * @param  string $id (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getCredentialsRequest($id)
+    protected function getAccessTokenRequest($id)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling getCredentials'
+                'Missing the required parameter $id when calling getAccessToken'
             );
         }
 
-        $resourcePath = '/api/credentials/{id}';
+        $resourcePath = '/api/access-tokens/{id}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -911,36 +975,36 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation revokeCredentials
+     * Operation revokeAccessToken
      *
-     * Revoke User Token
+     * Revoke Access Token
      *
-     * @param  string $id The public Access Identifier of the Credentials (required)
+     * @param  string $id The public Id of the AccessToken (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials
+     * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken
      */
-    public function revokeCredentials($id)
+    public function revokeAccessToken($id)
     {
-        list($response) = $this->revokeCredentialsWithHttpInfo($id);
+        list($response) = $this->revokeAccessTokenWithHttpInfo($id);
         return $response;
     }
 
     /**
-     * Operation revokeCredentialsWithHttpInfo
+     * Operation revokeAccessTokenWithHttpInfo
      *
-     * Revoke User Token
+     * Revoke Access Token
      *
-     * @param  string $id The public Access Identifier of the Credentials (required)
+     * @param  string $id The public Id of the AccessToken (required)
      *
      * @throws \Catalytic\SDK\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\Credentials, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\AccessToken, HTTP status code, HTTP response headers (array of strings)
      */
-    public function revokeCredentialsWithHttpInfo($id)
+    public function revokeAccessTokenWithHttpInfo($id)
     {
-        $request = $this->revokeCredentialsRequest($id);
+        $request = $this->revokeAccessTokenRequest($id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1009,20 +1073,20 @@ class UserCredentialsApi
                         $response->getHeaders()
                     ];
                 case 200:
-                    if ('\Catalytic\SDK\Model\Credentials' === '\SplFileObject') {
+                    if ('\Catalytic\SDK\Model\AccessToken' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\Credentials', []),
+                        ObjectSerializer::deserialize($content, '\Catalytic\SDK\Model\AccessToken', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\Catalytic\SDK\Model\Credentials';
+            $returnType = '\Catalytic\SDK\Model\AccessToken';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1065,7 +1129,7 @@ class UserCredentialsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Catalytic\SDK\Model\Credentials',
+                        '\Catalytic\SDK\Model\AccessToken',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1076,18 +1140,18 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation revokeCredentialsAsync
+     * Operation revokeAccessTokenAsync
      *
-     * Revoke User Token
+     * Revoke Access Token
      *
-     * @param  string $id The public Access Identifier of the Credentials (required)
+     * @param  string $id The public Id of the AccessToken (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function revokeCredentialsAsync($id)
+    public function revokeAccessTokenAsync($id)
     {
-        return $this->revokeCredentialsAsyncWithHttpInfo($id)
+        return $this->revokeAccessTokenAsyncWithHttpInfo($id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1096,19 +1160,19 @@ class UserCredentialsApi
     }
 
     /**
-     * Operation revokeCredentialsAsyncWithHttpInfo
+     * Operation revokeAccessTokenAsyncWithHttpInfo
      *
-     * Revoke User Token
+     * Revoke Access Token
      *
-     * @param  string $id The public Access Identifier of the Credentials (required)
+     * @param  string $id The public Id of the AccessToken (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function revokeCredentialsAsyncWithHttpInfo($id)
+    public function revokeAccessTokenAsyncWithHttpInfo($id)
     {
-        $returnType = '\Catalytic\SDK\Model\Credentials';
-        $request = $this->revokeCredentialsRequest($id);
+        $returnType = '\Catalytic\SDK\Model\AccessToken';
+        $request = $this->revokeAccessTokenRequest($id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1145,23 +1209,23 @@ class UserCredentialsApi
     }
 
     /**
-     * Create request for operation 'revokeCredentials'
+     * Create request for operation 'revokeAccessToken'
      *
-     * @param  string $id The public Access Identifier of the Credentials (required)
+     * @param  string $id The public Id of the AccessToken (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function revokeCredentialsRequest($id)
+    protected function revokeAccessTokenRequest($id)
     {
         // verify the required parameter 'id' is set
         if ($id === null || (is_array($id) && count($id) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $id when calling revokeCredentials'
+                'Missing the required parameter $id when calling revokeAccessToken'
             );
         }
 
-        $resourcePath = '/api/credentials/{id}:revoke';
+        $resourcePath = '/api/access-tokens/{id}:revoke';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

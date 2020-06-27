@@ -127,6 +127,10 @@ class InstancesApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
@@ -134,9 +138,9 @@ class InstancesApi
      * @throws \InvalidArgumentException
      * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\InstancesPage
      */
-    public function findInstances($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findInstances($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        list($response) = $this->findInstancesWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        list($response) = $this->findInstancesWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
         return $response;
     }
 
@@ -152,6 +156,10 @@ class InstancesApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
@@ -159,9 +167,9 @@ class InstancesApi
      * @throws \InvalidArgumentException
      * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\InstancesPage, HTTP status code, HTTP response headers (array of strings)
      */
-    public function findInstancesWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findInstancesWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        $request = $this->findInstancesRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $request = $this->findInstancesRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
 
         try {
             $options = $this->createHttpClientOption();
@@ -268,15 +276,19 @@ class InstancesApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findInstancesAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findInstancesAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        return $this->findInstancesAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize)
+        return $this->findInstancesAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -296,16 +308,20 @@ class InstancesApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findInstancesAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findInstancesAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
         $returnType = '\Catalytic\SDK\Model\InstancesPage';
-        $request = $this->findInstancesRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $request = $this->findInstancesRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -351,13 +367,17 @@ class InstancesApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function findInstancesRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    protected function findInstancesRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
 
         $resourcePath = '/api/instances';
@@ -442,6 +462,50 @@ class InstancesApi
             }
             else {
                 $queryParams['participating_users'] = $participatingUsers;
+            }
+        }
+        // query params
+        if ($startedBefore !== null) {
+            if('form' === 'form' && is_array($startedBefore)) {
+                foreach($startedBefore as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['started_before'] = $startedBefore;
+            }
+        }
+        // query params
+        if ($startedAfter !== null) {
+            if('form' === 'form' && is_array($startedAfter)) {
+                foreach($startedAfter as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['started_after'] = $startedAfter;
+            }
+        }
+        // query params
+        if ($endedBefore !== null) {
+            if('form' === 'form' && is_array($endedBefore)) {
+                foreach($endedBefore as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['ended_before'] = $endedBefore;
+            }
+        }
+        // query params
+        if ($endedAfter !== null) {
+            if('form' === 'form' && is_array($endedAfter)) {
+                foreach($endedAfter as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['ended_after'] = $endedAfter;
             }
         }
         // query params

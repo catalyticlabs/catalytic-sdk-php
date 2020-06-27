@@ -1,6 +1,6 @@
 <?php
 /**
- * CredentialsPage
+ * AccessTokenCreationRequest
  *
  * PHP version 5
  *
@@ -33,15 +33,15 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * CredentialsPage Class Doc Comment
+ * AccessTokenCreationRequest Class Doc Comment
  *
  * @category Class
- * @description Represents a page of Credentials
+ * @description Represents a request to generate new AccessToken for authentication into a Catalytic team
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CredentialsPage implements ModelInterface, ArrayAccess
+class AccessTokenCreationRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CredentialsPage implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CredentialsPage';
+    protected static $openAPIModelName = 'AccessTokenCreationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,8 @@ class CredentialsPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credentials' => '\Catalytic\SDK\Model\Credentials[]',
-        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
-        'nextPageToken' => 'string',
-        'count' => 'int'
+        'domain' => 'string',
+        'name' => 'string'
     ];
 
     /**
@@ -70,10 +68,8 @@ class CredentialsPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'credentials' => null,
-        'nextPageOptions' => null,
-        'nextPageToken' => null,
-        'count' => 'int32'
+        'domain' => null,
+        'name' => null
     ];
 
     /**
@@ -103,10 +99,8 @@ class CredentialsPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'credentials' => 'credentials',
-        'nextPageOptions' => 'nextPageOptions',
-        'nextPageToken' => 'nextPageToken',
-        'count' => 'count'
+        'domain' => 'domain',
+        'name' => 'name'
     ];
 
     /**
@@ -115,10 +109,8 @@ class CredentialsPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'credentials' => 'setCredentials',
-        'nextPageOptions' => 'setNextPageOptions',
-        'nextPageToken' => 'setNextPageToken',
-        'count' => 'setCount'
+        'domain' => 'setDomain',
+        'name' => 'setName'
     ];
 
     /**
@@ -127,10 +119,8 @@ class CredentialsPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'credentials' => 'getCredentials',
-        'nextPageOptions' => 'getNextPageOptions',
-        'nextPageToken' => 'getNextPageToken',
-        'count' => 'getCount'
+        'domain' => 'getDomain',
+        'name' => 'getName'
     ];
 
     /**
@@ -193,10 +183,8 @@ class CredentialsPage implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['credentials'] = isset($data['credentials']) ? $data['credentials'] : null;
-        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
-        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
-        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['domain'] = isset($data['domain']) ? $data['domain'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
     }
 
     /**
@@ -208,6 +196,9 @@ class CredentialsPage implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['domain'] === null) {
+            $invalidProperties[] = "'domain' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -224,97 +215,49 @@ class CredentialsPage implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets credentials
+     * Gets domain
      *
-     * @return \Catalytic\SDK\Model\Credentials[]|null
+     * @return string
      */
-    public function getCredentials()
+    public function getDomain()
     {
-        return $this->container['credentials'];
+        return $this->container['domain'];
     }
 
     /**
-     * Sets credentials
+     * Sets domain
      *
-     * @param \Catalytic\SDK\Model\Credentials[]|null $credentials The Collection of Credentials in the page
+     * @param string $domain Catalytic team domain to authenticate in to (ex: \"myteam.pushbot.com\")
      *
      * @return $this
      */
-    public function setCredentials($credentials)
+    public function setDomain($domain)
     {
-        $this->container['credentials'] = $credentials;
+        $this->container['domain'] = $domain;
 
         return $this;
     }
 
     /**
-     * Gets nextPageOptions
-     *
-     * @return \Catalytic\SDK\Model\PagingOptions|null
-     */
-    public function getNextPageOptions()
-    {
-        return $this->container['nextPageOptions'];
-    }
-
-    /**
-     * Sets nextPageOptions
-     *
-     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
-     *
-     * @return $this
-     */
-    public function setNextPageOptions($nextPageOptions)
-    {
-        $this->container['nextPageOptions'] = $nextPageOptions;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextPageToken
+     * Gets name
      *
      * @return string|null
      */
-    public function getNextPageToken()
+    public function getName()
     {
-        return $this->container['nextPageToken'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets nextPageToken
+     * Sets name
      *
-     * @param string|null $nextPageToken nextPageToken
+     * @param string|null $name Optional Name to assign to AccessToken; visible in Catalytic UI
      *
      * @return $this
      */
-    public function setNextPageToken($nextPageToken)
+    public function setName($name)
     {
-        $this->container['nextPageToken'] = $nextPageToken;
-
-        return $this;
-    }
-
-    /**
-     * Gets count
-     *
-     * @return int|null
-     */
-    public function getCount()
-    {
-        return $this->container['count'];
-    }
-
-    /**
-     * Sets count
-     *
-     * @param int|null $count count
-     *
-     * @return $this
-     */
-    public function setCount($count)
-    {
-        $this->container['count'] = $count;
+        $this->container['name'] = $name;
 
         return $this;
     }

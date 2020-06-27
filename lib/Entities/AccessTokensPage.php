@@ -3,35 +3,35 @@
 namespace Catalytic\SDK\Entities;
 
 /**
- * An object which represents a page of credentials
+ * An object which represents a page of AccessTokens
  */
-class CredentialsPage
+class AccessTokensPage
 {
-    private array $credentials;
+    private array $accessTokens;
     private ?string $nextPageToken;
     private string $count;
 
-    public function __construct($credentials, $count, $nextPageToken = null)
+    public function __construct($accessTokens, $count, $nextPageToken = null)
     {
-        $this->credentials = $credentials;
+        $this->accessTokens = $accessTokens;
         $this->nextPageToken = $nextPageToken;
         $this->count = $count;
     }
 
     /**
-     * Get the value of credentials
+     * Get the value of AccessTokens
      */
-    public function getCredentials()
+    public function getAccessTokens()
     {
-        return $this->credentials;
+        return $this->accessTokens;
     }
 
     /**
-     * Set the value of credentials
+     * Set the value of AccessTokens
      */
-    public function setCredentials($credentials)
+    public function setAccessTokens($accessTokens)
     {
-        $this->credentials = $credentials;
+        $this->accessTokens = $accessTokens;
     }
 
     /**

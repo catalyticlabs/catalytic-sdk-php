@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Added
 - Basic logging
-- Create Credentials method
-- Create Credentials with web approval flow method
+- Create AccessTokens method
+- Create AccessTokens with web approval flow method
 - Get approval url method
 - Wait for approval method
+- CatalyticClient->getAccessToken() method
+
+### Changed
+- Renamed Credentials to AccessTokens
 
 ## [0.3.0] - 2020-05-28
 ### Changed

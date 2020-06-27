@@ -452,6 +452,10 @@ class WorkflowsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
@@ -459,9 +463,9 @@ class WorkflowsApi
      * @throws \InvalidArgumentException
      * @return \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowsPage
      */
-    public function findWorkflows($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflows($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        list($response) = $this->findWorkflowsWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        list($response) = $this->findWorkflowsWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
         return $response;
     }
 
@@ -477,6 +481,10 @@ class WorkflowsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
@@ -484,9 +492,9 @@ class WorkflowsApi
      * @throws \InvalidArgumentException
      * @return array of \Catalytic\SDK\Model\ProblemDetails|\Catalytic\SDK\Model\WorkflowsPage, HTTP status code, HTTP response headers (array of strings)
      */
-    public function findWorkflowsWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflowsWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        $request = $this->findWorkflowsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $request = $this->findWorkflowsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
 
         try {
             $options = $this->createHttpClientOption();
@@ -593,15 +601,19 @@ class WorkflowsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findWorkflowsAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflowsAsync($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
-        return $this->findWorkflowsAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize)
+        return $this->findWorkflowsAsyncWithHttpInfo($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -621,16 +633,20 @@ class WorkflowsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function findWorkflowsAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    public function findWorkflowsAsyncWithHttpInfo($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
         $returnType = '\Catalytic\SDK\Model\WorkflowsPage';
-        $request = $this->findWorkflowsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $pageToken, $pageSize);
+        $request = $this->findWorkflowsRequest($query, $status, $processId, $runId, $owner, $category, $participatingUsers, $startedBefore, $startedAfter, $endedBefore, $endedAfter, $pageToken, $pageSize);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -676,13 +692,17 @@ class WorkflowsApi
      * @param  string $owner Run or task owner to search for (optional)
      * @param  string $category Category of process or run to search for (optional)
      * @param  string $participatingUsers Task assignee to search for (optional)
+     * @param  string $startedBefore Latest start date of the task or run to search for (optional)
+     * @param  string $startedAfter Earliest start date of the task or run to search for (optional)
+     * @param  string $endedBefore Latest end date of the task or run to search for (optional)
+     * @param  string $endedAfter Earliest end date of the task or run to search for (optional)
      * @param  string $pageToken The token representing the result page to get (optional)
      * @param  int $pageSize The page size requested (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function findWorkflowsRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $pageToken = null, $pageSize = null)
+    protected function findWorkflowsRequest($query = null, $status = null, $processId = null, $runId = null, $owner = null, $category = null, $participatingUsers = null, $startedBefore = null, $startedAfter = null, $endedBefore = null, $endedAfter = null, $pageToken = null, $pageSize = null)
     {
 
         $resourcePath = '/api/workflows';
@@ -767,6 +787,50 @@ class WorkflowsApi
             }
             else {
                 $queryParams['participating_users'] = $participatingUsers;
+            }
+        }
+        // query params
+        if ($startedBefore !== null) {
+            if('form' === 'form' && is_array($startedBefore)) {
+                foreach($startedBefore as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['started_before'] = $startedBefore;
+            }
+        }
+        // query params
+        if ($startedAfter !== null) {
+            if('form' === 'form' && is_array($startedAfter)) {
+                foreach($startedAfter as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['started_after'] = $startedAfter;
+            }
+        }
+        // query params
+        if ($endedBefore !== null) {
+            if('form' === 'form' && is_array($endedBefore)) {
+                foreach($endedBefore as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['ended_before'] = $endedBefore;
+            }
+        }
+        // query params
+        if ($endedAfter !== null) {
+            if('form' === 'form' && is_array($endedAfter)) {
+                foreach($endedAfter as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['ended_after'] = $endedAfter;
             }
         }
         // query params

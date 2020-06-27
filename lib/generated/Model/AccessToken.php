@@ -1,6 +1,6 @@
 <?php
 /**
- * Credentials
+ * AccessToken
  *
  * PHP version 5
  *
@@ -33,15 +33,15 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * Credentials Class Doc Comment
+ * AccessToken Class Doc Comment
  *
  * @category Class
- * @description A set of Credentials used for authentication via the SDK
+ * @description An AccessToken used for authentication via the SDK
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class Credentials implements ModelInterface, ArrayAccess
+class AccessToken implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class Credentials implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Credentials';
+    protected static $openAPIModelName = 'AccessToken';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -61,7 +61,7 @@ class Credentials implements ModelInterface, ArrayAccess
         'id' => 'string',
         'domain' => 'string',
         'name' => 'string',
-        'type' => '\Catalytic\SDK\Model\CredentialType',
+        'type' => '\Catalytic\SDK\Model\TokenType',
         'token' => 'string',
         'secret' => 'string',
         'environment' => 'string',
@@ -266,7 +266,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string $id The public Id of the Credentials
+     * @param string $id The public Id of the AccessToken
      *
      * @return $this
      */
@@ -290,7 +290,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets domain
      *
-     * @param string $domain The Domain of the Catalytic team with which these Credentials are associated
+     * @param string $domain The Domain of the Catalytic team with which these AccessToken are associated
      *
      * @return $this
      */
@@ -314,7 +314,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name The name associated with the Credentials
+     * @param string|null $name The name associated with the AccessToken
      *
      * @return $this
      */
@@ -328,7 +328,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Gets type
      *
-     * @return \Catalytic\SDK\Model\CredentialType|null
+     * @return \Catalytic\SDK\Model\TokenType|null
      */
     public function getType()
     {
@@ -338,7 +338,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \Catalytic\SDK\Model\CredentialType|null $type type
+     * @param \Catalytic\SDK\Model\TokenType|null $type type
      *
      * @return $this
      */
@@ -362,7 +362,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param string|null $token The serialized Credentials Token
+     * @param string|null $token The serialized AccessToken Token
      *
      * @return $this
      */
@@ -386,7 +386,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets secret
      *
-     * @param string|null $secret The confidential Secret of the Credentials
+     * @param string|null $secret The confidential Secret of the AccessToken
      *
      * @return $this
      */
@@ -410,7 +410,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets environment
      *
-     * @param string|null $environment The environment of the Catalytic team associated with the Credentials
+     * @param string|null $environment The environment of the Catalytic team associated with the AccessToken
      *
      * @return $this
      */
@@ -434,7 +434,7 @@ class Credentials implements ModelInterface, ArrayAccess
     /**
      * Sets owner
      *
-     * @param string|null $owner The email address of the user who these Credentials belong to
+     * @param string|null $owner The email address of the user who these AccessToken belong to
      *
      * @return $this
      */

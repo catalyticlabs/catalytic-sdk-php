@@ -1,6 +1,6 @@
 <?php
 /**
- * CredentialsCreationRequest
+ * AccessTokenCreationWithEmailAndPasswordRequest
  *
  * PHP version 5
  *
@@ -33,15 +33,15 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * CredentialsCreationRequest Class Doc Comment
+ * AccessTokenCreationWithEmailAndPasswordRequest Class Doc Comment
  *
  * @category Class
- * @description Represents a request to generate new Credentials for authentication into a Catalytic team
+ * @description Represents a request to create and approve new AccessToken for authentication into a Catalytic team  with passed username and password
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CredentialsCreationRequest implements ModelInterface, ArrayAccess
+class AccessTokenCreationWithEmailAndPasswordRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CredentialsCreationRequest';
+    protected static $openAPIModelName = 'AccessTokenCreationWithEmailAndPasswordRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,6 +58,8 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
+        'email' => 'string',
+        'password' => 'string',
         'domain' => 'string',
         'name' => 'string'
     ];
@@ -68,6 +70,8 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
+        'email' => null,
+        'password' => null,
         'domain' => null,
         'name' => null
     ];
@@ -99,6 +103,8 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'email' => 'email',
+        'password' => 'password',
         'domain' => 'domain',
         'name' => 'name'
     ];
@@ -109,6 +115,8 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'email' => 'setEmail',
+        'password' => 'setPassword',
         'domain' => 'setDomain',
         'name' => 'setName'
     ];
@@ -119,6 +127,8 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'email' => 'getEmail',
+        'password' => 'getPassword',
         'domain' => 'getDomain',
         'name' => 'getName'
     ];
@@ -183,6 +193,8 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
+        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
         $this->container['domain'] = isset($data['domain']) ? $data['domain'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
     }
@@ -196,6 +208,12 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['email'] === null) {
+            $invalidProperties[] = "'email' can't be null";
+        }
+        if ($this->container['password'] === null) {
+            $invalidProperties[] = "'password' can't be null";
+        }
         if ($this->container['domain'] === null) {
             $invalidProperties[] = "'domain' can't be null";
         }
@@ -213,6 +231,54 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param string $email Optional email address of the Catalytic user for whom the AccessToken should be created
+     *
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /**
+     * Sets password
+     *
+     * @param string $password Optional password of the Catalytic user for whom the AccessToken should be created
+     *
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        $this->container['password'] = $password;
+
+        return $this;
+    }
 
     /**
      * Gets domain
@@ -251,7 +317,7 @@ class CredentialsCreationRequest implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string|null $name Optional Name to assign to Credentials; visible in Catalytic UI
+     * @param string|null $name Optional Name to assign to AccessToken; visible in Catalytic UI
      *
      * @return $this
      */

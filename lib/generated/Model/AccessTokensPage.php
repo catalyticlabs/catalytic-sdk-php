@@ -1,6 +1,6 @@
 <?php
 /**
- * CredentialsCreationWithEmailAndPasswordRequest
+ * AccessTokensPage
  *
  * PHP version 5
  *
@@ -33,15 +33,15 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * CredentialsCreationWithEmailAndPasswordRequest Class Doc Comment
+ * AccessTokensPage Class Doc Comment
  *
  * @category Class
- * @description Represents a request to create and approve new Credentials for authentication into a Catalytic team  with passed username and password
+ * @description Represents a page of AccessTokens
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, ArrayAccess
+class AccessTokensPage implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CredentialsCreationWithEmailAndPasswordRequest';
+    protected static $openAPIModelName = 'AccessTokensPage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,10 +58,10 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
       * @var string[]
       */
     protected static $openAPITypes = [
-        'email' => 'string',
-        'password' => 'string',
-        'domain' => 'string',
-        'name' => 'string'
+        'accessTokens' => '\Catalytic\SDK\Model\AccessToken[]',
+        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
+        'nextPageToken' => 'string',
+        'count' => 'int'
     ];
 
     /**
@@ -70,10 +70,10 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'email' => null,
-        'password' => null,
-        'domain' => null,
-        'name' => null
+        'accessTokens' => null,
+        'nextPageOptions' => null,
+        'nextPageToken' => null,
+        'count' => 'int32'
     ];
 
     /**
@@ -103,10 +103,10 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
      * @var string[]
      */
     protected static $attributeMap = [
-        'email' => 'email',
-        'password' => 'password',
-        'domain' => 'domain',
-        'name' => 'name'
+        'accessTokens' => 'accessTokens',
+        'nextPageOptions' => 'nextPageOptions',
+        'nextPageToken' => 'nextPageToken',
+        'count' => 'count'
     ];
 
     /**
@@ -115,10 +115,10 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
      * @var string[]
      */
     protected static $setters = [
-        'email' => 'setEmail',
-        'password' => 'setPassword',
-        'domain' => 'setDomain',
-        'name' => 'setName'
+        'accessTokens' => 'setAccessTokens',
+        'nextPageOptions' => 'setNextPageOptions',
+        'nextPageToken' => 'setNextPageToken',
+        'count' => 'setCount'
     ];
 
     /**
@@ -127,10 +127,10 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
      * @var string[]
      */
     protected static $getters = [
-        'email' => 'getEmail',
-        'password' => 'getPassword',
-        'domain' => 'getDomain',
-        'name' => 'getName'
+        'accessTokens' => 'getAccessTokens',
+        'nextPageOptions' => 'getNextPageOptions',
+        'nextPageToken' => 'getNextPageToken',
+        'count' => 'getCount'
     ];
 
     /**
@@ -193,10 +193,10 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
      */
     public function __construct(array $data = null)
     {
-        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
-        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
-        $this->container['domain'] = isset($data['domain']) ? $data['domain'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['accessTokens'] = isset($data['accessTokens']) ? $data['accessTokens'] : null;
+        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
+        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
+        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
     }
 
     /**
@@ -208,15 +208,6 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
     {
         $invalidProperties = [];
 
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
-        if ($this->container['password'] === null) {
-            $invalidProperties[] = "'password' can't be null";
-        }
-        if ($this->container['domain'] === null) {
-            $invalidProperties[] = "'domain' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -233,97 +224,97 @@ class CredentialsCreationWithEmailAndPasswordRequest implements ModelInterface, 
 
 
     /**
-     * Gets email
+     * Gets accessTokens
      *
-     * @return string
+     * @return \Catalytic\SDK\Model\AccessToken[]|null
      */
-    public function getEmail()
+    public function getAccessTokens()
     {
-        return $this->container['email'];
+        return $this->container['accessTokens'];
     }
 
     /**
-     * Sets email
+     * Sets accessTokens
      *
-     * @param string $email Optional email address of the Catalytic user for whom the Credentials should be created
+     * @param \Catalytic\SDK\Model\AccessToken[]|null $accessTokens The Collection of AccessTokens in the page
      *
      * @return $this
      */
-    public function setEmail($email)
+    public function setAccessTokens($accessTokens)
     {
-        $this->container['email'] = $email;
+        $this->container['accessTokens'] = $accessTokens;
 
         return $this;
     }
 
     /**
-     * Gets password
+     * Gets nextPageOptions
      *
-     * @return string
+     * @return \Catalytic\SDK\Model\PagingOptions|null
      */
-    public function getPassword()
+    public function getNextPageOptions()
     {
-        return $this->container['password'];
+        return $this->container['nextPageOptions'];
     }
 
     /**
-     * Sets password
+     * Sets nextPageOptions
      *
-     * @param string $password Optional password of the Catalytic user for whom the Credentials should be created
+     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
      *
      * @return $this
      */
-    public function setPassword($password)
+    public function setNextPageOptions($nextPageOptions)
     {
-        $this->container['password'] = $password;
+        $this->container['nextPageOptions'] = $nextPageOptions;
 
         return $this;
     }
 
     /**
-     * Gets domain
-     *
-     * @return string
-     */
-    public function getDomain()
-    {
-        return $this->container['domain'];
-    }
-
-    /**
-     * Sets domain
-     *
-     * @param string $domain Catalytic team domain to authenticate in to (ex: \"myteam.pushbot.com\")
-     *
-     * @return $this
-     */
-    public function setDomain($domain)
-    {
-        $this->container['domain'] = $domain;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
+     * Gets nextPageToken
      *
      * @return string|null
      */
-    public function getName()
+    public function getNextPageToken()
     {
-        return $this->container['name'];
+        return $this->container['nextPageToken'];
     }
 
     /**
-     * Sets name
+     * Sets nextPageToken
      *
-     * @param string|null $name Optional Name to assign to Credentials; visible in Catalytic UI
+     * @param string|null $nextPageToken nextPageToken
      *
      * @return $this
      */
-    public function setName($name)
+    public function setNextPageToken($nextPageToken)
     {
-        $this->container['name'] = $name;
+        $this->container['nextPageToken'] = $nextPageToken;
+
+        return $this;
+    }
+
+    /**
+     * Gets count
+     *
+     * @return int|null
+     */
+    public function getCount()
+    {
+        return $this->container['count'];
+    }
+
+    /**
+     * Sets count
+     *
+     * @param int|null $count count
+     *
+     * @return $this
+     */
+    public function setCount($count)
+    {
+        $this->container['count'] = $count;
 
         return $this;
     }

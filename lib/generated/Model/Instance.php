@@ -69,6 +69,8 @@ class Instance implements ModelInterface, ArrayAccess
         'steps' => '\Catalytic\SDK\Model\InstanceStep[]',
         'fields' => '\Catalytic\SDK\Model\Field[]',
         'status' => '\Catalytic\SDK\Model\InstanceStatus',
+        'startDate' => '\DateTime',
+        'endDate' => '\DateTime',
         'fieldVisibility' => '\Catalytic\SDK\Model\FieldVisibility',
         'visibility' => '\Catalytic\SDK\Model\InstanceVisibilty',
         'visibleToUsers' => 'string[]'
@@ -91,6 +93,8 @@ class Instance implements ModelInterface, ArrayAccess
         'steps' => null,
         'fields' => null,
         'status' => null,
+        'startDate' => 'date-time',
+        'endDate' => 'date-time',
         'fieldVisibility' => null,
         'visibility' => null,
         'visibleToUsers' => null
@@ -134,6 +138,8 @@ class Instance implements ModelInterface, ArrayAccess
         'steps' => 'steps',
         'fields' => 'fields',
         'status' => 'status',
+        'startDate' => 'startDate',
+        'endDate' => 'endDate',
         'fieldVisibility' => 'fieldVisibility',
         'visibility' => 'visibility',
         'visibleToUsers' => 'visibleToUsers'
@@ -156,6 +162,8 @@ class Instance implements ModelInterface, ArrayAccess
         'steps' => 'setSteps',
         'fields' => 'setFields',
         'status' => 'setStatus',
+        'startDate' => 'setStartDate',
+        'endDate' => 'setEndDate',
         'fieldVisibility' => 'setFieldVisibility',
         'visibility' => 'setVisibility',
         'visibleToUsers' => 'setVisibleToUsers'
@@ -178,6 +186,8 @@ class Instance implements ModelInterface, ArrayAccess
         'steps' => 'getSteps',
         'fields' => 'getFields',
         'status' => 'getStatus',
+        'startDate' => 'getStartDate',
+        'endDate' => 'getEndDate',
         'fieldVisibility' => 'getFieldVisibility',
         'visibility' => 'getVisibility',
         'visibleToUsers' => 'getVisibleToUsers'
@@ -254,6 +264,8 @@ class Instance implements ModelInterface, ArrayAccess
         $this->container['steps'] = isset($data['steps']) ? $data['steps'] : null;
         $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
+        $this->container['startDate'] = isset($data['startDate']) ? $data['startDate'] : null;
+        $this->container['endDate'] = isset($data['endDate']) ? $data['endDate'] : null;
         $this->container['fieldVisibility'] = isset($data['fieldVisibility']) ? $data['fieldVisibility'] : null;
         $this->container['visibility'] = isset($data['visibility']) ? $data['visibility'] : null;
         $this->container['visibleToUsers'] = isset($data['visibleToUsers']) ? $data['visibleToUsers'] : null;
@@ -552,6 +564,54 @@ class Instance implements ModelInterface, ArrayAccess
     public function setStatus($status)
     {
         $this->container['status'] = $status;
+
+        return $this;
+    }
+
+    /**
+     * Gets startDate
+     *
+     * @return \DateTime|null
+     */
+    public function getStartDate()
+    {
+        return $this->container['startDate'];
+    }
+
+    /**
+     * Sets startDate
+     *
+     * @param \DateTime|null $startDate The start date of the instance
+     *
+     * @return $this
+     */
+    public function setStartDate($startDate)
+    {
+        $this->container['startDate'] = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * Gets endDate
+     *
+     * @return \DateTime|null
+     */
+    public function getEndDate()
+    {
+        return $this->container['endDate'];
+    }
+
+    /**
+     * Sets endDate
+     *
+     * @param \DateTime|null $endDate The end date of the instance, or null if the step has not started
+     *
+     * @return $this
+     */
+    public function setEndDate($endDate)
+    {
+        $this->container['endDate'] = $endDate;
 
         return $this;
     }

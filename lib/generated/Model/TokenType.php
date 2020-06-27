@@ -1,6 +1,6 @@
 <?php
 /**
- * CredentialType
+ * TokenType
  *
  * PHP version 5
  *
@@ -31,15 +31,15 @@ namespace Catalytic\SDK\Model;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * CredentialType Class Doc Comment
+ * TokenType Class Doc Comment
  *
  * @category Class
- * @description Represents the type of the entity associated with the Credentials
+ * @description Represents the type of the entity associated with the AccessToken
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CredentialType
+class TokenType
 {
     /**
      * Possible values of this enum

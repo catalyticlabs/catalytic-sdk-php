@@ -1,6 +1,6 @@
 <?php
 /**
- * WaitForCredentialsApprovalRequest
+ * WaitForAccessTokenApprovalRequest
  *
  * PHP version 5
  *
@@ -33,15 +33,15 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * WaitForCredentialsApprovalRequest Class Doc Comment
+ * WaitForAccessTokenApprovalRequest Class Doc Comment
  *
  * @category Class
- * @description A request to activate Credentials
+ * @description A request to activate AccessToken
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class WaitForCredentialsApprovalRequest implements ModelInterface, ArrayAccess
+class WaitForAccessTokenApprovalRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class WaitForCredentialsApprovalRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'WaitForCredentialsApprovalRequest';
+    protected static $openAPIModelName = 'WaitForAccessTokenApprovalRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -227,7 +227,7 @@ class WaitForCredentialsApprovalRequest implements ModelInterface, ArrayAccess
     /**
      * Sets token
      *
-     * @param string $token Credentials Token
+     * @param string $token AccessToken string
      *
      * @return $this
      */
@@ -251,7 +251,7 @@ class WaitForCredentialsApprovalRequest implements ModelInterface, ArrayAccess
     /**
      * Sets waitTimeMillis
      *
-     * @param int|null $waitTimeMillis Optional timeout to wait for Credentials to be approved via UI (milliseconds)  Defaults to 300000ms (5 minutes)
+     * @param int|null $waitTimeMillis Optional timeout to wait for AccessToken to be approved via UI (milliseconds)  Defaults to 300000ms (5 minutes)
      *
      * @return $this
      */

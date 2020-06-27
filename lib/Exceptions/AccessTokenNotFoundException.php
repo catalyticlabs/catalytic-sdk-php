@@ -5,9 +5,9 @@ namespace Catalytic\SDK\Exceptions;
 use Exception;
 
 /**
- * An exception to be thrown when Credentials are not found
+ * An exception to be thrown when an Acess Token is not found
  */
-class CredentialsNotFoundException extends NotFoundException
+class AccessTokenNotFoundException extends NotFoundException
 {
     public function __construct($message, Exception $previous = null)
     {

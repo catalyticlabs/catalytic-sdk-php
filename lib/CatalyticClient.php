@@ -2,14 +2,14 @@
 
 namespace Catalytic\SDK;
 
-use Catalytic\SDK\Credentials as InternalCredentials;
+use Catalytic\SDK\Credentials;
 use Catalytic\SDK\Clients\{
     Workflows,
     Instances,
     Users,
     Files,
     DataTables,
-    Credentials
+    AccessTokens
 };
 
 /**
@@ -17,12 +17,13 @@ use Catalytic\SDK\Clients\{
  */
 class CatalyticClient
 {
+    private string $token;
     private Workflows $workflows;
     private Instances $instances;
     private Users $users;
     private Files $files;
     private DataTables $dataTables;
-    private Credentials $credentials;
+    private AccessTokens $accessTokens;
 
     /**
      * Instantiate the individual clients
@@ -31,71 +32,51 @@ class CatalyticClient
      */
     public function __construct(string $tokenOrFile = null)
     {
-        $credentials = new InternalCredentials();
-        $token = $credentials->fetchToken($tokenOrFile);
-        $this->workflows = new Workflows($token);
-        $this->instances = new Instances($token);
-        $this->users = new Users($token);
-        $this->files = new Files($token);
-        $this->dataTables = new DataTables($token);
-        $this->credentials = new Credentials($token);
+        $credentials = new Credentials();
+        $this->token = $credentials->fetchToken($tokenOrFile);
+        $this->workflows = new Workflows($this->token);
+        $this->instances = new Instances($this->token);
+        $this->users = new Users($this->token);
+        $this->files = new Files($this->token);
+        $this->dataTables = new DataTables($this->token);
+        $this->accessTokens = new AccessTokens($this->token);
     }
 
-    public function workflows()
+    public function workflows(): Workflows
     {
         return $this->workflows;
     }
 
-    public function instances()
+    public function instances(): Instances
     {
         return $this->instances;
     }
 
-    public function users()
+    public function users(): Users
     {
         return $this->users;
     }
 
-    public function files()
+    public function files(): Files
     {
         return $this->files;
     }
 
-    public function dataTables()
+    public function dataTables(): DataTables
     {
         return $this->dataTables;
     }
 
-    public function credentials()
+    public function accessTokens(): AccessTokens
     {
-        return $this->credentials;
+        return $this->accessTokens;
     }
 
     /**
-     * Parse a token to get the connection values
+     * Get the AccessToken used to instantiate this instance of CatalyticClient
      */
-    // private static function _parseToken(string $secret)
-    // {
-
-
-        // $parsedToken = $this->_parseToken($secret);
-        // $credentials['secret'] = $secret;
-        // $config = array(
-        //     'id' => $parsedToken['id'],
-        //     'domain' => $parsedToken['domain'],
-        //     'name' => ?,
-        //     'type' => ?,
-        //     'token' => $token,
-        //     'secret' => $parsedToken['secret'],
-        //     'environment' => $parsedToken['']
-        // )
-
-
-    //     $decodedToken = base64_decode($secret);
-    //     echo "decodedToken = ";
-    //     var_dump($decodedToken);
-    //     $pieces = explode(':', $encodedToken);
-    //     $credentials = array('id' => $pieces[0], 'secret' => $pieces[1], 'domain' => $pieces[2], 'stage' => $pieces[3]);
-    //     return $credentials;
-    // }
+    public function getAccessToken(): string
+    {
+        return $this->token;
+    }
 }

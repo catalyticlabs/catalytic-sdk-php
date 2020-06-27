@@ -3,9 +3,9 @@
 namespace Catalytic\SDK\Entities;
 
 /**
- * A Credentials object
+ * A AccessToken object
  */
-class Credentials
+class AccessToken
 {
     private string $id;
     private string $domain;

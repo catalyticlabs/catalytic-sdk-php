@@ -67,6 +67,11 @@ class InstanceStep implements ModelInterface, ArrayAccess
         'description' => 'string',
         'status' => '\Catalytic\SDK\Model\InstanceStepStatus',
         'assignedTo' => 'string',
+        'actionTypeId' => 'string',
+        'isAutomated' => 'bool',
+        'isManual' => 'bool',
+        'startDate' => '\DateTime',
+        'endDate' => '\DateTime',
         'outputFields' => '\Catalytic\SDK\Model\Field[]'
     ];
 
@@ -85,6 +90,11 @@ class InstanceStep implements ModelInterface, ArrayAccess
         'description' => null,
         'status' => null,
         'assignedTo' => null,
+        'actionTypeId' => null,
+        'isAutomated' => null,
+        'isManual' => null,
+        'startDate' => 'date-time',
+        'endDate' => 'date-time',
         'outputFields' => null
     ];
 
@@ -124,6 +134,11 @@ class InstanceStep implements ModelInterface, ArrayAccess
         'description' => 'description',
         'status' => 'status',
         'assignedTo' => 'assignedTo',
+        'actionTypeId' => 'actionTypeId',
+        'isAutomated' => 'isAutomated',
+        'isManual' => 'isManual',
+        'startDate' => 'startDate',
+        'endDate' => 'endDate',
         'outputFields' => 'outputFields'
     ];
 
@@ -142,6 +157,11 @@ class InstanceStep implements ModelInterface, ArrayAccess
         'description' => 'setDescription',
         'status' => 'setStatus',
         'assignedTo' => 'setAssignedTo',
+        'actionTypeId' => 'setActionTypeId',
+        'isAutomated' => 'setIsAutomated',
+        'isManual' => 'setIsManual',
+        'startDate' => 'setStartDate',
+        'endDate' => 'setEndDate',
         'outputFields' => 'setOutputFields'
     ];
 
@@ -160,6 +180,11 @@ class InstanceStep implements ModelInterface, ArrayAccess
         'description' => 'getDescription',
         'status' => 'getStatus',
         'assignedTo' => 'getAssignedTo',
+        'actionTypeId' => 'getActionTypeId',
+        'isAutomated' => 'getIsAutomated',
+        'isManual' => 'getIsManual',
+        'startDate' => 'getStartDate',
+        'endDate' => 'getEndDate',
         'outputFields' => 'getOutputFields'
     ];
 
@@ -232,6 +257,11 @@ class InstanceStep implements ModelInterface, ArrayAccess
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
         $this->container['status'] = isset($data['status']) ? $data['status'] : null;
         $this->container['assignedTo'] = isset($data['assignedTo']) ? $data['assignedTo'] : null;
+        $this->container['actionTypeId'] = isset($data['actionTypeId']) ? $data['actionTypeId'] : null;
+        $this->container['isAutomated'] = isset($data['isAutomated']) ? $data['isAutomated'] : null;
+        $this->container['isManual'] = isset($data['isManual']) ? $data['isManual'] : null;
+        $this->container['startDate'] = isset($data['startDate']) ? $data['startDate'] : null;
+        $this->container['endDate'] = isset($data['endDate']) ? $data['endDate'] : null;
         $this->container['outputFields'] = isset($data['outputFields']) ? $data['outputFields'] : null;
     }
 
@@ -486,6 +516,126 @@ class InstanceStep implements ModelInterface, ArrayAccess
     public function setAssignedTo($assignedTo)
     {
         $this->container['assignedTo'] = $assignedTo;
+
+        return $this;
+    }
+
+    /**
+     * Gets actionTypeId
+     *
+     * @return string|null
+     */
+    public function getActionTypeId()
+    {
+        return $this->container['actionTypeId'];
+    }
+
+    /**
+     * Sets actionTypeId
+     *
+     * @param string|null $actionTypeId The ID of this action type of this step
+     *
+     * @return $this
+     */
+    public function setActionTypeId($actionTypeId)
+    {
+        $this->container['actionTypeId'] = $actionTypeId;
+
+        return $this;
+    }
+
+    /**
+     * Gets isAutomated
+     *
+     * @return bool|null
+     */
+    public function getIsAutomated()
+    {
+        return $this->container['isAutomated'];
+    }
+
+    /**
+     * Sets isAutomated
+     *
+     * @param bool|null $isAutomated Indicates whether or not this step is an automated action that will be completed without manual intervention.
+     *
+     * @return $this
+     */
+    public function setIsAutomated($isAutomated)
+    {
+        $this->container['isAutomated'] = $isAutomated;
+
+        return $this;
+    }
+
+    /**
+     * Gets isManual
+     *
+     * @return bool|null
+     */
+    public function getIsManual()
+    {
+        return $this->container['isManual'];
+    }
+
+    /**
+     * Sets isManual
+     *
+     * @param bool|null $isManual Indicates whether or not this step is manual, to be completed by a person.  This is a convinience property that gets/sets the inverse of Catalytic.Sdk.Entities.InstanceStep.IsAutomated.
+     *
+     * @return $this
+     */
+    public function setIsManual($isManual)
+    {
+        $this->container['isManual'] = $isManual;
+
+        return $this;
+    }
+
+    /**
+     * Gets startDate
+     *
+     * @return \DateTime|null
+     */
+    public function getStartDate()
+    {
+        return $this->container['startDate'];
+    }
+
+    /**
+     * Sets startDate
+     *
+     * @param \DateTime|null $startDate The start date of the step, or null if the step has not started
+     *
+     * @return $this
+     */
+    public function setStartDate($startDate)
+    {
+        $this->container['startDate'] = $startDate;
+
+        return $this;
+    }
+
+    /**
+     * Gets endDate
+     *
+     * @return \DateTime|null
+     */
+    public function getEndDate()
+    {
+        return $this->container['endDate'];
+    }
+
+    /**
+     * Sets endDate
+     *
+     * @param \DateTime|null $endDate The end date of the step, or null if the step has not started
+     *
+     * @return $this
+     */
+    public function setEndDate($endDate)
+    {
+        $this->container['endDate'] = $endDate;
 
         return $this;
     }
