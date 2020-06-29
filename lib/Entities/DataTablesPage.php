@@ -7,9 +7,9 @@ namespace Catalytic\SDK\Entities;
  */
 class DataTablesPage
 {
-    private array $dataTables;
-    private ?string $nextPageToken;
-    private string $count;
+    private $dataTables;
+    private $nextPageToken;
+    private $count;
 
     public function __construct($dataTables, $count, $nextPageToken = null)
     {

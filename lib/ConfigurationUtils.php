@@ -8,7 +8,7 @@ namespace Catalytic\SDK;
  */
 class ConfigurationUtils
 {
-    private static Configuration $config;
+    private static $config;
 
     /**
      * Creates a Configuration if one doesn't exist and returns it
@@ -16,7 +16,7 @@ class ConfigurationUtils
      * @param string $secret    The secret to set on the configuration
      * @return Configuration    The Configuration object
      */
-    public static function getConfiguration(string $secret): Configuration
+    public static function getConfiguration($secret)
     {
         // If a configuration object doesn't exist, create one
         if (!isset(self::$config)) {
@@ -34,7 +34,7 @@ class ConfigurationUtils
      *
      * @return string   The version of the SDK
      */
-    private static function getVersion(): string
+    private static function getVersion()
     {
         $version = file_get_contents(__DIR__ . '/../.version');
         return $version;

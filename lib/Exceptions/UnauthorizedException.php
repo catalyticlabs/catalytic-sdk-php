@@ -9,7 +9,7 @@ use Exception;
  */
 class UnauthorizedException extends Exception
 {
-    public function __construct($message, Exception $previous = null)
+    public function __construct($message, $previous = null)
     {
         if (!$message) {
             $message = 'Unauthorized';

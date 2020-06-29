@@ -24,9 +24,9 @@ use Monolog\Logger;
  */
 class AccessTokens
 {
-    private Logger $logger;
-    private AccessTokensApi $accessTokensApi;
-    private AuthenticationApi $authenticationApi;
+    private $logger;
+    private $accessTokensApi;
+    private $authenticationApi;
 
     /**
      * Constructor for AccessTokens
@@ -35,7 +35,7 @@ class AccessTokens
      * @param AccessTokensApi $accessTokensApi (Optional) The injected AccessTokensApi. Used for unit testing
      * @param AuthenticationApi  $authenticationApi (Optional)  The injected AuthenticationApi. Used for unit testing
      */
-    public function __construct(?string $secret, AccessTokensApi $accessTokensApi = null, AuthenticationApi $authenticationApi = null)
+    public function __construct($secret, $accessTokensApi = null, $authenticationApi = null)
     {
         $config = null;
         $this->logger = CatalyticLogger::getLogger(AccessTokens::class);
@@ -65,7 +65,7 @@ class AccessTokens
      * @throws InternalErrorException       If any errors fetching AccessToken
      * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id): AccessToken
+    public function get($id)
     {
         try {
             $this->logger->debug("Getting AccessToken with id $id");
@@ -92,7 +92,7 @@ class AccessTokens
      * @throws InternalErrorException       If any errors finding AccessTokens
      * @throws UnauthorizedException        If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): AccessTokensPage
+    public function find($filter = null, $pageToken = null, $pageSize = null)
     {
         $text = null;
         $owner = null;
@@ -131,7 +131,7 @@ class AccessTokens
      * @throws InternalErrorException   If any errors creating AccessToken
      * @throws UnauthorizedException    If unauthorized
      */
-    public function create(string $teamName, string $email, string $password, string $name = null): AccessToken
+    public function create($teamName, $email, $password, $name = null)
     {
         $domain = $this->getDomainFromTeamName($teamName);
         $accessTokensRequest = new AccessTokenCreationWithEmailAndPasswordRequest(
@@ -168,7 +168,7 @@ class AccessTokens
      * @throws InternalErrorException   If any errors creating AccessToken
      * @throws UnauthorizedException    If unauthorized
      */
-    public function createWithWebApprovalFlow(string $teamName, string $name = null): AccessToken
+    public function createWithWebApprovalFlow($teamName, $name = null)
     {
         $domain = $this->getDomainFromTeamName($teamName);
         $accessTokenRequest = new AccessTokenCreationRequest(array('domain' => $domain,'name' => $name));
@@ -194,7 +194,7 @@ class AccessTokens
      * @param string $applicationName (Optional)    The name of the application to label the token with
      * @return string                               The url a user must visit to approve the AccessToken created
      */
-    public function getApprovalUrl(AccessToken $accessToken, string $applicationName = 'Catalytic SDK'): string
+    public function getApprovalUrl($accessToken, $applicationName = 'Catalytic SDK')
     {
         return "https://" . $accessToken->getDomain() . "/access-tokens/approve?userTokenID=" . $accessToken->getId() . "&application=" . urlencode($applicationName);
     }
@@ -203,10 +203,10 @@ class AccessTokens
      * Waits for AccessToken to be approved
      *
      * @param AccessTokens   $accessToken    The AccessToken to wait for approval of
-     * @param int               $waitTimeMillis The amount of time to wait in milliseconds before timing out
+     * @param int            $waitTimeMillis The amount of time to wait in milliseconds before timing out
      * @return AccessTokens                  The AccessToken
      */
-    public function waitForApproval(AccessToken $accessToken, int $waitTimeMillis = null): AccessToken
+    public function waitForApproval($accessToken, $waitTimeMillis = null)
     {
         $accessTokenApproval = new WaitForAccessTokenApprovalRequest(
             array('token' => $accessToken->getToken(), 'waitTimeMillis' => $waitTimeMillis)
@@ -232,7 +232,7 @@ class AccessTokens
      * @throws InternalErrorException   If any errors revoking AccessToken
      * @throws UnauthorizedException    If unauthorized
      */
-    public function revoke(string $id): AccessToken
+    public function revoke($id)
     {
         try {
             $this->logger->debug("Revoking AccessToken with id $id");
@@ -252,10 +252,10 @@ class AccessTokens
     /**
      * Create a AccessToken object from an internal File object
      *
-     * @param InternalAccessToken  $internalAccessToken   The internal accessToken to create a AccessToken object from
-     * @return AccessToken     $accessToken           The created AccessToken object
+     * @param InternalAccessToken   $internalAccessToken   The internal accessToken to create a AccessToken object from
+     * @return AccessToken          $accessToken           The created AccessToken object
      */
-    private function createAccessToken(InternalAccessToken $internalAccessToken): AccessToken
+    private function createAccessToken($internalAccessToken)
     {
         $accessToken = new AccessToken(
             $internalAccessToken->getId(),
@@ -276,7 +276,7 @@ class AccessTokens
      * @param string $teamNameOrDomain  The teamName to get the domain from
      * @return string                   The domain
      */
-    private function getDomainFromTeamName(string $teamNameOrDomain): string
+    private function getDomainFromTeamName($teamNameOrDomain)
     {
         // If the domain was passed in, validate the teamName and return the domain
         if (strpos($teamNameOrDomain, '.') !== false) {
@@ -297,7 +297,7 @@ class AccessTokens
      * @param string $teamName          The team name to validate
      * @throws InvalidArgumentException If the passed in team name is not valid
      */
-    private function validateTeamName(string $teamName): void
+    private function validateTeamName($teamName)
     {
         $validTeamNameRegex = '/^[a-z0-9][a-z0-9-_]+$/';
         if (!preg_match($validTeamNameRegex, $teamName)) {

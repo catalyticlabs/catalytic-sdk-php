@@ -7,15 +7,15 @@ namespace Catalytic\SDK\Entities;
  */
 class File
 {
-    private string $id;
-    private string $name;
-    private string $teamName;
-    private string $contentType;
-    private int $sizeInBytes;
-    private string $displaySize;
-    private bool $isPublic;
-    private string $md5Hash;
-    private string $referenceName;
+    private $id;
+    private $name;
+    private $teamName;
+    private $contentType;
+    private $sizeInBytes;
+    private $displaySize;
+    private $isPublic;
+    private $md5Hash;
+    private $referenceName;
 
     public function __construct(
         $id = null,

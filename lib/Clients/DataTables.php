@@ -12,15 +12,14 @@ use Catalytic\SDK\Entities\{DataTable, DataTablesPage};
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{InternalErrorException, DataTableNotFoundException, UnauthorizedException};
 use Catalytic\SDK\Model\DataTable as InternalDataTable;
-use Monolog\Logger;
 
 /**
  * DataTables client
  */
 class DataTables
 {
-    private Logger $logger;
-    private DataTablesApi $dataTablesApi;
+    private $logger;
+    private $dataTablesApi;
 
     /**
      * Constructor for DataTables client
@@ -28,7 +27,7 @@ class DataTables
      * @param string $secret                            The token used to make the underlying api calls
      * @param DataTablesApi $dataTablesApi (Optional)   The injected DataTablesApi. Used for unit testing
      */
-    public function __construct(?string $secret, DataTablesApi $dataTablesApi = null)
+    public function __construct($secret, $dataTablesApi = null)
     {
         $this->logger = CatalyticLogger::getLogger(DataTables::class);
         if ($dataTablesApi) {
@@ -48,7 +47,7 @@ class DataTables
      * @throws InternalErrorException       If any errors fetching DataTable
      * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id): DataTable
+    public function get($id)
     {
         try {
             $this->logger->debug("Getting DataTable with id $id");
@@ -73,7 +72,7 @@ class DataTables
      * @throws InternalErrorException   If any errors finding DataTables
      * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): DataTablesPage
+    public function find($filter = null, $pageToken = null, $pageSize = null)
     {
         $text = null;
         $dataTables = [];
@@ -112,7 +111,7 @@ class DataTables
      * @throws InternalErrorException       If errors saving to $directory
      * @throws UnauthorizedException        If unauthorized
      */
-    public function download(string $id, string $format, string $directory = null): SplFileObject
+    public function download($id, $format, $directory = null)
     {
         // By default this downloads the file to a temp dir
         try {
@@ -158,7 +157,7 @@ class DataTables
      * @throws InternalErrorException               If any errors uploading the DataTable
      * @throws UnauthorizedException                If unauthorized
      */
-    public function upload(SplFileObject $dataTableFile, string $tableName = null, int $headerRow = 1, int $sheetNumber = 1): DataTable
+    public function upload($dataTableFile, $tableName = null, $headerRow = 1, $sheetNumber = 1)
     {
         try {
             $this->logger->debug("Uploading DataTable with tableName $tableName");
@@ -185,7 +184,7 @@ class DataTables
      * @throws InternalErrorException               If any errors replacing DataTable
      * @throws UnauthorizedException                If unauthorized
      */
-    public function replace(string $id, SplFileObject $dataTableFile, int $headerRow = 1, int $sheetNumber = 1): DataTable
+    public function replace($id, $dataTableFile, $headerRow = 1, $sheetNumber = 1)
     {
         try {
             $this->logger->debug("Replacing DataTable with id $id");
@@ -208,7 +207,7 @@ class DataTables
      * @param InternalDataTable $internalDataTable  The internal datatable to create a DataTable object from
      * @return DataTable        $dataTable          The created DataTable object
      */
-    private function createDataTable(InternalDataTable $internalDataTable): DataTable
+    private function createDataTable($internalDataTable)
     {
         $dataTable = new DataTable(
             $internalDataTable->getId(),

@@ -3,7 +3,7 @@
 namespace Catalytic\SDK\Entities;
 
 /**
- * Class which contains possible values for the status of an instance
+ * Class which contains possible values for the status of an Instance
  */
 class InstanceStatus
 {

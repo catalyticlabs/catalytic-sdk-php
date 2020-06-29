@@ -7,9 +7,9 @@ namespace Catalytic\SDK\Entities;
  */
 class AccessTokensPage
 {
-    private array $accessTokens;
-    private ?string $nextPageToken;
-    private string $count;
+    private $accessTokens;
+    private $nextPageToken;
+    private $count;
 
     public function __construct($accessTokens, $count, $nextPageToken = null)
     {

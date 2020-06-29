@@ -17,20 +17,20 @@ use Catalytic\SDK\Clients\{
  */
 class CatalyticClient
 {
-    private string $token;
-    private Workflows $workflows;
-    private Instances $instances;
-    private Users $users;
-    private Files $files;
-    private DataTables $dataTables;
-    private AccessTokens $accessTokens;
+    private $token;
+    private $workflows;
+    private $instances;
+    private $users;
+    private $files;
+    private $dataTables;
+    private $accessTokens;
 
     /**
      * Instantiate the individual clients
      *
      * @param string $tokenOrFile (Optional) The token/name/path of a file to fetch a token to use for making api requests
      */
-    public function __construct(string $tokenOrFile = null)
+    public function __construct($tokenOrFile = null)
     {
         $credentials = new Credentials();
         $this->token = $credentials->fetchToken($tokenOrFile);

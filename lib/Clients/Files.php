@@ -15,15 +15,14 @@ use Catalytic\SDK\Exceptions\{
     UnauthorizedException
 };
 use Catalytic\SDK\Model\FileMetadata as InternalFile;
-use Monolog\Logger;
 
 /**
  * Files client
  */
 class Files
 {
-    private Logger $logger;
-    private FilesApi $filesApi;
+    private $logger;
+    private $filesApi;
 
     /**
      * Constructor for Files client
@@ -31,7 +30,7 @@ class Files
      * @param string $secret                            The token used to make the underlying api calls
      * @param FilesApi $filesApi (Optional)   The injected DataTablesApi. Used for unit testing
      */
-    public function __construct(?string $secret, FilesApi $filesApi = null)
+    public function __construct($secret, $filesApi = null)
     {
         $this->logger = CatalyticLogger::getLogger(Files::class);
         if ($filesApi) {
@@ -51,7 +50,7 @@ class Files
      * @throws InternalErrorException   If any errors fetching File
      * @throws UnauthorizedException    If unauthorized
      */
-    public function get(string $id): File
+    public function get($id)
     {
         try {
             $this->logger->debug("Getting File with id $id");
@@ -82,7 +81,7 @@ class Files
      * @throws InternalErrorException       If any errors downloading File
      * @throws UnauthorizedException        If unauthorized
      */
-    public function download(string $id, string $directory = null): SplFileObject
+    public function download($id, $directory = null)
     {
         // By default this downloads the file to a temp dir
         try {
@@ -125,7 +124,7 @@ class Files
      * @throws InternalErrorExeption    If any errors uploading File
      * @throws UnauthorizedException    If unauthorized
      */
-    public function upload(SplFileObject $fileToUpload): File
+    public function upload($fileToUpload)
     {
         try {
             $this->logger->debug("Uploading File");
@@ -147,7 +146,7 @@ class Files
      * @param InternalFile  $internalFile   The internal file to create a File object from
      * @return File                         The created File object
      */
-    private function createFile(InternalFile $internalFile): File
+    private function createFile($internalFile)
     {
         $file = new File(
             $internalFile->getId(),

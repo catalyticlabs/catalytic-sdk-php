@@ -7,9 +7,9 @@ namespace Catalytic\SDK\Entities;
  */
 class InstanceStepsPage
 {
-    private array $instanceSteps;
-    private ?string $nextPageToken;
-    private string $count;
+    private $instanceSteps;
+    private $nextPageToken;
+    private $count;
 
     public function __construct($instanceSteps, $count, $nextPageToken = null)
     {

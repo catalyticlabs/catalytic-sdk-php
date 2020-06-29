@@ -11,7 +11,7 @@ class SearchUtils
      * @param string $name  The name of the search critiera object to look for
      * @return string       The value of the search criteria by name
      */
-    public static function getSearchCriteriaValueByKey(array $array, string $name) : ?string
+    public static function getSearchCriteriaValueByKey($array, $name)
     {
         // TODO: Can refactor this to simply use a find method
 

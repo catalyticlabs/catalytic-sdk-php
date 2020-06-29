@@ -17,8 +17,8 @@ use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest, Wo
  */
 class Workflows
 {
-    private WorkflowsApi $workflowsApi;
-    private Files $filesClient;
+    private $workflowsApi;
+    private $filesClient;
 
     /**
      * Constructor for Workflows client
@@ -27,7 +27,7 @@ class Workflows
      * @param WorkflowsApi  $workflowsApi (Optional)    The injected WorkflowsApi. Used for unit testing
      * @param Files         $filesClient                The injected FilesClient. Used for unit testing
      */
-    public function __construct(?string $secret, WorkflowsApi $workflowsApi = null, Files $filesClient = null)
+    public function __construct($secret, $workflowsApi = null, $filesClient = null)
     {
         $this->logger = CatalyticLogger::getLogger(Workflows::class);
         if ($secret) {
@@ -56,7 +56,7 @@ class Workflows
      * @throws InternalErrorException       If any errors fetching Workflow
      * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id): Workflow
+    public function get($id)
     {
         try {
             $this->logger->debug("Getting Workflow with id $id");
@@ -83,7 +83,7 @@ class Workflows
      * @throws InternalErrorException       If any errors finding Workflows
      * @throws UnauthorizedException        If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): WorkflowsPage
+    public function find($filter = null, $pageToken = null, $pageSize = null)
     {
         $text = null;
         $owner = null;
@@ -124,7 +124,7 @@ class Workflows
      * @throws InternalErrorException       If any errors exporting Workflow
      * @throws UnauthorizedException        If unauthorized
      */
-    public function export(string $id, string $password = null): File
+    public function export($id, $password = null)
     {
         $workflowExportRequest = null;
 
@@ -170,7 +170,7 @@ class Workflows
      * @throws InternalErrorException               If any errors importing Workflow
      * @throws UnauthorizedException                If unauthorized
      */
-    public function import(SplFileObject $importFile, string $password = null): Workflow
+    public function import($importFile, $password = null)
     {
         // Upload the file
         $file = $this->filesClient->upload($importFile);
@@ -215,7 +215,7 @@ class Workflows
      * @param InternalWorkflow  $internalWorkflow     The internal workflow to create a Workflow object from
      * @return Workflow         $workflow             The created Workflow object
      */
-    private function createWorkflow(InternalWorkflow $internalWorkflow): Workflow
+    private function createWorkflow($internalWorkflow)
     {
         $workflow = new Workflow(
             $internalWorkflow->getId(),

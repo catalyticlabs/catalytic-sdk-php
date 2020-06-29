@@ -4,10 +4,10 @@ namespace Catalytic\SDK\Entities;
 
 class DataTableColumn
 {
-    private string $name;
-    private string $type;
-    private string $referenceName;
-    private string $restrictions;
+    private $name;
+    private $type;
+    private $referenceName;
+    private $restrictions;
 
     /**
      * Get the value of name

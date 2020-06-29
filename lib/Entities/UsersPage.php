@@ -7,9 +7,9 @@ namespace Catalytic\SDK\Entities;
  */
 class UsersPage
 {
-    private array $users;
-    private ?string $nextPageToken;
-    private string $count;
+    private $users;
+    private $nextPageToken;
+    private $count;
 
     public function __construct($users, $count, $nextPageToken = null)
     {

@@ -7,34 +7,34 @@ namespace Catalytic\SDK\Entities;
  */
 class DataTable
 {
-    private string $id;
-    private string $referenceName;
-    private string $name;
-    private string $teamName;
-    private ?string $description;
-    private array $columns;
-    private bool $isArchived;
-    private string $type;
-    private string $visibility;
-    private array $visibleToUsers;
-    private int $rowLimit;
-    private int $columnLimit;
-    private int $cellLimit;
+    private $id;
+    private $referenceName;
+    private $name;
+    private $teamName;
+    private $description;
+    private $columns;
+    private $isArchived;
+    private $type;
+    private $visibility;
+    private $visibleToUsers;
+    private $rowLimit;
+    private $columnLimit;
+    private $cellLimit;
 
     public function __construct(
-        string $id = null,
-        string $referenceName = null,
-        string $name = null,
-        string $teamName = null,
-        string $description = null,
-        array $columns = null,
-        bool $isArchived = null,
-        string $type = null,
-        string $visibility = null,
-        array $visibleToUsers = null,
-        int $rowLimit = null,
-        int $columnLimit = null,
-        int $cellLimit = null
+        $id = null,
+        $referenceName = null,
+        $name = null,
+        $teamName = null,
+        $description = null,
+        $columns = null,
+        $isArchived = null,
+        $type = null,
+        $visibility = null,
+        $visibleToUsers = null,
+        $rowLimit = null,
+        $columnLimit = null,
+        $cellLimit = null
     ) {
         $this->id = $id;
         $this->referenceName = $referenceName;

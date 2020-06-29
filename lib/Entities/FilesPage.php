@@ -7,9 +7,9 @@ namespace Catalytic\SDK\Entities;
  */
 class FilesPage
 {
-    private array $files;
-    private ?string $nextPageToken;
-    private string $count;
+    private $files;
+    private $nextPageToken;
+    private $count;
 
     public function __construct($files, $count, $nextPageToken = null)
     {

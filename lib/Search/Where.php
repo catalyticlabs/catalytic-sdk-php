@@ -14,7 +14,7 @@ class Where
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function text() : FilterCriteria
+    public function text()
     {
         return (new Filter())->text();
     }
@@ -24,7 +24,7 @@ class Where
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function owner() : FilterCriteria
+    public function owner()
     {
         return (new Filter())->owner();
     }
@@ -34,7 +34,7 @@ class Where
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function category() : FilterCriteria
+    public function category()
     {
         return (new Filter())->category();
     }
@@ -44,7 +44,7 @@ class Where
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function status() : FilterCriteria
+    public function status()
     {
         return (new Filter())->status();
     }
@@ -54,7 +54,7 @@ class Where
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function workflowId() : FilterCriteria
+    public function workflowId()
     {
         return (new Filter())->workflowId();
     }
@@ -64,7 +64,7 @@ class Where
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function assignee(): FilterCriteria
+    public function assignee()
     {
         return (new Filter())->assignee();
     }
@@ -74,7 +74,7 @@ class Where
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function instanceId(): FilterCriteria
+    public function instanceId()
     {
         return (new Filter())->instanceId();
     }

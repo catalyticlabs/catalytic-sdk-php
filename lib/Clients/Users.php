@@ -17,8 +17,8 @@ use Monolog\Logger;
  */
 class Users
 {
-    private Logger $logger;
-    private UsersApi $usersApi;
+    private $logger;
+    private $usersApi;
 
     /**
      * Constructor for Users client
@@ -26,7 +26,7 @@ class Users
      * @param string $secret                The token used to make the underlying api calls
      * @param UsersApi $usersApi (Optional) The injected UsersApi. Used for unit testing
      */
-    public function __construct(?string $secret, UsersApi $usersApi = null)
+    public function __construct($secret, $usersApi = null)
     {
         $this->logger = CatalyticLogger::getLogger(Users::class);
         if ($usersApi) {
@@ -46,7 +46,7 @@ class Users
      * @throws InternalErrorException   If any errors fetching User
      * @throws UnauthorizedException    If unauthorized
      */
-    public function get(string $identifier): User
+    public function get($identifier)
     {
         try {
             $this->logger->debug("Getting user with identifier $identifier");
@@ -74,7 +74,7 @@ class Users
      * @throws InternalErrorException   If any errors finding Users
      * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): UsersPage
+    public function find($filter = null, $pageToken = null, $pageSize = null)
     {
         $text = null;
         $users = [];
@@ -107,7 +107,7 @@ class Users
      * @param InternalUser  $internalUser   The internal user to create a User object from
      * @return User         $user           The created User object
      */
-    private function createUser(InternalUser $internalUser) : User
+    private function createUser($internalUser)
     {
         $user = new User(
             $internalUser->getId(),

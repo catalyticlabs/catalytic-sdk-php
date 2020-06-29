@@ -29,7 +29,7 @@ class Credentials
      * @return string                           The token
      * @throws Exception                        If a token can't be found
      */
-    public function fetchToken(string $tokenOrFile = null)
+    public function fetchToken($tokenOrFile = null)
     {
         if ($tokenOrFile === null) {
             return $this->fromDefault();
@@ -74,7 +74,7 @@ class Credentials
      * @return string                   The Catalytic access token
      * @throws Exception
      */
-    private function fromFile(string $fileName)
+    private function fromFile($fileName)
     {
         $token = $this->fetchTokenFromFile($fileName);
 
@@ -104,7 +104,7 @@ class Credentials
      * @param string $fileName (optional)   The name or path to the file to fetch the token from
      * @return string                       The Catalytic access token
      */
-    private function fetchTokenFromFile(string $fileName = null)
+    private function fetchTokenFromFile($fileName = null)
     {
         // If it's a path to a file
         if (is_file($fileName)) {

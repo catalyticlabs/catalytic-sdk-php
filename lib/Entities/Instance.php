@@ -10,20 +10,20 @@ use Exception;
  */
 class Instance
 {
-    private string $id;
-    private string $workflowId;
-    private string $name;
-    private string $teamName;
-    private ?string $description;
-    private ?string $category;
-    private string $owner;
-    private string $createdBy;
-    private ?array $steps;
-    private array $fields;
-    private string $status;
-    private string $fieldVisibility;
-    private string $visibility;
-    private array $visibleToUsers;
+    private $id;
+    private $workflowId;
+    private $name;
+    private $teamName;
+    private $description;
+    private $category;
+    private $owner;
+    private $createdBy;
+    private $steps;
+    private $fields;
+    private $status;
+    private $fieldVisibility;
+    private $visibility;
+    private $visibleToUsers;
 
     public function __construct(
         $id = null,

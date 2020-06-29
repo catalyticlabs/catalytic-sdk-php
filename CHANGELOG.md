@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.4.0]
 ### Added
 - Basic logging
 - Create AccessTokens method
@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Get approval url method
 - Wait for approval method
 - CatalyticClient->getAccessToken() method
+- Support for PHP 7.3
 
 ### Changed
 - Renamed Credentials to AccessTokens
@@ -84,7 +85,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Get a user method
 - Find users method
 
-[Unreleased]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.3.0...HEAD
+[Unreleased]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.4.0...HEAD
+[0.4.0]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.3.0...0.4.0
 [0.3.0]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.0.1...0.1.0

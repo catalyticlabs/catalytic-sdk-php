@@ -9,7 +9,7 @@ use Monolog\Logger;
  */
 class CatalyticLogger
 {
-    public static function getLogger(string $clazz): Logger
+    public static function getLogger($clazz)
     {
         return new Logger($clazz);
     }

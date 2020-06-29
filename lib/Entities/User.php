@@ -3,14 +3,14 @@
 namespace Catalytic\SDK\Entities;
 
 /**
- * A user object
+ * A User object
  */
 class User
 {
-    private string $id;
-    private string $username;
-    private string $email;
-    private ?string $fullName;
+    private $id;
+    private $username;
+    private $email;
+    private $fullName;
 
     public function __construct(
         $id = null,

@@ -7,9 +7,9 @@ namespace Catalytic\SDK\Entities;
  */
 class WorkflowsPage
 {
-    private array $workflows;
-    private ?string $nextPageToken;
-    private string $count;
+    private $workflows;
+    private $nextPageToken;
+    private $count;
 
     public function __construct($workflows, $count, $nextPageToken = null)
     {

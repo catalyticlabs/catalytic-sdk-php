@@ -9,9 +9,9 @@ class FilterCriteria
 {
     // The Filter that was passed into the
     // constructor which holds all the filter criteria
-    private Filter $filter;
-    public string $name;
-    public string $value;
+    private $filter;
+    public $name;
+    public $value;
 
     public function __construct(Filter $filter, $name)
     {
@@ -27,7 +27,7 @@ class FilterCriteria
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to
      */
-    public function matches(string $term) : Filter
+    public function matches(string $term)
     {
         return $this->addAsFilterCriteria($term);
     }
@@ -40,7 +40,7 @@ class FilterCriteria
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to
      */
-    public function is(string $term) : Filter
+    public function is(string $term)
     {
         return $this->addAsFilterCriteria($term);
     }
@@ -51,7 +51,7 @@ class FilterCriteria
      * @param string @term  The term to add as the filter criteria value
      * @return Filter       The Filter object that the filter criteria value was added to
      */
-    private function addAsFilterCriteria(string $term) : Filter
+    private function addAsFilterCriteria(string $term)
     {
         $this->value = $term;
         array_push($this->filter->searchFilters, $this);

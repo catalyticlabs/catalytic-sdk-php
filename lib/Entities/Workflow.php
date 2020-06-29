@@ -10,20 +10,20 @@ use Exception;
  */
 class Workflow
 {
-    private string $id;
-    private string $name;
-    private string $teamName;
-    private ?string $description;
-    private string $category;
-    private string $owner;
-    private string $createdBy;
-    private array $inputFields;
-    private bool $isPublished;
-    private bool $isArchived;
-    private string $fieldVisibility;
-    private string $instanceVisibility;
-    private array $adminUsers;
-    private array $standardUsers;
+    private $id;
+    private $name;
+    private $teamName;
+    private $description;
+    private $category;
+    private $owner;
+    private $createdBy;
+    private $inputFields;
+    private $isPublished;
+    private $isArchived;
+    private $fieldVisibility;
+    private $instanceVisibility;
+    private $adminUsers;
+    private $standardUsers;
 
     public function __construct(
         $id = null,

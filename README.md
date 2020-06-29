@@ -18,7 +18,7 @@ Key Benefits:
 
 
 ## Requirements
-PHP 7.4 and later
+PHP 7.3 and later
 
 ## Installation
 Via composer

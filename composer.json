@@ -23,7 +23,7 @@
         "cover-xml": "./vendor/bin/phpunit tests --testdox --coverage-clover build/coverage/clover"
     },
     "require": {
-        "php": ">=7.4",
+        "php": ">=7.3",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",

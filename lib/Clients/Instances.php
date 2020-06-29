@@ -29,11 +29,11 @@ use Monolog\Logger;
  */
 class Instances
 {
-    private Logger $logger;
-    private InstancesApi $instancesApi;
-    private InstanceStepsApi $instanceStepsApi;
+    private $logger;
+    private $instancesApi;
+    private $instanceStepsApi;
 
-    public function __construct(?string $secret, InstancesApi $instancesApi = null, InstanceStepsApi $instanceStepsApi = null)
+    public function __construct($secret, $instancesApi = null, $instanceStepsApi = null)
     {
         $this->logger = CatalyticLogger::getLogger(Instances::class);
         $config = null;
@@ -64,7 +64,7 @@ class Instances
      * @throws InternalErrorException       If any errors fetching Instance
      * @throws UnauthorizedException        If unauthorized
      */
-    public function get(string $id): Instance
+    public function get($id)
     {
         try {
             $this->logger->debug("Getting Instance with id $id");
@@ -91,7 +91,7 @@ class Instances
      * @throws InternalErrorException   If any errors finding Instances
      * @throws UnauthorizedException    If unauthorized
      */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): InstancesPage
+    public function find($filter = null, $pageToken = null, $pageSize = null)
     {
         $text = null;
         $owner = null;
@@ -137,7 +137,7 @@ class Instances
      * @throws InternalErrorException           If any errors starting Instance
      * @throws UnauthorizedException            If unauthorized
      */
-    public function start(string $workflowId, string $name = null, string $description = null, array $fields = null): Instance
+    public function start($workflowId, $name = null, $description = null, $fields = null)
     {
         $request = $this->createStartInstanceRequest($workflowId, $name, $description, $fields);
 
@@ -165,7 +165,7 @@ class Instances
      * @throws InternalErrorException       If any errors stopping Instance
      * @throws UnauthorizedException        If unauthorized
      */
-    public function stop(string $id): Instance
+    public function stop($id)
     {
         try {
             $this->logger->debug("Stopping Instance with id $id");
@@ -191,7 +191,7 @@ class Instances
      * @throws InternalErrorException           If any errors fetching Instance Step
      * @throws UnauthorizedException            If unauthorized
      */
-    public function getStep(string $id): InstanceStep
+    public function getStep($id)
     {
         try {
             $this->logger->debug("Getting step with id $id");
@@ -216,7 +216,7 @@ class Instances
      * @throws InternalErrorException   If any errors fetching Instance Steps
      * @throws UnauthorizedException    If unauthorized
      */
-    public function getSteps(string $instanceId): Array
+    public function getSteps($instanceId)
     {
         $steps = [];
 
@@ -260,7 +260,7 @@ class Instances
      * @throws InternalErrorException   If any errors finding Instance Steps
      * @throws UnauthorizedException    If unauthorized
      */
-    public function findSteps(Filter $filter = null, string $pageToken = null, int $pageSize = null): InstanceStepsPage
+    public function findSteps($filter = null, $pageToken = null, $pageSize = null)
     {
         // The REST api supports wildcard instance id when searching for instance steps
         // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
@@ -306,7 +306,7 @@ class Instances
      * @throws InternalErrorException           If any errors completing Instance Step
      * @throws UnauthorizedException            If unauthorized
      */
-    public function completeStep(string $id, array $fields = null): InstanceStep
+    public function completeStep($id, $fields = null)
     {
         $completeStepRequest = null;
         if (isset($fields)) {
@@ -337,7 +337,7 @@ class Instances
      * @param array  $fields (Optional)         The fields to create the StartInstanceRequest with
      * @return StartInstanceRequest             The created StartInstanceRequest object
      */
-    private function createStartInstanceRequest(string $workflowId, string $name = null, string $description = null, array $fields = null): StartInstanceRequest
+    private function createStartInstanceRequest($workflowId, $name = null, $description = null, $fields = null)
     {
         $config = array('workflowId' => $workflowId);
 
@@ -365,7 +365,7 @@ class Instances
      * @param array  $fields        The fields to create the CompleteStepRequest with
      * @return CompleteStepRequest  The created CompleteStepRequest
      */
-    private function createCompleteStepRequest(string $id, array $fields): CompleteStepRequest
+    private function createCompleteStepRequest($id, $fields)
     {
         $stepOutputFields = $this->formatFields($fields);
         $stepRequest = new CompleteStepRequest(array('id' => $id, 'stepOutputFields' => $stepOutputFields));
@@ -378,7 +378,7 @@ class Instances
      * @param  array $fields    The fields to create a FieldUpdateRequest for each one
      * @return array            The formatted fields
      */
-    private function formatFields(array $fields): array
+    private function formatFields($fields)
     {
         $formattedFields = [];
 
@@ -397,7 +397,7 @@ class Instances
      * @param string $id    The id of the step to get
      * @return InternalInstanceStep The InstanceStep object
      */
-    private function getStepById(string $id): InternalInstanceStep
+    private function getStepById($id)
     {
         // The REST api supports wildcard instance id when searching for instance steps
         // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
@@ -412,7 +412,7 @@ class Instances
      * @param InternalInstance  $internalInstance   The internal instance to create an Instance object from
      * @return Instance                             The created Instance object
      */
-    private function createInstance(InternalInstance $internalInstance): Instance
+    private function createInstance($internalInstance)
     {
         $instance = new Instance(
             $internalInstance->getId(),
@@ -439,7 +439,7 @@ class Instances
      * @param InternalInstanceStep  $internalInstanceStep   The internal instance step to create an InstanceStep object from
      * @return InstanceStep                                 The created InstanceStep object
      */
-    private function createInstanceStep(InternalInstanceStep $internalInstanceStep): InstanceStep
+    private function createInstanceStep($internalInstanceStep)
     {
         $instanceStep = new InstanceStep(
             $internalInstanceStep->getId(),

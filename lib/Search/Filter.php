@@ -11,14 +11,14 @@ class Filter
 {
     // Contains all the search filter criteria objects to
     // be used for actually filtering against the api
-    public array $searchFilters = [];
+    public $searchFilters = [];
 
     /**
      * Syntactic sugar to allow chaining
      *
      * @return Filter   The Filter object
      */
-    public function and() : Filter
+    public function and()
     {
         return $this;
     }
@@ -28,7 +28,7 @@ class Filter
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function text() : FilterCriteria
+    public function text()
     {
         $filterCriteria = new FilterCriteria($this, 'text');
         return $filterCriteria;
@@ -39,7 +39,7 @@ class Filter
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function owner() : FilterCriteria
+    public function owner()
     {
         $filterCriteria = new FilterCriteria($this, 'owner');
         return $filterCriteria;
@@ -50,7 +50,7 @@ class Filter
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function category() : FilterCriteria
+    public function category()
     {
         $filterCriteria = new FilterCriteria($this, 'category');
         return $filterCriteria;
@@ -61,7 +61,7 @@ class Filter
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function status() : FilterCriteria
+    public function status()
     {
         $filterCriteria = new FilterCriteria($this, 'status');
         return $filterCriteria;
@@ -72,7 +72,7 @@ class Filter
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function workflowId(): FilterCriteria
+    public function workflowId()
     {
         $filterCriteria = new FilterCriteria($this, 'workflowId');
         return $filterCriteria;
@@ -83,7 +83,7 @@ class Filter
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function assignee(): FilterCriteria
+    public function assignee()
     {
         $filterCriteria = new FilterCriteria($this, 'assignee');
         return $filterCriteria;
@@ -94,7 +94,7 @@ class Filter
      *
      * @return FilterCriteria   The created FilterCriteria object
      */
-    public function instanceId(): FilterCriteria
+    public function instanceId()
     {
         $filterCriteria = new FilterCriteria($this, 'run_id');
         return $filterCriteria;

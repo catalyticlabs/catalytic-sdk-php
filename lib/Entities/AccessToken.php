@@ -7,24 +7,24 @@ namespace Catalytic\SDK\Entities;
  */
 class AccessToken
 {
-    private string $id;
-    private string $domain;
-    private string $name;
-    private string $type;
-    private ?string $token;
-    private ?string $secret;
-    private string $environment;
-    private string $owner;
+    private $id;
+    private $domain;
+    private $name;
+    private $type;
+    private $token;
+    private $secret;
+    private $environment;
+    private $owner;
 
     public function __construct(
-        string $id = null,
-        string $domain = null,
-        string $name = null,
-        string $type = null,
-        string $token = null,
-        string $secret = null,
-        string $environment = null,
-        string $owner = null
+        $id = null,
+        $domain = null,
+        $name = null,
+        $type = null,
+        $token = null,
+        $secret = null,
+        $environment = null,
+        $owner = null
     ) {
         $this->id = $id;
         $this->domain = $domain;

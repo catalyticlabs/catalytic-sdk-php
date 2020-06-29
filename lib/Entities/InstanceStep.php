@@ -7,16 +7,16 @@ namespace Catalytic\SDK\Entities;
  */
 class InstanceStep
 {
-    private string $id;
-    private string $instanceId;
-    private string $workflowId;
-    private string $name;
-    private string $teamName;
-    private string $position;
-    private ?string $description;
-    private string $status;
-    private ?string $assignedTo;
-    private ?array $outputFields;
+    private $id;
+    private $instanceId;
+    private $workflowId;
+    private $name;
+    private $teamName;
+    private $position;
+    private $description;
+    private $status;
+    private $assignedTo;
+    private $outputFields;
 
     public function __construct(
         $id = null,

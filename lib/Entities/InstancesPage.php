@@ -3,13 +3,13 @@
 namespace Catalytic\SDK\Entities;
 
 /**
- * An object which represents a page of instances
+ * An object which represents a page of Instances
  */
 class InstancesPage
 {
-    private array $instances;
-    private ?string $nextPageToken;
-    private string $count;
+    private $instances;
+    private $nextPageToken;
+    private $count;
 
     public function __construct($instances, $count, $nextPageToken = null)
     {
