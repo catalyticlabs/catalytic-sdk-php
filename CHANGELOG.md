@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+### Changed
+- Environment Variable name to look for the Access Token from CATALYTIC_CREDENTIALS to CATALYTIC_TOKEN
+- Access Tokens dir from ~/.catalytic/credentials to ~/.catalytic/tokens
+
 ## [0.4.0]
 ### Added
 - Basic logging
