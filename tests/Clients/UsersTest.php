@@ -5,13 +5,25 @@ use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Clients\Users;
 use Catalytic\SDK\Search\Where;
 use Catalytic\SDK\Entities\User;
-use Catalytic\SDK\Exceptions\InternalErrorException;
-use Catalytic\SDK\Exceptions\UnauthorizedException;
-use Catalytic\SDK\Exceptions\UserNotFoundException;
+use Catalytic\SDK\Exceptions\{
+    AccessTokenNotFoundException,
+    InternalErrorException,
+    UnauthorizedException,
+    UserNotFoundException
+};
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 
 class UsersTest extends MockeryTestCase
 {
+    public function testGetUser_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $usersClient = new Users(null);
+        $usersClient->get('alice@example.com');
+    }
+
     public function testGetUser_ItShouldThrowUserNotFoundExceptionIfUserDoesNotExist()
     {
         $this->expectException(UserNotFoundException::class);
@@ -21,7 +33,7 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('getUser')
             ->andThrow(new ApiException(null, 404));
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
         $usersClient->get('alice@catalytic.com');
     }
 
@@ -34,7 +46,7 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('getUser')
         ->andThrow(new ApiException(null, 401));
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
         $usersClient->get('alice@catalytic.com');
     }
 
@@ -47,7 +59,7 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('getUser')
         ->andThrow(new ApiException(null, 500));
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
         $usersClient->get('alice@catalytic.com');
     }
 
@@ -64,9 +76,18 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('getUser')
             ->andReturn($user);
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
         $user = $usersClient->get('alice@catalytic.com');
         $this->assertInstanceOf(User::class, $user);
+    }
+
+    public function testFindUsers_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $usersClient = new Users(null);
+        $usersClient->find();
     }
 
     public function testFindUsers_ItShouldThrowUnauthorizedExceptionIfUserDoesNotExist()
@@ -78,7 +99,7 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('findUsers')
         ->andThrow(new ApiException(null, 401));
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
         $usersClient->find();
     }
 
@@ -91,7 +112,7 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('findUsers')
         ->andThrow(new ApiException(null, 500));
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
         $usersClient->find();
     }
 
@@ -115,7 +136,7 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('findUsers')
             ->andReturn($usersPage);
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
 
         $results = $usersClient->find();
         $users = $results->getUsers();
@@ -149,7 +170,7 @@ class UsersTest extends MockeryTestCase
         $usersApi->shouldReceive('findUsers')
             ->andReturn($usersPage);
 
-        $usersClient = new Users(null, $usersApi);
+        $usersClient = new Users('1234', $usersApi);
 
         $where = (new Where())->text()->matches('tom');
         $results = $usersClient->find($where);

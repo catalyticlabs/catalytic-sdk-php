@@ -6,33 +6,37 @@ use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\Api\UsersApi;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\ConfigurationUtils;
+use Catalytic\SDK\Clients\ClientHelpers;
 use Catalytic\SDK\Entities\{User, UsersPage};
 use Catalytic\SDK\Exceptions\{UserNotFoundException, InternalErrorException, UnauthorizedException};
 use Catalytic\SDK\Model\User as InternalUser;
-use Catalytic\SDK\Search\{Filter, SearchUtils};
-use Monolog\Logger;
+use Catalytic\SDK\Search\{SearchUtils};
 
 /**
  * User client to be exposed to consumers
  */
 class Users
 {
+    private $token;
     private $logger;
     private $usersApi;
 
     /**
      * Constructor for Users client
      *
-     * @param string $secret                The token used to make the underlying api calls
+     * @param string $token                 The token used to make the underlying api calls
      * @param UsersApi $usersApi (Optional) The injected UsersApi. Used for unit testing
      */
-    public function __construct($secret, $usersApi = null)
+    public function __construct($token, $usersApi = null)
     {
+        $config = null;
         $this->logger = CatalyticLogger::getLogger(Users::class);
+        $this->token = ClientHelpers::trimIfString($token);
+
         if ($usersApi) {
             $this->usersApi = $usersApi;
         } else {
-            $config = ConfigurationUtils::getConfiguration($secret);
+            $config = ConfigurationUtils::getConfiguration($this->token);
             $this->usersApi = new UsersApi(null, $config);
         }
     }
@@ -40,14 +44,17 @@ class Users
     /**
      * Get a User by either id, email, or username
      *
-     * @param string $identifier        The id, email, or username of the User to get
-     * @return User                     The User object
-     * @throws UserNotFoundException    If User is not found
-     * @throws InternalErrorException   If any errors fetching User
-     * @throws UnauthorizedException    If unauthorized
+     * @param string $identifier            The id, email, or username of the User to get
+     * @return User                         The User object
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws UserNotFoundException        If User is not found
+     * @throws InternalErrorException       If any errors fetching User
+     * @throws UnauthorizedException        If unauthorized
      */
     public function get($identifier)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Getting user with identifier $identifier");
             $internalUser = $this->usersApi->getUser($identifier);
@@ -67,15 +74,18 @@ class Users
     /**
      * Find Users by a variety of filters
      *
-     * @param string $filter            The filter to search users by
-     * @param string $pageToken         The token of the page to fetch
-     * @param int    $pageSize          The number of users per page to fetch
-     * @param UsersPage                 A UsersPage which contains the results
-     * @throws InternalErrorException   If any errors finding Users
-     * @throws UnauthorizedException    If unauthorized
+     * @param string $filter                The filter to search users by
+     * @param string $pageToken             The token of the page to fetch
+     * @param int    $pageSize              The number of users per page to fetch
+     * @param UsersPage                     A UsersPage which contains the results
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws InternalErrorException       If any errors finding Users
+     * @throws UnauthorizedException        If unauthorized
      */
     public function find($filter = null, $pageToken = null, $pageSize = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $text = null;
         $users = [];
 

@@ -6,34 +6,39 @@ use Exception;
 use SplFileObject;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\CatalyticLogger;
-use Catalytic\SDK\Api\DataTablesApi;
 use Catalytic\SDK\ConfigurationUtils;
+use Catalytic\SDK\Api\DataTablesApi;
+use Catalytic\SDK\Clients\ClientHelpers;
 use Catalytic\SDK\Entities\{DataTable, DataTablesPage};
-use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{InternalErrorException, DataTableNotFoundException, UnauthorizedException};
 use Catalytic\SDK\Model\DataTable as InternalDataTable;
+use Catalytic\SDK\Search\SearchUtils;
 
 /**
  * DataTables client
  */
 class DataTables
 {
+    private $token;
     private $logger;
     private $dataTablesApi;
 
     /**
      * Constructor for DataTables client
      *
-     * @param string $secret                            The token used to make the underlying api calls
+     * @param string $token                             The token used to make the underlying api calls
      * @param DataTablesApi $dataTablesApi (Optional)   The injected DataTablesApi. Used for unit testing
      */
-    public function __construct($secret, $dataTablesApi = null)
+    public function __construct($token, $dataTablesApi = null)
     {
+        $config = null;
         $this->logger = CatalyticLogger::getLogger(DataTables::class);
+        $this->token = ClientHelpers::trimIfString($token);
+
         if ($dataTablesApi) {
             $this->dataTablesApi = $dataTablesApi;
         } else {
-            $config = ConfigurationUtils::getConfiguration($secret);
+            $config = ConfigurationUtils::getConfiguration($this->token);
             $this->dataTablesApi = new DataTablesApi(null, $config);
         }
     }
@@ -43,12 +48,15 @@ class DataTables
      *
      * @param string $id                    The id of the Datatable to get
      * @return DataTable                    The Datatable object
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws DataTableNotFoundException   If DataTable not found
      * @throws InternalErrorException       If any errors fetching DataTable
      * @throws UnauthorizedException        If unauthorized
      */
     public function get($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Getting DataTable with id $id");
             $internalDataTable = $this->dataTablesApi->getDataTable($id);
@@ -67,13 +75,16 @@ class DataTables
     /**
      * Find DataTables by a variety of filters
      *
-     * @param string $filter            The filter to search DataTables by
-     * @return DataTablesPage           A DataTablesPage which contains the results
-     * @throws InternalErrorException   If any errors finding DataTables
-     * @throws UnauthorizedException    If unauthorized
+     * @param string $filter                The filter to search DataTables by
+     * @return DataTablesPage               A DataTablesPage which contains the results
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws InternalErrorException       If any errors finding DataTables
+     * @throws UnauthorizedException        If unauthorized
      */
     public function find($filter = null, $pageToken = null, $pageSize = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $text = null;
         $dataTables = [];
 
@@ -107,12 +118,15 @@ class DataTables
      * @param string $format                The format of the data table to download
      * @param string $directory (Optional)  The dir to download the dataTable to
      * @return SplFileObject                An object containing the dataTable info
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws DataTableNotFoundException   If DataTable not found
      * @throws InternalErrorException       If errors saving to $directory
      * @throws UnauthorizedException        If unauthorized
      */
     public function download($id, $format, $directory = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         // By default this downloads the file to a temp dir
         try {
             $this->logger->debug("Downloading DataTable with id $id and format $format");
@@ -154,11 +168,14 @@ class DataTables
      * @param int           $headerRow (Optional)   The header row
      * @param int           $sheetNumber (Optional) The sheet number of an excel file to use
      * @return DataTable                            The DataTable that was uploaded
+     * @throws AccessTokenNotFoundException         If the client was instantiated without an Access Token
      * @throws InternalErrorException               If any errors uploading the DataTable
      * @throws UnauthorizedException                If unauthorized
      */
     public function upload($dataTableFile, $tableName = null, $headerRow = 1, $sheetNumber = 1)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Uploading DataTable with tableName $tableName");
             $internalDataTable = $this->dataTablesApi->uploadDataTable($tableName, $headerRow, $sheetNumber, $dataTableFile);
@@ -180,12 +197,15 @@ class DataTables
      * @param int           $headerRow (Optional)   The header row
      * @param int           $sheetNumber (Optional) The sheet number of an excel file to use
      * @return DataTable                            The new DataTable
+     * @throws AccessTokenNotFoundException         If the client was instantiated without an Access Token
      * @throws DataTableNotFoundException           If DataTable is not found
      * @throws InternalErrorException               If any errors replacing DataTable
      * @throws UnauthorizedException                If unauthorized
      */
     public function replace($id, $dataTableFile, $headerRow = 1, $sheetNumber = 1)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Replacing DataTable with id $id");
             $internalDataTable = $this->dataTablesApi->replaceDataTable($id, $headerRow, $sheetNumber, $dataTableFile);

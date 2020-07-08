@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Environment Variable name to look for the Access Token from CATALYTIC_CREDENTIALS to CATALYTIC_TOKEN
 - Access Tokens dir from ~/.catalytic/credentials to ~/.catalytic/tokens
+- Allow instantiating CatalyticClient without it finding a token
+
+### Fixed
+- Passing in a token directly not working
 
 ## [0.4.0]
 ### Added

@@ -13,6 +13,15 @@ use PHPUnit\Framework\TestCase;
 
 class AccessTokensTest extends TestCase
 {
+    public function testGetAccessToken_ItShouldReturnAccessTokenNotFoundExceptionIfClientNotInstaniatedWithToken()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $accessTokensClient = new AccessTokens(null);
+        $accessTokensClient->get('1234');
+    }
+
     public function testGetAccessToken_ItShouldThrowAnExceptionIfAccessTokenDoesNotExist()
     {
         $this->expectException(AccessTokenNotFoundException::class);
@@ -22,7 +31,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('getAccessToken')
             ->andThrow(new ApiException(null, 404));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->get('1234');
     }
 
@@ -35,7 +44,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('getAccessToken')
             ->andThrow(new ApiException(null, 401));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->get('114c0d7d-c291-4ad2-a10d-68c5dd532af3');
     }
 
@@ -48,7 +57,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('getAccessToken')
             ->andThrow(new ApiException(null, 500));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->get('114c0d7d-c291-4ad2-a10d-68c5dd532af3');
     }
 
@@ -69,9 +78,18 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('getAccessToken')
             ->andReturn($accessToken);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->get('114c0d7d-c291-4ad2-a10d-68c5dd532af3');
         $this->assertInstanceOf(AccessToken::class, $accessToken);
+    }
+
+    public function testFindAccessToken_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $accessTokensClient = new AccessTokens(null);
+        $accessTokensClient->find();
     }
 
     public function testFindAccessTokens_ItShouldThrowUnauthorizedExceptionIfUserDoesNotExist()
@@ -84,7 +102,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('findAccessTokens')
         ->andThrow(new ApiException(null, 401));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->find();
     }
 
@@ -98,7 +116,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('findAccessTokens')
         ->andThrow(new ApiException(null, 500));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->find();
     }
 
@@ -126,7 +144,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('findAccessTokens')
         ->andReturn($accessTokenPage);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
 
         $results = $accessTokensClient->find();
         $accessToken = $results->getAccessTokens();
@@ -164,7 +182,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('findAccessTokens')
         ->andReturn($accessTokenPage);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
 
         $where = (new Where())->text()->matches('tom');
         $results = $accessTokensClient->find($where);
@@ -203,7 +221,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('findAccessTokens')
         ->andReturn($accessTokenPage);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
 
         $where = (new Where())->text()->matches('tom');
         $results = $accessTokensClient->find($where);
@@ -227,7 +245,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAndApproveAccessToken')
         ->andThrow(new ApiException(null, 401));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->create('example', 'alice@example.com', 'mypassword');
     }
 
@@ -240,7 +258,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAndApproveAccessToken')
         ->andThrow(new ApiException(null, 500));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->create('example', 'alice@example.com', 'mypassword');
     }
 
@@ -261,7 +279,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAndApproveAccessToken')
         ->andReturn($accessToken);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->create('example', 'alice@example.com', 'mypassword');
         $this->assertInstanceOf(AccessToken::class, $accessToken);
     }
@@ -283,7 +301,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAndApproveAccessToken')
         ->andReturn($accessToken);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->create('example.pushbot.com', 'alice@example.com', 'mypassword');
         $this->assertInstanceOf(AccessToken::class, $accessToken);
     }
@@ -307,7 +325,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAndApproveAccessToken')
         ->andReturn($accessToken);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->create('http://example.pushbot.com', 'alice@example.com', 'mypassword');
     }
 
@@ -320,7 +338,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAccessToken')
         ->andThrow(new ApiException(null, 401));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->createWithWebApprovalFlow('example', 'alice@example.com', 'mypassword');
     }
 
@@ -333,7 +351,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAccessToken')
         ->andThrow(new ApiException(null, 500));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->createWithWebApprovalFlow('example', 'alice@example.com', 'mypassword');
     }
 
@@ -354,7 +372,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAccessToken')
         ->andReturn($accessToken);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->createWithWebApprovalFlow('example', 'alice@example.com', 'mypassword');
         $this->assertInstanceOf(AccessToken::class, $accessToken);
     }
@@ -377,7 +395,7 @@ class AccessTokensTest extends TestCase
         $authenticationApi->shouldReceive('createAccessToken')
         ->andReturn($accessToken);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->createWithWebApprovalFlow('example.pushbot.com');
         $url = $accessTokensClient->getApprovalUrl($accessToken);
         $this->assertEquals('https://example.pushbot.com/access-tokens/approve?userTokenID=114c0d7d-c291-4ad2-a10d-68c5dd532af3&application=Catalytic+SDK', $url);
@@ -425,7 +443,7 @@ class AccessTokensTest extends TestCase
             'prod',
             'alice'
         );
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->waitForApproval($accessToken);
     }
 
@@ -456,9 +474,18 @@ class AccessTokensTest extends TestCase
             'prod',
             'alice'
         );
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->waitForApproval($accessToken);
         $this->assertInstanceOf(AccessToken::class, $accessToken);
+    }
+
+    public function testGetAccessToken_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $accessTokensClient = new AccessTokens(null);
+        $accessTokensClient->revoke('1234');
     }
 
     public function testRevokeAccessToken_ItShouldThrowAnExceptionIfAccessTokenDoNotExist()
@@ -470,7 +497,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('revokeAccessToken')
             ->andThrow(new ApiException(null, 404));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->revoke('1234');
     }
 
@@ -483,7 +510,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('revokeAccessToken')
             ->andThrow(new ApiException(null, 401));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->revoke('114c0d7d-c291-4ad2-a10d-68c5dd532af3');
     }
 
@@ -496,7 +523,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('revokeAccessToken')
             ->andThrow(new ApiException(null, 500));
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessTokensClient->revoke('114c0d7d-c291-4ad2-a10d-68c5dd532af3');
     }
 
@@ -517,7 +544,7 @@ class AccessTokensTest extends TestCase
         $accessTokenApi->shouldReceive('revokeAccessToken')
             ->andReturn($accessToken);
 
-        $accessTokensClient = new AccessTokens(null, $accessTokenApi, $authenticationApi);
+        $accessTokensClient = new AccessTokens('1234', $accessTokenApi, $authenticationApi);
         $accessToken = $accessTokensClient->revoke('114c0d7d-c291-4ad2-a10d-68c5dd532af3');
         $this->assertInstanceOf(AccessToken::class, $accessToken);
     }

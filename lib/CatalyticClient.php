@@ -33,13 +33,9 @@ class CatalyticClient
     public function __construct($tokenOrFile = null)
     {
         $credentials = new Credentials();
+
         $this->token = $credentials->fetchToken($tokenOrFile);
-        $this->workflows = new Workflows($this->token);
-        $this->instances = new Instances($this->token);
-        $this->users = new Users($this->token);
-        $this->files = new Files($this->token);
-        $this->dataTables = new DataTables($this->token);
-        $this->accessTokens = new AccessTokens($this->token);
+        $this->initialize();
     }
 
     public function workflows(): Workflows
@@ -73,10 +69,32 @@ class CatalyticClient
     }
 
     /**
-     * Get the AccessToken used to instantiate this instance of CatalyticClient
+     * Get the Access Token used to instantiate this instance of CatalyticClient
      */
-    public function getAccessToken(): string
+    public function getAccessToken(): ?string
     {
         return $this->token;
+    }
+
+    /**
+     * Sets the Access Token and initializes this instance of CatalyticClient
+     */
+    public function setAccessToken($token): void
+    {
+        $this->token = $token;
+        $this->initialize();
+    }
+
+    /**
+     * Initialize all the clients
+     */
+    private function initialize(): void
+    {
+        $this->workflows = new Workflows($this->token);
+        $this->instances = new Instances($this->token);
+        $this->users = new Users($this->token);
+        $this->files = new Files($this->token);
+        $this->dataTables = new DataTables($this->token);
+        $this->accessTokens = new AccessTokens($this->token);
     }
 }

@@ -3,7 +3,7 @@
 namespace Catalytic\SDK\Exceptions;
 
 /**
- * An exception to be thrown when an Acess Token is not found
+ * An exception to be thrown when an Access Token is not found
  */
 class AccessTokenNotFoundException extends NotFoundException
 {

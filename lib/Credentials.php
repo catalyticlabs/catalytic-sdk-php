@@ -2,6 +2,9 @@
 
 namespace Catalytic\SDK;
 
+use Catalytic\SDK\CatalyticLogger;
+use Catalytic\SDK\Exceptions\AccessTokenNotFoundException;
+
 use Exception;
 
 /**
@@ -9,6 +12,16 @@ use Exception;
  */
 class Credentials
 {
+    private $logger;
+
+    /**
+     * Constructor which initializes the logger
+     */
+    public function __construct()
+    {
+        $this->logger = CatalyticLogger::getLogger(Credentials::class);
+    }
+
     /**
      * Tries to find a token.
      *
@@ -26,15 +39,19 @@ class Credentials
      * 3. Assume it's an actual token that was passed in
      *
      * @param string $tokenOrFile (Optional)    The token, filename, or path to a file for fetching a token
-     * @return string                           The token
-     * @throws Exception                        If a token can't be found
+     * @return string|null                      The token if found or null if not found
      */
     public function fetchToken($tokenOrFile = null)
     {
         if ($tokenOrFile === null) {
             return $this->fromDefault();
         } else {
-            return $this->fromFile($tokenOrFile);
+            $token = $this->fromFile($tokenOrFile);
+
+            // If a token was not found in a file, then a token was passed in so use it
+            if ($token === null) {
+                return $tokenOrFile;
+            }
         }
     }
 
@@ -60,8 +77,9 @@ class Credentials
         // If it wasn't found, throw an exception
         if (!$token) {
             $home = $this->getHomeDir();
-            throw new Exception('Cannot find Access Token in $CATALYTIC_TOKEN
+            $this->logger->debug('Cannot find Access Token in $CATALYTIC_TOKEN
                 environment variable or ' . "$home/.catalytic/tokens/default");
+            return null;
         }
 
         return $token;
@@ -78,10 +96,11 @@ class Credentials
     {
         $token = $this->fetchTokenFromFile($fileName);
 
-        // If it wasn't found, throw an exception
+        // If it wasn't found, return null;
         if ($token === null) {
             $home = $this->getHomeDir();
-            throw new Exception('Cannot find Access Token in ' . "$home/.catalytic/tokens/$fileName" . "or $fileName");
+            $this->logger->debug('Cannot find Access Token in ' . "$home/.catalytic/tokens/$fileName" . "or $fileName");
+            return null;
         }
 
         return $token;
@@ -120,7 +139,14 @@ class Credentials
         } else {
             $path = "$home/.catalytic/tokens/default";
         }
-        $token = file_get_contents($path);
+
+        try {
+            $token = file_get_contents($path);
+        } catch (Exception $e) {
+            // If the file doesn't exist or can't be read, set the token to null
+            $this->logger->debug("Cannot find Access Token in $path");
+            $token = null;
+        }
 
         return $token;
     }

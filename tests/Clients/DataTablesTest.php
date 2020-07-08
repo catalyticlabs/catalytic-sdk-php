@@ -4,6 +4,7 @@ use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Clients\DataTables;
 use Catalytic\SDK\Entities\DataTable;
 use Catalytic\SDK\Exceptions\{
+    AccessTokenNotFoundException,
     DataTableNotFoundException,
     InternalErrorException,
     UnauthorizedException
@@ -21,6 +22,15 @@ class DataTablesTest extends MockeryTestCase
         }
     }
 
+    public function testGetDataTable_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $dataTablesClient = new DataTables(null);
+        $dataTablesClient->get('1234');
+    }
+
     public function testGetDataTable_ItShouldThrowDataTableNotFoundExceptionIfDataTableDoesNotExist()
     {
         $this->expectException(DataTableNotFoundException::class);
@@ -30,7 +40,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('getDataTable')
         ->andThrow(new ApiException(null, 404));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->get('1234');
     }
 
@@ -43,7 +53,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('getDataTable')
         ->andThrow(new ApiException(null, 401));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->get('alice@catalytic.com');
     }
 
@@ -56,7 +66,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('getDataTable')
         ->andThrow(new ApiException(null, 500));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->get('alice@catalytic.com');
     }
 
@@ -84,9 +94,18 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('getDataTable')
         ->andReturn($dataTable);
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTable = $dataTablesClient->get('alice@catalytic.com');
         $this->assertInstanceOf(DataTable::class, $dataTable);
+    }
+
+    public function testFindDataTables_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $dataTablesClient = new DataTables(null);
+        $dataTablesClient->find();
     }
 
     public function testFindDataTables_ItShouldThrowUnauthorizedExceptionIfDataTableDoesNotExist()
@@ -98,7 +117,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('findDataTables')
         ->andThrow(new ApiException(null, 401));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->find();
     }
 
@@ -111,7 +130,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('findDataTables')
         ->andThrow(new ApiException(null, 500));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->find();
     }
 
@@ -146,7 +165,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('findDataTables')
         ->andReturn($dataTablesPage);
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
 
         $results = $dataTablesClient->find();
         $dataTables = $results->getDataTables();
@@ -191,7 +210,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('findDataTables')
         ->andReturn($dataTablesPage);
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
 
         $where = (new Where())->text()->matches('tom');
         $results = $dataTablesClient->find($where);
@@ -206,6 +225,15 @@ class DataTablesTest extends MockeryTestCase
         $this->assertEquals(count($dataTables), 1);
     }
 
+    public function testDownloadDataTable_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $dataTablesClient = new DataTables(null);
+        $dataTablesClient->download('1234', 'csv');
+    }
+
     public function testDownloadDataTable_itShouldThrowUnauthorizedException() {
         $this->expectException(UnauthorizedException::class);
         $this->expectExceptionMessage("Unauthorized");
@@ -214,7 +242,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('downloadDataTable')
         ->andThrow(new ApiException(null, 401));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->download('1234', 'csv');
     }
 
@@ -226,7 +254,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('downloadDataTable')
         ->andThrow(new ApiException(null, 404));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->download('1234', 'csv');
     }
 
@@ -238,7 +266,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('downloadDataTable')
         ->andThrow(new ApiException(null, 500));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->download('1234', 'csv');
     }
 
@@ -248,9 +276,18 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('downloadDataTable')
         ->andReturn($dataTable);
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTable = $dataTablesClient->download('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd', 'csv');
         $this->assertInstanceOf(SplFileObject::class, $dataTable);
+    }
+
+    public function testUploadDataTable_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $dataTablesClient = new DataTables(null);
+        $dataTablesClient->upload('1234');
     }
 
     public function testUploadDataTable_itShouldThrowUnauthorizedException()
@@ -263,7 +300,7 @@ class DataTablesTest extends MockeryTestCase
         ->andThrow(new ApiException(null, 401));
         $dataTableFile = new SplFileObject('foobar', 'w');
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->upload($dataTableFile);
     }
 
@@ -277,7 +314,7 @@ class DataTablesTest extends MockeryTestCase
         ->andThrow(new ApiException(null, 500));
         $dataTableFile = new SplFileObject('foobar', 'w');
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->upload($dataTableFile);
     }
 
@@ -305,9 +342,18 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('uploadDataTable')
         ->andReturn($internalDataTable);
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTable = $dataTablesClient->upload($dataTableFile);
         $this->assertInstanceOf(DataTable::class, $dataTable);
+    }
+
+    public function testReplaceDataTable_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $dataTablesClient = new DataTables(null);
+        $dataTablesClient->replace('1234', 'foo');
     }
 
     public function testReplaceDataTable_itShouldThrowUnauthorizedException()
@@ -320,7 +366,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('replaceDataTable')
         ->andThrow(new ApiException(null, 401));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->replace('1234', $dataTableFile);
     }
 
@@ -334,7 +380,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('replaceDataTable')
         ->andThrow(new ApiException(null, 404));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->replace('1234', $dataTableFile);
     }
 
@@ -348,7 +394,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('replaceDataTable')
         ->andThrow(new ApiException(null, 500));
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTablesClient->replace('1234', $dataTableFile);
     }
 
@@ -377,7 +423,7 @@ class DataTablesTest extends MockeryTestCase
         $dataTablesApi->shouldReceive('replaceDataTable')
         ->andReturn($internalDataTable);
 
-        $dataTablesClient = new DataTables(null, $dataTablesApi);
+        $dataTablesClient = new DataTables('1234', $dataTablesApi);
         $dataTable = $dataTablesClient->replace('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd', $dataTableFile);
         $this->assertInstanceOf(DataTable::class, $dataTable);
     }

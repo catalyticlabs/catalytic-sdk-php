@@ -4,6 +4,7 @@ use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Clients\Files;
 use Catalytic\SDK\Entities\File;
 use Catalytic\SDK\Exceptions\{
+    AccessTokenNotFoundException,
     FileNotFoundException,
     InternalErrorException,
     UnauthorizedException,
@@ -21,6 +22,15 @@ class FilesTest extends MockeryTestCase
         }
     }
 
+    public function testGetFile_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $filesClient = new Files(null);
+        $filesClient->get('1234');
+    }
+
     public function testGetFile_ItShouldThrowFileNotFoundExceptionIfFileDoesNotExist()
     {
         $this->expectException(FileNotFoundException::class);
@@ -30,7 +40,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('getFile')
         ->andThrow(new ApiException(null, 404));
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->get('1234');
     }
 
@@ -43,7 +53,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('getFile')
         ->andThrow(new ApiException(null, 401));
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->get('alice@catalytic.com');
     }
 
@@ -56,7 +66,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('getFile')
         ->andThrow(new ApiException(null, 500));
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->get('alice@catalytic.com');
     }
 
@@ -79,9 +89,18 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('getFile')
         ->andReturn($file);
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $file = $filesClient->get('alice@catalytic.com');
         $this->assertInstanceOf(File::class, $file);
+    }
+
+    public function testDownloadFile_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $filesClient = new Files(null);
+        $filesClient->download('1234');
     }
 
     public function testDownloadFile_itShouldThrowUnauthorizedException() {
@@ -92,7 +111,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('downloadFile')
         ->andThrow(new ApiException(null, 401));
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->download('1234');
     }
 
@@ -104,7 +123,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('downloadFile')
         ->andThrow(new ApiException(null, 404));
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->download('1234');
     }
 
@@ -116,7 +135,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('downloadFile')
         ->andThrow(new ApiException(null, 500));
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->download('1234', 'csv');
     }
 
@@ -126,9 +145,18 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('downloadFile')
         ->andReturn($file);
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $file = $filesClient->download('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(SplFileObject::class, $file);
+    }
+
+    public function testUploadFile_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $filesClient = new Files(null);
+        $filesClient->upload('1234');
     }
 
     public function testUploadFile_itShouldThrowUnauthorizedException()
@@ -140,7 +168,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('uploadFiles')->andThrow(new ApiException(null, 401));
         $fileFile = new SplFileObject('foobar', 'w');
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->upload($fileFile);
     }
 
@@ -153,7 +181,7 @@ class FilesTest extends MockeryTestCase
         $filesApi->shouldReceive('uploadFiles')->andThrow(new ApiException(null, 500));
         $fileFile = new SplFileObject('foobar', 'w');
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $filesClient->upload($fileFile);
     }
 
@@ -183,7 +211,7 @@ class FilesTest extends MockeryTestCase
         $filesApi = Mockery::mock('Catalytic\SDK\Api\FilesApi');
         $filesApi->shouldReceive('uploadFiles')->andReturn($fileMetadataPage);
 
-        $filesClient = new Files(null, $filesApi);
+        $filesClient = new Files('1234', $filesApi);
         $file = $filesClient->upload($fileFile);
         $this->assertInstanceOf(File::class, $file);
     }

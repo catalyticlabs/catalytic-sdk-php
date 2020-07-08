@@ -6,6 +6,7 @@ use Catalytic\SDK\ApiException;
 use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\{InstancesApi, InstanceStepsApi};
+use Catalytic\SDK\Clients\ClientHelpers;
 use Catalytic\SDK\Entities\{Instance, InstanceStep, InstancesPage, InstanceStepsPage};
 use Catalytic\SDK\Exceptions\{
     InstanceNotFoundException,
@@ -22,24 +23,32 @@ use Catalytic\SDK\Model\{
     StartInstanceRequest
 };
 use Catalytic\SDK\Search\{Filter, SearchUtils};
-use Monolog\Logger;
 
 /**
  * Instance client to be exposed to consumers
  */
 class Instances
 {
+    private $token;
     private $logger;
     private $instancesApi;
     private $instanceStepsApi;
 
-    public function __construct($secret, $instancesApi = null, $instanceStepsApi = null)
+    /**
+     * Constructor for Workflows client
+     *
+     * @param string $token                                     The token used to make the underlying api calls
+     * @param InstancesApi      $instancesApi (Optional)        The injected WorkflowsApi. Used for unit testing
+     * @param InstanceStepsApi  $instanceStepsApi (Optional)    The injected FilesClient. Used for unit testing
+     */
+    public function __construct($token, $instancesApi = null, $instanceStepsApi = null)
     {
-        $this->logger = CatalyticLogger::getLogger(Instances::class);
         $config = null;
+        $this->logger = CatalyticLogger::getLogger(Instances::class);
+        $this->token = ClientHelpers::trimIfString($token);
 
-        if ($secret) {
-            $config = ConfigurationUtils::getConfiguration($secret);
+        if ($token) {
+            $config = ConfigurationUtils::getConfiguration($this->token);
         }
 
         if ($instancesApi) {
@@ -60,12 +69,15 @@ class Instances
      *
      * @param string $id                    The id of the workflow Instance to get
      * @return Instance                     The Instance object
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws InstanceNotFoundException    If Instance is not found
      * @throws InternalErrorException       If any errors fetching Instance
      * @throws UnauthorizedException        If unauthorized
      */
     public function get($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Getting Instance with id $id");
             $internalInstance = $this->instancesApi->getInstance($id);
@@ -84,15 +96,18 @@ class Instances
     /**
      * Find Instances by a variety of criteria
      *
-     * @param Filter $filter            The filter criteria to search instances by
-     * @param string $pageToken         The token of the page to fetch
-     * @param int    $pageSize          The number of workflows per page to fetch
-     * @return InstancesPage            An InstancesPage which contains the results
-     * @throws InternalErrorException   If any errors finding Instances
-     * @throws UnauthorizedException    If unauthorized
+     * @param Filter $filter                The filter criteria to search instances by
+     * @param string $pageToken             The token of the page to fetch
+     * @param int    $pageSize              The number of workflows per page to fetch
+     * @return InstancesPage                An InstancesPage which contains the results
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws InternalErrorException       If any errors finding Instances
+     * @throws UnauthorizedException        If unauthorized
      */
     public function find($filter = null, $pageToken = null, $pageSize = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $text = null;
         $owner = null;
         $status = null;
@@ -133,12 +148,15 @@ class Instances
      * @param string $description (Optional)    The description to give to the instance
      * @param array  $fields (Optional)         The input fields to use when starting this instance
      * @return Instance                         The newly created instance
+     * @throws AccessTokenNotFoundException     If the client was instantiated without an Access Token
      * @throws WorkflowNotFoundException        If Workflow not found
      * @throws InternalErrorException           If any errors starting Instance
      * @throws UnauthorizedException            If unauthorized
      */
     public function start($workflowId, $name = null, $description = null, $fields = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $request = $this->createStartInstanceRequest($workflowId, $name, $description, $fields);
 
         try {
@@ -161,12 +179,15 @@ class Instances
      *
      * @param string $id                    The id of the Instance to stop
      * @param Instance                      The Instance that was stopped
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws InstanceNotFoundException    If Instance not found
      * @throws InternalErrorException       If any errors stopping Instance
      * @throws UnauthorizedException        If unauthorized
      */
     public function stop($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Stopping Instance with id $id");
             $internalStoppedInstance = $this->instancesApi->stopInstance($id);
@@ -187,12 +208,15 @@ class Instances
      *
      * @param string $id                        The id of the step to get
      * @return InstanceStep                     The InstanceStep object
+     * @throws AccessTokenNotFoundException     If the client was instantiated without an Access Token
      * @throws InstanceStepNotFoundException    If Instance Step not found
      * @throws InternalErrorException           If any errors fetching Instance Step
      * @throws UnauthorizedException            If unauthorized
      */
     public function getStep($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Getting step with id $id");
             $internalStep = $this->getStepById($id);
@@ -211,13 +235,16 @@ class Instances
     /**
      * Gets all the steps for a specific Instance id
      *
-     * @param string $instanceId        The id of the Instance to get steps for
-     * @return InstanceStepsPage        The InstanceStepsPage which contains the results
-     * @throws InternalErrorException   If any errors fetching Instance Steps
-     * @throws UnauthorizedException    If unauthorized
+     * @param string $instanceId            The id of the Instance to get steps for
+     * @return InstanceStepsPage            The InstanceStepsPage which contains the results
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws InternalErrorException       If any errors fetching Instance Steps
+     * @throws UnauthorizedException        If unauthorized
      */
     public function getSteps($instanceId)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $steps = [];
 
         try {
@@ -253,15 +280,18 @@ class Instances
     /**
      * Search for steps
      *
-     * @param Filter $filter            The filter criteria to search instance steps by
-     * @param string $pageToken         The token of the page to fetch
-     * @param int    $pageSize          The number of instance steps per page to fetch
-     * @return InstanceStepsPage        An InstanceStepsPage which contains the reults
-     * @throws InternalErrorException   If any errors finding Instance Steps
-     * @throws UnauthorizedException    If unauthorized
+     * @param Filter $filter                The filter criteria to search instance steps by
+     * @param string $pageToken             The token of the page to fetch
+     * @param int    $pageSize              The number of instance steps per page to fetch
+     * @return InstanceStepsPage            An InstanceStepsPage which contains the reults
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws InternalErrorException       If any errors finding Instance Steps
+     * @throws UnauthorizedException        If unauthorized
      */
     public function findSteps($filter = null, $pageToken = null, $pageSize = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         // The REST api supports wildcard instance id when searching for instance steps
         // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
         $wildcardInstanceId = '-';
@@ -302,12 +332,15 @@ class Instances
      * @param string $id                        The id of the step to complete
      * @param array  $fields (Optional)         Fields and the values to use when completing a step
      * @return InstanceStep                     The completed InstanceStep
+     * @throws AccessTokenNotFoundException     If the client was instantiated without an Access Token
      * @throws InstanceStepNotFoundException    If Instance Step not found
      * @throws InternalErrorException           If any errors completing Instance Step
      * @throws UnauthorizedException            If unauthorized
      */
     public function completeStep($id, $fields = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $completeStepRequest = null;
         if (isset($fields)) {
             $completeStepRequest = $this->createCompleteStepRequest($id, $fields);

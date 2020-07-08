@@ -5,6 +5,7 @@ use Catalytic\SDK\Clients\Workflows;
 use Catalytic\SDK\Entities\File;
 use Catalytic\SDK\Search\Where;
 use Catalytic\SDK\Entities\Workflow;
+use Catalytic\SDK\Exceptions\AccessTokenNotFoundException;
 use Catalytic\SDK\Exceptions\InternalErrorException;
 use Catalytic\SDK\Exceptions\UnauthorizedException;
 use Catalytic\SDK\Exceptions\WorkflowNotFoundException;
@@ -19,6 +20,16 @@ class WorkflowsTest extends MockeryTestCase
             unlink('foobar');
         }
     }
+
+    public function testGetWorkflow_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $workflowsClient = new Workflows(null);
+        $workflowsClient->get('1234');
+    }
+
     public function testGetWorkflow_ItShouldThrowUnathorizedException()
     {
         $this->expectException(UnauthorizedException::class);
@@ -28,7 +39,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('getWorkflow')
         ->andThrow(new ApiException(null, 401));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->get('1234');
     }
 
@@ -41,7 +52,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('getWorkflow')
         ->andThrow(new ApiException(null, 404));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->get('1234');
     }
 
@@ -54,7 +65,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('getWorkflow')
         ->andThrow(new ApiException(null, 500));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->get('alice@catalytic.com');
     }
 
@@ -83,9 +94,18 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('getWorkflow')
         ->andReturn($workflow);
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflow = $workflowsClient->get('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(Workflow::class, $workflow);
+    }
+
+    public function testFindWorkflow_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $workflowsClient = new Workflows(null);
+        $workflowsClient->find();
     }
 
     public function testFindWorkflows_ItShouldThrowUnauthorizedExceptionIfWorkflowDoesNotExist()
@@ -97,7 +117,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('findWorkflows')
         ->andThrow(new ApiException(null, 401));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->find();
     }
 
@@ -110,7 +130,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('findWorkflows')
         ->andThrow(new ApiException(null, 500));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->find();
     }
 
@@ -146,7 +166,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('findWorkflows')
             ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
 
         $results = $workflowsClient->find();
         $workflows = $results->getWorkflows();
@@ -192,7 +212,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('findWorkflows')
             ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
 
         $where = (new Where())->text()->matches('tom');
         $results = $workflowsClient->find($where);
@@ -239,7 +259,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('findWorkflows')
         ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
 
         $where = (new Where())->owner()->is('alice');
         $results = $workflowsClient->find($where);
@@ -286,7 +306,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('findWorkflows')
         ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
 
         $where = (new Where())->category()->is('general');
         $results = $workflowsClient->find($where);
@@ -301,6 +321,15 @@ class WorkflowsTest extends MockeryTestCase
         $this->assertEquals(count($workflows), 1);
     }
 
+    public function testExportWorkflow_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $workflowsClient = new Workflows(null);
+        $workflowsClient->export('1234');
+    }
+
     public function testExportWorkflow_ItShouldThrowUnathorizedException()
     {
         $this->expectException(UnauthorizedException::class);
@@ -310,7 +339,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('exportWorkflow')
         ->andThrow(new ApiException(null, 401));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->export('1234');
     }
 
@@ -323,7 +352,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('exportWorkflow')
         ->andThrow(new ApiException(null, 404));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->export('1234');
     }
 
@@ -336,7 +365,7 @@ class WorkflowsTest extends MockeryTestCase
         $workflowsApi->shouldReceive('exportWorkflow')
         ->andThrow(new ApiException(null, 500));
 
-        $workflowsClient = new Workflows(null, $workflowsApi);
+        $workflowsClient = new Workflows('1234', $workflowsApi);
         $workflowsClient->export('1234');
     }
 
@@ -369,7 +398,7 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('get')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflow = $workflowsClient->export('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(File::class, $workflow);
     }
@@ -407,7 +436,7 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('get')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflow = $workflowsClient->export('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(File::class, $workflow);
     }
@@ -445,9 +474,18 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('get')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflow = $workflowsClient->export('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd', 'my-password');
         $this->assertInstanceOf(File::class, $workflow);
+    }
+
+    public function testImportWorkflow_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $workflowsClient = new Workflows(null);
+        $workflowsClient->import('1234');
     }
 
     public function testImportWorkflow_ItShouldThrowUnathorizedException()
@@ -472,7 +510,7 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('upload')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflowsClient->import($importFile);
     }
 
@@ -498,7 +536,7 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('upload')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflowsClient->import($importFile);
     }
 
@@ -531,7 +569,7 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('upload')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflow = $workflowsClient->import($importFile);
         $this->assertInstanceOf(File::class, $workflow);
     }
@@ -592,7 +630,7 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('upload')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflow = $workflowsClient->import($importFile);
         $this->assertInstanceOf(Workflow::class, $workflow);
     }
@@ -652,7 +690,7 @@ class WorkflowsTest extends MockeryTestCase
         $filesClient = Mockery::mock('Catalytic\SDK\Clients\Files');
         $filesClient->shouldReceive('upload')->andReturn($file);
 
-        $workflowsClient = new Workflows(null, $workflowsApi, $filesClient);
+        $workflowsClient = new Workflows('1234', $workflowsApi, $filesClient);
         $workflow = $workflowsClient->import($importFile, 'my-password');
         $this->assertInstanceOf(Workflow::class, $workflow);
     }

@@ -17,13 +17,13 @@ use Catalytic\SDK\Model\{
     WaitForAccessTokenApprovalRequest
 };
 use InvalidArgumentException;
-use Monolog\Logger;
 
 /**
  * AccessTokens client
  */
 class AccessTokens
 {
+    private $token;
     private $logger;
     private $accessTokensApi;
     private $authenticationApi;
@@ -31,16 +31,18 @@ class AccessTokens
     /**
      * Constructor for AccessTokens
      *
-     * @param string $secret                                    The token used to make the underlying api calls
-     * @param AccessTokensApi $accessTokensApi (Optional) The injected AccessTokensApi. Used for unit testing
+     * @param string $token                                     The token used to make the underlying api calls
+     * @param AccessTokensApi $accessTokensApi (Optional)       The injected AccessTokensApi. Used for unit testing
      * @param AuthenticationApi  $authenticationApi (Optional)  The injected AuthenticationApi. Used for unit testing
      */
-    public function __construct($secret, $accessTokensApi = null, $authenticationApi = null)
+    public function __construct($token, $accessTokensApi = null, $authenticationApi = null)
     {
         $config = null;
         $this->logger = CatalyticLogger::getLogger(AccessTokens::class);
-        if ($secret) {
-            $config = ConfigurationUtils::getConfiguration($secret);
+        $this->token = ClientHelpers::trimIfString($token);
+
+        if ($token) {
+            $config = ConfigurationUtils::getConfiguration($token);
         }
 
         if ($accessTokensApi) {
@@ -60,13 +62,15 @@ class AccessTokens
      * Get AccessToken by id
      *
      * @param string $id                    The id of the AccessToken to get
-     * @return AccessTokens              The AccessToken object
-     * @throws AccessTokenNotFoundException If AccessToken are not found
+     * @return AccessTokens                 The AccessToken object
+     * @throws AccessTokenNotFoundException If AccessToken is not found or if the client was instantiated without an Access Token
      * @throws InternalErrorException       If any errors fetching AccessToken
      * @throws UnauthorizedException        If unauthorized
      */
     public function get($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Getting AccessToken with id $id");
             $internalAccessToken = $this->accessTokensApi->getAccessToken($id);
@@ -85,15 +89,18 @@ class AccessTokens
     /**
      * Find AccessTokens by a variety of filters
      *
-     * @param Filter $filter (Optional)     The filter criteria to search AccessTokens by
-     * @param string $pageToken (Optional)  The token of the page to fetch
-     * @param int    $pageSize (Optional)   The number of AccessTokens per page to fetch
-     * @return AccessTokensPage (Optional)  An AccessTokensPage which contains the results
-     * @throws InternalErrorException       If any errors finding AccessTokens
-     * @throws UnauthorizedException        If unauthorized
+     * @param Filter $filter (Optional)         The filter criteria to search AccessTokens by
+     * @param string $pageToken (Optional)      The token of the page to fetch
+     * @param int    $pageSize (Optional)       The number of AccessTokens per page to fetch
+     * @return AccessTokensPage (Optional)      An AccessTokensPage which contains the results
+     * @throws AccessTokenNotFoundException   If the client was instantiated without an Access Token
+     * @throws InternalErrorException           If any errors finding AccessTokens
+     * @throws UnauthorizedException            If unauthorized
      */
     public function find($filter = null, $pageToken = null, $pageSize = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $text = null;
         $owner = null;
         $accessTokens = [];
@@ -164,7 +171,7 @@ class AccessTokens
      *
      * @param string $teamname          The name or hostname of your Catalytic team
      * @param string $name (Optional)   A name to identify the AccessToken
-     * @return AccessToken               The newly created AccessToken
+     * @return AccessToken              The newly created AccessToken
      * @throws InternalErrorException   If any errors creating AccessToken
      * @throws UnauthorizedException    If unauthorized
      */
@@ -227,13 +234,16 @@ class AccessTokens
     /**
      * Revoke AccessToken for a specific id
      *
-     * @param string $id                The id of the AccessToken to revoke
-     * @return AccessTokens          The Credentals that have been revoked
-     * @throws InternalErrorException   If any errors revoking AccessToken
-     * @throws UnauthorizedException    If unauthorized
+     * @param string $id                    The id of the AccessToken to revoke
+     * @return AccessTokens                 The Credentals that have been revoked
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws InternalErrorException       If any errors revoking AccessToken
+     * @throws UnauthorizedException        If unauthorized
      */
     public function revoke($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Revoking AccessToken with id $id");
             $internalAccessToken = $this->accessTokensApi->revokeAccessToken($id);

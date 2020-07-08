@@ -4,8 +4,9 @@ namespace Catalytic\SDK\Clients;
 
 use Exception;
 use SplFileObject;
-use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\CatalyticLogger;
+use Catalytic\SDK\ConfigurationUtils;
+use Catalytic\SDK\Clients\ClientHelpers;
 use Catalytic\SDK\Api\FilesApi;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Entities\File;
@@ -21,22 +22,26 @@ use Catalytic\SDK\Model\FileMetadata as InternalFile;
  */
 class Files
 {
+    private $token;
     private $logger;
     private $filesApi;
 
     /**
      * Constructor for Files client
      *
-     * @param string $secret                            The token used to make the underlying api calls
-     * @param FilesApi $filesApi (Optional)   The injected DataTablesApi. Used for unit testing
+     * @param string $token                 The token used to make the underlying api calls
+     * @param FilesApi $filesApi (Optional) The injected DataTablesApi. Used for unit testing
      */
-    public function __construct($secret, $filesApi = null)
+    public function __construct($token, $filesApi = null)
     {
+        $config = null;
         $this->logger = CatalyticLogger::getLogger(Files::class);
+        $this->token = ClientHelpers::trimIfString($token);
+
         if ($filesApi) {
             $this->filesApi = $filesApi;
         } else {
-            $config = ConfigurationUtils::getConfiguration($secret);
+            $config = ConfigurationUtils::getConfiguration($this->token);
             $this->filesApi = new FilesApi(null, $config);
         }
     }
@@ -44,14 +49,17 @@ class Files
     /**
      * Get a File by id
      *
-     * @param string $id                The id of the File to get
-     * @return File                     The File object
-     * @throws FileNotFoundException    If File is not found
-     * @throws InternalErrorException   If any errors fetching File
-     * @throws UnauthorizedException    If unauthorized
+     * @param string $id                    The id of the File to get
+     * @return File                         The File object
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws FileNotFoundException        If File is not found
+     * @throws InternalErrorException       If any errors fetching File
+     * @throws UnauthorizedException        If unauthorized
      */
     public function get($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Getting File with id $id");
             $internalFile = $this->filesApi->getFile($id);
@@ -78,11 +86,14 @@ class Files
      * @param string $id                    The id of the File to download
      * @param string $directory (Optional)  The dir to download the File to
      * @return SplFileObject                An object containing the File info
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws InternalErrorException       If any errors downloading File
      * @throws UnauthorizedException        If unauthorized
      */
     public function download($id, $directory = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         // By default this downloads the file to a temp dir
         try {
             $this->logger->debug("Downloading File with id $id");
@@ -119,13 +130,16 @@ class Files
     /**
      * Uploads the passed in File
      *
-     * @param SplFileObject $file       The File to upload
-     * @return File                     The File that was uploaded
-     * @throws InternalErrorExeption    If any errors uploading File
-     * @throws UnauthorizedException    If unauthorized
+     * @param SplFileObject $file           The File to upload
+     * @return File                         The File that was uploaded
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+     * @throws InternalErrorExeption        If any errors uploading File
+     * @throws UnauthorizedException        If unauthorized
      */
     public function upload($fileToUpload)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Uploading File");
             $internalFile = $this->filesApi->uploadFiles($fileToUpload);

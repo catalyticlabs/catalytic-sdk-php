@@ -5,8 +5,9 @@ namespace Catalytic\SDK\Clients;
 use SplFileObject;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\CatalyticLogger;
-use Catalytic\SDK\Api\WorkflowsApi;
 use Catalytic\SDK\ConfigurationUtils;
+use Catalytic\SDK\Api\WorkflowsApi;
+use Catalytic\SDK\Clients\ClientHelpers;
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{InternalErrorException, WorkflowNotFoundException, UnauthorizedException};
 use Catalytic\SDK\Entities\{File, Workflow, WorkflowsPage};
@@ -17,21 +18,25 @@ use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest, Wo
  */
 class Workflows
 {
+    private $token;
     private $workflowsApi;
     private $filesClient;
 
     /**
      * Constructor for Workflows client
      *
-     * @param string $secret                            The token used to make the underlying api calls
+     * @param string $token                             The token used to make the underlying api calls
      * @param WorkflowsApi  $workflowsApi (Optional)    The injected WorkflowsApi. Used for unit testing
-     * @param Files         $filesClient                The injected FilesClient. Used for unit testing
+     * @param Files         $filesClient (Optional)     The injected FilesClient. Used for unit testing
      */
-    public function __construct($secret, $workflowsApi = null, $filesClient = null)
+    public function __construct($token, $workflowsApi = null, $filesClient = null)
     {
+        $config = null;
         $this->logger = CatalyticLogger::getLogger(Workflows::class);
-        if ($secret) {
-            $config = ConfigurationUtils::getConfiguration($secret);
+        $this->token = ClientHelpers::trimIfString($token);
+
+        if ($token) {
+            $config = ConfigurationUtils::getConfiguration($this->token);
         }
 
         if ($workflowsApi) {
@@ -43,7 +48,7 @@ class Workflows
         if ($filesClient) {
             $this->filesClient = $filesClient;
         } else {
-            $this->filesClient = new Files(trim($secret));
+            $this->filesClient = new Files($this->token);
         }
     }
 
@@ -52,12 +57,15 @@ class Workflows
      *
      * @param string $id                    The id of the workflow to get
      * @return Workflow                     The Workflow object
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws WorkflowNotFoundException    If Workflow not found
      * @throws InternalErrorException       If any errors fetching Workflow
      * @throws UnauthorizedException        If unauthorized
      */
     public function get($id)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         try {
             $this->logger->debug("Getting Workflow with id $id");
             $internalWorkflow = $this->workflowsApi->getWorkflow($id);
@@ -80,11 +88,14 @@ class Workflows
      * @param string $pageToken (Optional)  The token of the page to fetch
      * @param int    $pageSize (Optional)   The number of Workflows per page to fetch
      * @return WorkflowsPage                A WorkflowsPage which contains the reults
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws InternalErrorException       If any errors finding Workflows
      * @throws UnauthorizedException        If unauthorized
      */
     public function find($filter = null, $pageToken = null, $pageSize = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $text = null;
         $owner = null;
         $category = null;
@@ -120,12 +131,15 @@ class Workflows
      * @param string $id                    The id of the Workflow to export
      * @param string $password (Optional)   The password for the Workflow
      * @return File                         The exported Workflow file object
+     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws WorkflowNotFoundException    If Workflow is not found
      * @throws InternalErrorException       If any errors exporting Workflow
      * @throws UnauthorizedException        If unauthorized
      */
     public function export($id, $password = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         $workflowExportRequest = null;
 
         if (isset($password)) {
@@ -167,11 +181,14 @@ class Workflows
      * @param SplFileObject $importFile             The workflow to be imported
      * @param string        $password (Optional)    The password for the workflow
      * @return Workflow                             The imported workflow
+     * @throws AccessTokenNotFoundException         If the client was instantiated without an Access Token
      * @throws InternalErrorException               If any errors importing Workflow
      * @throws UnauthorizedException                If unauthorized
      */
     public function import($importFile, $password = null)
     {
+        ClientHelpers::verifyAccessTokenExists($this->token);
+
         // Upload the file
         $file = $this->filesClient->upload($importFile);
         $workflowImportBody = array('fileId' => $file->getId());

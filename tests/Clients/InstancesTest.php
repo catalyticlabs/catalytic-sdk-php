@@ -3,16 +3,28 @@
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\Clients\Instances;
 use Catalytic\SDK\Search\Where;
-use Catalytic\SDK\Entities\{Instance, InstanceStep, InstanceStepsPage};
-use Catalytic\SDK\Exceptions\InternalErrorException;
-use Catalytic\SDK\Exceptions\UnauthorizedException;
-use Catalytic\SDK\Exceptions\InstanceNotFoundException;
-use Catalytic\SDK\Exceptions\InstanceStepNotFoundException;
-use Catalytic\SDK\Exceptions\WorkflowNotFoundException;
+use Catalytic\SDK\Entities\{Instance, InstanceStep};
+use Catalytic\SDK\Exceptions\{
+    AccessTokenNotFoundException,
+    InternalErrorException,
+    InstanceNotFoundException,
+    InstanceStepNotFoundException,
+    UnauthorizedException,
+    WorkflowNotFoundException
+};
 use Mockery\Adapter\Phpunit\MockeryTestCase;
 
 class InstancesTest extends MockeryTestCase
 {
+    public function testGetInstance_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->get('1234');
+    }
+
     public function testGetInstance_ItShouldThrowUnathorizedException()
     {
         $this->expectException(UnauthorizedException::class);
@@ -22,7 +34,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('getInstance')
             ->andThrow(new ApiException(null, 401));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->get('1234');
     }
 
@@ -35,7 +47,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('getInstance')
             ->andThrow(new ApiException(null, 404));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->get('1234');
     }
 
@@ -48,7 +60,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('getInstance')
             ->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->get('alice@catalytic.com');
     }
 
@@ -73,9 +85,18 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('getInstance')
             ->andReturn($instance);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instance = $instancesClient->get('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(Instance::class, $instance);
+    }
+
+    public function testFindInstances_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->find();
     }
 
     public function testFindInstances_ItShouldThrowUnauthorizedExceptionIfInstanceDoesNotExist()
@@ -87,7 +108,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('findInstances')
             ->andThrow(new ApiException(null, 401));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->find();
     }
 
@@ -100,7 +121,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('findInstances')
             ->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->find();
     }
 
@@ -132,7 +153,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('findInstances')
             ->andReturn($instancesPage);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
 
         $results = $instancesClient->find();
         $instances = $results->getInstances();
@@ -174,7 +195,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('findInstances')
             ->andReturn($instancesPage);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
 
         $where = (new Where())->text()->matches('tom');
         $results = $instancesClient->find($where);
@@ -217,7 +238,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('findInstances')
             ->andReturn($instancesPage);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
 
         $where = (new Where())->owner()->is('alice');
         $results = $instancesClient->find($where);
@@ -260,7 +281,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('findInstances')
             ->andReturn($instancesPage);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
 
         $where = (new Where())->status()->is('running');
         $results = $instancesClient->find($where);
@@ -303,7 +324,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi->shouldReceive('findInstances')
         ->andReturn($instancesPage);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
 
         $where = (new Where())->workflowId()->is('7d92e9ad-064c-42e4-b35e-6b26a594dd95');
         $results = $instancesClient->find($where);
@@ -318,6 +339,15 @@ class InstancesTest extends MockeryTestCase
         $this->assertEquals(count($instances), 1);
     }
 
+    public function testStartInstance_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->start('1234');
+    }
+
     public function testStartInstance_ItShouldThrowUnathorizedException()
     {
         $this->expectException(UnauthorizedException::class);
@@ -326,7 +356,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('startInstance')->andThrow(new ApiException(null, 401));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->start('1234');
     }
 
@@ -338,7 +368,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('startInstance')->andThrow(new ApiException(null, 404));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->start('1234');
     }
 
@@ -350,7 +380,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('startInstance')->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->start('1234');
     }
 
@@ -375,7 +405,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('startInstance')->andReturn($instance);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instance = $instancesClient->start('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(Instance::class, $instance);
     }
@@ -401,9 +431,18 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('startInstance')->andReturn($instance);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instance = $instancesClient->start('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd', 'My Instance', 'My first instance', array('foo' => 'bar'));
         $this->assertInstanceOf(Instance::class, $instance);
+    }
+
+    public function testStopInstance_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->stop('1234');
     }
 
     public function testStopInstance_ItShouldThrowUnathorizedException()
@@ -414,7 +453,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('stopInstance')->andThrow(new ApiException(null, 401));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->stop('1234');
     }
 
@@ -426,7 +465,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('stopInstance')->andThrow(new ApiException(null, 404));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->stop('1234');
     }
 
@@ -438,7 +477,7 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('stopInstance')->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instancesClient->stop('1234');
     }
 
@@ -463,9 +502,18 @@ class InstancesTest extends MockeryTestCase
         $instancesApi = Mockery::mock('Catalytic\SDK\Api\InstancesApi');
         $instancesApi->shouldReceive('stopInstance')->andReturn($instance);
 
-        $instancesClient = new Instances(null, $instancesApi);
+        $instancesClient = new Instances('1234', $instancesApi);
         $instance = $instancesClient->stop('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(Instance::class, $instance);
+    }
+
+    public function testGetStep_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->getStep('1234');
     }
 
     public function testGetStep_ItShouldThrowUnathorizedException()
@@ -476,7 +524,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('getInstanceStep')->andThrow(new ApiException(null, 401));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->getStep('1234');
     }
 
@@ -488,7 +536,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('getInstanceStep')->andThrow(new ApiException(null, 404));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->getStep('1234');
     }
 
@@ -500,7 +548,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('getInstanceStep')->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->getStep('1234');
     }
 
@@ -527,9 +575,18 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('getInstanceStep')->andReturn($instanceStep);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instanceStep = $instancesClient->getStep('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(InstanceStep::class, $instanceStep);
+    }
+
+    public function testFindInstanceSteps_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->findSteps();
     }
 
     public function testFindInstanceSteps_ItShouldThrowUnauthorizedException()
@@ -541,7 +598,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi->shouldReceive('findInstanceSteps')
         ->andThrow(new ApiException(null, 401));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->findSteps();
     }
 
@@ -554,7 +611,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi->shouldReceive('findInstanceSteps')
         ->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', $instanceStepsApi);
         $instancesClient->findSteps();
     }
 
@@ -587,7 +644,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('findInstanceSteps')->andReturn($instanceStepsPage);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
 
         $results = $instancesClient->findSteps();
         $instanceSteps = $results->getInstanceSteps();
@@ -630,7 +687,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('findInstanceSteps')->andReturn($instanceStepsPage);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
 
         $where = (new Where())->text()->matches('alice');
         $results = $instancesClient->findSteps($where);
@@ -674,7 +731,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('findInstanceSteps')->andReturn($instanceStepsPage);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
 
         $where = (new Where())->workflowId()->is('7d92e9ad-064c-42e4-b35e-6b26a594dd95');
         $results = $instancesClient->findSteps($where);
@@ -718,7 +775,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('findInstanceSteps')->andReturn($instanceStepsPage);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
 
         $where = (new Where())->assignee()->is('alice');
         $results = $instancesClient->findSteps($where);
@@ -733,6 +790,15 @@ class InstancesTest extends MockeryTestCase
         $this->assertEquals(count($instanceSteps), 1);
     }
 
+    public function testGetInstances_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->getSteps('1234');
+    }
+
     public function testGetSteps_ItShouldThrowInternalErrorException()
     {
         $this->expectException(InternalErrorException::class);
@@ -741,7 +807,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('findInstanceSteps')->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->getSteps('1234');
     }
 
@@ -776,11 +842,20 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
         $instanceStepsApi->shouldReceive('findInstanceSteps')->andReturn($instanceStepsPage);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instanceSteps = $instancesClient->getSteps('5a21f23c-e5e2-4b5d-95ed-f7338b6b0645');
 
 
         $this->assertEquals(count($instanceSteps), 1);
+    }
+
+    public function testCompleteStep_ItShouldReturnAccessTokenNotFoundException()
+    {
+        $this->expectException(AccessTokenNotFoundException::class);
+        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+
+        $instancesClient = new Instances(null);
+        $instancesClient->completeStep('1234');
     }
 
     public function testCompleteStep_ItShouldThrowUnathorizedException()
@@ -810,7 +885,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi->shouldReceive('getInstanceStep')->andReturn($instanceStep);
         $instanceStepsApi->shouldReceive('completeStep')->andThrow(new ApiException(null, 401));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->completeStep('1234');
     }
 
@@ -841,7 +916,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi->shouldReceive('getInstanceStep')->andReturn($instanceStep);
         $instanceStepsApi->shouldReceive('completeStep')->andThrow(new ApiException(null, 404));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->completeStep('1234');
     }
 
@@ -872,7 +947,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi->shouldReceive('getInstanceStep')->andReturn($instanceStep);
         $instanceStepsApi->shouldReceive('completeStep')->andThrow(new ApiException(null, 500));
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instancesClient->completeStep('1234');
     }
 
@@ -900,7 +975,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi->shouldReceive('getInstanceStep')->andReturn($instanceStep);
         $instanceStepsApi->shouldReceive('completeStep')->andReturn($instanceStep);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instanceStep = $instancesClient->completeStep('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd');
         $this->assertInstanceOf(InstanceStep::class, $instanceStep);
     }
@@ -929,7 +1004,7 @@ class InstancesTest extends MockeryTestCase
         $instanceStepsApi->shouldReceive('getInstanceStep')->andReturn($instanceStep);
         $instanceStepsApi->shouldReceive('completeStep')->andReturn($instanceStep);
 
-        $instancesClient = new Instances(null, null, $instanceStepsApi);
+        $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instanceStep = $instancesClient->completeStep('7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd', array('foo' => 'bar'));
         $this->assertInstanceOf(InstanceStep::class, $instanceStep);
     }
