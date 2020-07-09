@@ -52,6 +52,8 @@ class Credentials
             if ($token === null) {
                 return $tokenOrFile;
             }
+
+            return $token;
         }
     }
 
@@ -74,7 +76,7 @@ class Credentials
             $token = $this->fetchTokenFromFile();
         }
 
-        // If it wasn't found, throw an exception
+        // If it wasn't found, return null
         if (!$token) {
             $home = $this->getHomeDir();
             $this->logger->debug('Cannot find Access Token in $CATALYTIC_TOKEN
