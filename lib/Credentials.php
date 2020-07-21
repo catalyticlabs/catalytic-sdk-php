@@ -144,6 +144,11 @@ class Credentials
 
         try {
             $token = file_get_contents($path);
+
+            // Since file_get_contents returns false if no file is found we need to do this
+            if (!$token) {
+                return null;
+            }
         } catch (Exception $e) {
             // If the file doesn't exist or can't be read, set the token to null
             $this->logger->debug("Cannot find Access Token in $path");

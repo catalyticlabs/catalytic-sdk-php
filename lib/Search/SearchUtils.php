@@ -13,8 +13,6 @@ class SearchUtils
      */
     public static function getSearchCriteriaValueByKey($array, $name)
     {
-        // TODO: Can refactor this to simply use a find method
-
         // Filter $array for a key of $name
         $filteredArray = array_filter(
             $array,

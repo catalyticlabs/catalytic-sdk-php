@@ -8,8 +8,6 @@ namespace Catalytic\SDK;
  */
 class ConfigurationUtils
 {
-    private static $config;
-
     /**
      * Creates a Configuration if one doesn't exist and returns it
      *
@@ -18,15 +16,12 @@ class ConfigurationUtils
      */
     public static function getConfiguration($secret)
     {
-        // If a configuration object doesn't exist, create one
-        if (!isset(self::$config)) {
-            $version = self::getVersion();
-            self::$config = Configuration::getDefaultConfiguration();
-            self::$config->setUserAgent("Catalytic PHP SDK/$version");
-            self::$config->setAccessToken(trim($secret));
-        }
+        $version = self::getVersion();
+        $config = Configuration::getDefaultConfiguration();
+        $config->setUserAgent("Catalytic PHP SDK/$version");
+        $config->setAccessToken(trim($secret));
 
-        return self::$config;
+        return $config;
     }
 
     /**

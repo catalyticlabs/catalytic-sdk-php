@@ -26,14 +26,13 @@ class CatalyticClient
     private $accessTokens;
 
     /**
-     * Instantiate the individual clients
+     * Instantiate this instance of CatalyticClient
      *
      * @param string $tokenOrFile (Optional) The token/name/path of a file to fetch a token to use for making api requests
      */
     public function __construct($tokenOrFile = null)
     {
         $credentials = new Credentials();
-
         $this->token = $credentials->fetchToken($tokenOrFile);
         $this->initialize();
     }
