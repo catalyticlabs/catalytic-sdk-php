@@ -18,7 +18,7 @@ class ConfigurationUtils
     {
         $version = self::getVersion();
         $config = Configuration::getDefaultConfiguration();
-        $config->setUserAgent("Catalytic PHP SDK/$version");
+        $config->setUserAgent("catalytic-sdk-php/$version");
         $config->setAccessToken(trim($secret));
 
         return $config;
