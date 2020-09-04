@@ -9,7 +9,8 @@ use Catalytic\SDK\Clients\{
     Users,
     Files,
     DataTables,
-    AccessTokens
+    AccessTokens,
+    Integrations
 };
 
 /**
@@ -24,6 +25,7 @@ class CatalyticClient
     private $files;
     private $dataTables;
     private $accessTokens;
+    private $integrations;
 
     /**
      * Instantiate this instance of CatalyticClient
@@ -67,6 +69,11 @@ class CatalyticClient
         return $this->accessTokens;
     }
 
+    public function integrations(): Integrations
+    {
+        return $this->integrations;
+    }
+
     /**
      * Get the Access Token used to instantiate this instance of CatalyticClient
      */
@@ -95,5 +102,6 @@ class CatalyticClient
         $this->files = new Files($this->token);
         $this->dataTables = new DataTables($this->token);
         $this->accessTokens = new AccessTokens($this->token);
+        $this->integrations = new Integrations($this->token);
     }
 }

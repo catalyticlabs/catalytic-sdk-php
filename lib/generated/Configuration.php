@@ -81,7 +81,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://sdk.catalytic.com/v1.0.1-pre-35';
+    protected $host = 'https://sdk.catalytic.com/v1.0.3';
 
     /**
      * User agent of the HTTP request, set to "OpenAPI-Generator/{version}/PHP" by default
@@ -436,7 +436,7 @@ class Configuration
     {
         return array(
           array(
-            "url" => "https://sdk.catalytic.com/v1.0.1-pre-35",
+            "url" => "https://sdk.catalytic.com/v1.0.3",
             "description" => "Catalytic SDK API",
           )
         );

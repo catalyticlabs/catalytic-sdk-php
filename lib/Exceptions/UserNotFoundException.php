@@ -2,8 +2,6 @@
 
 namespace Catalytic\SDK\Exceptions;
 
-use Exception;
-
 /**
  * An exception to be thrown when a User is not found
  */

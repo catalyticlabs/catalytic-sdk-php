@@ -14,7 +14,7 @@ use Catalytic\SDK\Entities\{File, Workflow, WorkflowsPage};
 use Catalytic\SDK\Model\{Workflow as InternalWorkflow, WorkflowExportRequest, WorkflowImportRequest};
 
 /**
- * Workflow client to be exposed to consumers
+ * Workflow client
  */
 class Workflows
 {
@@ -87,7 +87,7 @@ class Workflows
      * @param Filter $filter (Optional)     The filter criteria to search Workflows by
      * @param string $pageToken (Optional)  The token of the page to fetch
      * @param int    $pageSize (Optional)   The number of Workflows per page to fetch
-     * @return WorkflowsPage                A WorkflowsPage which contains the reults
+     * @return WorkflowsPage                A WorkflowsPage which contains the results
      * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
      * @throws InternalErrorException       If any errors finding Workflows
      * @throws UnauthorizedException        If unauthorized

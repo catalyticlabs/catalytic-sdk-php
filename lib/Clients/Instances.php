@@ -17,7 +17,6 @@ use Catalytic\SDK\Exceptions\{
 };
 use Catalytic\SDK\Model\{
     CompleteStepRequest,
-    FieldUpdateRequest,
     Instance as InternalInstance,
     InstanceStep as InternalInstanceStep,
     StartInstanceRequest
@@ -25,7 +24,7 @@ use Catalytic\SDK\Model\{
 use Catalytic\SDK\Search\{Filter, SearchUtils};
 
 /**
- * Instance client to be exposed to consumers
+ * Instance client
  */
 class Instances
 {
@@ -292,9 +291,6 @@ class Instances
     {
         ClientHelpers::verifyAccessTokenExists($this->token);
 
-        // The REST api supports wildcard instance id when searching for instance steps
-        // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
-        $wildcardInstanceId = '-';
         $text = null;
         $workflowId = null;
         $assignee = null;
@@ -308,7 +304,7 @@ class Instances
 
         try {
             $this->logger->debug("Finding steps with text $text, workflowId $workflowId, assignee $assignee");
-            $internalSteps = $this->instanceStepsApi->findInstanceSteps($wildcardInstanceId, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
+            $internalSteps = $this->instanceStepsApi->findInstanceSteps(ClientHelpers::WILDCARD_ID, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
@@ -383,7 +379,7 @@ class Instances
         }
 
         if (isset($fields)) {
-            $inputFields = $this->formatFields($fields);
+            $inputFields = ClientHelpers::formatFields($fields);
             $config['inputFields'] = $inputFields;
         }
 
@@ -400,28 +396,9 @@ class Instances
      */
     private function createCompleteStepRequest($id, $fields)
     {
-        $stepOutputFields = $this->formatFields($fields);
+        $stepOutputFields = ClientHelpers::formatFields($fields);
         $stepRequest = new CompleteStepRequest(array('id' => $id, 'stepOutputFields' => $stepOutputFields));
         return $stepRequest;
-    }
-
-    /**
-     * Creates a FieldUpdateRequest object for each of the fields
-     *
-     * @param  array $fields    The fields to create a FieldUpdateRequest for each one
-     * @return array            The formatted fields
-     */
-    private function formatFields($fields)
-    {
-        $formattedFields = [];
-
-        // Create a FieldUpdateRequest for each field
-        foreach ($fields as $key => $value) {
-            $fieldUpdateRequest = new FieldUpdateRequest(array('referenceName' => $key, 'value' => $value));
-            array_push($formattedFields, $fieldUpdateRequest);
-        }
-
-        return $formattedFields;
     }
 
     /**
@@ -432,10 +409,7 @@ class Instances
      */
     private function getStepById($id)
     {
-        // The REST api supports wildcard instance id when searching for instance steps
-        // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
-        $wildcardInstanceId = '-';
-        $step = $this->instanceStepsApi->getInstanceStep($id, $wildcardInstanceId);
+        $step = $this->instanceStepsApi->getInstanceStep($id, ClientHelpers::WILDCARD_ID);
         return $step;
     }
 

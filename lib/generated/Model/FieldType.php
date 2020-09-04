@@ -60,6 +60,7 @@ class FieldType
     const WORKFLOW = 'workflow';
     const INSTANCE = 'instance';
     const USER = 'user';
+    const PASSWORD = 'password';
     
     /**
      * Gets allowable values of the enum
@@ -84,6 +85,7 @@ class FieldType
             self::WORKFLOW,
             self::INSTANCE,
             self::USER,
+            self::PASSWORD,
         ];
     }
 }

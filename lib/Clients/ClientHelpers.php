@@ -3,9 +3,33 @@
 namespace Catalytic\SDK\Clients;
 
 use Catalytic\SDK\Exceptions\AccessTokenNotFoundException;
+use Catalytic\SDK\Model\FieldUpdateRequest;
 
 class ClientHelpers
 {
+    // The REST api supports wildcard IntegrationId when fetching an Integration Connection by id
+    // https://cloud.google.com/apis/design/design_patterns#list_sub-collections
+    const WILDCARD_ID = '-';
+
+    /**
+     * Creates a FieldUpdateRequest object for each of the fields
+     *
+     * @param  array $fields    The fields to create a FieldUpdateRequest for each one
+     * @return array            The formatted fields
+     */
+    public static function formatFields($fields)
+    {
+        $formattedFields = [];
+
+        // Create a FieldUpdateRequest for each field
+        foreach ($fields as $key => $value) {
+            $fieldUpdateRequest = new FieldUpdateRequest(array('referenceName' => $key, 'value' => $value));
+            array_push($formattedFields, $fieldUpdateRequest);
+        }
+
+        return $formattedFields;
+    }
+
     /**
      * Verifies that the passed in $token is not null
      *

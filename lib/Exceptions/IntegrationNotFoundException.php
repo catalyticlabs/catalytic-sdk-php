@@ -3,9 +3,9 @@
 namespace Catalytic\SDK\Exceptions;
 
 /**
- * An exception to be thrown when a Workflow is not found
+ * An exception to be thrown when an Integration is not found
  */
-class WorkflowNotFoundException extends NotFoundException
+class IntegrationNotFoundException extends NotFoundException
 {
     public function __construct($message, $previous = null)
     {

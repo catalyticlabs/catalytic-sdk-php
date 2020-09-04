@@ -1,6 +1,6 @@
 <?php
 /**
- * FileMetadataPage
+ * IntegrationsPage
  *
  * PHP version 5
  *
@@ -33,14 +33,15 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * FileMetadataPage Class Doc Comment
+ * IntegrationsPage Class Doc Comment
  *
  * @category Class
+ * @description A page of Integrations returned from a FindAync request
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class FileMetadataPage implements ModelInterface, ArrayAccess
+class IntegrationsPage implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileMetadataPage';
+    protected static $openAPIModelName = 'IntegrationsPage';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +58,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'files' => '\Catalytic\SDK\Model\FileMetadata[]',
+        'integrations' => '\Catalytic\SDK\Model\Integration[]',
         'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
         'nextPageToken' => 'string',
         'count' => 'int'
@@ -69,7 +70,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'files' => null,
+        'integrations' => null,
         'nextPageOptions' => null,
         'nextPageToken' => null,
         'count' => 'int32'
@@ -102,7 +103,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'files' => 'files',
+        'integrations' => 'integrations',
         'nextPageOptions' => 'nextPageOptions',
         'nextPageToken' => 'nextPageToken',
         'count' => 'count'
@@ -114,7 +115,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'files' => 'setFiles',
+        'integrations' => 'setIntegrations',
         'nextPageOptions' => 'setNextPageOptions',
         'nextPageToken' => 'setNextPageToken',
         'count' => 'setCount'
@@ -126,7 +127,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'files' => 'getFiles',
+        'integrations' => 'getIntegrations',
         'nextPageOptions' => 'getNextPageOptions',
         'nextPageToken' => 'getNextPageToken',
         'count' => 'getCount'
@@ -192,7 +193,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['files'] = isset($data['files']) ? $data['files'] : null;
+        $this->container['integrations'] = isset($data['integrations']) ? $data['integrations'] : null;
         $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
         $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
         $this->container['count'] = isset($data['count']) ? $data['count'] : null;
@@ -223,25 +224,25 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets files
+     * Gets integrations
      *
-     * @return \Catalytic\SDK\Model\FileMetadata[]|null
+     * @return \Catalytic\SDK\Model\Integration[]|null
      */
-    public function getFiles()
+    public function getIntegrations()
     {
-        return $this->container['files'];
+        return $this->container['integrations'];
     }
 
     /**
-     * Sets files
+     * Sets integrations
      *
-     * @param \Catalytic\SDK\Model\FileMetadata[]|null $files A Collection of items with Dictionaries keyed by both ID and ReferenceName
+     * @param \Catalytic\SDK\Model\Integration[]|null $integrations The list of Integrations
      *
      * @return $this
      */
-    public function setFiles($files)
+    public function setIntegrations($integrations)
     {
-        $this->container['files'] = $files;
+        $this->container['integrations'] = $integrations;
 
         return $this;
     }

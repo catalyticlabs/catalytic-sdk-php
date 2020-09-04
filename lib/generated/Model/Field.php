@@ -62,10 +62,12 @@ class Field implements ModelInterface, ArrayAccess
         'name' => 'string',
         'referenceName' => 'string',
         'description' => 'string',
+        'example' => 'string',
         'position' => 'int',
         'restrictions' => '\Catalytic\SDK\Model\FieldRestrictions',
         'fieldType' => '\Catalytic\SDK\Model\FieldType',
         'value' => 'string',
+        'templateValue' => 'string',
         'defaultValue' => 'string'
     ];
 
@@ -79,10 +81,12 @@ class Field implements ModelInterface, ArrayAccess
         'name' => null,
         'referenceName' => null,
         'description' => null,
+        'example' => null,
         'position' => 'int32',
         'restrictions' => null,
         'fieldType' => null,
         'value' => null,
+        'templateValue' => null,
         'defaultValue' => null
     ];
 
@@ -117,10 +121,12 @@ class Field implements ModelInterface, ArrayAccess
         'name' => 'name',
         'referenceName' => 'referenceName',
         'description' => 'description',
+        'example' => 'example',
         'position' => 'position',
         'restrictions' => 'restrictions',
         'fieldType' => 'fieldType',
         'value' => 'value',
+        'templateValue' => 'templateValue',
         'defaultValue' => 'defaultValue'
     ];
 
@@ -134,10 +140,12 @@ class Field implements ModelInterface, ArrayAccess
         'name' => 'setName',
         'referenceName' => 'setReferenceName',
         'description' => 'setDescription',
+        'example' => 'setExample',
         'position' => 'setPosition',
         'restrictions' => 'setRestrictions',
         'fieldType' => 'setFieldType',
         'value' => 'setValue',
+        'templateValue' => 'setTemplateValue',
         'defaultValue' => 'setDefaultValue'
     ];
 
@@ -151,10 +159,12 @@ class Field implements ModelInterface, ArrayAccess
         'name' => 'getName',
         'referenceName' => 'getReferenceName',
         'description' => 'getDescription',
+        'example' => 'getExample',
         'position' => 'getPosition',
         'restrictions' => 'getRestrictions',
         'fieldType' => 'getFieldType',
         'value' => 'getValue',
+        'templateValue' => 'getTemplateValue',
         'defaultValue' => 'getDefaultValue'
     ];
 
@@ -222,10 +232,12 @@ class Field implements ModelInterface, ArrayAccess
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['referenceName'] = isset($data['referenceName']) ? $data['referenceName'] : null;
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['example'] = isset($data['example']) ? $data['example'] : null;
         $this->container['position'] = isset($data['position']) ? $data['position'] : null;
         $this->container['restrictions'] = isset($data['restrictions']) ? $data['restrictions'] : null;
         $this->container['fieldType'] = isset($data['fieldType']) ? $data['fieldType'] : null;
         $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['templateValue'] = isset($data['templateValue']) ? $data['templateValue'] : null;
         $this->container['defaultValue'] = isset($data['defaultValue']) ? $data['defaultValue'] : null;
     }
 
@@ -350,6 +362,30 @@ class Field implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets example
+     *
+     * @return string|null
+     */
+    public function getExample()
+    {
+        return $this->container['example'];
+    }
+
+    /**
+     * Sets example
+     *
+     * @param string|null $example An example of possible values for this field.
+     *
+     * @return $this
+     */
+    public function setExample($example)
+    {
+        $this->container['example'] = $example;
+
+        return $this;
+    }
+
+    /**
      * Gets position
      *
      * @return int|null
@@ -441,6 +477,30 @@ class Field implements ModelInterface, ArrayAccess
     public function setValue($value)
     {
         $this->container['value'] = $value;
+
+        return $this;
+    }
+
+    /**
+     * Gets templateValue
+     *
+     * @return string|null
+     */
+    public function getTemplateValue()
+    {
+        return $this->container['templateValue'];
+    }
+
+    /**
+     * Sets templateValue
+     *
+     * @param string|null $templateValue The template expression that will become the field value  once it is evaluated
+     *
+     * @return $this
+     */
+    public function setTemplateValue($templateValue)
+    {
+        $this->container['templateValue'] = $templateValue;
 
         return $this;
     }

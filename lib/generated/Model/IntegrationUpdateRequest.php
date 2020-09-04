@@ -1,6 +1,6 @@
 <?php
 /**
- * FileMetadataPage
+ * IntegrationUpdateRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * FileMetadataPage Class Doc Comment
+ * IntegrationUpdateRequest Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class FileMetadataPage implements ModelInterface, ArrayAccess
+class IntegrationUpdateRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileMetadataPage';
+    protected static $openAPIModelName = 'IntegrationUpdateRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'files' => '\Catalytic\SDK\Model\FileMetadata[]',
-        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
-        'nextPageToken' => 'string',
-        'count' => 'int'
+        'name' => 'string',
+        'type' => '\Catalytic\SDK\Model\IntegrationType',
+        'config' => '\Catalytic\SDK\Model\IntegrationConfiguration'
     ];
 
     /**
@@ -69,10 +68,9 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'files' => null,
-        'nextPageOptions' => null,
-        'nextPageToken' => null,
-        'count' => 'int32'
+        'name' => null,
+        'type' => null,
+        'config' => null
     ];
 
     /**
@@ -102,10 +100,9 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'files' => 'files',
-        'nextPageOptions' => 'nextPageOptions',
-        'nextPageToken' => 'nextPageToken',
-        'count' => 'count'
+        'name' => 'name',
+        'type' => 'type',
+        'config' => 'config'
     ];
 
     /**
@@ -114,10 +111,9 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'files' => 'setFiles',
-        'nextPageOptions' => 'setNextPageOptions',
-        'nextPageToken' => 'setNextPageToken',
-        'count' => 'setCount'
+        'name' => 'setName',
+        'type' => 'setType',
+        'config' => 'setConfig'
     ];
 
     /**
@@ -126,10 +122,9 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'files' => 'getFiles',
-        'nextPageOptions' => 'getNextPageOptions',
-        'nextPageToken' => 'getNextPageToken',
-        'count' => 'getCount'
+        'name' => 'getName',
+        'type' => 'getType',
+        'config' => 'getConfig'
     ];
 
     /**
@@ -192,10 +187,9 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['files'] = isset($data['files']) ? $data['files'] : null;
-        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
-        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
-        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['config'] = isset($data['config']) ? $data['config'] : null;
     }
 
     /**
@@ -207,6 +201,15 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['type'] === null) {
+            $invalidProperties[] = "'type' can't be null";
+        }
+        if ($this->container['config'] === null) {
+            $invalidProperties[] = "'config' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -223,97 +226,73 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets files
+     * Gets name
      *
-     * @return \Catalytic\SDK\Model\FileMetadata[]|null
+     * @return string
      */
-    public function getFiles()
+    public function getName()
     {
-        return $this->container['files'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets files
+     * Sets name
      *
-     * @param \Catalytic\SDK\Model\FileMetadata[]|null $files A Collection of items with Dictionaries keyed by both ID and ReferenceName
+     * @param string $name The display Name to apply to the Integration Definition
      *
      * @return $this
      */
-    public function setFiles($files)
+    public function setName($name)
     {
-        $this->container['files'] = $files;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets nextPageOptions
+     * Gets type
      *
-     * @return \Catalytic\SDK\Model\PagingOptions|null
+     * @return \Catalytic\SDK\Model\IntegrationType
      */
-    public function getNextPageOptions()
+    public function getType()
     {
-        return $this->container['nextPageOptions'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets nextPageOptions
+     * Sets type
      *
-     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
+     * @param \Catalytic\SDK\Model\IntegrationType $type type
      *
      * @return $this
      */
-    public function setNextPageOptions($nextPageOptions)
+    public function setType($type)
     {
-        $this->container['nextPageOptions'] = $nextPageOptions;
+        $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets nextPageToken
+     * Gets config
      *
-     * @return string|null
+     * @return \Catalytic\SDK\Model\IntegrationConfiguration
      */
-    public function getNextPageToken()
+    public function getConfig()
     {
-        return $this->container['nextPageToken'];
+        return $this->container['config'];
     }
 
     /**
-     * Sets nextPageToken
+     * Sets config
      *
-     * @param string|null $nextPageToken nextPageToken
+     * @param \Catalytic\SDK\Model\IntegrationConfiguration $config config
      *
      * @return $this
      */
-    public function setNextPageToken($nextPageToken)
+    public function setConfig($config)
     {
-        $this->container['nextPageToken'] = $nextPageToken;
-
-        return $this;
-    }
-
-    /**
-     * Gets count
-     *
-     * @return int|null
-     */
-    public function getCount()
-    {
-        return $this->container['count'];
-    }
-
-    /**
-     * Sets count
-     *
-     * @param int|null $count count
-     *
-     * @return $this
-     */
-    public function setCount($count)
-    {
-        $this->container['count'] = $count;
+        $this->container['config'] = $config;
 
         return $this;
     }

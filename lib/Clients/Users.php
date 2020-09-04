@@ -13,7 +13,7 @@ use Catalytic\SDK\Model\User as InternalUser;
 use Catalytic\SDK\Search\{SearchUtils};
 
 /**
- * User client to be exposed to consumers
+ * User client
  */
 class Users
 {

@@ -3,35 +3,35 @@
 namespace Catalytic\SDK\Entities;
 
 /**
- * An object which represents a page of Workflows
+ * An object which represents a page of Integrations
  */
-class WorkflowsPage
+class IntegrationsPage
 {
-    private $workflows;
+    private $integrations;
     private $nextPageToken;
     private $count;
 
-    public function __construct($workflows, $count, $nextPageToken = null)
+    public function __construct($integrations, $count, $nextPageToken = null)
     {
-        $this->workflows = $workflows;
+        $this->integrations = $integrations;
         $this->nextPageToken = $nextPageToken;
         $this->count = $count;
     }
 
     /**
-     * Get the value of workflows
+     * Get the value of integrations
      */
-    public function getWorkflows()
+    public function getIntegrations()
     {
-        return $this->workflows;
+        return $this->integrations;
     }
 
     /**
-     * Set the value of workflows
+     * Set the value of integrations
      */
-    public function setWorkflows($workflows)
+    public function setIntegrations($integrations)
     {
-        $this->workflows = $workflows;
+        $this->integrations = $integrations;
     }
 
     /**

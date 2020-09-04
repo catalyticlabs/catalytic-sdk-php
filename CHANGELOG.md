@@ -5,9 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Integrations client
+- Get Integration method
+- Find Integrations method
+- Create Integration method
+- Update Integration method
+- Get Integration Connection method
+- Create Integration Connection method
+- Delete Integration Connection method
+- Ability to turn on debug to stdout via env var
 
-### Fixed
 ## [0.5.1]
+### Fixed
 - CatalyticClient.setAccessToken not working
 
 ## [0.5.0]

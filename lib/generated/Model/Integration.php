@@ -1,6 +1,6 @@
 <?php
 /**
- * FileMetadataPage
+ * Integration
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \Catalytic\SDK\ObjectSerializer;
 
 /**
- * FileMetadataPage Class Doc Comment
+ * Integration Class Doc Comment
  *
  * @category Class
  * @package  Catalytic\SDK
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class FileMetadataPage implements ModelInterface, ArrayAccess
+class Integration implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'FileMetadataPage';
+    protected static $openAPIModelName = 'Integration';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'files' => '\Catalytic\SDK\Model\FileMetadata[]',
-        'nextPageOptions' => '\Catalytic\SDK\Model\PagingOptions',
-        'nextPageToken' => 'string',
-        'count' => 'int'
+        'id' => 'string',
+        'referenceName' => 'string',
+        'name' => 'string',
+        'isCustomIntegration' => 'bool',
+        'connections' => '\Catalytic\SDK\Model\IntegrationConnection[]',
+        'connectionParams' => '\Catalytic\SDK\Model\Field[]'
     ];
 
     /**
@@ -69,10 +71,12 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'files' => null,
-        'nextPageOptions' => null,
-        'nextPageToken' => null,
-        'count' => 'int32'
+        'id' => null,
+        'referenceName' => null,
+        'name' => null,
+        'isCustomIntegration' => null,
+        'connections' => null,
+        'connectionParams' => null
     ];
 
     /**
@@ -102,10 +106,12 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'files' => 'files',
-        'nextPageOptions' => 'nextPageOptions',
-        'nextPageToken' => 'nextPageToken',
-        'count' => 'count'
+        'id' => 'id',
+        'referenceName' => 'referenceName',
+        'name' => 'name',
+        'isCustomIntegration' => 'isCustomIntegration',
+        'connections' => 'connections',
+        'connectionParams' => 'connectionParams'
     ];
 
     /**
@@ -114,10 +120,12 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'files' => 'setFiles',
-        'nextPageOptions' => 'setNextPageOptions',
-        'nextPageToken' => 'setNextPageToken',
-        'count' => 'setCount'
+        'id' => 'setId',
+        'referenceName' => 'setReferenceName',
+        'name' => 'setName',
+        'isCustomIntegration' => 'setIsCustomIntegration',
+        'connections' => 'setConnections',
+        'connectionParams' => 'setConnectionParams'
     ];
 
     /**
@@ -126,10 +134,12 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'files' => 'getFiles',
-        'nextPageOptions' => 'getNextPageOptions',
-        'nextPageToken' => 'getNextPageToken',
-        'count' => 'getCount'
+        'id' => 'getId',
+        'referenceName' => 'getReferenceName',
+        'name' => 'getName',
+        'isCustomIntegration' => 'getIsCustomIntegration',
+        'connections' => 'getConnections',
+        'connectionParams' => 'getConnectionParams'
     ];
 
     /**
@@ -192,10 +202,12 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['files'] = isset($data['files']) ? $data['files'] : null;
-        $this->container['nextPageOptions'] = isset($data['nextPageOptions']) ? $data['nextPageOptions'] : null;
-        $this->container['nextPageToken'] = isset($data['nextPageToken']) ? $data['nextPageToken'] : null;
-        $this->container['count'] = isset($data['count']) ? $data['count'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['referenceName'] = isset($data['referenceName']) ? $data['referenceName'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['isCustomIntegration'] = isset($data['isCustomIntegration']) ? $data['isCustomIntegration'] : null;
+        $this->container['connections'] = isset($data['connections']) ? $data['connections'] : null;
+        $this->container['connectionParams'] = isset($data['connectionParams']) ? $data['connectionParams'] : null;
     }
 
     /**
@@ -223,97 +235,145 @@ class FileMetadataPage implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets files
-     *
-     * @return \Catalytic\SDK\Model\FileMetadata[]|null
-     */
-    public function getFiles()
-    {
-        return $this->container['files'];
-    }
-
-    /**
-     * Sets files
-     *
-     * @param \Catalytic\SDK\Model\FileMetadata[]|null $files A Collection of items with Dictionaries keyed by both ID and ReferenceName
-     *
-     * @return $this
-     */
-    public function setFiles($files)
-    {
-        $this->container['files'] = $files;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextPageOptions
-     *
-     * @return \Catalytic\SDK\Model\PagingOptions|null
-     */
-    public function getNextPageOptions()
-    {
-        return $this->container['nextPageOptions'];
-    }
-
-    /**
-     * Sets nextPageOptions
-     *
-     * @param \Catalytic\SDK\Model\PagingOptions|null $nextPageOptions nextPageOptions
-     *
-     * @return $this
-     */
-    public function setNextPageOptions($nextPageOptions)
-    {
-        $this->container['nextPageOptions'] = $nextPageOptions;
-
-        return $this;
-    }
-
-    /**
-     * Gets nextPageToken
+     * Gets id
      *
      * @return string|null
      */
-    public function getNextPageToken()
+    public function getId()
     {
-        return $this->container['nextPageToken'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets nextPageToken
+     * Sets id
      *
-     * @param string|null $nextPageToken nextPageToken
+     * @param string|null $id The unique ID of the Integration
      *
      * @return $this
      */
-    public function setNextPageToken($nextPageToken)
+    public function setId($id)
     {
-        $this->container['nextPageToken'] = $nextPageToken;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets count
+     * Gets referenceName
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getCount()
+    public function getReferenceName()
     {
-        return $this->container['count'];
+        return $this->container['referenceName'];
     }
 
     /**
-     * Sets count
+     * Sets referenceName
      *
-     * @param int|null $count count
+     * @param string|null $referenceName referenceName
      *
      * @return $this
      */
-    public function setCount($count)
+    public function setReferenceName($referenceName)
     {
-        $this->container['count'] = $count;
+        $this->container['referenceName'] = $referenceName;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name The display Name of the Integration
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets isCustomIntegration
+     *
+     * @return bool|null
+     */
+    public function getIsCustomIntegration()
+    {
+        return $this->container['isCustomIntegration'];
+    }
+
+    /**
+     * Sets isCustomIntegration
+     *
+     * @param bool|null $isCustomIntegration Boolean indicating whether this Integration Defintion is custom to your Catalytic team.  Only custom Integrations can be updated using the SDK.
+     *
+     * @return $this
+     */
+    public function setIsCustomIntegration($isCustomIntegration)
+    {
+        $this->container['isCustomIntegration'] = $isCustomIntegration;
+
+        return $this;
+    }
+
+    /**
+     * Gets connections
+     *
+     * @return \Catalytic\SDK\Model\IntegrationConnection[]|null
+     */
+    public function getConnections()
+    {
+        return $this->container['connections'];
+    }
+
+    /**
+     * Sets connections
+     *
+     * @param \Catalytic\SDK\Model\IntegrationConnection[]|null $connections The List of Integration Connections using this Integration
+     *
+     * @return $this
+     */
+    public function setConnections($connections)
+    {
+        $this->container['connections'] = $connections;
+
+        return $this;
+    }
+
+    /**
+     * Gets connectionParams
+     *
+     * @return \Catalytic\SDK\Model\Field[]|null
+     */
+    public function getConnectionParams()
+    {
+        return $this->container['connectionParams'];
+    }
+
+    /**
+     * Sets connectionParams
+     *
+     * @param \Catalytic\SDK\Model\Field[]|null $connectionParams The values required to create a new
+     *
+     * @return $this
+     */
+    public function setConnectionParams($connectionParams)
+    {
+        $this->container['connectionParams'] = $connectionParams;
 
         return $this;
     }
