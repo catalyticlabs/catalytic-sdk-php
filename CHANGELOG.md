@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1]
+### Added
+- getStartDate and getEndDate methods to Instance entity
+- getStartDate and getEndDate methods to Instance Step entity
+
 ## [1.0.0]
 ### Added
 - Integrations client
@@ -112,7 +117,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Get a user method
 - Find users method
 
-[Unreleased]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/1.0.0...HEAD
+[Unreleased]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/1.0.1...HEAD
+[1.0.1]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.5.1...1.0.0
 [0.5.1]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.5.0...0.5.1
 [0.5.0]: https://github.com/catalyticlabs/catalytic-sdk-php/compare/0.4.0...0.5.0
