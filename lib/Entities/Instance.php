@@ -21,6 +21,8 @@ class Instance
     private $steps;
     private $fields;
     private $status;
+    private $startDate;
+    private $endDate;
     private $fieldVisibility;
     private $visibility;
     private $visibleToUsers;
@@ -37,6 +39,8 @@ class Instance
         $steps = null,
         $fields = null,
         $status = null,
+        $startDate = null,
+        $endDate = null,
         $fieldVisibility = null,
         $visibility = null,
         $visibleToUsers = null
@@ -52,6 +56,8 @@ class Instance
         $this->steps = $steps;
         $this->fields = $fields;
         $this->status = $status;
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
         $this->fieldVisibility = $fieldVisibility;
         $this->visibility = $visibility;
         $this->visibleToUsers = $visibleToUsers;
@@ -244,6 +250,38 @@ class Instance
             throw new Exception('Invalid value for $status param. Must be one of ' . $possibleValues);
         }
         $this->status = $status;
+    }
+
+    /**
+     * Get the value of startDate
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set the value of startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * Get the value of endDate
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * Set the value of endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
     }
 
     /**

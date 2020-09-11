@@ -433,6 +433,8 @@ class Instances
             $internalInstance->getSteps(),
             $internalInstance->getFields(),
             $internalInstance->getStatus(),
+            $internalInstance->getStartDate(),
+            $internalInstance->getEndDate(),
             $internalInstance->getFieldVisibility(),
             $internalInstance->getVisibility(),
             $internalInstance->getVisibleToUsers()
@@ -458,6 +460,8 @@ class Instances
             $internalInstanceStep->getDescription(),
             $internalInstanceStep->getStatus(),
             $internalInstanceStep->getAssignedTo(),
+            $internalInstanceStep->getStartDate(),
+            $internalInstanceStep->getEndDate(),
             $internalInstanceStep->getOutputFields()
         );
         return $instanceStep;

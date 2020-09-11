@@ -16,6 +16,8 @@ class InstanceStep
     private $description;
     private $status;
     private $assignedTo;
+    private $startDate;
+    private $endDate;
     private $outputFields;
 
     public function __construct(
@@ -28,6 +30,8 @@ class InstanceStep
         $description = null,
         $status = null,
         $assignedTo = null,
+        $startDate = null,
+        $endDate = null,
         $outputFields = null
     ) {
         $this->id = $id;
@@ -39,6 +43,8 @@ class InstanceStep
         $this->description = $description;
         $this->status = $status;
         $this->assignedTo = $assignedTo;
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
         $this->outputFields = $outputFields;
     }
 
@@ -184,6 +190,38 @@ class InstanceStep
     public function setAssignedTo($assignedTo)
     {
         $this->assignedTo = $assignedTo;
+    }
+
+    /**
+     * Get the value of startDate
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * Set the value of startDate
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * Get the value of endDate
+     */
+    public function getEndDate()
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * Set the value of endDate
+     */
+    public function setEndDate($endDate)
+    {
+        $this->endDate = $endDate;
     }
 
     /**
