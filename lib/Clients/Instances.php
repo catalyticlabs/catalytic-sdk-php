@@ -258,7 +258,7 @@ class Instances
         // Loop through and get all the steps
         while ($results->getNextPageToken() != null) {
             try {
-                $results = $this->instanceStepsApi->findInstanceSteps($instanceId, $results->getNextPageToken());
+                $results = $this->instanceStepsApi->findInstanceSteps($instanceId, null, null, null, null, null, null, null, null, null, null, null, $results->getNextPageToken());
             } catch (ApiException $e) {
                 if ($e->getCode() === 401) {
                     throw new UnauthorizedException(null, $e);
