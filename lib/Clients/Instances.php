@@ -265,7 +265,7 @@ class Instances
                 }
                 throw new InternalErrorException("Unable to get Instance Steps", $e);
             }
-            array_push($allSteps, $results->getSteps());
+            $allSteps = array_merge($allSteps, $results->getSteps());
         }
 
         // Create external InstanceStep from each internal InstanceStep
