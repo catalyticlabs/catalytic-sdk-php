@@ -813,12 +813,12 @@ class InstancesTest extends MockeryTestCase
 
     public function testGetSteps_ItShouldGetSteps()
     {
-        $instanceStep = new \Catalytic\SDK\Model\InstanceStep(
+        $instanceStep1 = new \Catalytic\SDK\Model\InstanceStep(
             array(
                 'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
                 'instanceId' => '5a21f23c-e5e2-4b5d-95ed-f7338b6b0645',
                 'workflowId' => '7d92e9ad-064c-42e4-b35e-6b26a594dd95',
-                'name' => 'Example Instance',
+                'name' => 'Example Step 1',
                 'teamName' => 'example',
                 'status' => 'stopped',
                 'owner' => 'alice@example.com',
@@ -831,22 +831,47 @@ class InstancesTest extends MockeryTestCase
             )
         );
 
-        $instanceStepsPage = new \Catalytic\SDK\Model\InstanceStepsPage(
+        $instanceStepsPage1 = new \Catalytic\SDK\Model\InstanceStepsPage(
             array(
-                'steps' => array($instanceStep),
+                'steps' => array($instanceStep1),
+                'nextPageToken' => "1",
+                'count' => 1
+            )
+        );
+
+        $instanceStep2 = new \Catalytic\SDK\Model\InstanceStep(
+            array(
+                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91be',
+                'instanceId' => '5a21f23c-e5e2-4b5d-95ed-f7338b6b0645',
+                'workflowId' => '7d92e9ad-064c-42e4-b35e-6b26a594dd95',
+                'name' => 'Example Step 2',
+                'teamName' => 'example',
+                'status' => 'stopped',
+                'owner' => 'alice@example.com',
+                'createdBy' => 'alice',
+                'fields' => array(),
+                'fieldVisibility' => 'foo',
+                'visibility' => 'foo',
+                'visibleToUsers' => array(),
+                'position' => '2'
+            )
+        );
+
+        $instanceStepsPage2 = new \Catalytic\SDK\Model\InstanceStepsPage(
+            array(
+                'steps' => array($instanceStep2),
                 'nextPageToken' => null,
                 'count' => 1
             )
         );
 
         $instanceStepsApi = Mockery::mock('Catalytic\SDK\Api\InstanceStepsApi');
-        $instanceStepsApi->shouldReceive('findInstanceSteps')->andReturn($instanceStepsPage);
+        $instanceStepsApi->shouldReceive('findInstanceSteps')->andReturn($instanceStepsPage1, $instanceStepsPage2)->twice();
 
         $instancesClient = new Instances('1234', null, $instanceStepsApi);
         $instanceSteps = $instancesClient->getSteps('5a21f23c-e5e2-4b5d-95ed-f7338b6b0645');
 
-
-        $this->assertEquals(count($instanceSteps), 1);
+        $this->assertEquals(count($instanceSteps), 2);
     }
 
     public function testCompleteStep_ItShouldReturnAccessTokenNotFoundException()
