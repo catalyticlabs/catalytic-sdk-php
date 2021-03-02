@@ -2,12 +2,10 @@
 
 namespace Catalytic\SDK\Clients;
 
-use Catalytic\SDK\Api\AuthenticationApi;
 use Catalytic\SDK\ApiException;
 use Catalytic\SDK\CatalyticLogger;
 use Catalytic\SDK\ConfigurationUtils;
 use Catalytic\SDK\Api\AccessTokensApi;
-use Catalytic\SDK\Search\{Filter, SearchUtils};
 use Catalytic\SDK\Exceptions\{AccessTokenNotFoundException, UnauthorizedException, InternalErrorException};
 use Catalytic\SDK\Model\AccessToken as InternalAccessToken;
 use Catalytic\SDK\Entities\{AccessToken, AccessTokensPage};
@@ -26,16 +24,14 @@ class AccessTokens
     private $token;
     private $logger;
     private $accessTokensApi;
-    private $authenticationApi;
 
     /**
      * Constructor for AccessTokens
      *
      * @param string $token                                     The token used to make the underlying api calls
      * @param AccessTokensApi $accessTokensApi (Optional)       The injected AccessTokensApi. Used for unit testing
-     * @param AuthenticationApi  $authenticationApi (Optional)  The injected AuthenticationApi. Used for unit testing
      */
-    public function __construct($token, $accessTokensApi = null, $authenticationApi = null)
+    public function __construct($token, $accessTokensApi = null)
     {
         $config = null;
         $this->logger = CatalyticLogger::getLogger(AccessTokens::class);
@@ -49,12 +45,6 @@ class AccessTokens
             $this->accessTokensApi = $accessTokensApi;
         } else {
             $this->accessTokensApi = new AccessTokensApi(null, $config);
-        }
-
-        if ($authenticationApi) {
-            $this->authenticationApi = $authenticationApi;
-        } else {
-            $this->authenticationApi = new AuthenticationApi(null, $config);
         }
     }
 
@@ -86,46 +76,46 @@ class AccessTokens
         return $accessToken;
     }
 
-    /**
-     * Find AccessTokens by a variety of filters
-     *
-     * @param Filter $filter (Optional)         The filter criteria to search AccessTokens by
-     * @param string $pageToken (Optional)      The token of the page to fetch
-     * @param int    $pageSize (Optional)       The number of AccessTokens per page to fetch
-     * @return AccessTokensPage (Optional)      An AccessTokensPage which contains the results
-     * @throws AccessTokenNotFoundException   If the client was instantiated without an Access Token
-     * @throws InternalErrorException           If any errors finding AccessTokens
-     * @throws UnauthorizedException            If unauthorized
-     */
-    public function find($filter = null, $pageToken = null, $pageSize = null)
-    {
-        ClientHelpers::verifyAccessTokenExists($this->token);
+    // /**
+    //  * Find AccessTokens by a variety of filters
+    //  *
+    //  * @param Filter $filter (Optional)         The filter criteria to search AccessTokens by
+    //  * @param string $pageToken (Optional)      The token of the page to fetch
+    //  * @param int    $pageSize (Optional)       The number of AccessTokens per page to fetch
+    //  * @return AccessTokensPage (Optional)      An AccessTokensPage which contains the results
+    //  * @throws AccessTokenNotFoundException   If the client was instantiated without an Access Token
+    //  * @throws InternalErrorException           If any errors finding AccessTokens
+    //  * @throws UnauthorizedException            If unauthorized
+    //  */
+    // public function find($filter = null, $pageToken = null, $pageSize = null)
+    // {
+    //     ClientHelpers::verifyAccessTokenExists($this->token);
 
-        $text = null;
-        $owner = null;
-        $accessTokens = [];
+    //     $text = null;
+    //     $owner = null;
+    //     $accessTokens = [];
 
-        if ($filter !== null) {
-            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-            $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
-        }
+    //     if ($filter !== null) {
+    //         $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+    //         $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
+    //     }
 
-        try {
-            $this->logger->debug("Finding AccessTokens with text $text and owner $owner");
-            $internalAccessTokens = $this->accessTokensApi->findAccessTokens($text, null, null, null, $owner, null, null, $pageToken, $pageSize);
-        } catch (ApiException $e) {
-            if ($e->getCode() === 401) {
-                throw new UnauthorizedException(null, $e);
-            }
-            throw new InternalErrorException("Unable to find AccessTokens", $e);
-        }
-        foreach ($internalAccessTokens->getAccessTokens() as $internalAccessToken) {
-            $accessToken = $this->createAccessToken($internalAccessToken);
-            array_push($accessTokens, $accessToken);
-        }
-        $accessTokensPage = new AccessTokensPage($accessTokens, $internalAccessTokens->getCount(), $internalAccessTokens->getNextPageToken());
-        return $accessTokensPage;
-    }
+    //     try {
+    //         $this->logger->debug("Finding AccessTokens with text $text and owner $owner");
+    //         $internalAccessTokens = $this->accessTokensApi->findAccessTokens($text, null, null, null, $owner, null, null, $pageToken, $pageSize);
+    //     } catch (ApiException $e) {
+    //         if ($e->getCode() === 401) {
+    //             throw new UnauthorizedException(null, $e);
+    //         }
+    //         throw new InternalErrorException("Unable to find AccessTokens", $e);
+    //     }
+    //     foreach ($internalAccessTokens->getAccessTokens() as $internalAccessToken) {
+    //         $accessToken = $this->createAccessToken($internalAccessToken);
+    //         array_push($accessTokens, $accessToken);
+    //     }
+    //     $accessTokensPage = new AccessTokensPage($accessTokens, $internalAccessTokens->getCount(), $internalAccessTokens->getNextPageToken());
+    //     return $accessTokensPage;
+    // }
 
     /**
      * Create AccessToken
@@ -152,7 +142,7 @@ class AccessTokens
 
         try {
             $this->logger->debug("Creating AccessToken with email $email, teamName $teamName, name $name");
-            $internalAccessToken = $this->authenticationApi->createAndApproveAccessToken($accessTokensRequest);
+            $internalAccessToken = $this->accessTokensApi->createAndApproveAccessToken($accessTokensRequest);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
@@ -182,7 +172,7 @@ class AccessTokens
 
         try {
             $this->logger->debug("Creating AccessToken with domain $teamName, name $name");
-            $internalAccessToken = $this->authenticationApi->createAccessToken($accessTokenRequest);
+            $internalAccessToken = $this->accessTokensApi->createAccessToken($accessTokenRequest);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);
@@ -220,7 +210,7 @@ class AccessTokens
         );
         try {
             $this->logger->debug("Waiting for approval of AccessToken");
-            $internalAccessToken = $this->authenticationApi->waitForAccessTokenApproval($accessTokenApproval);
+            $internalAccessToken = $this->accessTokensApi->waitForAccessTokenApproval($accessTokenApproval);
         } catch (ApiException $e) {
             if ($e->getCode() === 401) {
                 throw new UnauthorizedException(null, $e);

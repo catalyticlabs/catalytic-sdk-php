@@ -86,113 +86,113 @@ class IntegrationsTest extends MockeryTestCase
         $this->assertInstanceOf(Integration::class, $integration);
     }
 
-    public function testFindIntegration_ItShouldReturnAccessTokenNotFoundException()
-    {
-        $this->expectException(AccessTokenNotFoundException::class);
-        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+    // public function testFindIntegration_ItShouldReturnAccessTokenNotFoundException()
+    // {
+    //     $this->expectException(AccessTokenNotFoundException::class);
+    //     $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
 
-        $integrationsClient = new Integrations(null);
-        $integrationsClient->find();
-    }
+    //     $integrationsClient = new Integrations(null);
+    //     $integrationsClient->find();
+    // }
 
-    public function testFindIntegrations_ItShouldThrowUnauthorizedExceptionIfNotAuthorized()
-    {
-        $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage("Unauthorized");
+    // public function testFindIntegrations_ItShouldThrowUnauthorizedExceptionIfNotAuthorized()
+    // {
+    //     $this->expectException(UnauthorizedException::class);
+    //     $this->expectExceptionMessage("Unauthorized");
 
-        $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
-        $integrationsApi->shouldReceive('findIntegrations')
-            ->andThrow(new ApiException(null, 401));
+    //     $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
+    //     $integrationsApi->shouldReceive('findIntegrations')
+    //         ->andThrow(new ApiException(null, 401));
 
-        $integrationsClient = new Integrations('1234', $integrationsApi);
-        $integrationsClient->find();
-    }
+    //     $integrationsClient = new Integrations('1234', $integrationsApi);
+    //     $integrationsClient->find();
+    // }
 
-    public function testFindIntegrations_ItShouldThrowUInternalErrorExceptionIfAnErrorOccurs()
-    {
-        $this->expectException(InternalErrorException::class);
-        $this->expectExceptionMessage("Unable to find Integrations");
+    // public function testFindIntegrations_ItShouldThrowUInternalErrorExceptionIfAnErrorOccurs()
+    // {
+    //     $this->expectException(InternalErrorException::class);
+    //     $this->expectExceptionMessage("Unable to find Integrations");
 
-        $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
-        $integrationsApi->shouldReceive('findIntegrations')
-            ->andThrow(new ApiException(null, 500));
+    //     $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
+    //     $integrationsApi->shouldReceive('findIntegrations')
+    //         ->andThrow(new ApiException(null, 500));
 
-        $integrationsClient = new Integrations('1234', $integrationsApi);
-        $integrationsClient->find();
-    }
+    //     $integrationsClient = new Integrations('1234', $integrationsApi);
+    //     $integrationsClient->find();
+    // }
 
-    public function testFindIntegrations_ItShouldFindAllIntegrations()
-    {
-        $integration = new \Catalytic\SDK\Model\Integration(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'name' => 'Example Integration',
-                'isCustomIntegration' => false,
-                'connections' => 'Something here',
-                'connectionParams' => 'Some params'
-            )
-        );
-        $integrationsPage = new \Catalytic\SDK\Model\IntegrationsPage(
-            array(
-                'integrations' => array($integration),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
-        $integrationsApi->shouldReceive('findIntegrations')
-            ->andReturn($integrationsPage);
+    // public function testFindIntegrations_ItShouldFindAllIntegrations()
+    // {
+    //     $integration = new \Catalytic\SDK\Model\Integration(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'name' => 'Example Integration',
+    //             'isCustomIntegration' => false,
+    //             'connections' => 'Something here',
+    //             'connectionParams' => 'Some params'
+    //         )
+    //     );
+    //     $integrationsPage = new \Catalytic\SDK\Model\IntegrationsPage(
+    //         array(
+    //             'integrations' => array($integration),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
+    //     $integrationsApi->shouldReceive('findIntegrations')
+    //         ->andReturn($integrationsPage);
 
-        $integrationsClient = new Integrations('1234', $integrationsApi);
+    //     $integrationsClient = new Integrations('1234', $integrationsApi);
 
-        $results = $integrationsClient->find();
-        $integrations = $results->getIntegrations();
+    //     $results = $integrationsClient->find();
+    //     $integrations = $results->getIntegrations();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $integrationsClient()->find(null, $results->getNextPageToken());
-            $integrations = array_merge($integrations, $results->getIntegrations());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $integrationsClient()->find(null, $results->getNextPageToken());
+    //         $integrations = array_merge($integrations, $results->getIntegrations());
+    //     }
 
-        $this->assertEquals(count($integrations), 1);
-    }
+    //     $this->assertEquals(count($integrations), 1);
+    // }
 
-    public function testFindIntegrations_ItShouldFindIntegrationsWithNameDropbox()
-    {
-        $integration = new \Catalytic\SDK\Model\Integration(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'name' => 'Example Integration',
-                'isCustomIntegration' => false,
-                'connections' => 'Something here',
-                'connectionParams' => 'Some params'
-            )
-        );
-        $integrationsPage = new \Catalytic\SDK\Model\IntegrationsPage(
-            array(
-                'integrations' => array($integration),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
-        $integrationsApi->shouldReceive('findIntegrations')
-            ->andReturn($integrationsPage);
+    // public function testFindIntegrations_ItShouldFindIntegrationsWithNameDropbox()
+    // {
+    //     $integration = new \Catalytic\SDK\Model\Integration(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'name' => 'Example Integration',
+    //             'isCustomIntegration' => false,
+    //             'connections' => 'Something here',
+    //             'connectionParams' => 'Some params'
+    //         )
+    //     );
+    //     $integrationsPage = new \Catalytic\SDK\Model\IntegrationsPage(
+    //         array(
+    //             'integrations' => array($integration),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $integrationsApi = Mockery::mock('Catalytic\SDK\Api\IntegrationsApi');
+    //     $integrationsApi->shouldReceive('findIntegrations')
+    //         ->andReturn($integrationsPage);
 
-        $integrationsClient = new Integrations('1234', $integrationsApi);
+    //     $integrationsClient = new Integrations('1234', $integrationsApi);
 
-        $where = (new Where())->text()->matches('dropbox');
-        $results = $integrationsClient->find($where);
-        $integrations = $results->getIntegrations();
+    //     $where = (new Where())->text()->matches('dropbox');
+    //     $results = $integrationsClient->find($where);
+    //     $integrations = $results->getIntegrations();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $integrationsClient()->find($where, $results->getNextPageToken());
-            $integrations = array_merge($integrations, $results->getIntegrations());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $integrationsClient()->find($where, $results->getNextPageToken());
+    //         $integrations = array_merge($integrations, $results->getIntegrations());
+    //     }
 
-        $this->assertEquals(count($integrations), 1);
-    }
+    //     $this->assertEquals(count($integrations), 1);
+    // }
 
     public function testCreateIntegration_ItShouldReturnAccessTokenNotFoundException()
     {

@@ -15,9 +15,12 @@ class InstanceStep
     private $position;
     private $description;
     private $status;
-    private $assignedTo;
+    private $assignedToEmail;
+    private $actionTypeId;
+    private $isAutomated;
     private $startDate;
     private $endDate;
+    private $completedByEmail;
     private $outputFields;
 
     public function __construct(
@@ -29,9 +32,12 @@ class InstanceStep
         $position = null,
         $description = null,
         $status = null,
-        $assignedTo = null,
+        $assignedToEmail = null,
+        $actionTypeId = null,
+        $isAutomated = null,
         $startDate = null,
         $endDate = null,
+        $completedByEmail = null,
         $outputFields = null
     ) {
         $this->id = $id;
@@ -42,9 +48,12 @@ class InstanceStep
         $this->position = $position;
         $this->description = $description;
         $this->status = $status;
-        $this->assignedTo = $assignedTo;
+        $this->assignedToEmail = $assignedToEmail;
+        $this->actionTypeId = $actionTypeId;
+        $this->isAutomated = $isAutomated;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+        $this->completedByEmail = $completedByEmail;
         $this->outputFields = $outputFields;
     }
 
@@ -177,19 +186,51 @@ class InstanceStep
     }
 
     /**
-     * Get the value of assignedTo
+     * Get the value of assignedToEmail
      */
-    public function getAssignedTo()
+    public function getAssignedToEmail()
     {
-        return $this->assignedTo;
+        return $this->assignedToEmail;
     }
 
     /**
-     * Set the value of assignedTo
+     * Set the value of assignedToEmail
      */
-    public function setAssignedTo($assignedTo)
+    public function setAssignedToEmail($assignedToEmail)
     {
-        $this->assignedTo = $assignedTo;
+        $this->assignedToEmail = $assignedToEmail;
+    }
+
+    /**
+     * Get the value of actionTypeId
+     */
+    public function getActionTypeId()
+    {
+        return $this->actionTypeId;
+    }
+
+    /**
+     * Set the value of actionTypeId
+     */
+    public function setActionTypeId($actionTypeId)
+    {
+        $this->actionTypeId = $actionTypeId;
+    }
+
+    /**
+     * Get the value of isAutomated
+     */
+    public function getIsAutomated()
+    {
+        return $this->isAutomated;
+    }
+
+    /**
+     * Set the value of isAutomated
+     */
+    public function setIsAutomated($isAutomated)
+    {
+        $this->isAutomated = $isAutomated;
     }
 
     /**
@@ -222,6 +263,22 @@ class InstanceStep
     public function setEndDate($endDate)
     {
         $this->endDate = $endDate;
+    }
+
+    /**
+     * Get the value of completedByEmail
+     */
+    public function getCompletedByEmail()
+    {
+        return $this->completedByEmail;
+    }
+
+    /**
+     * Set the value of completedByEmail
+     */
+    public function setCompletedByEmail($completedByEmail)
+    {
+        $this->completedByEmail = $completedByEmail;
     }
 
     /**

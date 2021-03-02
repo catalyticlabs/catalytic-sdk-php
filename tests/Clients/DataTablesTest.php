@@ -99,131 +99,131 @@ class DataTablesTest extends MockeryTestCase
         $this->assertInstanceOf(DataTable::class, $dataTable);
     }
 
-    public function testFindDataTables_ItShouldReturnAccessTokenNotFoundException()
-    {
-        $this->expectException(AccessTokenNotFoundException::class);
-        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+    // public function testFindDataTables_ItShouldReturnAccessTokenNotFoundException()
+    // {
+    //     $this->expectException(AccessTokenNotFoundException::class);
+    //     $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
 
-        $dataTablesClient = new DataTables(null);
-        $dataTablesClient->find();
-    }
+    //     $dataTablesClient = new DataTables(null);
+    //     $dataTablesClient->find();
+    // }
 
-    public function testFindDataTables_ItShouldThrowUnauthorizedExceptionIfDataTableDoesNotExist()
-    {
-        $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage("Unauthorized");
+    // public function testFindDataTables_ItShouldThrowUnauthorizedExceptionIfDataTableDoesNotExist()
+    // {
+    //     $this->expectException(UnauthorizedException::class);
+    //     $this->expectExceptionMessage("Unauthorized");
 
-        $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
-        $dataTablesApi->shouldReceive('findDataTables')
-        ->andThrow(new ApiException(null, 401));
+    //     $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
+    //     $dataTablesApi->shouldReceive('findDataTables')
+    //     ->andThrow(new ApiException(null, 401));
 
-        $dataTablesClient = new DataTables('1234', $dataTablesApi);
-        $dataTablesClient->find();
-    }
+    //     $dataTablesClient = new DataTables('1234', $dataTablesApi);
+    //     $dataTablesClient->find();
+    // }
 
-    public function testFindDataTables_ItShouldThrowUInternalErrorExceptionIfDataTableDoesNotExist()
-    {
-        $this->expectException(InternalErrorException::class);
-        $this->expectExceptionMessage("Unable to find DataTables");
+    // public function testFindDataTables_ItShouldThrowUInternalErrorExceptionIfDataTableDoesNotExist()
+    // {
+    //     $this->expectException(InternalErrorException::class);
+    //     $this->expectExceptionMessage("Unable to find DataTables");
 
-        $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
-        $dataTablesApi->shouldReceive('findDataTables')
-        ->andThrow(new ApiException(null, 500));
+    //     $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
+    //     $dataTablesApi->shouldReceive('findDataTables')
+    //     ->andThrow(new ApiException(null, 500));
 
-        $dataTablesClient = new DataTables('1234', $dataTablesApi);
-        $dataTablesClient->find();
-    }
+    //     $dataTablesClient = new DataTables('1234', $dataTablesApi);
+    //     $dataTablesClient->find();
+    // }
 
-    public function testFindDataTables_ItShouldFindAllDataTables()
-    {
-        $dataTable = new \Catalytic\SDK\Model\DataTable(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'dataTablename' => 'alice',
-                'email' => 'alice@catalytic.com',
-                'referenceName' => 'foobar',
-                'name' => 'My Data Table',
-                'teamName' => 'testing',
-                'columns' => array(),
-                'isArchived' => false,
-                'type' => 'foo',
-                'visibility' => 'bar',
-                'visibleToUsers' => array(),
-                'rowLimit' => 100,
-                'columnLimit' => 100,
-                'cellLimit' => 100
-            )
-        );
-        $dataTablesPage = new \Catalytic\SDK\Model\DataTablesPage(
-            array(
-                'dataTables' => array($dataTable),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
-        $dataTablesApi->shouldReceive('findDataTables')
-        ->andReturn($dataTablesPage);
+    // public function testFindDataTables_ItShouldFindAllDataTables()
+    // {
+    //     $dataTable = new \Catalytic\SDK\Model\DataTable(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'dataTablename' => 'alice',
+    //             'email' => 'alice@catalytic.com',
+    //             'referenceName' => 'foobar',
+    //             'name' => 'My Data Table',
+    //             'teamName' => 'testing',
+    //             'columns' => array(),
+    //             'isArchived' => false,
+    //             'type' => 'foo',
+    //             'visibility' => 'bar',
+    //             'visibleToUsers' => array(),
+    //             'rowLimit' => 100,
+    //             'columnLimit' => 100,
+    //             'cellLimit' => 100
+    //         )
+    //     );
+    //     $dataTablesPage = new \Catalytic\SDK\Model\DataTablesPage(
+    //         array(
+    //             'dataTables' => array($dataTable),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
+    //     $dataTablesApi->shouldReceive('findDataTables')
+    //     ->andReturn($dataTablesPage);
 
-        $dataTablesClient = new DataTables('1234', $dataTablesApi);
+    //     $dataTablesClient = new DataTables('1234', $dataTablesApi);
 
-        $results = $dataTablesClient->find();
-        $dataTables = $results->getDataTables();
+    //     $results = $dataTablesClient->find();
+    //     $dataTables = $results->getDataTables();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $dataTablesClient()->find(null, $results->getNextPageToken());
-            $dataTables = array_merge($dataTables, $results->getDataTables());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $dataTablesClient()->find(null, $results->getNextPageToken());
+    //         $dataTables = array_merge($dataTables, $results->getDataTables());
+    //     }
 
-        $this->assertEquals(count($dataTables), 1);
-    }
+    //     $this->assertEquals(count($dataTables), 1);
+    // }
 
-    public function testFindDataTables_ItShouldFindDataTablesWithNameAlice()
-    {
-        $dataTable = new \Catalytic\SDK\Model\DataTable(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'dataTablename' => 'alice',
-                'email' => 'alice@catalytic.com',
-                'referenceName' => 'foobar',
-                'name' => 'My Data Table',
-                'teamName' => 'testing',
-                'columns' => array(),
-                'isArchived' => false,
-                'type' => 'foo',
-                'visibility' => 'bar',
-                'visibleToUsers' => array(),
-                'rowLimit' => 100,
-                'columnLimit' => 100,
-                'cellLimit' => 100
-            )
-        );
-        $dataTablesPage = new \Catalytic\SDK\Model\DataTablesPage(
-            array(
-                'dataTables' => array($dataTable),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
-        $dataTablesApi->shouldReceive('findDataTables')
-        ->andReturn($dataTablesPage);
+    // public function testFindDataTables_ItShouldFindDataTablesWithNameAlice()
+    // {
+    //     $dataTable = new \Catalytic\SDK\Model\DataTable(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'dataTablename' => 'alice',
+    //             'email' => 'alice@catalytic.com',
+    //             'referenceName' => 'foobar',
+    //             'name' => 'My Data Table',
+    //             'teamName' => 'testing',
+    //             'columns' => array(),
+    //             'isArchived' => false,
+    //             'type' => 'foo',
+    //             'visibility' => 'bar',
+    //             'visibleToUsers' => array(),
+    //             'rowLimit' => 100,
+    //             'columnLimit' => 100,
+    //             'cellLimit' => 100
+    //         )
+    //     );
+    //     $dataTablesPage = new \Catalytic\SDK\Model\DataTablesPage(
+    //         array(
+    //             'dataTables' => array($dataTable),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $dataTablesApi = Mockery::mock('Catalytic\SDK\Api\DataTablesApi');
+    //     $dataTablesApi->shouldReceive('findDataTables')
+    //     ->andReturn($dataTablesPage);
 
-        $dataTablesClient = new DataTables('1234', $dataTablesApi);
+    //     $dataTablesClient = new DataTables('1234', $dataTablesApi);
 
-        $where = (new Where())->text()->matches('tom');
-        $results = $dataTablesClient->find($where);
-        $dataTables = $results->getDataTables();
+    //     $where = (new Where())->text()->matches('tom');
+    //     $results = $dataTablesClient->find($where);
+    //     $dataTables = $results->getDataTables();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $dataTablesClient()->find($where, $results->getNextPageToken());
-            $dataTables = array_merge($dataTables, $results->getDataTables());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $dataTablesClient()->find($where, $results->getNextPageToken());
+    //         $dataTables = array_merge($dataTables, $results->getDataTables());
+    //     }
 
-        $this->assertEquals(count($dataTables), 1);
-    }
+    //     $this->assertEquals(count($dataTables), 1);
+    // }
 
     public function testDownloadDataTable_ItShouldReturnAccessTokenNotFoundException()
     {

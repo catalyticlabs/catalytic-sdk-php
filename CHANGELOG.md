@@ -6,6 +6,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Deprecated
+- Find Users method
+
+### Added
+- Search Users method
+- List Users method
+- `User`.`teamName` property
+- `User`.`isTeamAdmin` property
+- `User`.`isDeactivated` property
+- `User`.`isLockedOut` property
+- `User`.`createdDate` property
+- `InstanceStep`.`completedByEmail` property
+- `InstanceStep`.`actionTypeId` property
+- `InstanceStep`.`isAutomated` property
+
+### Removed
+- `User`.`username` property (Breaking change)
+- `Instance`.`steps` including `getSteps`/`setSteps` methods (Breaking change)
+- Find Users method (Breaking change)
+- Find Access Tokens method (Breaking change)
+- Find Workflows method (Breaking change)
+- Find Instances method (Breaking change)
+- Find Instance Steps method (Breaking change)
+- Find Data Tables method (Breaking change)
+- Find Integrations method (Breaking change)
+
 ## [1.0.3] - 2020-09-15
 ### Fixed
 

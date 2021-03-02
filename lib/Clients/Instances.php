@@ -92,52 +92,52 @@ class Instances
         return $instance;
     }
 
-    /**
-     * Find Instances by a variety of criteria
-     *
-     * @param Filter $filter                The filter criteria to search instances by
-     * @param string $pageToken             The token of the page to fetch
-     * @param int    $pageSize              The number of workflows per page to fetch
-     * @return InstancesPage                An InstancesPage which contains the results
-     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
-     * @throws InternalErrorException       If any errors finding Instances
-     * @throws UnauthorizedException        If unauthorized
-     */
-    public function find($filter = null, $pageToken = null, $pageSize = null)
-    {
-        ClientHelpers::verifyAccessTokenExists($this->token);
+    // /**
+    //  * Find Instances by a variety of criteria
+    //  *
+    //  * @param Filter $filter                The filter criteria to search instances by
+    //  * @param string $pageToken             The token of the page to fetch
+    //  * @param int    $pageSize              The number of workflows per page to fetch
+    //  * @return InstancesPage                An InstancesPage which contains the results
+    //  * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+    //  * @throws InternalErrorException       If any errors finding Instances
+    //  * @throws UnauthorizedException        If unauthorized
+    //  */
+    // public function find($filter = null, $pageToken = null, $pageSize = null)
+    // {
+    //     ClientHelpers::verifyAccessTokenExists($this->token);
 
-        $text = null;
-        $owner = null;
-        $status = null;
-        $workflowId = null;
-        $instances = [];
+    //     $text = null;
+    //     $owner = null;
+    //     $status = null;
+    //     $workflowId = null;
+    //     $instances = [];
 
-        if ($filter !== null) {
-            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-            $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
-            $status = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'status');
-            $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
-        }
+    //     if ($filter !== null) {
+    //         $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+    //         $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
+    //         $status = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'status');
+    //         $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
+    //     }
 
-        try {
-            $this->logger->debug("Finding Instances with text $text, owner $owner, status $status, workflowId $workflowId");
-            $internalInstances = $this->instancesApi->findInstances($text, $status, $workflowId, null, $owner, null, null, $pageToken, $pageSize);
-        } catch (ApiException $e) {
-            if ($e->getCode() === 401) {
-                throw new UnauthorizedException(null, $e);
-            }
-            throw new InternalErrorException("Unable to find Instances", $e);
-        }
+    //     try {
+    //         $this->logger->debug("Finding Instances with text $text, owner $owner, status $status, workflowId $workflowId");
+    //         $internalInstances = $this->instancesApi->findInstances($text, $status, $workflowId, null, $owner, null, null, $pageToken, $pageSize);
+    //     } catch (ApiException $e) {
+    //         if ($e->getCode() === 401) {
+    //             throw new UnauthorizedException(null, $e);
+    //         }
+    //         throw new InternalErrorException("Unable to find Instances", $e);
+    //     }
 
-        foreach ($internalInstances->getInstances() as $internalInstance) {
-            $instance = $this->createInstance($internalInstance);
-            array_push($instances, $instance);
-        }
+    //     foreach ($internalInstances->getInstances() as $internalInstance) {
+    //         $instance = $this->createInstance($internalInstance);
+    //         array_push($instances, $instance);
+    //     }
 
-        $instancesPage = new InstancesPage($instances, $internalInstances->getCount(), $internalInstances->getNextPageToken());
-        return $instancesPage;
-    }
+    //     $instancesPage = new InstancesPage($instances, $internalInstances->getCount(), $internalInstances->getNextPageToken());
+    //     return $instancesPage;
+    // }
 
     /**
      * Start an instance of a workflow for a given workflow id
@@ -231,96 +231,96 @@ class Instances
         return $step;
     }
 
-    /**
-     * Gets all the steps for a specific Instance id
-     *
-     * @param string $instanceId            The id of the Instance to get steps for
-     * @return InstanceStepsPage            The InstanceStepsPage which contains the results
-     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
-     * @throws InternalErrorException       If any errors fetching Instance Steps
-     * @throws UnauthorizedException        If unauthorized
-     */
-    public function getSteps($instanceId)
-    {
-        ClientHelpers::verifyAccessTokenExists($this->token);
+    // /**
+    //  * Gets all the steps for a specific Instance id
+    //  *
+    //  * @param string $instanceId            The id of the Instance to get steps for
+    //  * @return InstanceStepsPage            The InstanceStepsPage which contains the results
+    //  * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+    //  * @throws InternalErrorException       If any errors fetching Instance Steps
+    //  * @throws UnauthorizedException        If unauthorized
+    //  */
+    // public function getSteps($instanceId)
+    // {
+    //     ClientHelpers::verifyAccessTokenExists($this->token);
 
-        $steps = [];
+    //     $steps = [];
 
-        try {
-            $this->logger->debug("Getting all the steps for Instance $instanceId");
-            $results = $this->instanceStepsApi->findInstanceSteps($instanceId);
-        } catch (ApiException $e) {
-            throw new InternalErrorException("Unable to get Instance Steps", $e);
-        }
+    //     try {
+    //         $this->logger->debug("Getting all the steps for Instance $instanceId");
+    //         $results = $this->instanceStepsApi->findInstanceSteps($instanceId);
+    //     } catch (ApiException $e) {
+    //         throw new InternalErrorException("Unable to get Instance Steps", $e);
+    //     }
 
-        $allSteps = $results->getSteps();
+    //     $allSteps = $results->getSteps();
 
-        // Loop through and get all the steps
-        while ($results->getNextPageToken() != null) {
-            try {
-                $results = $this->instanceStepsApi->findInstanceSteps($instanceId, null, null, null, null, null, null, null, null, null, null, null, $results->getNextPageToken());
-            } catch (ApiException $e) {
-                if ($e->getCode() === 401) {
-                    throw new UnauthorizedException(null, $e);
-                }
-                throw new InternalErrorException("Unable to get Instance Steps", $e);
-            }
-            $allSteps = array_merge($allSteps, $results->getSteps());
-        }
+    //     // Loop through and get all the steps
+    //     while ($results->getNextPageToken() != null) {
+    //         try {
+    //             $results = $this->instanceStepsApi->findInstanceSteps($instanceId, null, null, null, null, null, null, null, null, null, null, null, $results->getNextPageToken());
+    //         } catch (ApiException $e) {
+    //             if ($e->getCode() === 401) {
+    //                 throw new UnauthorizedException(null, $e);
+    //             }
+    //             throw new InternalErrorException("Unable to get Instance Steps", $e);
+    //         }
+    //         $allSteps = array_merge($allSteps, $results->getSteps());
+    //     }
 
-        // Create external InstanceStep from each internal InstanceStep
-        foreach ($allSteps as $step) {
-            $newStep = $this->createInstanceStep($step);
-            array_push($steps, $newStep);
-        }
-        return $steps;
-    }
+    //     // Create external InstanceStep from each internal InstanceStep
+    //     foreach ($allSteps as $step) {
+    //         $newStep = $this->createInstanceStep($step);
+    //         array_push($steps, $newStep);
+    //     }
+    //     return $steps;
+    // }
 
-    /**
-     * Search for steps
-     *
-     * @param Filter $filter                The filter criteria to search instance steps by
-     * @param string $pageToken             The token of the page to fetch
-     * @param int    $pageSize              The number of instance steps per page to fetch
-     * @return InstanceStepsPage            An InstanceStepsPage which contains the reults
-     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
-     * @throws InternalErrorException       If any errors finding Instance Steps
-     * @throws UnauthorizedException        If unauthorized
-     */
-    public function findSteps($filter = null, $pageToken = null, $pageSize = null)
-    {
-        ClientHelpers::verifyAccessTokenExists($this->token);
+    // /**
+    //  * Search for steps
+    //  *
+    //  * @param Filter $filter                The filter criteria to search instance steps by
+    //  * @param string $pageToken             The token of the page to fetch
+    //  * @param int    $pageSize              The number of instance steps per page to fetch
+    //  * @return InstanceStepsPage            An InstanceStepsPage which contains the reults
+    //  * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+    //  * @throws InternalErrorException       If any errors finding Instance Steps
+    //  * @throws UnauthorizedException        If unauthorized
+    //  */
+    // public function findSteps($filter = null, $pageToken = null, $pageSize = null)
+    // {
+    //     ClientHelpers::verifyAccessTokenExists($this->token);
 
-        $text = null;
-        $workflowId = null;
-        $assignee = null;
-        $steps = [];
+    //     $text = null;
+    //     $workflowId = null;
+    //     $assignee = null;
+    //     $steps = [];
 
-        if ($filter !== null) {
-            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-            $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
-            $assignee = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'assignee');
-        }
+    //     if ($filter !== null) {
+    //         $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+    //         $workflowId = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'workflowId');
+    //         $assignee = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'assignee');
+    //     }
 
-        try {
-            $this->logger->debug("Finding steps with text $text, workflowId $workflowId, assignee $assignee");
-            $internalSteps = $this->instanceStepsApi->findInstanceSteps(ClientHelpers::WILDCARD_ID, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
-        } catch (ApiException $e) {
-            if ($e->getCode() === 401) {
-                throw new UnauthorizedException(null, $e);
-            }
-            throw new InternalErrorException("Unable to find Instance Steps", $e);
-        }
+    //     try {
+    //         $this->logger->debug("Finding steps with text $text, workflowId $workflowId, assignee $assignee");
+    //         $internalSteps = $this->instanceStepsApi->findInstanceSteps(ClientHelpers::WILDCARD_ID, $text, null, $workflowId, null, null, null, $assignee, $pageToken, $pageSize);
+    //     } catch (ApiException $e) {
+    //         if ($e->getCode() === 401) {
+    //             throw new UnauthorizedException(null, $e);
+    //         }
+    //         throw new InternalErrorException("Unable to find Instance Steps", $e);
+    //     }
 
-        // Loop through and get all the steps
-        foreach ($internalSteps->getSteps() as $internalStep) {
-            $step = $this->createInstanceStep($internalStep);
-            array_push($steps, $step);
-        }
+    //     // Loop through and get all the steps
+    //     foreach ($internalSteps->getSteps() as $internalStep) {
+    //         $step = $this->createInstanceStep($internalStep);
+    //         array_push($steps, $step);
+    //     }
 
-        $stepsPage = new InstanceStepsPage($steps, $internalSteps->getCount(), $internalSteps->getNextPageToken());
-        return $stepsPage;
-    }
+    //     $stepsPage = new InstanceStepsPage($steps, $internalSteps->getCount(), $internalSteps->getNextPageToken());
+    //     return $stepsPage;
+    // }
 
     /**
      * Completes a specific step
@@ -428,16 +428,15 @@ class Instances
             $internalInstance->getTeamName(),
             $internalInstance->getDescription(),
             $internalInstance->getCategory(),
-            $internalInstance->getOwner(),
-            $internalInstance->getCreatedBy(),
-            $internalInstance->getSteps(),
+            $internalInstance->getOwnerEmail(),
+            $internalInstance->getCreatedByEmail(),
             $internalInstance->getFields(),
             $internalInstance->getStatus(),
             $internalInstance->getStartDate(),
             $internalInstance->getEndDate(),
             $internalInstance->getFieldVisibility(),
             $internalInstance->getVisibility(),
-            $internalInstance->getVisibleToUsers()
+            $internalInstance->getVisibleToUserEmails()
         );
         return $instance;
     }
@@ -459,9 +458,12 @@ class Instances
             $internalInstanceStep->getPosition(),
             $internalInstanceStep->getDescription(),
             $internalInstanceStep->getStatus(),
-            $internalInstanceStep->getAssignedTo(),
+            $internalInstanceStep->getAssignedToEmail(),
+            $internalInstanceStep->getActionTypeId(),
+            $internalInstanceStep->getIsAutomated(),
             $internalInstanceStep->getStartDate(),
             $internalInstanceStep->getEndDate(),
+            $internalInstanceStep->getCompletedByEmail(),
             $internalInstanceStep->getOutputFields()
         );
         return $instanceStep;

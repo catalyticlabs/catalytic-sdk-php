@@ -72,44 +72,44 @@ class DataTables
         return $dataTable;
     }
 
-    /**
-     * Find DataTables by a variety of filters
-     *
-     * @param string $filter                The filter to search DataTables by
-     * @return DataTablesPage               A DataTablesPage which contains the results
-     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
-     * @throws InternalErrorException       If any errors finding DataTables
-     * @throws UnauthorizedException        If unauthorized
-     */
-    public function find($filter = null, $pageToken = null, $pageSize = null)
-    {
-        ClientHelpers::verifyAccessTokenExists($this->token);
+    // /**
+    //  * Find DataTables by a variety of filters
+    //  *
+    //  * @param string $filter                The filter to search DataTables by
+    //  * @return DataTablesPage               A DataTablesPage which contains the results
+    //  * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+    //  * @throws InternalErrorException       If any errors finding DataTables
+    //  * @throws UnauthorizedException        If unauthorized
+    //  */
+    // public function find($filter = null, $pageToken = null, $pageSize = null)
+    // {
+    //     ClientHelpers::verifyAccessTokenExists($this->token);
 
-        $text = null;
-        $dataTables = [];
+    //     $text = null;
+    //     $dataTables = [];
 
-        if ($filter !== null) {
-            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-        }
+    //     if ($filter !== null) {
+    //         $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+    //     }
 
-        try {
-            $this->logger->debug("Finding DataTables with text $text");
-            $internalDataTables = $this->dataTablesApi->findDataTables($text, null, null, null, null, null, null, $pageToken, $pageSize);
-        } catch (ApiException $e) {
-            if ($e->getCode() === 401) {
-                throw new UnauthorizedException(null, $e);
-            }
-            throw new InternalErrorException("Unable to find DataTables");
-        }
+    //     try {
+    //         $this->logger->debug("Finding DataTables with text $text");
+    //         $internalDataTables = $this->dataTablesApi->findDataTables($text, null, null, null, null, null, null, $pageToken, $pageSize);
+    //     } catch (ApiException $e) {
+    //         if ($e->getCode() === 401) {
+    //             throw new UnauthorizedException(null, $e);
+    //         }
+    //         throw new InternalErrorException("Unable to find DataTables");
+    //     }
 
-        foreach ($internalDataTables->getDataTables() as $internalDataTable) {
-            $dataTable = $this->createDataTable($internalDataTable);
-            array_push($dataTables, $dataTable);
-        }
+    //     foreach ($internalDataTables->getDataTables() as $internalDataTable) {
+    //         $dataTable = $this->createDataTable($internalDataTable);
+    //         array_push($dataTables, $dataTable);
+    //     }
 
-        $dataTablesPage = new DataTablesPage($dataTables, $internalDataTables->getCount(), $internalDataTables->getNextPageToken());
-        return $dataTablesPage;
-    }
+    //     $dataTablesPage = new DataTablesPage($dataTables, $internalDataTables->getCount(), $internalDataTables->getNextPageToken());
+    //     return $dataTablesPage;
+    // }
 
     /**
      * Downloads a data table in the format passed in to the users temp dir or a specified dir if passed in

@@ -15,15 +15,15 @@ class Workflow
     private $teamName;
     private $description;
     private $category;
-    private $owner;
-    private $createdBy;
+    private $ownerEmail;
+    private $createdByEmail;
     private $inputFields;
     private $isPublished;
     private $isArchived;
     private $fieldVisibility;
     private $instanceVisibility;
-    private $adminUsers;
-    private $standardUsers;
+    private $adminUserEmails;
+    private $standardUserEmails;
 
     public function __construct(
         $id = null,
@@ -31,30 +31,30 @@ class Workflow
         $teamName = null,
         $description = null,
         $category = null,
-        $owner = null,
-        $createdBy = null,
+        $ownerEmail = null,
+        $createdByEmail = null,
         $inputFields = null,
         $isPublished = null,
         $isArchived = null,
         $fieldVisibility = null,
         $instanceVisibility = null,
-        $adminUsers = null,
-        $standardUsers = null
+        $adminUserEmails = null,
+        $standardUserEmails = null
     ) {
         $this->id = $id;
         $this->name = $name;
         $this->teamName = $teamName;
         $this->description = $description;
         $this->category = $category;
-        $this->owner = $owner;
-        $this->createdBy = $createdBy;
+        $this->ownerEmail = $ownerEmail;
+        $this->createdByEmail = $createdByEmail;
         $this->inputFields = $inputFields;
         $this->isPublished = $isPublished;
         $this->isArchived = $isArchived;
         $this->fieldVisibility = $fieldVisibility;
         $this->instanceVisibility = $instanceVisibility;
-        $this->adminUsers = $adminUsers;
-        $this->standardUsers = $standardUsers;
+        $this->adminUserEmails = $adminUserEmails;
+        $this->standardUserEmails = $standardUserEmails;
     }
 
     /**
@@ -148,33 +148,33 @@ class Workflow
     /**
      * Get the value of owner
      */
-    public function getOwner()
+    public function getOwnerEmail()
     {
-        return $this->owner;
+        return $this->ownerEmail;
     }
 
     /**
-     * Set the value of owner
+     * Set the value of ownerEmail
      */
-    public function setOwner($owner)
+    public function setOwnerEmail($ownerEmail)
     {
-        $this->owner = $owner;
+        $this->ownerEmail = $ownerEmail;
     }
 
     /**
-     * Get the value of createdBy
+     * Get the value of createdByEmail
      */
-    public function getCreatedBy()
+    public function getCreatedByEmail()
     {
-        return $this->createdBy;
+        return $this->createdByEmail;
     }
 
     /**
-     * Set the value of createdBy
+     * Set the value of createdByEmail
      */
-    public function setCreatedBy($createdBy)
+    public function setCreatedByEmail($createdByEmail)
     {
-        $this->createdBy = $createdBy;
+        $this->createdByEmail = $createdByEmail;
     }
 
     /**
@@ -268,34 +268,34 @@ class Workflow
     }
 
     /**
-     * Get the value of adminUsers
+     * Get the value of adminUserEmails
      */
-    public function getAdminUsers()
+    public function getAdminUserEmails()
     {
-        return $this->adminUsers;
+        return $this->adminUserEmails;
     }
 
     /**
-     * Set the value of adminUsers
+     * Set the value of adminUserEmails
      */
-    public function setAdminUsers($adminUsers)
+    public function setAdminUserEmails($adminUserEmails)
     {
-        $this->adminUsers = $adminUsers;
+        $this->adminUserEmails = $adminUserEmails;
     }
 
     /**
-     * Get the value of standardUsers
+     * Get the value of standardUserEmails
      */
-    public function getStandardUsers()
+    public function getStandardUserEmails()
     {
-        return $this->standardUsers;
+        return $this->standardUserEmails;
     }
 
     /**
-     * Set the value of standardUsers
+     * Set the value of standardUserEmails
      */
-    public function setStandardUsers($standardUsers)
+    public function setStandardUserEmails($standardUserEmails)
     {
-        $this->standardUsers = $standardUsers;
+        $this->standardUserEmails = $standardUserEmails;
     }
 }

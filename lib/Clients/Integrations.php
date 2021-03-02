@@ -89,46 +89,46 @@ class Integrations
         return $integration;
     }
 
-    /**
-     * Find Integrations by a variety of filters
-     *
-     * @param Filter $filter (Optional)     The filter criteria to search Integrations by
-     * @param string $pageToken (Optional)  The token of the page to fetch
-     * @param int    $pageSize (Optional)   The number of Integrations per page to fetch
-     * @return IntegrationsPage             An IntegrationsPage which contains the results
-     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
-     * @throws InternalErrorException       If any errors finding Integrations
-     * @throws UnauthorizedException        If unauthorized
-     */
-    public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): IntegrationsPage
-    {
-        ClientHelpers::verifyAccessTokenExists($this->token);
+    // /**
+    //  * Find Integrations by a variety of filters
+    //  *
+    //  * @param Filter $filter (Optional)     The filter criteria to search Integrations by
+    //  * @param string $pageToken (Optional)  The token of the page to fetch
+    //  * @param int    $pageSize (Optional)   The number of Integrations per page to fetch
+    //  * @return IntegrationsPage             An IntegrationsPage which contains the results
+    //  * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+    //  * @throws InternalErrorException       If any errors finding Integrations
+    //  * @throws UnauthorizedException        If unauthorized
+    //  */
+    // public function find(Filter $filter = null, string $pageToken = null, int $pageSize = null): IntegrationsPage
+    // {
+    //     ClientHelpers::verifyAccessTokenExists($this->token);
 
-        $text = null;
-        $integrations = [];
+    //     $text = null;
+    //     $integrations = [];
 
-        if ($filter !== null) {
-            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-        }
+    //     if ($filter !== null) {
+    //         $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+    //     }
 
-        try {
-            $this->logger->debug("Finding Integrations with text $text");
-            $internalIntegrations = $this->integrationsApi->findIntegrations($text, null, null, null, null, null, null, $pageToken, $pageSize);
-        } catch (ApiException $e) {
-            if ($e->getCode() === 401) {
-                throw new UnauthorizedException(null, $e);
-            }
-            throw new InternalErrorException("Unable to find Integrations", $e);
-        }
+    //     try {
+    //         $this->logger->debug("Finding Integrations with text $text");
+    //         $internalIntegrations = $this->integrationsApi->findIntegrations($text, null, null, null, null, null, null, $pageToken, $pageSize);
+    //     } catch (ApiException $e) {
+    //         if ($e->getCode() === 401) {
+    //             throw new UnauthorizedException(null, $e);
+    //         }
+    //         throw new InternalErrorException("Unable to find Integrations", $e);
+    //     }
 
-        foreach ($internalIntegrations->getIntegrations() as $internalIntegration) {
-            $integration = $this->createIntegration($internalIntegration);
-            array_push($integrations, $integration);
-        }
+    //     foreach ($internalIntegrations->getIntegrations() as $internalIntegration) {
+    //         $integration = $this->createIntegration($internalIntegration);
+    //         array_push($integrations, $integration);
+    //     }
 
-        $integrationsPage = new IntegrationsPage($integrations, $internalIntegrations->getCount(), $internalIntegrations->getNextPageToken());
-        return $integrationsPage;
-    }
+    //     $integrationsPage = new IntegrationsPage($integrations, $internalIntegrations->getCount(), $internalIntegrations->getNextPageToken());
+    //     return $integrationsPage;
+    // }
 
     /**
      * Create a custom Integration with which Connections can be created

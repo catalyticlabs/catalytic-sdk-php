@@ -35,6 +35,21 @@ class UsersPage
     }
 
     /**
+     * Add a list of Users
+     *
+     * Note that this is different from setting a list of Users
+     *
+     * @param array users           The users to add
+     * @param string nextPageToken  The next page token
+     */
+    public function addUsers(array $users, string $nextPageToken): void
+    {
+        $this->users = array_merge($this->users, $users);
+        $this->count = $this->count + count($users);
+        $this->nextPageToken = $nextPageToken;
+    }
+
+    /**
      * Get the value of nextPageToken
      */
     public function getNextPageToken()

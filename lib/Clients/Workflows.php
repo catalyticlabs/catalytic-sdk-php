@@ -81,49 +81,49 @@ class Workflows
         return $workflow;
     }
 
-    /**
-     * Find Workflows by a variety of filters
-     *
-     * @param Filter $filter (Optional)     The filter criteria to search Workflows by
-     * @param string $pageToken (Optional)  The token of the page to fetch
-     * @param int    $pageSize (Optional)   The number of Workflows per page to fetch
-     * @return WorkflowsPage                A WorkflowsPage which contains the results
-     * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
-     * @throws InternalErrorException       If any errors finding Workflows
-     * @throws UnauthorizedException        If unauthorized
-     */
-    public function find($filter = null, $pageToken = null, $pageSize = null)
-    {
-        ClientHelpers::verifyAccessTokenExists($this->token);
+    // /**
+    //  * Find Workflows by a variety of filters
+    //  *
+    //  * @param Filter $filter (Optional)     The filter criteria to search Workflows by
+    //  * @param string $pageToken (Optional)  The token of the page to fetch
+    //  * @param int    $pageSize (Optional)   The number of Workflows per page to fetch
+    //  * @return WorkflowsPage                A WorkflowsPage which contains the results
+    //  * @throws AccessTokenNotFoundException If the client was instantiated without an Access Token
+    //  * @throws InternalErrorException       If any errors finding Workflows
+    //  * @throws UnauthorizedException        If unauthorized
+    //  */
+    // public function find($filter = null, $pageToken = null, $pageSize = null)
+    // {
+    //     ClientHelpers::verifyAccessTokenExists($this->token);
 
-        $text = null;
-        $owner = null;
-        $category = null;
-        $workflows = [];
+    //     $text = null;
+    //     $owner = null;
+    //     $category = null;
+    //     $workflows = [];
 
-        if ($filter !== null) {
-            $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
-            $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
-            $category = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'category');
-        }
+    //     if ($filter !== null) {
+    //         $text = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'text');
+    //         $owner = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'owner');
+    //         $category = SearchUtils::getSearchCriteriaValueByKey($filter->searchFilters, 'category');
+    //     }
 
-        try {
-            $this->logger->debug("Finding Workflows with text $text, owner $owner, category $category");
-            $internalWorkflows = $this->workflowsApi->findWorkflows($text, null, null, null, $owner, $category, null, $pageToken, $pageSize);
-        } catch (ApiException $e) {
-            if ($e->getCode() === 401) {
-                throw new UnauthorizedException(null, $e);
-            }
-            throw new InternalErrorException("Unable to find Workflows", $e);
-        }
+    //     try {
+    //         $this->logger->debug("Finding Workflows with text $text, owner $owner, category $category");
+    //         $internalWorkflows = $this->workflowsApi->findWorkflows($text, null, null, null, $owner, $category, null, $pageToken, $pageSize);
+    //     } catch (ApiException $e) {
+    //         if ($e->getCode() === 401) {
+    //             throw new UnauthorizedException(null, $e);
+    //         }
+    //         throw new InternalErrorException("Unable to find Workflows", $e);
+    //     }
 
-        foreach ($internalWorkflows->getWorkflows() as $internalWorkflow) {
-            $workflow = $this->createWorkflow($internalWorkflow);
-            array_push($workflows, $workflow);
-        }
-        $workflowsPage = new WorkflowsPage($workflows, $internalWorkflows->getCount(), $internalWorkflows->getNextPageToken());
-        return $workflowsPage;
-    }
+    //     foreach ($internalWorkflows->getWorkflows() as $internalWorkflow) {
+    //         $workflow = $this->createWorkflow($internalWorkflow);
+    //         array_push($workflows, $workflow);
+    //     }
+    //     $workflowsPage = new WorkflowsPage($workflows, $internalWorkflows->getCount(), $internalWorkflows->getNextPageToken());
+    //     return $workflowsPage;
+    // }
 
     /**
      * Export a Workflow by id
@@ -240,15 +240,15 @@ class Workflows
             $internalWorkflow->getTeamName(),
             $internalWorkflow->getDescription(),
             $internalWorkflow->getCategory(),
-            $internalWorkflow->getOwner(),
-            $internalWorkflow->getCreatedBy(),
+            $internalWorkflow->getOwnerEmail(),
+            $internalWorkflow->getCreatedByEmail(),
             $internalWorkflow->getInputFields(),
             $internalWorkflow->getIsPublished(),
             $internalWorkflow->getIsArchived(),
             $internalWorkflow->getFieldVisibility(),
             $internalWorkflow->getInstanceVisibility(),
-            $internalWorkflow->getAdminUsers(),
-            $internalWorkflow->getStandardUsers()
+            $internalWorkflow->getAdminUserEmails(),
+            $internalWorkflow->getStandardUserEmails()
         );
         return $workflow;
     }

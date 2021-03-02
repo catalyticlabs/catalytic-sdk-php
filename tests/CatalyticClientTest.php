@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 
 class CatalyticClientTest extends TestCase
 {
+    // NOTE: THIS TEST WILL FAIL LOCALLY IF YOU HAVE AN ACCESS TOKEN IN ~/.catalytic/tokens/default
     public function testCatalyticClient_ItShouldHaveNullAccessToken()
     {
         $catalytic = new CatalyticClient();

@@ -16,16 +16,15 @@ class Instance
     private $teamName;
     private $description;
     private $category;
-    private $owner;
-    private $createdBy;
-    private $steps;
+    private $ownerEmail;
+    private $createdByEmail;
     private $fields;
     private $status;
     private $startDate;
     private $endDate;
     private $fieldVisibility;
     private $visibility;
-    private $visibleToUsers;
+    private $visibleToUserEmails;
 
     public function __construct(
         $id = null,
@@ -34,16 +33,15 @@ class Instance
         $teamName = null,
         $description = null,
         $category = null,
-        $owner = null,
-        $createdBy = null,
-        $steps = null,
+        $ownerEmail = null,
+        $createdByEmail = null,
         $fields = null,
         $status = null,
         $startDate = null,
         $endDate = null,
         $fieldVisibility = null,
         $visibility = null,
-        $visibleToUsers = null
+        $visibleToUserEmails = null
     ) {
         $this->id = $id;
         $this->workflowId = $workflowId;
@@ -51,16 +49,15 @@ class Instance
         $this->teamName = $teamName;
         $this->description = $description;
         $this->category = $category;
-        $this->owner = $owner;
-        $this->createdBy = $createdBy;
-        $this->steps = $steps;
+        $this->ownerEmail = $ownerEmail;
+        $this->createdByEmail = $createdByEmail;
         $this->fields = $fields;
         $this->status = $status;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
         $this->fieldVisibility = $fieldVisibility;
         $this->visibility = $visibility;
-        $this->visibleToUsers = $visibleToUsers;
+        $this->visibleToUserEmails = $visibleToUserEmails;
     }
 
     /**
@@ -168,51 +165,35 @@ class Instance
     }
 
     /**
-     * Get the value of owner
+     * Get the value of ownerEmail
      */
-    public function getOwner()
+    public function getOwnerEmail()
     {
-        return $this->owner;
+        return $this->ownerEmail;
     }
 
     /**
-     * Set the value of owner
+     * Set the value of ownerEmail
      */
-    public function setOwner($owner)
+    public function setOwnerEmail($ownerEmail)
     {
-        $this->owner = $owner;
+        $this->ownerEmail = $ownerEmail;
     }
 
     /**
-     * Get the value of createdBy
+     * Get the value of createdByEmail
      */
-    public function getCreatedBy()
+    public function getCreatedByEmail()
     {
-        return $this->createdBy;
+        return $this->createdByEmail;
     }
 
     /**
-     * Set the value of createdBy
+     * Set the value of createdByEmail
      */
-    public function setCreatedBy($createdBy)
+    public function setCreatedByEmail($createdByEmail)
     {
-        $this->createdBy = $createdBy;
-    }
-
-    /**
-     * Get the value of steps
-     */
-    public function getSteps()
-    {
-        return $this->steps;
-    }
-
-    /**
-     * Set the value of steps
-     */
-    public function setSteps($steps)
-    {
-        $this->steps = $steps;
+        $this->createdByEmail = $createdByEmail;
     }
 
     /**
@@ -327,18 +308,18 @@ class Instance
     }
 
     /**
-     * Get the value of visibleToUsers
+     * Get the value of visibleToUserEmails
      */
-    public function getVisibleToUsers()
+    public function getVisibleToUserEmails()
     {
-        return $this->visibleToUsers;
+        return $this->visibleToUserEmails;
     }
 
     /**
-     * Set the value of visibleToUsers
+     * Set the value of visibleToUserEmails
      */
-    public function setVisibleToUsers($visibleToUsers)
+    public function setVisibleToUserEmails($visibleToUserEmails)
     {
-        $this->visibleToUsers = $visibleToUsers;
+        $this->visibleToUserEmails = $visibleToUserEmails;
     }
 }

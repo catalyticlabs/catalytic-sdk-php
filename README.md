@@ -28,4 +28,4 @@ $ composer add catalytic/sdk
 ```
 
 ## Documentation
-Documentation can be found at [https://catalytic-developer.readme.io/reference/catalytic-php-sdk](https://catalytic-developer.readme.io/reference/catalytic-php-sdk).
+Documentation can be found at [https://catalytic-developer.readme.io/reference/catalytic-php-sdk](https://developers.catalytic.com/docs/catalytic-sdk-php).

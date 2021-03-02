@@ -99,227 +99,227 @@ class WorkflowsTest extends MockeryTestCase
         $this->assertInstanceOf(Workflow::class, $workflow);
     }
 
-    public function testFindWorkflow_ItShouldReturnAccessTokenNotFoundException()
-    {
-        $this->expectException(AccessTokenNotFoundException::class);
-        $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
+    // public function testFindWorkflow_ItShouldReturnAccessTokenNotFoundException()
+    // {
+    //     $this->expectException(AccessTokenNotFoundException::class);
+    //     $this->expectExceptionMessage('Access Token not found. Instantiate CatalyticClient with one of the authentication options or call CatalyticClient->setToken()');
 
-        $workflowsClient = new Workflows(null);
-        $workflowsClient->find();
-    }
+    //     $workflowsClient = new Workflows(null);
+    //     $workflowsClient->find();
+    // }
 
-    public function testFindWorkflows_ItShouldThrowUnauthorizedExceptionIfWorkflowDoesNotExist()
-    {
-        $this->expectException(UnauthorizedException::class);
-        $this->expectExceptionMessage("Unauthorized");
+    // public function testFindWorkflows_ItShouldThrowUnauthorizedExceptionIfWorkflowDoesNotExist()
+    // {
+    //     $this->expectException(UnauthorizedException::class);
+    //     $this->expectExceptionMessage("Unauthorized");
 
-        $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
-        $workflowsApi->shouldReceive('findWorkflows')
-        ->andThrow(new ApiException(null, 401));
+    //     $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
+    //     $workflowsApi->shouldReceive('findWorkflows')
+    //     ->andThrow(new ApiException(null, 401));
 
-        $workflowsClient = new Workflows('1234', $workflowsApi);
-        $workflowsClient->find();
-    }
+    //     $workflowsClient = new Workflows('1234', $workflowsApi);
+    //     $workflowsClient->find();
+    // }
 
-    public function testFindWorkflows_ItShouldThrowUInternalErrorExceptionIfWorkflowDoesNotExist()
-    {
-        $this->expectException(InternalErrorException::class);
-        $this->expectExceptionMessage("Unable to find Workflows");
+    // public function testFindWorkflows_ItShouldThrowUInternalErrorExceptionIfWorkflowDoesNotExist()
+    // {
+    //     $this->expectException(InternalErrorException::class);
+    //     $this->expectExceptionMessage("Unable to find Workflows");
 
-        $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
-        $workflowsApi->shouldReceive('findWorkflows')
-        ->andThrow(new ApiException(null, 500));
+    //     $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
+    //     $workflowsApi->shouldReceive('findWorkflows')
+    //     ->andThrow(new ApiException(null, 500));
 
-        $workflowsClient = new Workflows('1234', $workflowsApi);
-        $workflowsClient->find();
-    }
+    //     $workflowsClient = new Workflows('1234', $workflowsApi);
+    //     $workflowsClient->find();
+    // }
 
-    public function testFindWorkflows_ItShouldFindAllWorkflows()
-    {
-        $workflow = new \Catalytic\SDK\Model\Workflow(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'name' => 'Example Workflow',
-                'teamName' => 'example',
-                'category' => 'General',
-                'owner' => 'alice@example.com',
-                'createdBy' => 'alice',
-                'inputFields' => array(),
-                'isPublished' => true,
-                'isArchived' => false,
-                'fieldVisibility' => 'foo',
-                'instanceVisibility' => 'bar',
-                'adminWorkflows' => array(),
-                'standardWorkflows' => array(),
-                'adminUsers' => array(),
-                'standardUsers' => array()
-            )
-        );
-        $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
-            array(
-                'workflows' => array($workflow),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
-        $workflowsApi->shouldReceive('findWorkflows')
-            ->andReturn($workflowsPage);
+    // public function testFindWorkflows_ItShouldFindAllWorkflows()
+    // {
+    //     $workflow = new \Catalytic\SDK\Model\Workflow(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'name' => 'Example Workflow',
+    //             'teamName' => 'example',
+    //             'category' => 'General',
+    //             'owner' => 'alice@example.com',
+    //             'createdBy' => 'alice',
+    //             'inputFields' => array(),
+    //             'isPublished' => true,
+    //             'isArchived' => false,
+    //             'fieldVisibility' => 'foo',
+    //             'instanceVisibility' => 'bar',
+    //             'adminWorkflows' => array(),
+    //             'standardWorkflows' => array(),
+    //             'adminUsers' => array(),
+    //             'standardUsers' => array()
+    //         )
+    //     );
+    //     $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
+    //         array(
+    //             'workflows' => array($workflow),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
+    //     $workflowsApi->shouldReceive('findWorkflows')
+    //         ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows('1234', $workflowsApi);
+    //     $workflowsClient = new Workflows('1234', $workflowsApi);
 
-        $results = $workflowsClient->find();
-        $workflows = $results->getWorkflows();
+    //     $results = $workflowsClient->find();
+    //     $workflows = $results->getWorkflows();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $workflowsClient()->find(null, $results->getNextPageToken());
-            $workflows = array_merge($workflows, $results->getWorkflows());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $workflowsClient()->find(null, $results->getNextPageToken());
+    //         $workflows = array_merge($workflows, $results->getWorkflows());
+    //     }
 
-        $this->assertEquals(count($workflows), 1);
-    }
+    //     $this->assertEquals(count($workflows), 1);
+    // }
 
-    public function testFindWorkflows_ItShouldFindWorkflowsWithNameAlice()
-    {
-        $workflow = new \Catalytic\SDK\Model\Workflow(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'name' => 'Example Workflow',
-                'teamName' => 'example',
-                'category' => 'General',
-                'owner' => 'alice@example.com',
-                'createdBy' => 'alice',
-                'inputFields' => array(),
-                'isPublished' => true,
-                'isArchived' => false,
-                'fieldVisibility' => 'foo',
-                'instanceVisibility' => 'bar',
-                'adminWorkflows' => array(),
-                'standardWorkflows' => array(),
-                'adminUsers' => array(),
-                'standardUsers' => array()
-            )
-        );
-        $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
-            array(
-                'workflows' => array($workflow),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
-        $workflowsApi->shouldReceive('findWorkflows')
-            ->andReturn($workflowsPage);
+    // public function testFindWorkflows_ItShouldFindWorkflowsWithNameAlice()
+    // {
+    //     $workflow = new \Catalytic\SDK\Model\Workflow(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'name' => 'Example Workflow',
+    //             'teamName' => 'example',
+    //             'category' => 'General',
+    //             'owner' => 'alice@example.com',
+    //             'createdBy' => 'alice',
+    //             'inputFields' => array(),
+    //             'isPublished' => true,
+    //             'isArchived' => false,
+    //             'fieldVisibility' => 'foo',
+    //             'instanceVisibility' => 'bar',
+    //             'adminWorkflows' => array(),
+    //             'standardWorkflows' => array(),
+    //             'adminUsers' => array(),
+    //             'standardUsers' => array()
+    //         )
+    //     );
+    //     $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
+    //         array(
+    //             'workflows' => array($workflow),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
+    //     $workflowsApi->shouldReceive('findWorkflows')
+    //         ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows('1234', $workflowsApi);
+    //     $workflowsClient = new Workflows('1234', $workflowsApi);
 
-        $where = (new Where())->text()->matches('tom');
-        $results = $workflowsClient->find($where);
-        $workflows = $results->getWorkflows();
+    //     $where = (new Where())->text()->matches('tom');
+    //     $results = $workflowsClient->find($where);
+    //     $workflows = $results->getWorkflows();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $workflowsClient()->find($where, $results->getNextPageToken());
-            $workflows = array_merge($workflows, $results->getWorkflows());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $workflowsClient()->find($where, $results->getNextPageToken());
+    //         $workflows = array_merge($workflows, $results->getWorkflows());
+    //     }
 
-        $this->assertEquals(count($workflows), 1);
-    }
+    //     $this->assertEquals(count($workflows), 1);
+    // }
 
-    public function testFindWorkflows_ItShouldFindWorkflowsWithOwnerAlice()
-    {
-        $workflow = new \Catalytic\SDK\Model\Workflow(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'name' => 'Example Workflow',
-                'teamName' => 'example',
-                'category' => 'General',
-                'owner' => 'alice@example.com',
-                'createdBy' => 'alice',
-                'inputFields' => array(),
-                'isPublished' => true,
-                'isArchived' => false,
-                'fieldVisibility' => 'foo',
-                'instanceVisibility' => 'bar',
-                'adminWorkflows' => array(),
-                'standardWorkflows' => array(),
-                'adminUsers' => array(),
-                'standardUsers' => array()
-            )
-        );
-        $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
-            array(
-                'workflows' => array($workflow),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
-        $workflowsApi->shouldReceive('findWorkflows')
-        ->andReturn($workflowsPage);
+    // public function testFindWorkflows_ItShouldFindWorkflowsWithOwnerAlice()
+    // {
+    //     $workflow = new \Catalytic\SDK\Model\Workflow(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'name' => 'Example Workflow',
+    //             'teamName' => 'example',
+    //             'category' => 'General',
+    //             'owner' => 'alice@example.com',
+    //             'createdBy' => 'alice',
+    //             'inputFields' => array(),
+    //             'isPublished' => true,
+    //             'isArchived' => false,
+    //             'fieldVisibility' => 'foo',
+    //             'instanceVisibility' => 'bar',
+    //             'adminWorkflows' => array(),
+    //             'standardWorkflows' => array(),
+    //             'adminUsers' => array(),
+    //             'standardUsers' => array()
+    //         )
+    //     );
+    //     $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
+    //         array(
+    //             'workflows' => array($workflow),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
+    //     $workflowsApi->shouldReceive('findWorkflows')
+    //     ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows('1234', $workflowsApi);
+    //     $workflowsClient = new Workflows('1234', $workflowsApi);
 
-        $where = (new Where())->owner()->is('alice');
-        $results = $workflowsClient->find($where);
-        $workflows = $results->getWorkflows();
+    //     $where = (new Where())->owner()->is('alice');
+    //     $results = $workflowsClient->find($where);
+    //     $workflows = $results->getWorkflows();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $workflowsClient()->find($where, $results->getNextPageToken());
-            $workflows = array_merge($workflows, $results->getWorkflows());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $workflowsClient()->find($where, $results->getNextPageToken());
+    //         $workflows = array_merge($workflows, $results->getWorkflows());
+    //     }
 
-        $this->assertEquals(count($workflows), 1);
-    }
+    //     $this->assertEquals(count($workflows), 1);
+    // }
 
-    public function testFindWorkflows_ItShouldFindWorkflowsWithCategoryGeneral()
-    {
-        $workflow = new \Catalytic\SDK\Model\Workflow(
-            array(
-                'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
-                'name' => 'Example Workflow',
-                'teamName' => 'example',
-                'category' => 'General',
-                'owner' => 'alice@example.com',
-                'createdBy' => 'alice',
-                'inputFields' => array(),
-                'isPublished' => true,
-                'isArchived' => false,
-                'fieldVisibility' => 'foo',
-                'instanceVisibility' => 'bar',
-                'adminWorkflows' => array(),
-                'standardWorkflows' => array(),
-                'adminUsers' => array(),
-                'standardUsers' => array()
-            )
-        );
-        $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
-            array(
-                'workflows' => array($workflow),
-                'nextPageToken' => null,
-                'count' => 1
-            )
-        );
-        $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
-        $workflowsApi->shouldReceive('findWorkflows')
-        ->andReturn($workflowsPage);
+    // public function testFindWorkflows_ItShouldFindWorkflowsWithCategoryGeneral()
+    // {
+    //     $workflow = new \Catalytic\SDK\Model\Workflow(
+    //         array(
+    //             'id' => '7c4cfdcc-2964-4f1f-8d56-ac8a260e91bd',
+    //             'name' => 'Example Workflow',
+    //             'teamName' => 'example',
+    //             'category' => 'General',
+    //             'owner' => 'alice@example.com',
+    //             'createdBy' => 'alice',
+    //             'inputFields' => array(),
+    //             'isPublished' => true,
+    //             'isArchived' => false,
+    //             'fieldVisibility' => 'foo',
+    //             'instanceVisibility' => 'bar',
+    //             'adminWorkflows' => array(),
+    //             'standardWorkflows' => array(),
+    //             'adminUsers' => array(),
+    //             'standardUsers' => array()
+    //         )
+    //     );
+    //     $workflowsPage = new \Catalytic\SDK\Model\WorkflowsPage(
+    //         array(
+    //             'workflows' => array($workflow),
+    //             'nextPageToken' => null,
+    //             'count' => 1
+    //         )
+    //     );
+    //     $workflowsApi = Mockery::mock('Catalytic\SDK\Api\WorkflowsApi');
+    //     $workflowsApi->shouldReceive('findWorkflows')
+    //     ->andReturn($workflowsPage);
 
-        $workflowsClient = new Workflows('1234', $workflowsApi);
+    //     $workflowsClient = new Workflows('1234', $workflowsApi);
 
-        $where = (new Where())->category()->is('general');
-        $results = $workflowsClient->find($where);
-        $workflows = $results->getWorkflows();
+    //     $where = (new Where())->category()->is('general');
+    //     $results = $workflowsClient->find($where);
+    //     $workflows = $results->getWorkflows();
 
-        // Loop through all the pages of results
-        while (!empty($results->getNextPageToken())) {
-            $results = $workflowsClient()->find($where, $results->getNextPageToken());
-            $workflows = array_merge($workflows, $results->getWorkflows());
-        }
+    //     // Loop through all the pages of results
+    //     while (!empty($results->getNextPageToken())) {
+    //         $results = $workflowsClient()->find($where, $results->getNextPageToken());
+    //         $workflows = array_merge($workflows, $results->getWorkflows());
+    //     }
 
-        $this->assertEquals(count($workflows), 1);
-    }
+    //     $this->assertEquals(count($workflows), 1);
+    // }
 
     public function testExportWorkflow_ItShouldReturnAccessTokenNotFoundException()
     {
